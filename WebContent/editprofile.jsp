@@ -1,6 +1,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
+<form name="edit" action="javascript:verifRegis();" method="post">
 <%
 try {
 	  //Load the JDBC driver
@@ -17,15 +18,16 @@ try {
 	  String sql = "SELECT * FROM user WHERE username ='"+session.getAttribute("username")+"'";
 	  ResultSet rs = s.executeQuery(sql);
 	  while (rs.next()) {
-	    out.println("<h3> "+rs.getString(3)+"</h3><br>");
-	    out.println("<p>username : "+rs.getString(2)+"</p><br>");
-		out.println("<p>email : "+ rs.getString(5)+"</p><br>");
-		out.println("<p>Mobile : "+ rs.getString(6)+"</p><br>");
-		out.println("<p>Address : "+ rs.getString(7)+"</p><br>");
-		out.println("<p>Province : "+ rs.getString(8)+"</p><br>");
-		out.println("<p>State : "+ rs.getString(9)+"</p><br>");
-		out.println("<p>Postal Code : "+ rs.getString(10)+"</p><br>");
-		out.println("<a href='editprofile.jsp'> Edit Profile </a>");
+		out.println("Change Password: <input type='password' onkeyup='checkPass(this)' name='password' value='"+rs.getString(4)+"'><div id='err_pass'></div><br>");
+	    out.println("Confirm Password: <input type='password' onkeyup='confirmPassword(this)' name='repassword' value='"+rs.getString(4)+"'><div id='err_repass'></div><br>");
+		out.println("Nama Lengkap: <input type='text' name='fullname' onkeyup='checkFullName(this)' value='"+ rs.getString(3)+"'><div id='err_fullname'></div><br>");
+		out.println("Nomor Hand Phone: <input type='text' name='hpnum' value='"+ rs.getString(6)+"'><br>");
+		out.println("Alamat : <input type='text' name='address' value='"+ rs.getString(7)+"'><br>");
+		out.println("Provinsi : <input type='text' name='province' value='"+ rs.getString(8)+"'><br>");
+		out.println("Kecamatan : <input type='text' name='kecamatan' value='"+ rs.getString(9)+"'><br>");
+		out.println("Kode Pos : <input type='text' name='postalcode' value='"+ rs.getString(10)+"'><br>");
+		out.println("<input type='submit' id='subedit' value='Edit'>");
+		out.println("<div id='edit_error'></div>");
 	  }
 	  rs.close();
 	  s.close();
@@ -44,5 +46,6 @@ try {
 	  System.out.println(e3.toString());
 	}
 %>
+</form>
 </body>
 </html>
