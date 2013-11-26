@@ -80,7 +80,7 @@ public class beli extends HttpServlet {
 					result = state.executeQuery(regquery);
 					while(result.next()){
 						if(item.get(i)> Integer.parseInt(result.getString(8))){
-							out.print("The amount of "+shopping_cart.get(i)+" is invalid");
+							out.print("The amount of item number "+(i+1)+" is invalid");
 						}
 						else{
 							int newPembelian = Integer.parseInt(result.getString(6))+ item.get(i);

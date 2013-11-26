@@ -7,8 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="javascript/text" src="verify.js"></script>
-<link rel="stylesheet" type="text/css" href="AJS_Style.css">
-<%--<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/ruserba.css" /> --%>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/AJS_Style.css" />
 <title>RuserBa</title>
 </head>
 <body>
@@ -43,7 +42,7 @@
         <div class="popup">
             <h2>Welcome Guest!</h2>
             <p>Please enter your login and password here</p>
-            <form name="login" action="javascript:verLogin();" method="post">
+            <form name="login" action="verifyLogin" method="post">
 	            
 	                Username : <input type="text" name="username"><br>
 	                Password : <input type="password" name="password"><br>

@@ -236,6 +236,4 @@ try {
 	  System.out.println(e3.toString());
 	}
 %>
-
-</body>
-</html>
+<%@ include file= "./footer.jsp" %>
