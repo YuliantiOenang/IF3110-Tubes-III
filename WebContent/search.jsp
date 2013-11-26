@@ -77,7 +77,7 @@ try {
 	  else{
 		  while (rs2.next()) {
 			    out.println("<h3>"+rs2.getString(2)+"</h3><br>");
-			    out.println("<a href='detail.php?id="+rs2.getString(1)+"'><img src='"+rs2.getString(3)+"'/></a>");
+			    out.println("<a href='detail.jsp?id="+rs2.getString(1)+"'><img src='"+rs2.getString(3)+"'/></a>");
 				out.println("<p class='product_price'>Harga : Rp "+ rs2.getString(4)+",-<br>");
 				out.println("Stok : "+ rs2.getString(8) +"<br>");
 				out.println("<form name='beli' action='addcart.php' method='post'>");
