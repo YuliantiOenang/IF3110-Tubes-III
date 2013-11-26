@@ -1,6 +1,4 @@
 build/
 bin/
-<<<<<<< HEAD
-.classpath
-=======
->>>>>>> 5bee92299f00055b9154baeab2c67f56845b4a96
+/.classpath
+
