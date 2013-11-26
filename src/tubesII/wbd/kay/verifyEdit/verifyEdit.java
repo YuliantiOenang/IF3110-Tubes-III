@@ -1,4 +1,4 @@
-package tubesII.wbd.kay.verifyregist;
+package tubesII.wbd.kay.verifyEdit;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,25 +8,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class verifyRegister
+ * Servlet implementation class verifyEdit
  */
-@WebServlet(description = "To Verify the registration input", urlPatterns = { "/verifyRegister" })
-public class verifyRegister extends HttpServlet {
+@WebServlet("/verifyEdit")
+public class verifyEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public verifyRegister() {
+    public verifyEdit() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,16 +42,14 @@ public class verifyRegister extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		Connection con = null;
+		Statement state = null;
 		Statement state1 = null;
-		Statement state2 = null;
-		Statement state3 = null;
-		ResultSet uresult = null;
-		ResultSet eresult = null;
-		String username = request.getParameter("username");
-		String email = request.getParameter("Email");
+		ResultSet result = null;
+		
 		String password = request.getParameter("password");
 		String fullname = request.getParameter("fullname");
 		String hpnum = request.getParameter("hpnum");
@@ -60,8 +57,6 @@ public class verifyRegister extends HttpServlet {
 		String province = request.getParameter("province");
 		String kecamatan = request.getParameter("kecamatan");
 		String postcode = request.getParameter("postalcode");
-		int urowcount =0;
-		int erowcount =0;
 		try{
 			String uname = "root";
 			String pass = "";
@@ -74,28 +69,15 @@ public class verifyRegister extends HttpServlet {
 			out.print("We're currently Unable to access the database. Please try again Later.");
 		}
 		try{
-			state1 = con.createStatement();
-			state2 = con.createStatement();
-			state3 = con.createStatement();
-			uresult = state1.executeQuery("SELECT * FROM user where username ='"+username+"'");
-			eresult = state2.executeQuery("SELECT * FROM user where email ='"+email+"'");
-			while(uresult.next()){
-				System.out.println(uresult.getObject(1));
-				urowcount++;
-			}
-			while(eresult.next()){
-				System.out.println(eresult.getObject(1));
-				erowcount++;
-			}
-			if(urowcount!=0){
-				out.print(username+" is not a valid username");
-			}
-			if(erowcount != 0){
-				out.print("The Email is already taken");
+			state = con.createStatement();
+			result = state.executeQuery("SELECT * FROM `progin_13511059`.user WHERE password = '"+password+"' AND nama_lengkap = '"+fullname+"' AND handphone = '"+hpnum+"' AND address= '"+address+"' AND province = '"+province+"' AND state = '"+kecamatan+"' AND postcode='"+postcode+"'");
+			if(result.next()){
+				out.print("The data is still the same");
 			}
 			else{
-				String regquery = "INSERT INTO `progin_13511059`.`user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`) VALUES ('"+username+"','"+fullname+"','"+password+"','"+email+"','"+hpnum+"','"+address+"','"+province+"','"+kecamatan+"','"+postcode+"')";
-				state3.executeUpdate(regquery);
+				state1 = con.createStatement();
+				String regquery = "UPDATE `progin_13511059`.`user` SET nama_lengkap='"+fullname+"', password='"+password+"', handphone="+hpnum+", address='"+address+"', province='"+province+"', state='"+kecamatan+"', postcode ="+postcode+" WHERE username= '"+ session.getAttribute("username")+"'";
+				state1.executeUpdate(regquery);
 				out.print("Ntar dikosongin untuk AJAX");
 			}
 		}

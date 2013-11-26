@@ -1,7 +1,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
-<form name="edit" action="javascript:verifRegis();" method="post">
+<form name="edit" action="verifyEdit" method="post">
 <%
 try {
 	  //Load the JDBC driver
@@ -18,14 +18,14 @@ try {
 	  String sql = "SELECT * FROM user WHERE username ='"+session.getAttribute("username")+"'";
 	  ResultSet rs = s.executeQuery(sql);
 	  while (rs.next()) {
-		out.println("Change Password: <input type='password' onkeyup='checkPass(this)' name='password' value='"+rs.getString(4)+"'><div id='err_pass'></div><br>");
-	    out.println("Confirm Password: <input type='password' onkeyup='confirmPassword(this)' name='repassword' value='"+rs.getString(4)+"'><div id='err_repass'></div><br>");
-		out.println("Nama Lengkap: <input type='text' name='fullname' onkeyup='checkFullName(this)' value='"+ rs.getString(3)+"'><div id='err_fullname'></div><br>");
-		out.println("Nomor Hand Phone: <input type='text' name='hpnum' value='"+ rs.getString(6)+"'><br>");
-		out.println("Alamat : <input type='text' name='address' value='"+ rs.getString(7)+"'><br>");
-		out.println("Provinsi : <input type='text' name='province' value='"+ rs.getString(8)+"'><br>");
-		out.println("Kecamatan : <input type='text' name='kecamatan' value='"+ rs.getString(9)+"'><br>");
-		out.println("Kode Pos : <input type='text' name='postalcode' value='"+ rs.getString(10)+"'><br>");
+		out.println("Change Password: <input type='password' onkeyup='checkPass(this)' name='password' value='"+rs.getString(3)+"'><div id='err_pass'></div><br>");
+	    out.println("Confirm Password: <input type='password' onkeyup='confirmPassword(this)' name='repassword' value='"+rs.getString(3)+"'><div id='err_repass'></div><br>");
+		out.println("Nama Lengkap: <input type='text' name='fullname' onkeyup='checkFullName(this)' value='"+ rs.getString(2)+"'><div id='err_fullname'></div><br>");
+		out.println("Nomor Hand Phone: <input type='text' name='hpnum' value='"+ rs.getString(5)+"'><br>");
+		out.println("Alamat : <input type='text' name='address' value='"+ rs.getString(6)+"'><br>");
+		out.println("Provinsi : <input type='text' name='province' value='"+ rs.getString(7)+"'><br>");
+		out.println("Kecamatan : <input type='text' name='kecamatan' value='"+ rs.getString(8)+"'><br>");
+		out.println("Kode Pos : <input type='text' name='postalcode' value='"+ rs.getString(9)+"'><br>");
 		out.println("<input type='submit' id='subedit' value='Edit'>");
 		out.println("<div id='edit_error'></div>");
 	  }

@@ -3,8 +3,7 @@ package tubesII.wbd.kay.verifylogin;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,13 +47,10 @@ public class verifyLogin extends HttpServlet {
 		
 		if(logger.validate(username,password)){
 			session.setAttribute("username", username);
-			String url = "/index.jsp";
-			ServletContext context = getServletContext();
-			RequestDispatcher dispatcher = context.getRequestDispatcher(url);
-			dispatcher.forward(request, response);
+			out.print("NTAR DIKOSONGIN UNTUK AJAX");
 		}
 		else{
-			out.print("Login Authentication Failed");
+			out.print("Wrong Username or Password");
 		}
 	}
 

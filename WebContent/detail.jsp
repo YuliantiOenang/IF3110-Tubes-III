@@ -14,18 +14,20 @@ try {
 	  //Create a Statement object and call its executeUpdate 
 	  //method to insert a record
 	  Statement s = con.createStatement();
-	  String sql = "SELECT * FROM user WHERE username ='"+session.getAttribute("username")+"'";
+	  String id_barang = request.getParameter("id");
+	  System.out.println(id_barang);
+	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE id_barang ="+ id_barang;
 	  ResultSet rs = s.executeQuery(sql);
 	  while (rs.next()) {
-	    out.println("<h3> "+rs.getString(2)+"</h3><br>");
-	    out.println("<p>username : "+rs.getString(1)+"</p><br>");
-		out.println("<p>email : "+ rs.getString(4)+"</p><br>");
-		out.println("<p>Mobile : "+ rs.getString(5)+"</p><br>");
-		out.println("<p>Address : "+ rs.getString(6)+"</p><br>");
-		out.println("<p>Province : "+ rs.getString(7)+"</p><br>");
-		out.println("<p>State : "+ rs.getString(8)+"</p><br>");
-		out.println("<p>Postal Code : "+ rs.getString(9)+"</p><br>");
-		out.println("<a href='editprofile.jsp'> Edit Profile </a>");
+	    out.println("<h1>"+rs.getString(2)+"</h1><br>");
+	    out.println("<img src='"+rs.getString(3)+"' width='300px' height='300px'/><br>");
+		out.println("<br><h2>Deskripsi :</h2><p>"+rs.getString(7)+"</p><br>");
+		out.println("Request tambahan 	: <br>");
+		out.println("<form action='addcart.php' method='post' id='usrform'>");
+		out.println("<textarea rows='4' cols='50'  name='request_tambahan' form='usrform'></textarea><br>");
+		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
+		out.println("Quantity : <input type='text' name='qt' style='width: 20px; text-align: right' /><br>");
+		out.println("<input type='submit' value='Add to cart'></form>");
 	  }
 	  rs.close();
 	  s.close();
@@ -44,5 +46,6 @@ try {
 	  System.out.println(e3.toString());
 	}
 %>
+
 </body>
 </html>
