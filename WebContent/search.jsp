@@ -18,9 +18,9 @@ String kategori = request.getParameter("s_kategori");
 String n_item_query="";
 String search_query="";
 
-if (name!= null) {
-	if(harga!=null){ //ada harga
-		if(kategori!=null){
+if (!name.equals("")) {
+	if(!harga.equals("")){ //ada harga
+		if(!kategori.equals("")){
 			n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM `progin_13511059`.barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = "+kategori;
 			search_query = "SELECT * FROM `progin_13511059`.barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = "+kategori+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
 		}else { //kategori kosong
@@ -28,7 +28,7 @@ if (name!= null) {
 			search_query = "SELECT * FROM `progin_13511059`.barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+harga+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
 		}
 	}else{ //harga kosong
-		if(kategori!= null) {
+		if(!kategori.equals("")) {
 			n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM `progin_13511059`.barang WHERE nama_barang like '%"+name+"%' AND kategori_barang = "+kategori;
 			search_query = "SELECT * FROM `progin_13511059`.barang WHERE nama_barang like '%"+name+"%' AND kategori_barang = "+kategori+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
 		} else {
@@ -38,8 +38,8 @@ if (name!= null) {
 		
 	}
 }else{// nama kosong
-	if(harga!=null){ //ada harga
-		if(kategori!=null){ //ada kategori
+	if(!harga.equals("")){ //ada harga
+		if(!kategori.equals("")){ //ada kategori
 			n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM `progin_13511059`.barang WHERE harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = "+kategori;
 			search_query = "SELECT * FROM `progin_13511059`.barang WHERE harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = "+kategori+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
 		}else { //kategori kosong
@@ -47,7 +47,7 @@ if (name!= null) {
 			search_query = "SELECT * FROM `progin_13511059`.barang WHERE harga_barang BETWEEN 0 AND "+harga+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
 		}
 	} else { //gak ada harga
-		if(kategori!= null) {
+		if(!kategori.equals("")) {
 			n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM `progin_13511059`.barang WHERE kategori_barang = "+kategori;
 			search_query = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = "+kategori+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
 		}
