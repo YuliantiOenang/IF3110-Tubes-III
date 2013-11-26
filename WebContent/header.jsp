@@ -7,33 +7,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="javascript/text" src="verify.js"></script>
+<link rel="stylesheet" type="text/css" href="AJS_Style.css">
 <%--<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/ruserba.css" /> --%>
 <title>RuserBa</title>
 </head>
 <body>
-<% 
-HttpSession sesi = request.getSession(true);
-if((sesi== null)|| (sesi.getAttribute("username")==null)) {
-%>
-<a href="register.jsp">Sign Up</a><br>
-Login<br>
-<form action="verifyLogin" method="post">
-Username : <input type="text" name="username"/><br>
-Password : <input type="password" name="password"/><br>
-<input type="submit" value="Login" />
-</form>
-<%
-}
-else{
-%>
-<a href="logout.jsp">Log Out</a><br>
-<a href="shoppingbag.jsp">Shopping Bag</a><br>
-<a href="profile.jsp">Profile</a><br>
-<a href="registercreditcard.jsp">Register Credit Card</a><br>
-<%
-}
-%>
-<h3>Search Option : </h3>
+<div id="AJS_body_wrapper">
+<div id="AJS_wrapper">
+	<div id="AJS_menubar">
+		<div id="top_nav" class="ddsmoothmenu">
+			<% 
+			HttpSession sesi = request.getSession(true);
+			if((sesi== null)|| (sesi.getAttribute("username")==null)) {
+			%>
+			<ul>
+				<li><a href="register.jsp">Sign Up</a></li>
+				<li><a href="#login_form">Log in </a></li>
+			<%
+			}
+			else{
+			%>
+				<li><a href="registercreditcard.jsp"> Register Credit Card </a></li>
+				<li><a href="shoppingbag.jsp"> Shopping Bag </a></li>
+				<li><a href="profile.jsp">Profile</a></li>
+				<li><a href="logout.jsp">Log out</a></li>
+			</ul>
+
+		</div> <!-- end of ddsmoothmenu -->	
+    </div> <!-- END of AJS_menubar -->
+			<%
+			}
+			%>
+			
+<a href="#x" class="overlay" id="login_form" ></a>
+        <div class="popup">
+            <h2>Welcome Guest!</h2>
+            <p>Please enter your login and password here</p>
+            <form name="login" action="javascript:verLogin();" method="post">
+	            
+	                Username : <input type="text" name="username"><br>
+	                Password : <input type="password" name="password"><br>
+	                <div id="err_login"></div><br>
+	            	<input type="submit" value="Log In" />
+	        </form>
+            <a class="close" href="#close"></a>
+        </div>
+        <br style="clear: left" />
+        
+<div id="AJS_main">
+	<div id="sidebar" class="float_r">
+		<div class="sidebar_box"><span class="bottom"></span>
+			<h3>Search Option : </h3>
 	        		<form name="search" action="search.jsp" method="get">
 						<input type="hidden" name="laman" value="1">
 						<input type="text" name="searched" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
@@ -105,4 +129,9 @@ try {
 	  System.out.println(e3.toString());
 	}
 %>
-	                    </ul>
+						</ul>
+	                    </div>
+	                    </div>
+	                    </div>
+	                    </div>
+	                    </div>

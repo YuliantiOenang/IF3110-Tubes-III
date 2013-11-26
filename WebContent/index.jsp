@@ -1,5 +1,6 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<link rel="stylesheet" type="text/css" href="AJS_Style.css">
 <%@ include file= "./header.jsp" %> 
 <%	
 	System.out.println("Hello World in Console.");
