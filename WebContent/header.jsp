@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="javascript/text" src="verify.js"></script>
-<link rel="stylesheet" type="text/css" href="AJS_Style.css">
+<link rel="stylesheet" type="text/css" href="AJS_style.css">
 <%--<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/ruserba.css" /> --%>
 <title>RuserBa</title>
 </head>
