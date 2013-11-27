@@ -1,7 +1,6 @@
 /**
  * 
  */
-
 function confirmAll(){
 				var username = document.forms['register']['username'].value;
 				var password = document.forms['register']['password'].value;
@@ -120,7 +119,7 @@ function confirmAll(){
 			}
 			function checkPass(fld){
 				var err_pass = document.getElementById("err_pass");
-				confirmAll();
+			//	confirmAll();
 				if(fld.value.length<8){
 					err_pass.innerHTML = "Password must be longer than 8 characters";
 					return false;
