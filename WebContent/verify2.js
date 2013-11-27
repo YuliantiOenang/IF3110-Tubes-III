@@ -77,6 +77,16 @@ function confirmAll(){
 			function checkPass(fld){
 				var err_pass = document.getElementById("err_pass");
 				confirmAll();
+				if (document.forms['edit']['password'].value == document.forms['edit']['username'].value)
+				{
+					err_pass.innerHTML = "Password can not be the same with username";
+					return false;
+				}
+				if (document.forms['edit']['password'].value == document.forms['edit']['Email'].value)
+				{
+					err_pass.innerHTML = "Password can not be the same with email";
+					return false;
+				}
 				if(fld.value.length<8){
 					err_pass.innerHTML = "Password must be longer than 8 characters";
 					return false;

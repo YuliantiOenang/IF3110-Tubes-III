@@ -61,13 +61,13 @@
 	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
 		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4)+",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addcart.php' method='post'>");
+		out.println("<form name='beli' action='addCart' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
 		if(sesion.getAttribute("username")!=null&&sesion.getAttribute("username").equals("admin"))
-			out.println("</form><a href='barangAdmin?action=update&id_barang="+rs.getString(1)+"'>Update</a> | <a href='barangAdmin?action=delete&id_barang="+rs.getString(1)+"'>Delete</a></p></div>");
+			out.println("</form><a href='barangAdmin?action=update&id_barang="+rs.getString(1)+"'>Update</a> | <a href='#' onclick='if (confirm(\"Yakin mau membuang barang ini?\")) window.location=\"barangAdmin?action=delete&id_barang="+rs.getString(1)+"\"'>Delete</a></p></div>");
 		else
 			out.println("</form></p></div>");
 	  }
@@ -87,10 +87,10 @@
 	  // other unexpected exception, print error message to the console
 	  System.out.println(e3.toString());
 	}
- int nextlaman = laman++;
- int prelaman = laman--;
+ int nextlaman = laman+1;
+ int prelaman = laman-1;
  if (laman == 1) {
-		out.println("<li> <a href='kategori.jsp?id="+idkat+"&laman="+laman+"'>Berikutnya>>></a></li><br>");
+		out.println("<li> <a href='kategori.jsp?id="+idkat+"&laman="+nextlaman+"'>Berikutnya>>></a></li><br>");
 		for (int x=1;x<=n_item/10;x++) {
 			out.println("<li> <a href='kategori.jsp?id="+idkat+"&laman="+x+"'>"+x+"</a></li><br>");
 		}
@@ -107,6 +107,9 @@
 		}
 		out.println("<li> <a href='kategori.jsp?id="+idkat+"&laman="+prelaman+"'><<<Sebelumnya</a></li><br>");
 	}
+out.print("<p> Sort By : </p>");
+out.print("<li> <a href='search.jsp?laman=1&searched=&order=nama_barang&s_harga=&s_kategori="+idkat+"'>Nama Barang</a></li><br>");
+out.print("<li> <a href='search.jsp?laman=1&searched=&order=harga_barang&s_harga=&s_kategori="+idkat+"'>Harga Barang</a></li><br>");
  %>
  
 </div>

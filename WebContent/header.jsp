@@ -26,7 +26,7 @@
 			<%
 			}
 			else{
-			out.print("<div id='site_title'><h1><a href='index.jsp'>Welcome, "+ sesi.getAttribute("username")+"</a></h1></div>");
+			out.print("<div id='site_title'><h1><a href='index.jsp'>Welcome</a>, <a href='profile.jsp'>"+ sesi.getAttribute("username")+"</a></h1></div>");
 			}
 			%>
 		</div>

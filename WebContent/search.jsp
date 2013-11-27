@@ -86,11 +86,11 @@ try {
 				out.println("<input type='hidden' name='request_tambahan' value='-'> Quantity <input type='text' name='qt' style='width: 20px; text-align: right' /><input type='submit' value='Add to cart'></form></div>");
 			  }  
 	  }
-	  int nextLaman = laman++;
-	  int prevLaman = laman--;
+	  int nextLaman = laman+1;
+	  int prevLaman = laman-1;
 	  if (n_item > 10) {
 			if (laman == 1) {
-				out.print("<li> <a href='search.jsp?laman="+nextLaman+"'&searched='"+name+"'&s_harga='"+harga+"'&s_kategori="+kategori+"'>Berikutnya>>></a></li><br>");
+				out.print("<li> <a href='search.jsp?laman="+nextLaman+"&searched="+name+"&s_harga="+harga+"&s_kategori="+kategori+"'>Berikutnya>>></a></li><br>");
 				for (int x=0;x<n_item/10;x++) {
 					out.print("<li> <a href='search.jsp?laman="+(x+1)+"&searched="+name+"&s_harga="+harga+"&s_kategori="+kategori+"'>"+(x+1)+"</a></li><br>");
 				}
@@ -110,8 +110,8 @@ try {
 			//fitur sorting
 			
 			out.print("<p> Sort By : </p>");
-			out.print("<li> <a href='search.jsp?laman=1&searched="+name+"&order=nama_barang'>Nama Barang</a></li><br>");
-			out.print("<li> <a href='search.jsp?laman=1&searched="+name+"&order=harga_barang'>Harga Barang</a></li><br>");
+			out.print("<li> <a href='search.jsp?laman=1&searched="+name+"&order=nama_barang&s_harga=&s_kategori="+kategori+"'>Nama Barang</a></li><br>");
+			out.print("<li> <a href='search.jsp?laman=1&searched="+name+"&order=harga_barang&s_harga=&s_kategori="+kategori+"'>Harga Barang</a></li><br>");
 		}
 	  rs1.close();
 	  rs2.close();

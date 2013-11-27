@@ -1,6 +1,10 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
+<%
+if((sesi== null)|| (sesi.getAttribute("username")==null))
+	out.print("<script>window.location='register.jsp';</script>");
+%>
 <script type="text/javascript" src="beli.js"></script>
 <h3> Your Shopping Cart </h3>
 <form name="shopping_cart" action="editShopCart" method="post">
@@ -43,16 +47,22 @@ else{
 		  String sqlCredit = "SELECT * FROM `progin_13511059`.creditcard WHERE card_owner ='"+session.getAttribute("username")+"'";
 		  ResultSet rs2 = s2.executeQuery(sqlCredit);
 		  out.print("<form name='beli_barang' action='javascript:verBeli();' method='post'>");
-		  while(rs2.next()){
-			  if(counter ==0){
-				  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid' checked>"+rs2.getString(1)+"<br>");
-			  }
-			  else{
-				  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid'>"+rs2.getString(1)+"<br>");  
-			  }
-			  counter++;
+		  if(!rs2.next()){
+			  out.print("<input type='hidden' name ='creditid' value='asd'>");
+			  out.print("<input type='submit' value='Beli!'>");
 		  }
-		  out.print("<input type='submit' value='Beli!'><div id='barang_error'></div>");
+		  else{
+			  while(rs2.next()){
+				  if(counter ==0){
+					  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid' checked>"+rs2.getString(1)+"<br>");
+				  }
+				  else{
+					  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid'>"+rs2.getString(1)+"<br>");  
+				  }
+				  counter++;
+			  }
+			  out.print("<input type='submit' value='Beli!'><div id='barang_error'></div>");  
+		  }
 		  con.close();
 		}
 		catch (ClassNotFoundException e1) {

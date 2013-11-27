@@ -28,6 +28,8 @@ try {
 		Provinsi : <input type='text' name='province' value='<%=rs.getString(7)%>'><br>
 		Kecamatan : <input type='text' name='kecamatan' value='<%=rs.getString(8)%>'><br>
 		Kode Pos : <input type='text' name='postalcode' value='<%=rs.getString(9)%>'><br>
+		<input type="hidden" name="username" value='<%=rs.getString(1)%>'>
+		<input type="hidden" name="Email" value='<%=rs.getString(4)%>'>
 		<input type='submit' id='subedit' value='Edit'>
 		<div id='edit_error'></div>
 	  <%}

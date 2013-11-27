@@ -1,4 +1,8 @@
 <%@ include file= "./header.jsp" %>
+<%
+if((sesi != null) && (sesi.getAttribute("username") != null))
+	out.print("<script>window.location='index.jsp';</script>");
+%>
 <script type="text/javascript" src="verify.js"></script>
 <form name="register" action="javascript:verifRegis();" method="post">
 			Username: <input type="text" onkeyup="return checkUsername(this)" name="username" value=""><div id="err_username"></div><br>

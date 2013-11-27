@@ -62,6 +62,7 @@ public class beli extends HttpServlet {
 		}
 		else{
 			try{
+				boolean success = true;
 				String uname = "root";
 				String pass = "";
 				String url = "jdbc:mysql://localhost/progin_13511059";
@@ -79,7 +80,8 @@ public class beli extends HttpServlet {
 						result = state.executeQuery(regquery);
 						while(result.next()){
 							if(item.get(i)> Integer.parseInt(result.getString(8))){
-								out.print("The amount of item number "+(i+1)+" is invalid");
+								out.print("The amount of item number "+(i+1)+" is invalid, the stock is only "+result.getString(8));
+								success = false;
 							}
 							else{
 								int newPembelian = Integer.parseInt(result.getString(6))+ item.get(i);
@@ -94,9 +96,11 @@ public class beli extends HttpServlet {
 						}
 				}
 				tempPembelian++;
-				String tambahQuery = "UPDATE `progin_13511059`.`user` SET `n_pembelian` = '"+tempPembelian+"' WHERE `user`.`username` = '"+session.getAttribute("username")+"'";
-				Statement State3 = con.createStatement();
-				State3.executeUpdate(tambahQuery);
+				if(success){
+					String tambahQuery = "UPDATE `progin_13511059`.`user` SET `n_pembelian` = '"+tempPembelian+"' WHERE `user`.`username` = '"+session.getAttribute("username")+"'";
+					Statement State3 = con.createStatement();
+					State3.executeUpdate(tambahQuery);
+				}
 			}
 			catch (ClassNotFoundException e1) {
 				  // JDBC driver class not found, print error message to the console

@@ -2,6 +2,8 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
 <%
+if((sesi== null)|| (sesi.getAttribute("username")==null))
+	out.print("<script>window.location='register.jsp';</script>");
 try {
 	  //Load the JDBC driver
 			String uname = "root";
