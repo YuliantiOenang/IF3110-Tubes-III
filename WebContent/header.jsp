@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
 <link href="css/layout.css" rel="stylesheet" type="text/css" />
 <link href="css/modal.css" rel="stylesheet" type="text/css" />
+<script src="${pageContext.request.contextPath}/verify.js"></script>
 <title>RuserBa</title>
 </head>
 <body>

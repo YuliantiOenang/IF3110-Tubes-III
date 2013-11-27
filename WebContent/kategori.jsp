@@ -3,7 +3,8 @@
 <%@ include file= "./header.jsp" %>
 <div id="content" class="float_l">
  <%
- if(session.getAttribute("username").equals("admin")){
+ HttpSession sesion = request.getSession(true);
+ if(sesion.getAttribute("username")!=null&&sesion.getAttribute("username").equals("admin")){
 	 out.print("<input type='button' value = 'Create' id='create'>");
  }
  int laman = Integer.parseInt(request.getParameter("laman"));
