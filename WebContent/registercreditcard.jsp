@@ -1,6 +1,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
+<script type="text/javascript" src="verifycard.js"></script>
 <form name="login" action="verifyCardRegist" method="post">
 		Card Number: <input type="text" name="cardnum" onkeyup="checkCard(this)"><br>
 		Name on Card: <input type="text" name="namecard"><br>

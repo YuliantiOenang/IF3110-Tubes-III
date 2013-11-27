@@ -54,7 +54,7 @@ function confirmAll(){
 						}
 					}
 				}
-				xmlhttp.open("POST","veredit.php",true);
+				xmlhttp.open("POST","verifyEdit",true);
 				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				xmlhttp.send(data);
 			}
