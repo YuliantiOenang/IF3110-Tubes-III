@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2013 at 12:47 PM
+-- Generation Time: Nov 27, 2013 at 11:37 AM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.3
 
@@ -51,9 +51,9 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `gambar_barang`, `harga_barang
 ('104', 'Tahu Palembang', './images/Tahu.png', 4000, 1, 7, 'tahu dari Palembang. wuenak', 10),
 ('105', 'Tahu Jakarta', './images/Tahu.png', 5000, 1, 6, 'tahu dari Jakarta. wuenak', 10),
 ('106', 'Siomay Sumedang', './images/Siomay.png', 1000, 1, 11, 'Siomay dari sumedang. wuenak', 10),
-('107', 'Siomay Bandung', './images/Siomay.png', 2000, 1, 19, 'Siomay dari Bandung. wuenak', 10),
-('108', 'Siomay Medan', './images/Siomay.png', 3000, 1, 18, 'Siomay dari Medan. wuenak', 10),
-('109', 'Siomay Palembang', './images/Siomay.png', 4000, 1, 17, 'Siomay dari Palembang. wuenak', 10),
+('107', 'Siomay Bandung', './images/Siomay.png', 2000, 1, 26, 'Siomay dari Bandung. wuenak', 3),
+('108', 'Siomay Medan', './images/Siomay.png', 3000, 1, 26, 'Siomay dari Medan. wuenak', 2),
+('109', 'Siomay Palembang', './images/Siomay.png', 4000, 1, 22, 'Siomay dari Palembang. wuenak', 5),
 ('110', 'Siomay Jakarta', './images/Siomay.png', 5000, 1, 6, 'Siomay dari Jakarta. wuenak', 10),
 ('111', 'Beras Sumedang', './images/Beras.png', 10000, 1, 1, 'Beras dari sumedang. wuenak', 10),
 ('112', 'Beras Bandung', './images/Beras.png', 20000, 1, 9, 'Beras dari Bandung. wuenak', 10),
@@ -235,6 +235,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `province` text NOT NULL,
   `state` text NOT NULL,
   `postcode` int(10) NOT NULL,
+  `n_pembelian` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabel Anggota Website';
 
@@ -242,13 +243,14 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`) VALUES
-('banggapardana', 'Gerangga Anggaparaldi', 'tangga', 'tangga@bangga.com', 0, '', '', '', 0),
-('codename', 'Yogi Salomo Mangontang Pratama', '12345678', 'itu@gimal.com', 12, 'sana', 'sini', 'situ', 1234),
-('codod', 'Nurwanto', 'dsadsadsa', 'admin@labtek.org', 811717, 'Indramayu', 'Jawa Barat', 'Jatibarang', 12341),
-('fathan', 'Fathan Adi', '123', 'fathan@gmail.com', 12345, 'beke', 'keke', 'okok', 1111),
-('jems', 'Yanuar', 'asdasdasd', 'jems@yanuar.com', 81175275, 'Bandung', 'Medan', 'Sei Galingging', 818181),
-('pya', 'pya pya', 'pya', '1@2.com', 987, 'sana', 'sini', 'keca', 0);
+INSERT INTO `user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`, `n_pembelian`) VALUES
+('admin', 'Administrator', '123', 'admin@ruserba.com', 0, 'A', 'P', 'K', 123, 0),
+('banggapardana', 'Gerangga Anggaparaldi', 'tangga', 'tangga@bangga.com', 0, '', '', '', 0, 0),
+('codename', 'Yogi Salomo Mangontang Pratama', '12345678', 'itu@gimal.com', 12, 'sana', 'sini', 'situ', 1234, 1),
+('codod', 'Nurwanto', 'dsadsadsa', 'admin@labtek.org', 811717, 'Indramayu', 'Jawa Barat', 'Jatibarang', 12341, 0),
+('fathan', 'Fathan Adi', '123', 'fathan@gmail.com', 12345, 'beke', 'keke', 'okok', 1111, 0),
+('jems', 'Yanuar', 'asdasdasd', 'jems@yanuar.com', 81175275, 'Bandung', 'Medan', 'Sei Galingging', 818181, 0),
+('pya', 'pya pya', 'pya', '1@2.com', 987, 'sana', 'sini', 'keca', 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
