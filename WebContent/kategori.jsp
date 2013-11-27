@@ -1,7 +1,12 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
+<div id="content" class="float_l">
  <%
+ HttpSession sesion = request.getSession(true);
+ if(sesion.getAttribute("username")!=null&&sesion.getAttribute("username").equals("admin")){
+	 out.print("<input type='button' value = 'Create' id='create'>");
+ }
  int laman = Integer.parseInt(request.getParameter("laman"));
  int idkat = Integer.parseInt(request.getParameter("id"));
  System.out.println(idkat);
@@ -49,9 +54,10 @@
 	  Statement s = con.createStatement();
 	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = "+idkat+" ORDER BY "+order+" ASC LIMIT "+istring+", 10";
 	  ResultSet rs = s.executeQuery(sql);
-	  out.println(nama);
+	  out.println("<h3>"+nama+"</h3>");
 	  while (rs.next()) {
-	    out.println("<h3>"+rs.getString(2)+"</h3>");
+	    out.println("<div class='product_box'>");
+		out.println("<h3>"+rs.getString(2)+"</h3>");
 	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
 		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4)+",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
@@ -60,7 +66,7 @@
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p>");
+		out.println("</form><input type='button' value = 'Delete' id='delete"+rs.getString(1)+"'><input type='button' value = 'Update' id='update"+rs.getString(1)+"'></p></div>");
 	  }
 	  rs.close();
 	  s.close();
@@ -100,6 +106,5 @@
 	}
  %>
  
- 
-</body>
-</html>
+</div>
+<%@ include file= "./footer.jsp" %>

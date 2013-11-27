@@ -9,5 +9,4 @@
 		<div id="credit_error"></div>
 		<input type="submit" id="regcard" value="Register Card">
 </form>
-</body>
-</html>
+<%@ include file= "./footer.jsp" %>

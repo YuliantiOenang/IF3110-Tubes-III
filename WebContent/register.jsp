@@ -13,5 +13,4 @@
 			<input type="submit" id="daftar" value="Register">
 			<div id="reg_error"></div>
 </form>
-</body>
-</html>
+<%@ include file= "./footer.jsp" %> 
