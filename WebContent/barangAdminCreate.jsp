@@ -7,7 +7,7 @@
 	Stok <input type="number" name="stok" min=0><br>
 	<input type="submit" value="Create">
 	<input type="hidden" name="action" value="create">
-	<input type="hidden" name="kategori_barang" value=<% out.print(request.getParameter("kategori_barang")); %>>
+	<input type="hidden" name="kategori_barang" value="<% out.print(request.getParameter("kategori_barang")); %>">
 </form>
 </body>
 </html>
