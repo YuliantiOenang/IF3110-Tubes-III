@@ -9,6 +9,11 @@
     <servlet-class>tubesII.wbd.kay.verifyregist.verifyRegister</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <servlet>
+    <servlet-name>verifyLogin</servlet-name>
+    <servlet-class>tubesII.wbd.kay.verifyregist.verifyLogin</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
   <servlet-mapping>
     <servlet-name>verifyRegister</servlet-name>
     <url-pattern>/verifyRegister.do</url-pattern>
