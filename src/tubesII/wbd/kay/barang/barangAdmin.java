@@ -45,7 +45,7 @@ public class barangAdmin extends HttpServlet {
 			int id_barang = Integer.parseInt(request.getParameter("id_barang"));
 			actionDelete(request, response, id_barang);
 		} else
-			out.print("Page not found");
+			out.print("<script>alert('Page not found');history.go(-1);</script>");
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class barangAdmin extends HttpServlet {
 			int id_barang = Integer.parseInt(request.getParameter("id_barang"));
 			actionUpdate(request, response, id_barang);
 		} else
-			out.print("Page not found");
+			out.print("<script>alert('Page not found');history.go(-1);</script>");
 	}
 
 	private void actionCreate(HttpServletRequest request, HttpServletResponse response, int kategori_barang) {
@@ -77,6 +77,15 @@ public class barangAdmin extends HttpServlet {
 			barang.harga_barang = Integer.parseInt(request.getParameter("harga_barang"));
 			barang.keterangan = request.getParameter("keterangan");
 			barang.stok = Integer.parseInt(request.getParameter("stok"));
+			if (Barang.find("SELECT * FROM barang WHERE nama_barang='"+barang.nama_barang+"'") != null)
+			{
+				try {
+					response.getWriter().print("<script>alert('Nama barang sudah ada!');history.go(-1);</script>");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return;
+			}
 			barang.save();
 			String url = "/kategori.jsp?laman=1&id=" + kategori_barang;
 			ServletContext context = getServletContext();
@@ -110,6 +119,15 @@ public class barangAdmin extends HttpServlet {
 			barang.harga_barang = Integer.parseInt(request.getParameter("harga_barang"));
 			barang.keterangan = request.getParameter("keterangan");
 			barang.stok = Integer.parseInt(request.getParameter("stok"));
+			if (Barang.find("SELECT * FROM barang WHERE nama_barang='"+barang.nama_barang+"' AND id_barang<>"+barang.id_barang) != null)
+			{
+				try {
+					response.getWriter().print("<script>alert('Nama barang sudah ada!');history.go(-1);</script>");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return;
+			}
 			barang.save();
 			String url = "/kategori.jsp?laman=1&id=" + barang.kategori_barang;
 			ServletContext context = getServletContext();
