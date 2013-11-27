@@ -1,9 +1,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %> 
-<%	
-	
-	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");%>
+<%	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");%>
 <div id="content" class="float_l">
 <h1>Current Date: <%= df.format(new java.util.Date()) %></h1>
 <h1>Mekanisme Pembelian</h1>
