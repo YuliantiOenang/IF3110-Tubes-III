@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/AJS_style.css" />
+<link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" />
+<link href="css/modal.css" rel="stylesheet" type="text/css" />
 <title>RuserBa</title>
 </head>
 <body>
@@ -142,6 +145,3 @@
 						</div>
 		</div>
 	</div>
-</div>
-</div>
-</div>
