@@ -86,7 +86,10 @@ public class beli extends HttpServlet {
 								int newStok = Integer.parseInt(result.getString(8))- item.get(i);
 								String beliQuery = "UPDATE `progin_13511059`.`barang` SET `n_beli` = '"+newPembelian+"', `stok` = '"+newStok+"' WHERE `barang`.`id_barang` = '"+shopping_cart.get(i)+"'";
 								state2 = con.createStatement();
-								state2.executeUpdate(beliQuery);					
+								state2.executeUpdate(beliQuery);
+								session.setAttribute("shopping_cart", null);
+								session.setAttribute("shopping_request", null);
+								session.setAttribute("amount", null);
 							}
 						}
 				}
@@ -94,7 +97,6 @@ public class beli extends HttpServlet {
 				String tambahQuery = "UPDATE `progin_13511059`.`user` SET `n_pembelian` = '"+tempPembelian+"' WHERE `user`.`username` = '"+session.getAttribute("username")+"'";
 				Statement State3 = con.createStatement();
 				State3.executeUpdate(tambahQuery);
-				out.print("NTAR DIKOSONGIN UNTUK AJAX");
 			}
 			catch (ClassNotFoundException e1) {
 				  // JDBC driver class not found, print error message to the console

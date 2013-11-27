@@ -78,7 +78,6 @@ public class verifyEdit extends HttpServlet {
 				state1 = con.createStatement();
 				String regquery = "UPDATE `progin_13511059`.`user` SET nama_lengkap='"+fullname+"', password='"+password+"', handphone="+hpnum+", address='"+address+"', province='"+province+"', state='"+kecamatan+"', postcode ="+postcode+" WHERE username= '"+ session.getAttribute("username")+"'";
 				state1.executeUpdate(regquery);
-				out.print("Ntar dikosongin untuk AJAX");
 			}
 		}
 		catch(SQLException e){

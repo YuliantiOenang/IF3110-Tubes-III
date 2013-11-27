@@ -1,6 +1,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
+<script type="text/javascript" src="beli.js"></script>
 <h3> Your Shopping Cart </h3>
 <form name="shopping_cart" action="editShopCart" method="post">
 <% 
@@ -22,7 +23,7 @@ else{
 				Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 		        Connection con = DriverManager.getConnection (url, uname, pass);
 				int totalHarga=0;
-			  
+			  	int counter = 0;
 		  //Create a Statement object and call its executeUpdate 
 		  //method to insert a record
 		  for(int i = 0; i < shopping_cart.size();i++){
@@ -41,9 +42,15 @@ else{
 		  Statement s2 = con.createStatement();
 		  String sqlCredit = "SELECT * FROM `progin_13511059`.creditcard WHERE card_owner ='"+session.getAttribute("username")+"'";
 		  ResultSet rs2 = s2.executeQuery(sqlCredit);
-		  out.print("<form name='beli_barang' action='beli' method='post'>");
+		  out.print("<form name='beli_barang' action='javascript:verBeli();' method='post'>");
 		  while(rs2.next()){
-			  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid'>"+rs2.getString(1)+"<br>");
+			  if(counter ==0){
+				  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid' checked>"+rs2.getString(1)+"<br>");
+			  }
+			  else{
+				  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid'>"+rs2.getString(1)+"<br>");  
+			  }
+			  counter++;
 		  }
 		  out.print("<input type='submit' value='Beli!'><div id='barang_error'></div>");
 		  con.close();

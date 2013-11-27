@@ -87,7 +87,7 @@ try {
 	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
 		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addcart.php' method='post'>");
+		out.println("<form name='beli' action='addCart' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
@@ -134,7 +134,7 @@ try {
 	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
 		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addcart.php' method='post'>");
+		out.println("<form name='beli' action='addCart' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
@@ -180,7 +180,7 @@ try {
 	    out.println("<a href='detail.jsp?id="+rs.getString(1) +"'><img src='"+ rs.getString(3)+"'/></a>");
 		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addcart.php' method='post'>");
+		out.println("<form name='beli' action='addCart' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");

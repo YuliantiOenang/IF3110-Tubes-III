@@ -49,8 +49,9 @@ function confirmAll(){
 				xmlhttp.onreadystatechange=function(){
 					if(xmlhttp.readyState==4&&xmlhttp.status==200){
 						reg_error.innerHTML = xmlhttp.responseText;
-						if(reg_error==""){
+						if(reg_error.innerHTML==""){
 							//Handle SESSION & LOCAL STORAGE
+							window.location = "profile.jsp";
 						}
 					}
 				}
