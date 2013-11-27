@@ -9,5 +9,4 @@
 	<input type="hidden" name="action" value="create">
 	<input type="hidden" name="kategori_barang" value="<% out.print(request.getParameter("kategori_barang")); %>">
 </form>
-</body>
-</html>
+<%@ include file= "./footer.jsp" %>

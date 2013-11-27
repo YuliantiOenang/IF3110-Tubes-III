@@ -13,5 +13,4 @@
 	<input type="hidden" name="action" value="update">
 	<input type="hidden" name="id_barang" value="<% out.print(barang.id_barang); %>">
 </form>
-</body>
-</html>
+<%@ include file= "./footer.jsp" %>
