@@ -11,6 +11,7 @@
 <link href="css/layout.css" rel="stylesheet" type="text/css" />
 <link href="css/modal.css" rel="stylesheet" type="text/css" />
 <script src="${pageContext.request.contextPath}/verify.js"></script>
+<script type="text/javascript" src="login.js"></script>
 <title>RuserBa</title>
 </head>
 <body>
@@ -61,7 +62,7 @@
         <div class="popup">
             <h2>Welcome Guest!</h2>
             <p>Please enter your login and password here</p>
-            <form name="login" action="verifyLogin" method="post">
+            <form name="login" action="javascript:verLogin();" method="post">
 	            
 	                Username : <input type="text" name="username"><br>
 	                Password : <input type="password" name="password"><br>

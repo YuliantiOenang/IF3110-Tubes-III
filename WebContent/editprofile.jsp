@@ -2,7 +2,7 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
 <script type="text/javascript" src="verify2.js"></script>
-<form name="edit" action="verifyEdit" method="post">
+<form name="edit" action="javascript:verifRegis();" method="post">
 <%
 try {
 	  //Load the JDBC driver

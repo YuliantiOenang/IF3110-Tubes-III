@@ -51,12 +51,12 @@ public class verifyEdit extends HttpServlet {
 		ResultSet result = null;
 		
 		String password = request.getParameter("password");
-		String fullname = request.getParameter("fullname");
+		String fullname = request.getParameter("namalengkap");
 		String hpnum = request.getParameter("hpnum");
 		String address = request.getParameter("address");
 		String province = request.getParameter("province");
 		String kecamatan = request.getParameter("kecamatan");
-		String postcode = request.getParameter("postalcode");
+		String postcode = request.getParameter("postcode");
 		try{
 			String uname = "root";
 			String pass = "";

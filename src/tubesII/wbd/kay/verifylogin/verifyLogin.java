@@ -47,7 +47,6 @@ public class verifyLogin extends HttpServlet {
 		
 		if(logger.validate(username,password)){
 			session.setAttribute("username", username);
-			out.print("NTAR DIKOSONGIN UNTUK AJAX");
 		}
 		else{
 			out.print("Wrong Username or Password");
