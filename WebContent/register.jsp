@@ -1,6 +1,6 @@
 <%@ include file= "./header.jsp" %>
 <script type="text/javascript" src="verify.js"></script>
-<form name="register" action="verifyRegister" method="post">
+<form name="register" action="javascript:verifRegis();" method="post">
 			Username: <input type="text" onkeyup="return checkUsername(this)" name="username" value=""><div id="err_username"></div><br>
 			Password: <input type="password" name="password" onkeyup="checkPass(this)"><div id="err_pass"></div><br>
 			Re-type Password: <input type="password" onkeyup="confirmPassword(this)" name="repassword"><div id="err_repass"></div><br>

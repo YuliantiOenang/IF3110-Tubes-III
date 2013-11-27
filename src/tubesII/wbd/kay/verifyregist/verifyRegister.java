@@ -8,13 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class verifyRegister
@@ -43,6 +42,7 @@ public class verifyRegister extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession(true);
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		Connection con = null;
@@ -52,14 +52,14 @@ public class verifyRegister extends HttpServlet {
 		ResultSet uresult = null;
 		ResultSet eresult = null;
 		String username = request.getParameter("username");
-		String email = request.getParameter("Email");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String fullname = request.getParameter("fullname");
+		String fullname = request.getParameter("namalengkap");
 		String hpnum = request.getParameter("hpnum");
 		String address = request.getParameter("address");
 		String province = request.getParameter("province");
 		String kecamatan = request.getParameter("kecamatan");
-		String postcode = request.getParameter("postalcode");
+		String postcode = request.getParameter("postcode");
 		int urowcount =0;
 		int erowcount =0;
 		try{
@@ -96,7 +96,7 @@ public class verifyRegister extends HttpServlet {
 			else{
 				String regquery = "INSERT INTO `progin_13511059`.`user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`) VALUES ('"+username+"','"+fullname+"','"+password+"','"+email+"','"+hpnum+"','"+address+"','"+province+"','"+kecamatan+"','"+postcode+"')";
 				state3.executeUpdate(regquery);
-				out.print("Ntar dikosongin untuk AJAX");
+				session.setAttribute("username", username);
 			}
 		}
 		catch(SQLException e){

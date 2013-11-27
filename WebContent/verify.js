@@ -40,9 +40,9 @@ function confirmAll(){
 					else{
 						button.disabled = true;
 					}
-			}/*
+			}
 		 	function verifRegis(){
-				var username = document.forms['register']['username'].value;
+		 		var username = document.forms['register']['username'].value;
 				var password = document.forms['register']['password'].value;
 				var repassword = document.forms['register']['repassword'].value;
 				var namalengkap = document.forms['register']['fullname'].value;
@@ -66,15 +66,16 @@ function confirmAll(){
 				xmlhttp.onreadystatechange=function(){
 					if(xmlhttp.readyState==4&&xmlhttp.status==200){
 						reg_error.innerHTML = xmlhttp.responseText;
-						if(reg_error==""){
+						if(reg_error.innerHTML==""){
 							//Handle SESSION & LOCAL STORAGE
+							window.location = "registercreditcard.jsp";
 						}
 					}
 				};
-				xmlhttp.open("POST","verifyRegister.do",true);
+				xmlhttp.open("POST","verifyRegister",true);
 				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				xmlhttp.send(data);
-			}*/
+			}
 		 	function checkUsername(fld){
 				var err_username = document.getElementById("err_username");
 				confirmAll();
