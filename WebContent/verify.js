@@ -5,7 +5,7 @@ function confirmAll(){
 				var username = document.forms['register']['username'].value;
 				var password = document.forms['register']['password'].value;
 				var repassword = document.forms['register']['repassword'].value;
-				var namalengkap = document.forms['regiser']['fullname'].value;
+				var namalengkap = document.forms['register']['fullname'].value;
 				var hpnum = document.forms['register']['hpnum'].value;
 				var address = document.forms['register']['address'].value;
 				var province = document.forms['register']['province'].value;
@@ -40,7 +40,7 @@ function confirmAll(){
 					else{
 						button.disabled = true;
 					}
-			}
+			}/*
 		 	function verifRegis(){
 				var username = document.forms['register']['username'].value;
 				var password = document.forms['register']['password'].value;
@@ -70,11 +70,11 @@ function confirmAll(){
 							//Handle SESSION & LOCAL STORAGE
 						}
 					}
-				}
+				};
 				xmlhttp.open("POST","verifyRegister.do",true);
 				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				xmlhttp.send(data);
-			}
+			}*/
 		 	function checkUsername(fld){
 				var err_username = document.getElementById("err_username");
 				confirmAll();
@@ -119,7 +119,7 @@ function confirmAll(){
 			}
 			function checkPass(fld){
 				var err_pass = document.getElementById("err_pass");
-			//	confirmAll();
+				confirmAll();
 				if(fld.value.length<8){
 					err_pass.innerHTML = "Password must be longer than 8 characters";
 					return false;

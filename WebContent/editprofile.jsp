@@ -1,7 +1,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
-<script type="text/javascript" src="verify.js"></script>
+<script type="text/javascript" src="verify2.js"></script>
 <form name="edit" action="verifyEdit" method="post">
 <%
 try {
