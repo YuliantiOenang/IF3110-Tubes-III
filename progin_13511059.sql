@@ -3,10 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2013 at 11:37 AM
--- Server version: 5.6.11
--- PHP Version: 5.5.3
+-- Generation Time: Nov 27, 2013 at 03:12 PM
+-- Server version: 5.5.32
+-- PHP Version: 5.4.19
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -28,6 +29,7 @@ USE `progin_13511059`;
 -- Table structure for table `barang`
 --
 
+DROP TABLE IF EXISTS `barang`;
 CREATE TABLE IF NOT EXISTS `barang` (
   `id_barang` varchar(10) NOT NULL DEFAULT '',
   `nama_barang` varchar(30) NOT NULL,
@@ -52,7 +54,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `gambar_barang`, `harga_barang
 ('105', 'Tahu Jakarta', './images/Tahu.png', 5000, 1, 6, 'tahu dari Jakarta. wuenak', 10),
 ('106', 'Siomay Sumedang', './images/Siomay.png', 1000, 1, 11, 'Siomay dari sumedang. wuenak', 10),
 ('107', 'Siomay Bandung', './images/Siomay.png', 2000, 1, 26, 'Siomay dari Bandung. wuenak', 3),
-('108', 'Siomay Medan', './images/Siomay.png', 3000, 1, 26, 'Siomay dari Medan. wuenak', 2),
+('108', 'Siomay Medan', './images/Siomay.png', 3000, 1, 27, 'Siomay dari Medan. wuenak', 1),
 ('109', 'Siomay Palembang', './images/Siomay.png', 4000, 1, 22, 'Siomay dari Palembang. wuenak', 5),
 ('110', 'Siomay Jakarta', './images/Siomay.png', 5000, 1, 6, 'Siomay dari Jakarta. wuenak', 10),
 ('111', 'Beras Sumedang', './images/Beras.png', 10000, 1, 1, 'Beras dari sumedang. wuenak', 10),
@@ -66,7 +68,6 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `gambar_barang`, `harga_barang
 ('119', 'Tempe Palembang', './images/Tempe.png', 4000, 1, 7, 'Tempe dari Palembang. wuenak', 10),
 ('120', 'Tempe Jakarta', './images/Tempe.png', 5000, 1, 6, 'Tempe dari Jakarta. wuenak', 10),
 ('121', 'Ayam Sumedang', './images/Ayam.png', 10000, 1, 1, 'Ayam dari sumedang. wuenak', 10),
-('122', 'Ayam Bandung', './images/Ayam.png', 20000, 1, 9, 'Ayam dari Bandung. wuenak', 10),
 ('123', 'Ayam Medan', './images/Ayam.png', 30000, 1, 8, 'Ayam dari Medan. wuenak', 10),
 ('124', 'Ayam Palembang', './images/Ayam.png', 40000, 1, 7, 'Ayam dari Palembang. wuenak', 10),
 ('125', 'Ayam Jakarta', './images/Ayam.png', 50000, 1, 6, 'Ayam dari Jakarta. wuenak', 10),
@@ -95,7 +96,6 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `gambar_barang`, `harga_barang
 ('218', 'kaos4 T-Shirt v-neck', './images/kaos.png', 75000, 2, 7, 'kaos T-shirt bergambar ... model v-neck', 10),
 ('219', 'kaos5 T-Shirt', './images/ArsenalA.png', 75000, 2, 7, 'jersey Arsenal away yang keren KW Thailand', 10),
 ('220', 'kaos5 T-Shirt v-neck', './images/RealA.png', 100000, 2, 8, 'jersey real madrid away yang keren KW Thailand', 10),
-('221', 'jaket1 ', './images/jaket.png', 75000, 2, 7, 'jaket model 1 yang kece abis', 10),
 ('222', 'jaket2', './images/jaket.png', 100000, 2, 8, 'jaket model 2 yang kece abis', 10),
 ('223', 'jaket3', './images/jaket.png', 150000, 2, 8, 'jaket model 3 yang kece abis', 10),
 ('224', 'rompi1', './images/rompi.png', 100000, 2, 8, 'rompi model 1 yang kece abis', 10),
@@ -202,8 +202,9 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `gambar_barang`, `harga_barang
 -- Table structure for table `creditcard`
 --
 
+DROP TABLE IF EXISTS `creditcard`;
 CREATE TABLE IF NOT EXISTS `creditcard` (
-  `card_id` int(11) NOT NULL,
+  `card_id` varchar(20) NOT NULL,
   `card_nameon` varchar(100) NOT NULL,
   `card_expdate` datetime NOT NULL,
   `card_owner` varchar(50) NOT NULL,
@@ -215,9 +216,10 @@ CREATE TABLE IF NOT EXISTS `creditcard` (
 --
 
 INSERT INTO `creditcard` (`card_id`, `card_nameon`, `card_expdate`, `card_owner`) VALUES
-(123111, 'Yogi Salomo Mangontang Pratama', '2013-10-23 00:00:00', 'codename'),
-(123355, 'pya pya', '2014-01-01 00:00:00', 'codename'),
-(123456789, 'Yanuar Aristya', '2011-09-09 00:00:00', 'codename');
+('123111', 'Yogi Salomo Mangontang Pratama', '2013-10-23 00:00:00', 'codename'),
+('123355', 'pya pya', '2014-01-01 00:00:00', 'codename'),
+('123456789', 'Yanuar Aristya', '2011-09-09 00:00:00', 'codename'),
+('378282246310005', 'Sampah', '2013-10-10 00:00:00', 'admin');
 
 -- --------------------------------------------------------
 
@@ -225,6 +227,7 @@ INSERT INTO `creditcard` (`card_id`, `card_nameon`, `card_expdate`, `card_owner`
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(25) NOT NULL,
   `nama_lengkap` varchar(50) NOT NULL,
@@ -244,13 +247,15 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`, `n_pembelian`) VALUES
-('admin', 'Administrator', '123', 'admin@ruserba.com', 0, 'A', 'P', 'K', 123, 0),
+('admin', 'Administrator', '123', 'admin@ruserba.com', 0, 'A', 'P', 'K', 123, 2),
 ('banggapardana', 'Gerangga Anggaparaldi', 'tangga', 'tangga@bangga.com', 0, '', '', '', 0, 0),
-('codename', 'Yogi Salomo Mangontang Pratama', '12345678', 'itu@gimal.com', 12, 'sana', 'sini', 'situ', 1234, 1),
+('codename', 'Yogi Salomo Mangontang Pratama', '12345678', 'itu@gimal.com', 12, 'sana', 'sini', 'situ', 1234, 4),
 ('codod', 'Nurwanto', 'dsadsadsa', 'admin@labtek.org', 811717, 'Indramayu', 'Jawa Barat', 'Jatibarang', 12341, 0),
 ('fathan', 'Fathan Adi', '123', 'fathan@gmail.com', 12345, 'beke', 'keke', 'okok', 1111, 0),
 ('jems', 'Yanuar', 'asdasdasd', 'jems@yanuar.com', 81175275, 'Bandung', 'Medan', 'Sei Galingging', 818181, 0),
-('pya', 'pya pya', 'pya', '1@2.com', 987, 'sana', 'sini', 'keca', 0, 0);
+('pya', 'pya pya', 'pya', '1@2.com', 987, 'sana', 'sini', 'keca', 0, 0),
+('rangga', 'Rangga Yus', 'ranggaimba', 's@sd3.com', 0, 'jamban', 'jma', 'jsm', 12, 0);
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
