@@ -41,7 +41,7 @@ function confirmAll(){
 						button.disabled = true;
 					}
 			}
-		/* 	function verifRegis(){
+		 	function verifRegis(){
 				var username = document.forms['register']['username'].value;
 				var password = document.forms['register']['password'].value;
 				var repassword = document.forms['register']['repassword'].value;
@@ -71,11 +71,11 @@ function confirmAll(){
 						}
 					}
 				}
-				xmlhttp.open("POST","verregist.php",true);
+				xmlhttp.open("POST","verifyRegister.do",true);
 				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				xmlhttp.send(data);
 			}
-		 */	function checkUsername(fld){
+		 	function checkUsername(fld){
 				var err_username = document.getElementById("err_username");
 				confirmAll();
 				if(fld.value.length<5){
