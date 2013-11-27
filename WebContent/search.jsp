@@ -80,7 +80,7 @@ try {
 			    out.println("<a href='detail.jsp?id="+rs2.getString(1)+"'><img src='"+rs2.getString(3)+"'/></a>");
 				out.println("<p class='product_price'>Harga : Rp "+ rs2.getString(4)+",-<br>");
 				out.println("Stok : "+ rs2.getString(8) +"<br>");
-				out.println("<form name='beli' action='addcart.php' method='post'>");
+				out.println("<form name='beli' action='addCart' method='post'>");
 				out.println("<input type='hidden' name='id_barang' value='"+rs2.getString(1)+"'>");
 				out.println("<input type='hidden' name='request_tambahan' value='-'> Quantity <input type='text' name='qt' style='width: 20px; text-align: right' /><input type='submit' value='Add to cart'></form>");
 			  }  

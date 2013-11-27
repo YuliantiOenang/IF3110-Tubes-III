@@ -23,7 +23,7 @@ try {
 	    out.println("<img src='"+rs.getString(3)+"' width='300px' height='300px'/><br>");
 		out.println("<br><h2>Deskripsi :</h2><p>"+rs.getString(7)+"</p><br>");
 		out.println("Request tambahan 	: <br>");
-		out.println("<form action='addcart.php' method='post' id='usrform'>");
+		out.println("<form action='addCart' method='post' id='usrform'>");
 		out.println("<textarea rows='4' cols='50'  name='request_tambahan' form='usrform'></textarea><br>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("Quantity : <input type='text' name='qt' style='width: 20px; text-align: right' /><br>");

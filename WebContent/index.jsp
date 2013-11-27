@@ -3,10 +3,21 @@
 <link rel="stylesheet" type="text/css" href="AJS_style.css">
 <%@ include file= "./header.jsp" %> 
 <%	
-	System.out.println("Hello World in Console.");
-	out.println("<ul>Hello Koordas Imba!</ul>");
+	
 	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");%>
 <h1>Current Date: <%= df.format(new java.util.Date()) %></h1>
+<h1>Mekanisme Pembelian</h1>
+	<p>
+		---------------------------------------------------------------------<br>
+		Tata cara pembelian:<br>
+			1. Masukkan nilai quantity pada input box yang diberikan<br>
+			2. Klik Tombol Add to cart.<br>
+			3. Klik link Shopping Bag pada bagian Header<br>
+			4. Pilih Kartu Kredit untuk pembayaran<br>
+			5. Apabila ingin mengedit jumlah barang, ubah nilai pada input box dan klik edit shopcart<br>
+			6. Klik tombol beli dan barang langsung dikirimkan pada Anda! :D<br>
+		---------------------------------------------------------------------<br>
+	</p>
 <h1>Top Pangan</h1>
 <%
 try {
@@ -236,6 +247,4 @@ try {
 	  System.out.println(e3.toString());
 	}
 %>
-
-</body>
-</html>
+<%@ include file= "./footer.jsp" %>
