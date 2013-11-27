@@ -5,7 +5,7 @@
  <%
  HttpSession sesion = request.getSession(true);
  if(sesion.getAttribute("username")!=null&&sesion.getAttribute("username").equals("admin")){
-	 out.print("<input type='button' value = 'Create' id='create'>");
+	 out.print("<a href='barangAdmin?action=create&kategori_barang="+request.getParameter("id")+"'>Create</a>");
  }
  int laman = Integer.parseInt(request.getParameter("laman"));
  int idkat = Integer.parseInt(request.getParameter("id"));
@@ -66,7 +66,10 @@
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form><input type='button' value = 'Delete' id='delete"+rs.getString(1)+"'><input type='button' value = 'Update' id='update"+rs.getString(1)+"'></p></div>");
+		if(sesion.getAttribute("username")!=null&&sesion.getAttribute("username").equals("admin"))
+			out.println("</form><a href='barangAdmin?action=update&id_barang="+rs.getString(1)+"'>Update</a> | <a href='barangAdmin?action=delete&id_barang="+rs.getString(1)+"'>Delete</a></p></div>");
+		else
+			out.println("</form></p></div>");
 	  }
 	  rs.close();
 	  s.close();

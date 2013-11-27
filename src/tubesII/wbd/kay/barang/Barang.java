@@ -17,9 +17,8 @@ public class Barang {
 	public static String user = "root";
 	public static String pass = "";
 	public static String url = "jdbc:mysql://localhost/progin_13511059";
-	
-	public Barang()
-	{
+
+	public Barang() {
 		id_barang = -1;
 	}
 
@@ -41,7 +40,7 @@ public class Barang {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// find 1 row data of barang based on query
 	public static Barang find(String query) {
 		startDbCon();
@@ -49,8 +48,7 @@ public class Barang {
 		try {
 			state = con.createStatement();
 			result = state.executeQuery(query);
-			if (result.next())
-			{
+			if (result.next()) {
 				barang = new Barang();
 				barang.id_barang = Integer.parseInt(result.getString(1));
 				barang.nama_barang = result.getString(2);
@@ -70,7 +68,7 @@ public class Barang {
 
 	// find 1 row data of barang based on primary key
 	public static Barang findByPk(int id) {
-		return find("SELECT * FROM barang WHERE id_barang="+id);
+		return find("SELECT * FROM barang WHERE id_barang=" + id);
 	}
 
 	// find all data of barang based on query
@@ -80,8 +78,7 @@ public class Barang {
 		try {
 			state = con.createStatement();
 			result = state.executeQuery(query);
-			while (result.next())
-			{
+			while (result.next()) {
 				Barang barang = new Barang();
 				barang.id_barang = Integer.parseInt(result.getString(1));
 				barang.nama_barang = result.getString(2);
@@ -107,9 +104,9 @@ public class Barang {
 			state = con.createStatement();
 			String query;
 			if (id_barang == -1) // new
-				query = "INSERT INTO barang (nama_barang, gambar_barang, harga_barang, kategori_barang, n_beli, keterangan, stok) VALUES ('"+nama_barang+"','"+gambar_barang+"','"+harga_barang+"','"+kategori_barang+"','"+n_beli+"','"+keterangan+"','"+stok+"')";
+				query = "INSERT INTO barang (nama_barang, gambar_barang, harga_barang, kategori_barang, n_beli, keterangan, stok) VALUES ('" + nama_barang + "','" + gambar_barang + "','" + harga_barang + "','" + kategori_barang + "','" + n_beli + "','" + keterangan + "','" + stok + "')";
 			else
-				query = "UPDATE barang SET nama_barang='"+nama_barang+"', gambar_barang='"+gambar_barang+"', harga_barang="+harga_barang+", kategori_barang="+kategori_barang+", n_beli="+n_beli+", keterangan='"+keterangan+"', stok="+stok+" WHERE id_barang="+id_barang;
+				query = "UPDATE barang SET nama_barang='" + nama_barang + "', gambar_barang='" + gambar_barang + "', harga_barang=" + harga_barang + ", kategori_barang=" + kategori_barang + ", n_beli=" + n_beli + ", keterangan='" + keterangan + "', stok=" + stok + " WHERE id_barang=" + id_barang;
 			state.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,7 +119,7 @@ public class Barang {
 		startDbCon();
 		try {
 			state = con.createStatement();
-			String query = "DELETE FROM barang WHERE id_barang="+id_barang;
+			String query = "DELETE FROM barang WHERE id_barang=" + id_barang;
 			state.execute(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
