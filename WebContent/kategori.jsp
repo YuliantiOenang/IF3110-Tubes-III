@@ -3,6 +3,9 @@
 <%@ include file= "./header.jsp" %>
 <div id="content" class="float_l">
  <%
+ if(session.getAttribute("username").equals("admin")){
+	 out.print("<input type='button' value = 'Create' id='create'>");
+ }
  int laman = Integer.parseInt(request.getParameter("laman"));
  int idkat = Integer.parseInt(request.getParameter("id"));
  System.out.println(idkat);
@@ -62,7 +65,7 @@
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p></div>");
+		out.println("</form><input type='button' value = 'Delete' id='delete"+rs.getString(1)+"'><input type='button' value = 'Update' id='update"+rs.getString(1)+"'></p></div>");
 	  }
 	  rs.close();
 	  s.close();

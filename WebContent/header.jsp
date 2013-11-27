@@ -43,6 +43,11 @@
 					<li><a href="registercreditcard.jsp"> Register Credit Card </a></li>
 					<li><a href="shoppingbag.jsp"> Shopping Bag </a></li>
 					<li><a href="profile.jsp">Profile</a></li>
+					<%
+						if(sesi.getAttribute("username").equals("admin")){
+							out.print("<li><a href='kategori.jsp?laman=1&id=1'>Admin Barang</a></li>");
+						}
+					%>
 					<li><a href="logout.jsp">Log out</a></li>
 				<%
 				}
