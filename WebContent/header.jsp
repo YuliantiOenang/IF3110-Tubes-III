@@ -6,8 +6,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script type="javascript/text" src="verify.js"></script>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/AJS_style.css" />
+<link rel="stylesheet" type="text/css" href="css/ddsmoothmenu.css" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" />
+<link href="css/modal.css" rel="stylesheet" type="text/css" />
 <title>RuserBa</title>
 </head>
 <body>
