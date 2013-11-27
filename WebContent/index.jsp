@@ -1,6 +1,5 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
-<link rel="stylesheet" type="text/css" href="AJS_style.css">
 <%@ include file= "./header.jsp" %> 
 <%	
 	

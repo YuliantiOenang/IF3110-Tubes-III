@@ -56,50 +56,58 @@ public class beli extends HttpServlet {
 		Vector<String> shopping_cart = (Vector<String>) session.getAttribute("shopping_cart");
 		Vector<String> shopping_request = (Vector<String>) session.getAttribute("shopping_request");
 		Vector<Integer> item= (Vector<Integer>) session.getAttribute("amount");
-		
+		int tempPembelian=0;
 		if(creditid.equals("")){
 			out.print("You haven't choose the credit card");
 		}
 		else{
-			for(int i = 0; i< shopping_cart.size();i++){
-				int checkAmount=0;
-				try{
-					String uname = "root";
-					String pass = "";
-					String url = "jdbc:mysql://localhost/progin_13511059";
-					Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-			        con = DriverManager.getConnection (url, uname, pass);
+			try{
+				String uname = "root";
+				String pass = "";
+				String url = "jdbc:mysql://localhost/progin_13511059";
+				Class.forName ("com.mysql.jdbc.Driver").newInstance ();
+		        con = DriverManager.getConnection (url, uname, pass);
+		        Statement s = con.createStatement();
+				String sql = "SELECT * FROM user WHERE username ='"+session.getAttribute("username")+"'";
+				ResultSet rs = s.executeQuery(sql);
+				while(rs.next()){
+					tempPembelian = Integer.parseInt(rs.getString(10));
 				}
-				catch(Exception e){
-					System.out.println("Cannot connect to database "+ e.getMessage());
-					out.print("We're currently Unable to access the database. Please try again Later.");
-				}
-				try{
-					state = con.createStatement();
-					String regquery = "SELECT * FROM `progin_13511059`.barang WHERE id_barang ='"+shopping_cart.get(i)+"'";
-					result = state.executeQuery(regquery);
-					while(result.next()){
-						if(item.get(i)> Integer.parseInt(result.getString(8))){
-							out.print("The amount of item number "+(i+1)+" is invalid");
+				for(int i = 0; i< shopping_cart.size();i++){	
+						state = con.createStatement();
+						String regquery = "SELECT * FROM `progin_13511059`.barang WHERE id_barang ='"+shopping_cart.get(i)+"'";
+						result = state.executeQuery(regquery);
+						while(result.next()){
+							if(item.get(i)> Integer.parseInt(result.getString(8))){
+								out.print("The amount of item number "+(i+1)+" is invalid");
+							}
+							else{
+								int newPembelian = Integer.parseInt(result.getString(6))+ item.get(i);
+								int newStok = Integer.parseInt(result.getString(8))- item.get(i);
+								String beliQuery = "UPDATE `progin_13511059`.`barang` SET `n_beli` = '"+newPembelian+"', `stok` = '"+newStok+"' WHERE `barang`.`id_barang` = '"+shopping_cart.get(i)+"'";
+								state2 = con.createStatement();
+								state2.executeUpdate(beliQuery);					
+							}
 						}
-						else{
-							int newPembelian = Integer.parseInt(result.getString(6))+ item.get(i);
-							int newStok = Integer.parseInt(result.getString(8))- item.get(i);
-							String beliQuery = "UPDATE `progin_13511059`.`barang` SET `n_beli` = '"+newPembelian+"', `stok` = '"+newStok+"' WHERE `barang`.`id_barang` = '"+shopping_cart.get(i)+"'";
-							state2 = con.createStatement();
-							state2.executeUpdate(beliQuery);
-							session.setAttribute("shopping_cart", null);
-							session.setAttribute("shopping_request", null);
-							session.setAttribute("mount", null);
-							out.print("");
-						}
-					}
-					}
-				catch(SQLException e){
-					System.out.println(e.getMessage());
-					System.out.println("masuk sini");
 				}
+				tempPembelian++;
+				String tambahQuery = "UPDATE `progin_13511059`.`user` SET `n_pembelian` = '"+tempPembelian+"' WHERE `user`.`username` = '"+session.getAttribute("username")+"'";
+				Statement State3 = con.createStatement();
+				State3.executeUpdate(tambahQuery);
+				out.print("NTAR DIKOSONGIN UNTUK AJAX");
 			}
+			catch (ClassNotFoundException e1) {
+				  // JDBC driver class not found, print error message to the console
+				  System.out.println(e1.toString());
+				}
+			catch (SQLException e2) {
+				  // Exception when executing java.sql related commands, print error message to the console
+				  System.out.println(e2.toString());
+				}
+			catch (Exception e3) {
+				  // other unexpected exception, print error message to the console
+				  System.out.println(e3.toString());
+				}
 		}
 	}
 

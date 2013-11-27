@@ -25,6 +25,7 @@ try {
 		out.println("<p>Province : "+ rs.getString(7)+"</p><br>");
 		out.println("<p>State : "+ rs.getString(8)+"</p><br>");
 		out.println("<p>Postal Code : "+ rs.getString(9)+"</p><br>");
+		out.println("<p>Jumlah Transaksi : "+ rs.getString(10)+"</p><br>");
 		out.println("<a href='editprofile.jsp'> Edit Profile </a>");
 	  }
 	  rs.close();
