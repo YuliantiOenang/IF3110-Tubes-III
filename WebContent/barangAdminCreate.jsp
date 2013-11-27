@@ -5,6 +5,7 @@
 	Harga Barang <input type="number" name="harga_barang" min=0><br>
 	Gambar Barang <input type="text" name="gambar_barang"><br>
 	Stok <input type="number" name="stok" min=0><br>
+	<input type="submit" value="Create">
 	<input type="hidden" name="action" value="create">
 	<input type="hidden" name="kategori_barang" value=<% out.print(request.getParameter("kategori_barang")); %>>
 </form>

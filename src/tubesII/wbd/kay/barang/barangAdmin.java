@@ -54,6 +54,17 @@ public class barangAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		post = true;
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		String action = request.getParameter("action");
+		if (action.equals("create")) {
+			int kategori_barang = Integer.parseInt(request.getParameter("kategori_barang"));
+			actionCreate(request, response, kategori_barang);
+		} else if (action.equals("update")) {
+			int id_barang = Integer.parseInt(request.getParameter("id_barang"));
+			actionUpdate(request, response, id_barang);
+		} else
+			out.print("Page not found");
 	}
 
 	private void actionCreate(HttpServletRequest request, HttpServletResponse response, int kategori_barang) {
@@ -78,7 +89,7 @@ public class barangAdmin extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			String url = "/barangAdminCreate.jsp?kategori_barang="+kategori_barang;
+			String url = "/barangAdminCreate.jsp?kategori_barang=" + kategori_barang;
 			ServletContext context = getServletContext();
 			RequestDispatcher dispatcher = context.getRequestDispatcher(url);
 			try {
@@ -112,7 +123,7 @@ public class barangAdmin extends HttpServlet {
 			}
 		} else {
 			Barang barang = Barang.findByPk(id_barang);
-			request.setAttribute("barang",barang);
+			request.setAttribute("barang", barang);
 			String url = "/barangAdminUpdate.jsp";
 			ServletContext context = getServletContext();
 			RequestDispatcher dispatcher = context.getRequestDispatcher(url);
