@@ -47,5 +47,4 @@ try {
 	}
 %>
 </form>
-</body>
-</html>
+<%@ include file= "./footer.jsp" %>

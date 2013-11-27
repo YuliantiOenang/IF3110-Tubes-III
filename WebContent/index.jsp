@@ -5,6 +5,7 @@
 <%	
 	
 	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");%>
+<div id="content" class="float_l">
 <h1>Current Date: <%= df.format(new java.util.Date()) %></h1>
 <h1>Mekanisme Pembelian</h1>
 	<p>
@@ -35,16 +36,17 @@ try {
 	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 1 ORDER BY n_beli DESC LIMIT 0,3";
 	  ResultSet rs = s.executeQuery(sql);
 	  while (rs.next()) {
-	    out.println("<h3> "+rs.getString(2)+"</h3><br>");
+	    out.println("<div class='product_box'>");
+		out.println("<h3> "+rs.getString(2)+"</h3><br>");
 	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p>Harga : Rp "+rs.getString(4) +",-<br>");
+		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
 		out.println("<form name='beli' action='addCart' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p>");
+		out.println("</form></p></div>");
 	  }
 	  rs.close();
 	  s.close();
@@ -83,16 +85,17 @@ try {
 	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 2 ORDER BY n_beli DESC LIMIT 0,3";
 	  ResultSet rs = s.executeQuery(sql);
 	  while (rs.next()) {
-	    out.println("<h3> "+rs.getString(2)+"</h3><br>");
+		out.println("<div class='product_box'>");
+		out.println("<h3> "+rs.getString(2)+"</h3><br>");
 	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p>Harga : Rp "+rs.getString(4) +",-<br>");
+		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
 		out.println("<form name='beli' action='addcart.php' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p>");
+		out.println("</form></p></div>");
 	  }
 	  rs.close();
 	  s.close();
@@ -129,16 +132,17 @@ try {
 	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 3 ORDER BY n_beli DESC LIMIT 0,3";
 	  ResultSet rs = s.executeQuery(sql);
 	  while (rs.next()) {
-	    out.println("<h3> "+rs.getString(2)+"</h3><br>");
+		out.println("<div class='product_box'>");
+		out.println("<h3> "+rs.getString(2)+"</h3><br>");
 	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p>Harga : Rp "+rs.getString(4) +",-<br>");
+		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
 		out.println("<form name='beli' action='addcart.php' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p>");
+		out.println("</form></p></div>");
 	  }
 	  rs.close();
 	  s.close();
@@ -174,16 +178,17 @@ try {
 	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 4 ORDER BY n_beli DESC LIMIT 0,3";
 	  ResultSet rs = s.executeQuery(sql);
 	  while (rs.next()) {
-	    out.println("<h3> "+rs.getString(2)+"</h3><br>");
+		out.println("<div class='product_box'>");
+		out.println("<h3> "+rs.getString(2)+"</h3><br>");
 	    out.println("<a href='detail.jsp?id="+rs.getString(1) +"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p>Harga : Rp "+rs.getString(4) +",-<br>");
+		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
 		out.println("<form name='beli' action='addcart.php' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p>");
+		out.println("</form></p></div>");
 	  }
 	  rs.close();
 	  s.close();
@@ -219,16 +224,17 @@ try {
 	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 5 ORDER BY n_beli DESC LIMIT 0,3";
 	  ResultSet rs = s.executeQuery(sql);
 	  while (rs.next()) {
-	    out.println("<h3> "+rs.getString(2)+"</h3><br>");
+		out.println("<div class='product_box'>");
+		out.println("<h3> "+rs.getString(2)+"</h3><br>");
 	    out.println("<a href='detail.jsp?id="+rs.getString(1) +"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p>Harga : Rp "+rs.getString(4) +",-<br>");
+		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
 		out.println("Stok : "+rs.getString(8) +"<br>");
 		out.println("<form name='beli' action='addChart' method='post'>");
 		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
 		out.println("<input type='hidden' name='request_tambahan' value='-'>");
 		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
 		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p>");
+		out.println("</form></p></div>");
 	  }
 	  rs.close();
 	  s.close();
@@ -247,4 +253,5 @@ try {
 	  System.out.println(e3.toString());
 	}
 %>
+</div>
 <%@ include file= "./footer.jsp" %>
