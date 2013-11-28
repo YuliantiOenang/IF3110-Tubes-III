@@ -1,0 +1,226 @@
+/* File CSS utama Website
+ *  Dongkol Ampas Bro
+ */
+ 
+a:link {text-decoration:none; color:blue;}
+a:visited {text-decoration:none; color:blue;}
+a:hover {text-decoration:underline;}
+a:active {text-decoration:underline; color:cyan;}
+
+body{
+	background-image:url('../gambar_barang/bgpattern.jpg');
+}	
+
+#toplogo{
+	width:fluid;
+	height:100px;
+	padding:10px;
+	border:10px ridge #804000;
+	margin:0px;
+	text-align:center;
+	font-family:"Bradley Hand ITC";
+	color:green;
+	font-size:30px;
+	background-image:url('../gambar_barang/backgroundtopheader.jpg');
+}	
+
+#kategori{
+	position:relative;
+	top:-130px;
+	width:850px;
+	height:50px;
+	padding:5px;
+	border:10px ridge #804000;
+	border-top:0px;
+	margin:0px;
+	text-align:center;
+	font-family:"Bradley Hand ITC";
+	color:white;
+	font-size:15px;
+	text-decoration:bold;
+	word-spacing:30px;
+	background-image:url('../gambar_barang/backgroundpilihbarang.jpg');
+}
+
+.underline{
+	color:#FFC90D;
+}
+
+#logo{
+	width:100px;
+	height:100px;
+}
+
+#logintop{
+	width:fluid;
+	height:100px;
+	padding:10px;
+	margin:0px;
+	text-align:right;
+	font-family:"Bradley Hand ITC";
+	color:green;
+	font-size:20px;
+	background-image:url('../gambar_barang/woodfence.jpg');
+}
+
+#search{
+	color:#FFC90D;
+	text-align:left;
+	position:absolute;
+	top:195px;
+	left:20px;
+	text-decoration:none;
+    width:900px;
+}
+
+#tasbelanja{
+	width:100px;
+	height:100px;
+	border:5px double #804000;
+	border-top:0px;
+	position:absolute;
+	top:155px;
+	right:200px;
+	color:red;
+}
+
+#picsize{
+	width:100px;
+	height:100px;
+}
+
+#pichome{
+	position:relative;
+	right:220px;
+	top:200px;
+}
+
+#formtitle{
+	font-size:24px;
+}
+
+#logintext{
+    font-size:24px;
+    color:#123456;
+}
+
+#pic2home{
+	position:relative;
+	right:-500px;
+}
+
+#welcometext{
+  position:absolute;
+  top:0px;
+  left:20px;
+  font-size:24px;
+  color:white;
+}
+
+#pictext{
+	position:relative;
+	width:100px;
+	height:80px;
+	right:-670px;
+	top:-200px;
+ 	color:#804000;
+	font-size:20px;
+}
+
+#homecontent{
+	width:fluid;
+	font-family:"Book Antiqua";
+}
+
+.basiccontent{
+	position:relative;
+	right:-100px;
+	width:600px;
+	height:370px;
+	padding:10px;
+	border:5px ridge #804000;
+	margin:0px;
+	text-align:left;
+	font-family:"Book Antiqua";
+	color:white;
+	font-size:20px;
+	background-image:url('../gambar_barang/backgroundpilihbarang.jpg');
+}
+
+#registerkreditcontent{
+	position:relative;
+	right:-100px;
+	width:600px;
+	height:450px;
+	padding:10px;
+	border:5px ridge cyan;
+	margin:0px;
+	text-align:left;
+	font-family:"Book Antiqua";
+	color:white;
+	font-size:20px;
+	background-color:cyan;
+}
+
+/**
+  * Bagian untuk CSS3 Carousel
+  */
+  
+.items {
+    width:999px;
+    -webkit-animation: hscroll 12s infinite;
+    -moz-animation: hscroll 12s infinite;
+    -ms-animation: hscroll 12s infinite;
+}
+  
+.scrollable {
+    width: 333px;
+    margin: 0 auto;
+    padding: 0;
+    border:10px solid #fff;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+@-webkit-keyframes hscroll {
+  0%   { margin-left: 0; }
+27.33%  { margin-left: 0 }
+33.33%  { margin-left: -333px; }
+60.66% { margin-left: -333px; }
+66.66% { margin-left: -666px; }
+94.99% { margin-left: -666px; }
+  100%  { margin-left: 0 }
+}
+
+@-moz-keyframes hscroll {
+  0%   { margin-left: 0; }
+27.33%  { margin-left: 0 }
+33.33%  { margin-left: -333px; }
+60.66% { margin-left: -333px; }
+66.66% { margin-left: -666px; }
+94.99% { margin-left: -666px; }
+  100%  { margin-left: 0 }
+}
+
+@-ms-keyframes hscroll {
+  0%   { margin-left: 0; }
+27.33%  { margin-left: 0 }
+33.33%  { margin-left: -333px; }
+60.66% { margin-left: -333px; }
+66.66% { margin-left: -666px; }
+94.99% { margin-left: -666px; }
+  100%  { margin-left: 0 }
+}
+
+#profilecontent{height:540px;}
+#addcreditcardcontent{height:150px;}
+#largecontent{height:800px;width:800px;}
+#giantcontent{height:1800px;width:800px;}
+#autogenerate{height:4000px;width:800px;}
+
+#radiobutt{
+    position:relative;
+    right:-540px;
+}

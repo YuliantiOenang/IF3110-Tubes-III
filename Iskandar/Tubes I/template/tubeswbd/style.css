@@ -1,0 +1,134 @@
+
+a:link {text-decoration:none; color:white;}    /* unvisited link */
+a:visited {text-decoration:none; color:white;} /* visited link */
+a:hover {text-decoration:underline;}   /* mouse over link */
+a:active {text-decoration:underline; color:blue;}  /* selected link */
+
+body{
+	background-image:url('grass.jpg');
+}	
+
+#toplogo{
+	width:fluid;
+	height:100px;
+	padding:10px;
+	border:5px ridge cyan;
+	margin:0px;
+	text-align:center;
+	font-family:arial;
+	color:green;
+	font-size:30px;
+	background-color:cyan;
+}	
+
+#kategori{
+	position:relative;
+	top:-130px;
+	width:850px;
+	height:50px;
+	padding:5px;
+	border:3px ridge green;
+	margin:0px;
+	text-align:center;
+	font-family:calibri;
+	color:white;
+	font-size:15px;
+	background-color:green;
+}
+
+.underline{
+	color:green;
+}	
+
+#logintop{
+	width:fluid;
+	height:100px;
+	padding:10px;
+	border:5px ridge cyan;
+	margin:0px;
+	text-align:right;
+	font-family:arial;
+	color:white;
+	font-size:20px;
+	text-decoration:underline;
+	background-color:cyan;
+}
+
+#search{
+	color:blue;
+	text-align:left;
+	position:relative;
+	top:-15px;
+	text-decoration:none;
+}
+
+#tasbelanja{
+	position:relative;
+	top:-50px;
+	color:red;
+}
+
+.picsize{
+	width:200px;
+	height:200px;
+}
+
+#pichome{
+	position:relative;
+	right:220px;
+	top:200px;
+}
+
+#formtitle{
+	font-size:24px;
+}
+
+#pic2home{
+	position:relative;
+	right:-500px;
+}
+
+#pictext{
+	position:relative;
+	width:100px;
+	height:80px;
+	right:-670px;
+	top:-200px;
+ 	color:white;
+	font-size:20px;
+}
+
+#homecontent{
+	width:fluid;
+	font-family:"Book Antiqua";
+}
+
+#registercontent{
+	position:relative;
+	right:-100px;
+	width:600px;
+	height:1100px;
+	padding:10px;
+	border:5px ridge cyan;
+	margin:0px;
+	text-align:left;
+	font-family:"Book Antiqua";
+	color:white;
+	font-size:20px;
+	background-color:cyan;
+}
+
+#registerkreditcontent{
+	position:relative;
+	right:-100px;
+	width:600px;
+	height:450px;
+	padding:10px;
+	border:5px ridge cyan;
+	margin:0px;
+	text-align:left;
+	font-family:"Book Antiqua";
+	color:white;
+	font-size:20px;
+	background-color:cyan;
+}

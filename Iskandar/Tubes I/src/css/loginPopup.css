@@ -1,0 +1,38 @@
+/* File CSS untuk popup login
+ *  Dongkol Ampas Bro
+ */
+ 
+        #popup {  
+            width:500px;
+            height:200px;
+            border:1px solid white;
+            top:30%;
+            position:relative;
+            margin: 0 auto;
+            border: 1px solid rgba(147, 184, 189,0.8);
+            background-image:url('../gambar_barang/backgroundpic.jpg');
+            opacity:1;              
+        }
+        
+        #login_popup {
+            position:absolute;
+            top:0px;
+            visibility:hidden;
+            background-color:black;
+            opacity:0.9;
+            left:0px;
+            height:100%;
+            width:100%;
+            text-align:center;
+        }
+        
+        #login_popup:target {
+            visibility:visible;
+            -webkit-animation: fade 400ms ease;
+        }
+        
+        #loginForm {
+            position:absolute;
+            top:50px;
+            left:120px;
+        }

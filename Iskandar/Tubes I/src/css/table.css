@@ -1,0 +1,10 @@
+#table{width:800px;}
+div .header{background:#95AABC;font-weight:bold;}
+.kolom{width:110px;padding:2px;margin:2px;display:inline-block;}
+.baris{border-bottom:1px solid #000;cursor:pointer;}
+.baris:hover{background:#fff59f;}
+.ganjil{background:#ddd;}
+.genap{backgound:#eee;}
+
+#widecolumn{width:150px;}
+#narrowcolumn{width:50px;}
