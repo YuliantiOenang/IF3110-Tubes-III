@@ -69,7 +69,16 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>barangSuggestions</servlet-name>
-    <url-pattern>/thelastruserba/barang/suggest</url-pattern>
+    <url-pattern>/thelastruserba/barang/suggestions</url-pattern>
     <url-pattern>/barang/suggestions</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>barangDetail</servlet-name>
+    <servlet-class>barangController.DetailBarang</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>barangDetail</servlet-name>
+    <url-pattern>/thelastruserba/barang/detail</url-pattern>
+    <url-pattern>/barang/detail</url-pattern>
   </servlet-mapping>
 </web-app>

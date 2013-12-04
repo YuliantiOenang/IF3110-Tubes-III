@@ -64,7 +64,6 @@ public class Suggestions extends HttpServlet {
 					str = str + "</li>";
 				}
 				str = str + "</ul>";
-				out.write(Query);
 			}
 			
 			json.put("content",str);

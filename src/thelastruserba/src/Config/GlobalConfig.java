@@ -12,6 +12,7 @@ public class GlobalConfig {
 	//comment constructor ini jika ingin menggunakan lokal
 	public GlobalConfig()
 	{
+		/*
 		try
 		{
 			JSONObject jsonVCAP = new JSONObject(java.lang.System.getenv("VCAP_SERVICES"));
@@ -21,5 +22,6 @@ public class GlobalConfig {
 			SQLUser = mysql.getJSONObject(0).getJSONObject("credentials").getString("username");
 			SQLPass = mysql.getJSONObject(0).getJSONObject("credentials").getString("password");
 		}catch (Exception e){}
+		*/
 	}
 }
