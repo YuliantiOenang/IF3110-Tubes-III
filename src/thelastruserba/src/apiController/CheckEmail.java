@@ -1,5 +1,6 @@
 package apiController;
 
+//URL MAP : /api/checkEmail?email=X
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -36,6 +37,7 @@ public class CheckEmail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter();
 		String email = request.getParameter("email");
 		DatabaseAdapter DBA = new DatabaseAdapter();

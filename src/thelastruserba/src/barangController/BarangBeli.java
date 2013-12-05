@@ -1,5 +1,6 @@
 package barangController;
 
+//URL MAP : /barang/beli
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class BarangBeli extends HttpServlet {
 		String jumlah = request.getParameter("jumlah");
 		String keterangan = request.getParameter("keterangan");
 		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		//Debug agar ridho punya library
 		try
 		{

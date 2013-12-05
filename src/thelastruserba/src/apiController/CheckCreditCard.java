@@ -1,5 +1,6 @@
 package apiController;
 
+//URL MAP : /api/checkCredit?credit_number=X&name_of_card=Y
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -34,15 +35,8 @@ public class CheckCreditCard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter();
 		String credit_number = request.getParameter("credit_number");
 		String name_of_card = request.getParameter("name_of_card");
@@ -65,6 +59,14 @@ public class CheckCreditCard extends HttpServlet {
 			e.printStackTrace();
 		}
 		out.close();
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,5 +1,5 @@
 package apiController;
-
+//URL MAP : /api/checkUsername?username=X
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -19,7 +19,6 @@ import databaseLib.DatabaseAdapter;
 /**
  * Servlet implementation class CheckUsername
  */
-@WebServlet("/api/usernameAvailable")
 public class CheckUsername extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,6 +35,7 @@ public class CheckUsername extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter();
 		String username = request.getParameter("username");
 		DatabaseAdapter DBA = new DatabaseAdapter();

@@ -1,5 +1,6 @@
 package apiController;
 
+//URL MAP : /logout
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -26,43 +27,20 @@ public class LogoutController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    public void deleteCookie(HttpServletRequest request,HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                cookie.setValue("KOSONG"); //kosong
-                cookie.setPath("/");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-        }
-    }
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		try
 		{
 			JSONObject json = new JSONObject();
-			if (session.getAttribute("isLogin")!=null)
-			{
-				deleteCookie(request,response);
-				session.invalidate();
-				json.put("success", true);
-				out.write(json.toString());
-			}
-			else
-			{
-				System.out.println("ganteng");
-				json.put("success", false);
-				out.write(json.toString());
-			}
+			json.put("success", true);
+			out.write(json.toString());
 			out.close();
 		}catch (Exception e){System.out.println(e.getMessage());}
 	}

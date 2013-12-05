@@ -12,6 +12,7 @@ import databaseLib.DatabaseAdapter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//URL MAP : /barang/suggestions?name=X
 /**
  * Servlet implementation class Suggestions
  */
@@ -43,6 +44,7 @@ public class Suggestions extends HttpServlet {
 			else name = request.getParameter("name");
 			
 			response.setContentType("application/json");
+			response.setHeader("Access-Control-Allow-Origin", "*");
 			PrintWriter out = response.getWriter();
 			
 			JSONObject json = new JSONObject();

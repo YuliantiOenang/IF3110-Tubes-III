@@ -1,5 +1,6 @@
 package barangController;
 
+//URL MAP : /barang?page=X
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -91,6 +92,7 @@ public class IndexBarang extends HttpServlet {
 			int jmlData = B2.nama.size();
 			
 			response.setContentType("application/json");
+			response.setHeader("Access-Control-Allow-Origin", "*");
 			//header harus diset
 			PrintWriter out = response.getWriter();
 			Integer limit = Integer.parseInt(page) * 10;

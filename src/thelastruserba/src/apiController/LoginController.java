@@ -1,5 +1,6 @@
 package apiController;
 
+//URL MAP : /login?username=X&password=Y
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -39,6 +40,7 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter();
 		try
 		{
@@ -58,13 +60,14 @@ public class LoginController extends HttpServlet {
 						json.put("success", false);
 						out.write(json.toString());
 					} else {			
-						RS.next();			
+						RS.next();		
+						/*
 						HttpSession session = request.getSession();
 						session.setAttribute("isLogin", true);
 						session.setAttribute("username", username);
 						session.setAttribute("role",Integer.parseInt(RS.getObject(12).toString()));
 						session.setMaxInactiveInterval(0);
-						
+						*/
 						Cookie C = new Cookie("isLogin",username);
 						C.setMaxAge(60*60*24*30); //30 Hari
 						C.setPath("/");
