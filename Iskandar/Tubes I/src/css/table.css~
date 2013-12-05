@@ -1,0 +1,8 @@
+#table{width:550px;}
+div span{display:inline-block;}
+div .header{background:#95AABC;font-weight:bold;}
+.kolom{width:90px;padding:2px;margin:2px;}
+.baris{border-bottom:1px solid #000;cursor:pointer;}
+.baris:hover{background:#fff59f;}
+.ganjil{background:#ddd;}
+.genap{backgound:#eee;}
