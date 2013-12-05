@@ -1,5 +1,4 @@
 package apiController;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -21,7 +20,6 @@ import databaseLib.DatabaseAdapter;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/api/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DatabaseAdapter DBA = new DatabaseAdapter();
@@ -40,7 +38,17 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setContentType("application/json");
+		// response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
+		try {
+			json.put("success", false);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		out.write(json.toString());
 	}
 
 	/**
