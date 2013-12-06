@@ -2,10 +2,13 @@
 
 /*** Service Configuration ***/
 
+// is released version?
+$RELEASE = false;
+
 /** Database Parameter **/
 
 function db_parameter(){
-	$RELEASE = false; $param = array();
+	global $RELEASE; $param = array();
 	
 	if ($RELEASE){
 		$env = json_decode(getenv("VCAP_SERVICES"), true);
@@ -22,10 +25,10 @@ function db_parameter(){
 		}
 		
 	}else{
-		$param["host"] = "localhost"; // to be changed
+		$param["host"] = "localhost";
 		$param["name"] = "wbd3";
-		$param["user"] = "root"; // to be changed
-		$param["pass"] = "root"; // to be changed
+		$param["user"] = "root";
+		$param["pass"] = "root";
 	}
 	return $param;
 }

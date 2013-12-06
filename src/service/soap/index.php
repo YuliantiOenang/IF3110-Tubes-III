@@ -1,6 +1,9 @@
 <?php 
 
-// shop functions
+/*** SOAP server ***/
+
+require_once "../model/barang.php";
+require_once "../model/user.php";
 
 function getXMLRetval($retval){
 	$xml = "<retval>";
