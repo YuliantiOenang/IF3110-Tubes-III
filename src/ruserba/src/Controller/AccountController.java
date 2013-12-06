@@ -17,8 +17,8 @@ import org.json.JSONObject;
  */
 @WebServlet("/AccountController")
 public class AccountController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,61 +27,68 @@ public class AccountController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    response.setContentType("application/json");
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setHeader("Access-Control-Allow-Origin","*");
         PrintWriter out = response.getWriter();
-	    String action = request.getParameter("action");
-	    try {
-    	    if (action.equals("read")) {
-    	        Integer id = Integer.parseInt(request.getParameter("id"));
-    	        Account user = Account.findByPk(id);
-    	        if (user != null) {
-    	            JSONObject json = new JSONObject();
-    	            json.put("status", "true");
-    	            json.put("data", user.toJSON());
-    	            out.println(json.toString());
-    	        } else {
-    	            out.println("{\"status\":\"false\"}");
-    	        }
-    	    } else if (action.equals("login")) {
-    	        String username = request.getParameter("username");
-    	        String password = request.getParameter("password");
-                Account user = Account.find("SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'");
-                if (user != null) {
-                    JSONObject json = new JSONObject();
-                    json.put("status", "true");
-                    json.put("data", user.toJSON());
-                    out.println(json.toString());
-                } else {
-                    out.println("{\"status\":\"false\"}");
-                }
-    	    }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    out.close();
-	}
+        try {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            Account user = Account.findByPk(id);
+            if (user != null) {
+                JSONObject json = new JSONObject();
+                json.put("status", "true");
+                json.put("data", user.toJSON());
+                out.println(json.toString());
+            } else {
+                out.println("{\"status\":\"false\"}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        out.close();
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-	
-	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	    resp.setContentType("application/json");
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setHeader("Access-Control-Allow-Origin","*");
+        PrintWriter out = response.getWriter();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        Account user = Account.find("SELECT * FROM account WHERE username = '" + username + "' AND password = '" + password + "'");
+        try {
+            if (user != null) {
+                JSONObject json = new JSONObject();
+                json.put("status", "true");
+                json.put("data", user.toJSON());
+                out.println(json.toString());
+            } else {
+                out.println("{\"status\":\"false\"}");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        out.close();
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setHeader("Access-Control-Allow-Origin","*");
         PrintWriter out = resp.getWriter();
         Integer id = Integer.parseInt(req.getParameter("id"));
-        
+
         Account user = Account.findByPk(id);
         try {
             if (user != null) {
-                //parameter atribut account
+                // parameter atribut account
                 user.username = req.getParameter("username");
                 user.password = req.getParameter("password");
                 user.nama = req.getParameter("nama");
@@ -105,7 +112,7 @@ public class AccountController extends HttpServlet {
             e.printStackTrace();
         }
         out.close();
-	    super.doPut(req, resp);
-	}
-	
+        super.doPut(req, resp);
+    }
+
 }

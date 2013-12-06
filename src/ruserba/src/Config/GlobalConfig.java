@@ -19,15 +19,19 @@ public class GlobalConfig {
 	public static String Path = "/home/habibie/IF3110-Tubes-II/src/ruserba/";
 	private static DatabaseAdapter DBA = new DatabaseAdapter();
 	private static boolean success = false;
+	private static String vcap;
 	
 	public static void init() {
 		try
 		{
-			while (!success) {
-				String my_env = java.lang.System.getenv("VCAP_SERVICES");
+		    String my_env;
+		    my_env = java.lang.System.getenv("VCAP_SERVICES");
+			while (!success && !vcap.equals(my_env)) {
+				my_env = java.lang.System.getenv("VCAP_SERVICES");
 				if (my_env != null)
 				{
 					success = true;
+					vcap = my_env;
 					JSONObject jsonVCAP = new JSONObject(my_env);
 					JSONArray mysql = jsonVCAP.getJSONArray("mysql-5.1");
 					String table = mysql.getJSONObject(0).getJSONObject("credentials").getString("name");
