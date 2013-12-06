@@ -1,5 +1,10 @@
 <?php
 
+/*** REST Server ***/
+
+require_once "../model/barang.php";
+require_once "../model/user.php";
+
 require_once "RestHandler.php";
 
 class ShopRestHandler extends RestHandler{
@@ -51,13 +56,21 @@ class ShopRestHandler extends RestHandler{
 		
 		switch(@$urlpart[0]){
 			case 'barang':
-				// get barang/<id>
+				$response = get_barang(@$urlpart[1]);
 			break;
 			case 'kategori':
-				// get kategori/<kategori>
+				$page = is_numeric(@$data["page"]) ? $data["page"] : 0;
+				$sort = (@$data["sort"]=="harga") ? "harga" : "nama_barang"; 
+				$order = (@$data["order"]=="desc") ? "desc" : "asc";
+				
+				$response = get_kategori(@$urlpart[1], $page, $sort, $order);
 			break;
 			case 'search':
-				// get search/<query>
+				$page = is_numeric(@$data["page"]) ? $data["page"] : 0;
+				$sort = (@$data["sort"]=="harga") ? "harga" : "nama_barang"; 
+				$order = (@$data["order"]=="desc") ? "desc" : "asc";
+				
+				$response = search_barang(@$urlpart[1], $page, $sort, $order);
 			break;
 			case 'populer':
 				// get populer
