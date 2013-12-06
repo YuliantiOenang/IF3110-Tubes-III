@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 import databaseLib.DatabaseAdapter;
 
 public class Kategori {
@@ -78,5 +80,19 @@ public class Kategori {
     public void delete() {
         String query = "DELETE FROM kategori WHERE id=" + id;
         DBA.deleteQuery(query);
+    }
+    
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", id);
+            json.put("nama_kategori", nama_kategori);
+            json.put("gambar", gambar);
+            json.put("deskripsi", deskripsi);
+            json.put("sub_deskripsi", sub_deskripsi);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 }

@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 import databaseLib.DatabaseAdapter;
 
 public class Barang {
@@ -82,5 +84,22 @@ public class Barang {
     public void delete() {
         String query = "DELETE FROM barang WHERE id=" + id;
         DBA.deleteQuery(query);
+    }
+    
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", id);
+            json.put("id_kategori", id_kategori);
+            json.put("nama", nama);
+            json.put("harga", harga);
+            json.put("gambar", gambar);
+            json.put("stok", stok);
+            json.put("counter", counter);
+            json.put("keterangan", keterangan);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 }
