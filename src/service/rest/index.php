@@ -93,7 +93,7 @@ class ShopRestHandler extends RestHandler{
 		
 		switch(@$urlpart[0]){
 			case 'barang':
-				// delete barang/<id>
+				$response = del_barang(@$data["ids"], @$data["token"]);
 			break;
 		}
 		

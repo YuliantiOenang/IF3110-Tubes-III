@@ -83,7 +83,7 @@ return string berformat json:
 -	status : `ok` jika sukses, `error` jika gagal
 -	desc : error message, hanya ada jika status = `error`
 
-6.	DELETE barang/<id_barang>  
+6.	DELETE barang
 menghapus data barang. Error jika token invalid / bukan token admin.
 
 DELETE data berformat JSON:

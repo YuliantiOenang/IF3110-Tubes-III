@@ -147,4 +147,29 @@ function edit_barang($id, $token, $barang){
 	return $response;
 }
 
+function del_barang($ids, $token){
+	$response["status"] = "error";
+	$response["desc"] = "bukan administrator";
+	
+	$db = db_connect();
+	$query = "SELECT role FROM token NATURAL JOIN user WHERE token_id = '$token'";
+	
+	if (($result = $db->query($query)) && ($result->num_rows > 0)){
+	
+		if ($result->fetch_assoc()["role"] != "admin") return $response;
+		
+		$response["status"] = "ok";
+		unset($response["desc"]);
+		
+		foreach($ids as $id){
+			$query = "DELETE FROM barang WHERE id_barang=$id";
+			$db->query($query);
+		}
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
 ?>
