@@ -36,7 +36,7 @@ class ShopRestHandler extends RestHandler{
 		
 		switch(@$urlpart[0]){
 			case 'barang':
-				// put barang/<id>
+				$response = edit_barang(intval(@$urlpart[1]), @$data['token'], @$data['barang']);
 			break;
 			case 'user':
 				if (@$urlpart[2] == "card"){
@@ -73,7 +73,7 @@ class ShopRestHandler extends RestHandler{
 				$response = search_barang(@$urlpart[1], $page, $sort, $order);
 			break;
 			case 'populer':
-				// get populer
+				$response = get_populer();
 			break;
 			case 'user':
 				if (@$urlpart[2] == "card"){

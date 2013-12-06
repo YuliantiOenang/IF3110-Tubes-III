@@ -96,4 +96,55 @@ function search_barang($q, $page, $sort, $order){
 	return $response;
 }
 
+function get_populer(){
+	$response["status"] = "error";
+	$response["desc"] = "barang tidak ditemukan";
+	
+	$db = db_connect();
+	$query = "SELECT * FROM barang ORDER BY jumlah_beli DESC LIMIT 0, 10";
+	
+	if ($result = $db->query($query)){
+		$response["hasil"] = array();
+		$response["status"] = "ok";
+		unset($response["desc"]);
+		while($row = $result->fetch_assoc()){			
+			array_push($response["hasil"], create_model($row));
+		}
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
+function edit_barang($id, $token, $barang){
+	$response["status"] = "error";
+	$response["desc"] = "bukan administrator";
+	
+	$db = db_connect();
+	$query = "SELECT role FROM token NATURAL JOIN user WHERE token_id = '$token'";
+	
+	if (($result = $db->query($query)) && ($result->num_rows > 0)){
+	
+		if ($result->fetch_assoc()["role"] != "admin") return $response;
+	
+		$nama_barang = $barang['nama']; $harga = $barang['harga'];
+		$stok = $barang['stok']; $kategori = $barang['kategori'];
+		$deskripsi = $barang['deskripsi']; $jumlah_beli = $barang['jumlah_beli'];
+		
+		$query = "UPDATE barang SET nama_barang='$nama_barang', harga=$harga, stok=$stok, kategori='$kategori', deskripsi='$deskripsi', jumlah_beli=$jumlah_beli WHERE id_barang=$id";
+
+		if ($db->query($query)){
+			$response["status"] = "ok";
+			unset($response["desc"]);
+		}else{
+			$response["desc"] = "update gagal";
+		}
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
 ?>
