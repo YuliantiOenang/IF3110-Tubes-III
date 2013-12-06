@@ -1,6 +1,7 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,12 +41,13 @@ public class Index extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		/* Notifikasi login gagal */
 		if (request.getParameter("login") != null) {
 			request.setAttribute("login", "gagal");
 		}
-		
-		/* Login by cookie */
+
+		/** Login by cookie */
 		Cookie[] cookies = request.getCookies();
 		HttpSession sessions = request.getSession(true);
 		boolean isLogin = false;
@@ -65,7 +67,12 @@ public class Index extends HttpServlet {
 		}
 		if (isLogin && sessions.getAttribute("user_id") == null) {
 			try {
-				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");
+				ResultSet rs = new DbConnection()
+						.mySqlConnection()
+						.createStatement()
+						.executeQuery(
+								"SELECT role FROM user WHERE id='" + userid
+										+ "'");
 				rs.next();
 				sessions.setAttribute("role", rs.getString("role"));
 				sessions.setAttribute("user_id", userid);
@@ -75,9 +82,15 @@ public class Index extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
+
+		PrintWriter out = response.getWriter();
+		out.println(dbConnection.test);
+		out.println(dbConnection.url);
+		out.println(dbConnection.username);
+		out.println(dbConnection.password);
 
 		String query2 = "SELECT * FROM barang";
 		String query3 = "SELECT * FROM kategori";
@@ -126,22 +139,25 @@ public class Index extends HttpServlet {
 
 				while (allResults3.get(i).getItemList().size() < 4) {
 					for (int j = 0; j < allResults2.size(); j++) {
-						if (allResults2.get(j).getId_category() == allResults3.get(i).getId()) {
-							// We need to check whether current ID has been appeared
+						if (allResults2.get(j).getId_category() == allResults3
+								.get(i).getId()) {
+							// We need to check whether current ID has been
+							// appeared
 							// before
 							long current_id = allResults2.get(j).getId();
 							boolean is_exist = false;
-							for (int k = 0; k < allResults3.get(i).getItemList()
-									.size(); k++) {
+							for (int k = 0; k < allResults3.get(i)
+									.getItemList().size(); k++) {
 								if (allResults3.get(i).getItemList(k).getId() == current_id)
 									is_exist = true;
 							}
 							if (!is_exist) {
-								allResults3.get(i).setItemList(allResults2.get(j)); // push
-																					// back
+								allResults3.get(i).setItemList(
+										allResults2.get(j)); // push
+																// back
 								if (allResults3.get(i).getItemList().size() == 4)
 									break;
-							}	
+							}
 						}
 					}
 				}
