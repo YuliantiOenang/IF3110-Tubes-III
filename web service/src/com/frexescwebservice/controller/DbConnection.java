@@ -1,4 +1,4 @@
-package com.frexesc.controller;
+package com.frexescwebservice.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,9 +14,9 @@ public class DbConnection {
 	public String url = "jdbc:mysql://localhost:3306/progin_13511073";
 	private String driver = "com.mysql.jdbc.Driver";
 	public String username = "root";
-	public String password = "";
+	public String password = " ";
 	public String test = "";
-
+	
 	public DbConnection() {
 
 		/** Get VCAP_SERVICES from Web Service */
