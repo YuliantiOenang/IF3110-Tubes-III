@@ -27,6 +27,7 @@ int stok;
 string kategori;
 string deskripsi;
 string token;
+string password
 
-result createUser(username, email, nama_lengkap, alamat, provinsi, kota, kodepos, telepon);
+result createUser(username, password, email, nama_lengkap, alamat, provinsi, kota, kodepos, telepon);
 result createBarang(token, nama_barang, harga, stok, kategori, deskripsi);
