@@ -9,4 +9,31 @@
     <url-pattern>/account</url-pattern>
     <url-pattern>/api/account</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Barang</servlet-name>
+    <servlet-class>Controller.BarangController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Barang</servlet-name>
+    <url-pattern>/barang</url-pattern>
+    <url-pattern>/api/barang</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Kategori</servlet-name>
+    <servlet-class>Controller.KategoriController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Kategori</servlet-name>
+    <url-pattern>/kategori</url-pattern>
+    <url-pattern>/api/kategori</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Kredit</servlet-name>
+    <servlet-class>Controller.KreditController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Kredit</servlet-name>
+    <url-pattern>/kredit</url-pattern>
+    <url-pattern>/api/kredit</url-pattern>
+  </servlet-mapping>
 </web-app>
