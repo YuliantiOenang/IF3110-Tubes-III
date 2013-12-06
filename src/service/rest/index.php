@@ -23,7 +23,7 @@ class ShopRestHandler extends RestHandler{
 				// post login
 			break;
 			case 'logout':
-				// post login
+				// post logout
 			break;
 		}
 		
@@ -77,9 +77,9 @@ class ShopRestHandler extends RestHandler{
 			break;
 			case 'user':
 				if (@$urlpart[2] == "card"){
-					// get user/<username>/card
+					$response = check_card(@$urlpart[1], $data["token"]);
 				}else{
-					// get user/<username>
+					$response = get_user(@$urlpart[1], $data["token"]);
 				}
 			break;
 		}

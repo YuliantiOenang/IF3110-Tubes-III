@@ -8,7 +8,7 @@
 
 require_once "../config.php";
 
-function create_model($data){
+function model_barang($data){
 	$barang["id"] = intval($data["id_barang"]);
 	$barang["nama"] = $data["nama_barang"];
 	$barang["harga"] = intval($data["harga"]);
@@ -60,7 +60,7 @@ function get_barang($id){
 	if ($result = $db->query($query)){
 		while($row = $result->fetch_assoc()){
 			$response["status"] = "ok";
-			$response["barang"] = create_model($row);
+			$response["barang"] = model_barang($row);
 			
 			unset($response["desc"]);
 		}
@@ -85,7 +85,7 @@ function get_kategori($cat, $page, $sort, $order){
 		$response["status"] = "ok";
 		unset($response["desc"]);
 		while($row = $result->fetch_assoc()){			
-			array_push($response["hasil"], create_model($row));
+			array_push($response["hasil"], model_barang($row));
 		}
 	}
 	
@@ -115,7 +115,7 @@ function search_barang($q, $page, $sort, $order){
 		$response["status"] = "ok";
 		unset($response["desc"]);
 		while($row = $result->fetch_assoc()){			
-			array_push($response["hasil"], create_model($row));
+			array_push($response["hasil"], model_barang($row));
 		}
 	}
 	
@@ -136,7 +136,7 @@ function get_populer(){
 		$response["status"] = "ok";
 		unset($response["desc"]);
 		while($row = $result->fetch_assoc()){			
-			array_push($response["hasil"], create_model($row));
+			array_push($response["hasil"], model_barang($row));
 		}
 	}
 	
