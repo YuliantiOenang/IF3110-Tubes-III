@@ -20,6 +20,7 @@ public class DatabaseAdapter {
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
+			GlobalConfig.init();
 	  	  	con = DriverManager.getConnection(GlobalConfig.URLSQL,GlobalConfig.SQLUser,GlobalConfig.SQLPass);
 		}catch (Exception e){System.out.println(e.getMessage());}
 	}
