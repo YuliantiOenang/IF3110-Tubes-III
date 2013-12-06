@@ -1,7 +1,11 @@
 package Controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.HashMap;
+
 import javaModel.Account;
 
 import javax.servlet.ServletException;
@@ -76,27 +80,36 @@ public class AccountController extends HttpServlet {
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	    resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        BufferedReader in = new BufferedReader(new InputStreamReader(req.getInputStream()));
+        String input = in.readLine();
+        String[] datas = input.split("&");
+        HashMap<String, String> map = new HashMap<String, String>();
+        for (String data : datas)
+        {
+        	System.out.println(data);
+        	String[] tuple = data.split("=");
+        	map.put(tuple[0], tuple[1]);
+        }
+        Integer id = Integer.parseInt(map.get("id"));
         
         Account user = Account.findByPk(id);
         try {
             if (user != null) {
                 //parameter atribut account
-                user.username = req.getParameter("username");
-                user.password = req.getParameter("password");
-                user.nama = req.getParameter("nama");
-                user.email = req.getParameter("email");
-                user.alamat = req.getParameter("alamat");
-                user.provinsi = req.getParameter("provinsi");
-                user.kota = req.getParameter("kota");
-                user.kodepos = req.getParameter("kodepos");
-                user.telepon = req.getParameter("telepon");
-                user.role = Integer.parseInt(req.getParameter("role"));
-                user.transaksi = Integer.parseInt(req.getParameter("telepon"));
+                user.username = map.get("username");
+                user.password = map.get("password");
+                user.nama = map.get("nama");
+                user.email = map.get("email");
+                user.alamat = map.get("alamat");
+                user.provinsi = map.get("provinsi");
+                user.kota = map.get("kota");
+                user.kodepos = map.get("kodepos");
+                user.telepon = map.get("telepon");
+                user.role = Integer.parseInt(map.get("role"));
+                user.transaksi = Integer.parseInt(map.get("telepon"));
                 user.save();
                 JSONObject json = new JSONObject();
                 json.put("status", "true");
-                json.put("data", user.toJSON());
                 out.println(json.toString());
             } else {
                 out.println("{\"status\":\"false\"}");
@@ -105,7 +118,5 @@ public class AccountController extends HttpServlet {
             e.printStackTrace();
         }
         out.close();
-	    super.doPut(req, resp);
 	}
-	
 }

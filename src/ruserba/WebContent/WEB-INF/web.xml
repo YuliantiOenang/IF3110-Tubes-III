@@ -37,6 +37,15 @@
     <url-pattern>/servlet/AdminServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>Account</servlet-name>
+    <servlet-class>Controller.AccountController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Account</servlet-name>
+    <url-pattern>/account</url-pattern>
+    <url-pattern>/api/account</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Barang</servlet-name>
     <servlet-class>Controller.BarangController</servlet-class>
   </servlet>
