@@ -31,6 +31,7 @@ import com.frexesc.model.KategoriBean;
 @MultipartConfig
 public class AdminBarang extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static String hostname = "http://ruko.ap01.aws.af.cm/";
 
 	/**
 	 * @see HttpServlet#HttpServlet()

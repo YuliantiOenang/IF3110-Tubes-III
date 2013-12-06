@@ -21,7 +21,8 @@ import com.frexesc.model.UserBean;
 @WebServlet("/User")
 public class User extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static String hostname = "http://ruko.ap01.aws.af.cm/";
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
