@@ -20,6 +20,34 @@ function create_model($data){
 	return $barang;
 }
 
+// SOAP-based
+
+function add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi){
+	$desc = "bukan admin";
+	
+	$db = db_connect();
+	$query = "SELECT role FROM token NATURAL JOIN user WHERE token_id = '$token'";
+	
+	if (($result = $db->query($query)) && ($result->num_rows > 0)){
+		
+		if ($result->fetch_assoc()["role"] != "admin"){
+			$db->close();
+			return $desc;
+		}
+	
+		$query = "INSERT INTO barang (nama_barang, harga, stok, kategori, deskripsi) VALUES ('$nama_barang', $harga, $stok, '$kategori', '$deskripsi')";
+		
+		if($db->query($query)) $desc = "";
+		else $desc = "barang tidak dapat ditambahkan";
+	}
+	
+	$db->close();
+	
+	return $desc;
+}
+
+// REST-based
+
 function get_barang($id){
 	$response["status"] = "error";
 	$response["desc"] = "barang tidak ditemukan";

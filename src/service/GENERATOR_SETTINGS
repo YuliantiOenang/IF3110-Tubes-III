@@ -10,7 +10,7 @@ com.loghorizon.rukoonline
 
 Online Shop Web Service
 
-http://localhost/wbd3/service/soap
+http://localhost/IF3110-Tubes-III/src/service/soap
 
 string result;
 string username;
@@ -26,6 +26,7 @@ int harga;
 int stok;
 string kategori;
 string deskripsi;
+string token;
 
 result createUser(username, email, nama_lengkap, alamat, provinsi, kota, kodepos, telepon);
-result createBarang(nama_barang, harga, stok, kategori, deskripsi);
+result createBarang(token, nama_barang, harga, stok, kategori, deskripsi);

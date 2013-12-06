@@ -20,9 +20,16 @@ function createUser($username, $email, $nama_lengkap, $alamat, $provinsi, $kota,
 	return getXMLRetval($response);
 }
 
-function createBarang($nama_barang, $harga, $stok, $kategori, $deskripsi){
-	$response["status"] = "ok";
-	$response["detail"] = $nama_barang.$harga.$stok.$kategori.$deskripsi;
+function createBarang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi){
+	$desc = add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi);
+
+	if($desc==""){
+		$response["status"] = "ok";
+	}else{
+		$response["status"] = "error";
+		$response["detail"] = $desc;
+	}
+	
 	return getXMLRetval($response);
 }
 

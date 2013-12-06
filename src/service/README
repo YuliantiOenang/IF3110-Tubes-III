@@ -13,7 +13,7 @@ return string berformat xml (atas):
 -	<desc> berisi error message, hanya ada jika status = `error`
 -	<token> berisi string token login, akan disimpan di cookie / local storage. Hanya ada jika status ok
 
-2.	createBarang(string nama_barang, int harga, int stok, string kategori, string deskripsi)
+2.	createBarang(string token, string nama_barang, int harga, int stok, string kategori, string deskripsi)
 menambahkan user baru
 return string berformat xml (atas):
 -	<status> berisi `ok` jika sukses, `error` jika gagal 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding ="utf-8"?>
 <!--
 Log Horizon
-2013-12-05
+2013-12-06
 Online Shop Web Service
 
 Online WSDL SOAP generator 0.1a
@@ -61,6 +61,9 @@ Julien Blitte
 		<element name="deskripsi">
 		<complexType><all><element name="value" type="string" /></all></complexType>
 		</element>
+		<element name="token">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
 	</schema>
 	</types>
 <!-- response messages -->
@@ -79,6 +82,7 @@ Julien Blitte
 	<part name='telepon' type='xsd:telepon'/>
 	</message>
 	<message name='createBarang'>
+	<part name='token' type='xsd:token'/>
 	<part name='nama_barang' type='xsd:nama_barang'/>
 	<part name='harga' type='xsd:harga'/>
 	<part name='stok' type='xsd:stok'/>
