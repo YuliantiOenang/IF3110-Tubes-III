@@ -44,7 +44,7 @@ public class AccountController extends HttpServlet {
     	            json.put("data", user.toJSON());
     	            out.println(json.toString());
     	        } else {
-    	            out.println("{status:\"false\"}");
+    	            out.println("{\"status\":\"false\"}");
     	        }
     	    } else if (action.equals("login")) {
     	        String username = request.getParameter("username");
@@ -56,7 +56,7 @@ public class AccountController extends HttpServlet {
                     json.put("data", user.toJSON());
                     out.println(json.toString());
                 } else {
-                    out.println("{status:\"false\"}");
+                    out.println("{\"status\":\"false\"}");
                 }
     	    }
 	    } catch (Exception e) {
@@ -99,7 +99,7 @@ public class AccountController extends HttpServlet {
                 json.put("data", user.toJSON());
                 out.println(json.toString());
             } else {
-                out.println("{status:\"false\"}");
+                out.println("{\"status\":\"false\"}");
             }
         } catch (Exception e) {
             e.printStackTrace();
