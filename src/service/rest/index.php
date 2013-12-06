@@ -20,10 +20,10 @@ class ShopRestHandler extends RestHandler{
 				$response = buy(@$data["cart"], @$data["token"]);
 			break;
 			case 'login':
-				// post login
+				$response = login(@$data["username"], @$data["password"]);
 			break;
 			case 'logout':
-				// post logout
+				$response = logout(@$data["username"], @$data["token"]);
 			break;
 		}
 		

@@ -51,5 +51,47 @@ function check_card($username, $token){
 	return $response;
 }
 
+function login($username, $password){
+	$response["status"] = "error";
+	$response["desc"] = "username atau password salah";
+	
+	$db = db_connect();
+	$query = "SELECT * FROM user WHERE password='$password' AND username='$username'";
+	
+	if (($result = $db->query($query)) && ($result->num_rows > 0)){
+		
+		$token = base64_encode(uniqid($username, true));
+		
+		$query = "INSERT INTO token (token_id, username) VALUES ('$token', '$username')";
+		$db->query($query);
+		
+		$response["status"] = "ok";
+		$response["token"] = $token;
+			
+		unset($response["desc"]);
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
+function logout($username, $token){
+	$response["status"] = "error";
+	$response["desc"] = "logout gagal";
+	
+	$db = db_connect();
+	$query = "DELETE FROM token WHERE token_id='$token' AND username='$username'";
+	
+	if (($result = $db->query($query)) && ($db->affected_rows > 0)){		
+		$response["status"] = "ok";			
+		unset($response["desc"]);
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
 
 ?>
