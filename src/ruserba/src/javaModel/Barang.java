@@ -1,60 +1,86 @@
 package javaModel;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import databaseLib.DatabaseAdapter;
 
 public class Barang {
-	private DatabaseAdapter DBA;
-	public ArrayList<String> nama= new ArrayList<String>();
-	public ArrayList<String> harga = new ArrayList<String>();
-	public ArrayList<String> gambar = new ArrayList<String>();
-	public ArrayList<String> stok = new ArrayList<String>();
-	public ArrayList<String> counter = new ArrayList<String>();
-	public ArrayList<String> keterangan = new ArrayList<String>();
-	public ArrayList<String> id = new ArrayList<String>();
-	public ArrayList<String> id_kat = new ArrayList<String>();
-	
-	public Barang(DatabaseAdapter _DBA)
-	{
-		DBA = _DBA;
-	}
-	
-	public void executeQuery(String query)
-	{
-		DBA.executeQuery(query);
-		ResultSet RS = DBA.getQueryResult();
-		try
-		{
-			while (RS.next())
-			{
-				id.add(RS.getObject(1).toString());
-				id_kat.add(RS.getObject(2).toString());
-				nama.add(RS.getObject(3).toString());
-				harga.add(RS.getObject(4).toString());
-				gambar.add(RS.getObject(5).toString());
-				stok.add(RS.getObject(6).toString());
-				counter.add(RS.getObject(7).toString());
-				keterangan.add(RS.getObject(8).toString());
-			}
-		}catch (Exception e){}
-	}
-	
-	public void executeQuery2(String query)
-	{
-		DBA.executeQuery(query);
-		ResultSet RS = DBA.getQueryResult();
-		try
-		{
-			while (RS.next())
-			{
-				harga.add(RS.getObject(3).toString());
-				nama.add(RS.getObject(2).toString());
-				id.add(RS.getObject(1).toString());
-				gambar.add(RS.getObject(4).toString());
-				stok.add(RS.getObject(5).toString());
-			}
-		}catch (Exception e){}
-	}
+    public int id, id_kategori, harga, stok, counter;
+    public String nama, gambar, keterangan;
+    private static DatabaseAdapter DBA = new DatabaseAdapter();
+    private static ResultSet result;
+
+    public Barang() {
+        id = -1;
+    }
+
+    // find 1 row data of barang based on query
+    public static Barang find(String query) {
+        Barang barang = null;
+        try {
+            DBA.executeQuery(query);
+            result = DBA.getQueryResult();
+            if (result.next()) {
+                barang = new Barang();
+                barang.id = Integer.parseInt(result.getString(1));
+                barang.id_kategori = Integer.parseInt(result.getString(2));
+                barang.nama = result.getString(3);
+                barang.harga = Integer.parseInt(result.getString(4));
+                barang.gambar = result.getString(5);
+                barang.stok = Integer.parseInt(result.getString(6));
+                barang.counter = Integer.parseInt(result.getString(7));
+                barang.keterangan = result.getString(8);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return barang;
+    }
+
+    // find 1 row data of barang based on primary key
+    public static Barang findByPk(int id) {
+        return find("SELECT * FROM barang WHERE id=" + id);
+    }
+
+    // find all data of barang based on query
+    public static ArrayList<Barang> findAll(String query) {
+        ArrayList<Barang> barangs = new ArrayList<Barang>();
+        try {
+            DBA.executeQuery(query);
+            result = DBA.getQueryResult();
+            while (result.next()) {
+                Barang barang = new Barang();
+                barang.id = Integer.parseInt(result.getString(1));
+                barang.id_kategori = Integer.parseInt(result.getString(2));
+                barang.nama = result.getString(3);
+                barang.harga = Integer.parseInt(result.getString(4));
+                barang.gambar = result.getString(5);
+                barang.stok = Integer.parseInt(result.getString(6));
+                barang.counter = Integer.parseInt(result.getString(7));
+                barang.keterangan = result.getString(8);
+                barangs.add(barang);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return barangs;
+    }
+
+    // save barang to db
+    public void save() {
+        String query;
+        if (id == -1) // new
+            query = "INSERT INTO barang (id_kategori, nama, harga, gambar, stok, counter, keterangan) VALUES ('" + id_kategori + "','" + nama + "','" + harga + "','" + gambar + "','" + stok + "','" + counter + "','" + keterangan + "')";
+        else
+            query = "UPDATE barang SET id_kategori = '"+ id_kategori +"', nama = '"+ nama +"', harga = '"+ harga +"', gambar = '"+ gambar +"', stok = '"+ stok +"', counter = '"+ counter +"', keterangan = '"+ keterangan +"' WHERE id = " + id;
+        DBA.insertQuery(query);
+    }
+
+    // delete barang from db
+    public void delete() {
+        String query = "DELETE FROM barang WHERE id=" + id;
+        DBA.deleteQuery(query);
+    }
 }

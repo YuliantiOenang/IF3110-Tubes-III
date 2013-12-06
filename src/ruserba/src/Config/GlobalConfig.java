@@ -18,15 +18,17 @@ public class GlobalConfig {
 	public static String SQLPass = "";
 	public static String Path = "/home/habibie/IF3110-Tubes-II/src/ruserba/";
 	private static DatabaseAdapter DBA = new DatabaseAdapter();
+	private static boolean success = false;
 	
-	public GlobalConfig() {
+	public static void init() {
 		try
 		{
-			if (java.lang.System.getenv("VCAP_SERVICES") != null)
-			{
-				if (java.lang.System.getenv("VCAP_SERVICES").equals(""))
+			while (!success) {
+				String my_env = java.lang.System.getenv("VCAP_SERVICES");
+				if (my_env != null)
 				{
-					JSONObject jsonVCAP = new JSONObject(java.lang.System.getenv("VCAP_SERVICES"));
+					success = true;
+					JSONObject jsonVCAP = new JSONObject(my_env);
 					JSONArray mysql = jsonVCAP.getJSONArray("mysql-5.1");
 					String table = mysql.getJSONObject(0).getJSONObject("credentials").getString("name");
 					URLSQL = "jdbc:mysql://"+mysql.getJSONObject(0).getJSONObject("credentials").getString("hostname")+":3306/"+table;
@@ -34,7 +36,9 @@ public class GlobalConfig {
 					SQLPass = mysql.getJSONObject(0).getJSONObject("credentials").getString("password");
 				}
 			}
-		}catch (Exception e){}
+		}catch (Exception e){
+			
+		}
 	}
 	
 	public static void cekLogin(HttpServletRequest request, HttpServletResponse response)
