@@ -16,6 +16,22 @@ function model_user($data){
 	return $user;
 }
 
+// SOAP-based
+
+function add_user($username, $email, $nama_lengkap, $alamat, $provinsi, $kota, $kodepos, $telepon){
+	$response["status"] = "ok";
+	/*$response["desc"] = "signup gagal";
+	
+	$db = db_connect();
+	
+	
+	
+	$db->close();*/
+	return $response;
+}
+
+// REST-based
+
 function get_user($username, $token){
 	$response["status"] = "error";
 	$response["desc"] = "belum login";
@@ -93,5 +109,65 @@ function logout($username, $token){
 	return $response;
 }
 
+function edit_card($username, $card, $token){
+	$response["status"] = "error";
+	$response["desc"] = "belum login";
+	
+	$db = db_connect();
+	$query = "SELECT * FROM token WHERE token_id='$token' AND username='$username'";
+	
+	if (($result = $db->query($query)) && ($result->num_rows > 0)){
+	
+		$card_name = @$card["card_name"]; $card_number = @$card["card_number"]; $card_date = @$card["card_date"];
+		
+		$query = "UPDATE user SET card_name='$card_name', card_number='$card_number', card_date='$card_date' WHERE username='$username'";
+		
+		$db->query($query);
+		
+		$response["status"] = "ok";	
+		unset($response["desc"]);
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
+function edit_user($username, $user, $token){
+	$response["status"] = "error";
+	$response["desc"] = "belum login";
+	
+	$db = db_connect();
+	$query = "SELECT * FROM token WHERE token_id='$token' AND username='$username'";
+	
+	if (($result = $db->query($query)) && ($result->num_rows > 0)){
+	
+		$sets = array();
+		$attrs = array("password", "email", "nama_lengkap", "alamat", "provinsi", "kota", "kodepos", "telepon");
+		
+		foreach($attrs as $attr){
+			$value = @$user[$attr];
+			
+			if ($value != ""){
+				array_push($sets, "$attr = '$value'");
+			}
+		}
+		
+		if (count($sets) > 0){
+			$setstr = join(", ", $sets);
+			$query = "UPDATE user SET $setstr WHERE username='$username'";
+			$db->query($query);
+			$response["status"] = "ok";	
+			
+			unset($response["desc"]);
+		}else{
+			$response["desc"] = "update gagal";
+		}
+	}
+	
+	$db->close();
+	
+	return $response;
+}
 
 ?>

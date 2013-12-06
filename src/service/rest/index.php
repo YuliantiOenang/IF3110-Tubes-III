@@ -40,9 +40,9 @@ class ShopRestHandler extends RestHandler{
 			break;
 			case 'user':
 				if (@$urlpart[2] == "card"){
-					// put user/<username>/card
+					$response = edit_card(@$urlpart[1], @$data["card"], @$data["token"]);
 				}else{
-					// put user/<username>
+					$response = edit_user(@$urlpart[1], @$data["user"], @$data["token"]);
 				}
 			break;
 		}

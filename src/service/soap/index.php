@@ -16,7 +16,8 @@ function getXMLRetval($retval){
 }
 
 function createUser($username, $email, $nama_lengkap, $alamat, $provinsi, $kota, $kodepos, $telepon){
-	$response["status"] = "ok";
+	$response = add_user($username, $email, $nama_lengkap, $alamat, $provinsi, $kota, $kodepos, $telepon);
+	
 	return getXMLRetval($response);
 }
 
