@@ -126,7 +126,10 @@ function edit_barang($id, $token, $barang){
 	
 	if (($result = $db->query($query)) && ($result->num_rows > 0)){
 	
-		if ($result->fetch_assoc()["role"] != "admin") return $response;
+		if ($result->fetch_assoc()["role"] != "admin"){
+			$db->close();
+			return $response;
+		}
 	
 		$nama_barang = $barang['nama']; $harga = $barang['harga'];
 		$stok = $barang['stok']; $kategori = $barang['kategori'];
@@ -164,6 +167,75 @@ function del_barang($ids, $token){
 		foreach($ids as $id){
 			$query = "DELETE FROM barang WHERE id_barang=$id";
 			$db->query($query);
+		}
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
+function add_cart($id, $jumlah, $token){
+	$response["status"] = "error";
+	$response["desc"] = "belum login";
+	
+	$db = db_connect();
+	$query = "SELECT * FROM token WHERE token_id = '$token'";
+	
+	if (($result = $db->query($query)) && ($result->num_rows > 0)){
+		
+		$query = "SELECT stok FROM barang WHERE id_barang=$id";
+		$result = $db->query($query);
+		$stok = intval($result->fetch_assoc()["stok"]);
+		
+		if ($stok >= $jumlah){		
+			$response["status"] = "ok";
+			unset($response["desc"]);
+		}else{
+			$response["desc"] = "barang tidak mencukupi, hanya tersisa $stok";
+		}
+		
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
+function buy($cart, $token){
+	$response["status"] = "error";
+	$response["desc"] = "belum login";
+	
+	$db = db_connect();
+	$query = "SELECT * FROM token WHERE token_id = '$token'";
+	
+	if (($result = $db->query($query)) && ($result->num_rows > 0)){
+		$username = $result->fetch_assoc()["username"];
+		
+		$db->autocommit(false);
+	
+		$success = true;
+		
+		foreach($cart as $id => $jumlah){
+			$query = "UPDATE barang SET stok = stok - $jumlah, jumlah_beli = jumlah_beli + $jumlah WHERE id_barang = $id AND stok >= $jumlah";
+			
+			$db->query($query);
+			
+			if ($db->affected_rows != 1){
+				$success = false; break;
+			}
+		}
+		
+		if ($success){
+			$response["status"] = "ok";
+			unset($response["desc"]);
+			
+			$db->query("UPDATE user SET jumlah_transaksi = jumlah_transaksi + 1 WHERE username = '$username'");
+			
+			$db->commit();
+		}else{
+			$db->rollback();
+			$response["desc"] = "jumlah barang tidak mencukupi";
 		}
 	}
 	

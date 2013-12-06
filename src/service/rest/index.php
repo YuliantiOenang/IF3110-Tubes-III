@@ -14,10 +14,10 @@ class ShopRestHandler extends RestHandler{
 		
 		switch(@$urlpart[0]){
 			case 'cart':
-				// post cart/<id_barang>
+				$response = add_cart(intval(@$urlpart[1]), @$data["jumlah"], @$data["token"]);
 			break;
 			case 'buy':
-				// post buy
+				$response = buy(@$data["cart"], @$data["token"]);
 			break;
 			case 'login':
 				// post login
