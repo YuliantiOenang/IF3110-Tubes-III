@@ -7,7 +7,7 @@
 function db_parameter(){
 	global $RELEASE; $param = array();
 	
-	if (getenv("RELEASE_VERSION")){
+	if (getenv("RUKO_RELEASE_VERSION")){
 		$env = json_decode(getenv("VCAP_SERVICES"), true);
 		$mysqls = $env["mysql-5.1"];
 		

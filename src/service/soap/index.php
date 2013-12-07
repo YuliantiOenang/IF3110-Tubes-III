@@ -35,7 +35,10 @@ function createBarang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi
 }
 
 ini_set("soap.wsdl_cache_enabled", "0"); // disabling WSDL cache
-$server = new SoapServer("service.wsdl");
+
+$serverurl = getenv("RUKO_RELEASE_VERSION") ? "http://loghorizon.ap01.aws.af.cm/soap" : "http://localhost/IF3110-Tubes-III/src/service/soap";
+
+$server = new SoapServer("service.wsdl", array("location" => $serverurl));
 $server->addFunction("createUser");
 $server->addFunction("createBarang");
 $server->handle();

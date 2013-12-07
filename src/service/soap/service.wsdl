@@ -125,7 +125,7 @@ Julien Blitte
 <!-- access to service provider -->
 	<service name='WBD'>
 	<port name='WBD_0' binding='Ruko Online_webservices'>
-	<soap:address location='http://localhost/IF3110-Tubes-III/src/service/soap'/>
+	<soap:address location='http://loghorizon.ap01.aws.af.cm/soap'/>
 	</port>
 	</service>
 </definitions>
