@@ -1,7 +1,6 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -94,20 +93,10 @@ public class Index extends HttpServlet {
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
 
-		PrintWriter out = response.getWriter();
-
-		out.println(dbConnection.test);
-		out.println(dbConnection.url);
-		out.println(dbConnection.username);
-		out.println(dbConnection.password);
-
-	    String query2 = "SELECT * FROM barang";
-		String query3 = "SELECT * FROM kategori";
-
 		try {
 			ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
 
-			/** Set WebService for retrieving list of Barang */
+			/** Set WebService (REST) for retrieving list of Barang */
 			WebService _barang = new WebService(hostname + "barang");
 			_barang.addParam("action", "readAll");
 			_barang.addHeader("GData-Version", "2");
@@ -134,15 +123,17 @@ public class Index extends HttpServlet {
 				@SuppressWarnings("unchecked")
 				Iterator<JSONObject> iterator = infoBarang.iterator();
 				while (iterator.hasNext()) {
-					JSONObject jsonBarang = iterator.next(); // each peer info
+					JSONObject jsonBarang = iterator.next(); // each barang info
 					BarangBean barang = new BarangBean(
 							(Long) jsonBarang.get("id"),
 							(Long) jsonBarang.get("id_category"),
 							(String) jsonBarang.get("name"),
 							(String) jsonBarang.get("picture"),
-							Integer.valueOf(String.valueOf(jsonBarang.get("price"))),
+							Integer.valueOf(String.valueOf(jsonBarang
+									.get("price"))),
 							(String) jsonBarang.get("description"),
-							Integer.valueOf(String.valueOf(jsonBarang.get("total_item"))));
+							Integer.valueOf(String.valueOf(jsonBarang
+									.get("total_item"))));
 					allResults2.add(barang);
 				}
 
@@ -152,14 +143,48 @@ public class Index extends HttpServlet {
 			}
 			/** End of WebService for retrieving list of Barang */
 
-			ResultSet rs3 = connection.createStatement().executeQuery(query3);
 			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
 
-			while (rs3.next()) {
-				KategoriBean kategori = new KategoriBean(Integer.valueOf(rs3
-						.getString("id")), rs3.getString("nama"));
-				allResults3.add(kategori);
+			/** Set WebService (REST) for retrieving list of Kategori */
+			WebService _kategori = new WebService(hostname + "kategori");
+			_kategori.addParam("action", "readAll");
+			_kategori.addHeader("GData-Version", "2");
+
+			try {
+				_kategori.execute(WebService.REQUEST_METHOD.GET);
+				String listKategori = _kategori.getResponse();
+
+				/*
+				 * JSON Parser, using json_simple-1.1.jar
+				 */
+				JSONParser parser = new JSONParser();
+				JSONObject mainJSON = null;
+				try {
+					mainJSON = (JSONObject) parser.parse(listKategori);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JSONArray infoKategori = (JSONArray) mainJSON.get("data"); // Get
+																			// info
+
+				/** Suppress warning for Compilation level */
+				@SuppressWarnings("unchecked")
+				Iterator<JSONObject> iterator = infoKategori.iterator();
+				while (iterator.hasNext()) {
+					JSONObject jsonKategori = iterator.next(); // each kategori
+																// info
+					KategoriBean kategori = new KategoriBean(
+							Integer.valueOf(String.valueOf(jsonKategori
+									.get("id"))),
+							(String) jsonKategori.get("name"));
+					allResults3.add(kategori);
+				}
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+			/** End of WebService for retrieving list of Kategori */
 
 			for (int i = 0; i < allResults3.size(); i++) {
 				String searchQuery = "SELECT barang.id FROM barang JOIN barang_user ON barang.id=barang_user.id_barang AND barang.id_kategori="
