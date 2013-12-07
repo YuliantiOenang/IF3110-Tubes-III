@@ -201,7 +201,7 @@ public class Index extends HttpServlet {
 			_rank.addHeader("GData-Version", "2");
 
 			try {
-				_kategori.execute(WebService.REQUEST_METHOD.GET);
+				_rank.execute(WebService.REQUEST_METHOD.GET);
 				String listRank = _rank.getResponse();
 
 				/*
@@ -237,8 +237,8 @@ public class Index extends HttpServlet {
 
 			for (int j = 0; j < searchResults.size(); j++) {
 				for (int k = 0; k < allResults2.size(); k++) {
-					if (allResults2.get(j).getId() == searchResults.get(i)) {
-						allResults3.get(i).setItemList(allResults2.get(j)); // push
+					if (allResults2.get(k).getId() == searchResults.get(j)) {
+						allResults3.get(i).setItemList(allResults2.get(k)); // push
 						// back
 					}
 				}
