@@ -92,7 +92,7 @@ public class Index extends HttpServlet {
 		
 		/** Set WebService for retrieving list of Barang */
 		WebService _barang = new WebService(hostname + "barang");
-		_barang.addParam("action", "action");
+		_barang.addParam("action", "readAll");
 		_barang.addHeader("GData-Version", "2");
 		
 		try {

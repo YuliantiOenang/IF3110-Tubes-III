@@ -1,5 +1,7 @@
 package com.frexescwebservice.model;
 
+import org.json.simple.JSONObject;
+
 public class BarangBean {
 	private long id;
 	private long id_category;
@@ -75,6 +77,23 @@ public class BarangBean {
 
 	public void setTotal_item(int total_item) {
 		this.total_item = total_item;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject toJSON() {
+		JSONObject json = new JSONObject();
+		try {
+            json.put("id", id);
+            json.put("id_category", id_category);
+            json.put("name", name);
+            json.put("picture", picture);
+            json.put("price", price);
+            json.put("description", description);
+        	json.put("total_item", total_item);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return json;
 	}
 
 }

@@ -2,6 +2,10 @@ package com.frexescwebservice.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
+
+import com.frexescwebservice.model.BarangBean;
 
 /**
  * 
@@ -38,10 +44,48 @@ public class BarangController extends HttpServlet {
 		
 		PrintWriter out = response.getWriter(); // for writer
 		
-		if (requestType.equals("action")) {
+		if (requestType.equals("readAll")) {
 			JSONObject json = new JSONObject();
-            json.put("status", "true");
-            out.println(json.toString());
+			
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+			
+			String query = "SELECT * FROM barang";
+			
+			try {
+				ResultSet rs2 = connection.createStatement().executeQuery(query);
+				ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+
+				while (rs2.next()) {
+					BarangBean barang = new BarangBean(Integer.valueOf(rs2
+							.getString("id")), Integer.valueOf(rs2
+							.getString("id_kategori")),
+							rs2.getString("nama_barang"), rs2.getString("gambar"),
+							Integer.valueOf(rs2.getString("harga_barang")),
+							rs2.getString("keterangan"), Integer.valueOf(rs2
+									.getString("jumlah_barang")));
+					allResults2.add(barang);
+				}
+				
+				/** ArrayList for storing JSONObject */
+				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
+				
+				if (allResults2.size() > 0) {
+					for (int i = 0; i < allResults2.size(); i++) {
+						returnResult.add(allResults2.get(i).toJSON());
+					}
+					json.put("status", "true");
+					json.put("data",  returnResult);
+				} else {
+					json.put("status", "false");
+				}
+				
+	            out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 	
