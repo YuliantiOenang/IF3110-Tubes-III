@@ -52,11 +52,11 @@ public class DatabaseAdapter {
             e.printStackTrace();
         }
     }
-    
-   public void endQuery() {
-        try { 
-        	if (rs!=null)
-        		rs.close();
+
+    public void endQuery() {
+        try {
+            if (rs != null)
+                rs.close();
             stmt.close();
             con.close();
         } catch (SQLException e) {
