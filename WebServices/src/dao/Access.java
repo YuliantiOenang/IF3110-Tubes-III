@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dto.Category;
 import dto.Course;
 
 public class Access
@@ -32,4 +33,24 @@ public class Access
 		}
 		return courseList;
 	}
+
+	public ArrayList<Category> getCategories(Connection con) throws SQLException {
+		ArrayList<Category> categoryList = new ArrayList<Category>();
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM kategori");
+		ResultSet rs = stmt.executeQuery();
+		try
+		{
+			while(rs.next())
+			{
+				Category courseObj = new Category(rs.getInt("id"), rs.getString("name"));
+				categoryList.add(courseObj);
+			}
+		} catch (SQLException e)
+		{		
+			e.printStackTrace();
+		}
+		return categoryList;
+	}
+	
+	
 }
