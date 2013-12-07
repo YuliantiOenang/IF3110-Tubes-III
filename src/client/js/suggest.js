@@ -18,9 +18,9 @@ xmlhttp2.onreadystatechange=function()
 };
 
 
-function searchSuggestions(name)
+function searchSuggestions(URL,name)
 {
-	xmlhttp2.open("GET","/ruserba/barang/suggestions?name="+(name.value),true);
+	xmlhttp2.open("GET",URL+"/barang/suggestions?name="+(name.value),true);
 	xmlhttp2.send();
 	document.getElementById('suggestions').classList.remove('hidden');
 }

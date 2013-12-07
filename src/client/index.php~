@@ -1,3 +1,6 @@
+<?php
+require_once('config.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +93,7 @@
 </head>
 <body>
 	
-	
+	<h3><?=URLService;?></h3>
 		<div class="conctr">
 			<div class="head">
 				<a href="home"><div class="logo"></div></a>
@@ -107,7 +110,7 @@
 				<div class="menu">
 					
 					
-					<a href="barang?kategori=Ladies%20Dress">
+					<a href="barang.php?kategori=Ladies%20Dress">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -118,7 +121,7 @@
 					</a>
 					
 					
-					<a href="barang?kategori=Ladies%20Shoes">
+					<a href="barang.php?kategori=Ladies%20Shoes">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -129,7 +132,7 @@
 					</a>
 					
 					
-					<a href="barang?kategori=Men%20Shirt">
+					<a href="barang.php?kategori=Men%20Shirt">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -140,7 +143,7 @@
 					</a>
 					
 					
-					<a href="barang?kategori=Men%20Shoes">
+					<a href="barang.php?kategori=Men%20Shoes">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -151,7 +154,7 @@
 					</a>
 					
 					
-					<a href="barang?kategori=Men%20Hat">
+					<a href="barang.php?kategori=Men%20Hat">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">

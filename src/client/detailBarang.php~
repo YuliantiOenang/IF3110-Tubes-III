@@ -1,6 +1,6 @@
 <html><head>
 <title>Calvin and Salvy</title>
-<link href="/ruserba/css/style.css" type="text/css" rel="stylesheet">
+<link href="css/style.css" type="text/css" rel="stylesheet">
 <script type="text/javascript">
 	function hasClass(ele, cls) {
 		return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
@@ -25,10 +25,10 @@
 		var objwidth = obj.offsetWidth;
 		var screen = objheight / objwidth;
 		var fit = height / width;
-		if (Math.abs(screen - fit) &lt;= 0.1) {
+		if (Math.abs(screen - fit) <= 0.1) {
 			obj.width = width;
 			obj.height = height;
-		} else if (((screen &lt; fit) &amp;&amp; overlay) || ((screen &gt; fit) &amp;&amp; !overlay)) {
+		} else if (((screen < fit) && overlay) || ((screen > fit) && !overlay)) {
 			obj.height = height;
 			if (xfit) {
 				obj.width = ((height * 1.0) / (screen * 1.0));
@@ -57,7 +57,7 @@
 		var x, aa, bb;
 		aa = 0;
 		bb = 0;
-		for (x = 0; x &lt;= 11; x++) {
+		for (x = 0; x <= 11; x++) {
 			setTimeout(function() {
 				document.getElementById('login_cont').style.opacity = 0.1 * aa;
 				aa++;
@@ -70,11 +70,11 @@
 		var x, aa, bb;
 		aa = 0;
 		bb = 0;
-		for (x = 0; x &lt;= 11; x++) {
+		for (x = 0; x <= 11; x++) {
 			setTimeout(
 					function() {
 						document.getElementById('login_cont').style.opacity = 1 - (0.1 * aa);
-						if (aa &gt;= 10)
+						if (aa >= 10)
 							document.getElementById('login_cont').style.top = "-100%";
 						aa++;
 					}, (50 * (bb + 1)));
@@ -82,30 +82,30 @@
 		}
 	}
 </script>
-<script type="text/javascript" src="/ruserba/js/generatedContent.js"></script>
-<script type="text/javascript" src="/ruserba/js/suggest.js"></script>
-<script type="text/javascript" src="/ruserba/js/shop.js"></script>
+<script type="text/javascript" src="js/generatedContent.js"></script>
+<script type="text/javascript" src="js/suggest.js"></script>
+<script type="text/javascript" src="js/shop.js"></script>
 </head>
 <body>
 	
 	
 		<div class="conctr">
 			<div class="head">
-				<a href="/ruserba/home"><div class="logo"></div></a>
+				<a href="home"><div class="logo"></div></a>
 				<div class="status">
 					
-						<p class="left"> welcome, <a href="/ruserba/profile/index">sonny</a>! (<a href="/ruserba/logout">Logout</a>)
-						 (<a href="/ruserba/admin">Admin</a>)
+						<p class="left"> welcome, <a href="profile/index">sonny</a>! (<a href="logout">Logout</a>)
+						 (<a href="admin">Admin</a>)
 						</p>
 						<p class="right">
-							<a href="/ruserba/cart">Shopping Cart</a> <img style="margin-right:5px;" src="/ruserba/img/site/cart_white.png" alt="">
+							<a href="cart">Shopping Cart</a> <img style="margin-right:5px;" src="img/site/cart_white.png" alt="">
 						</p>
 					
 				</div>
 				<div class="menu">
 					
 					
-					<a href="/ruserba/barang?kategori=Ladies%20Dress">
+					<a href="barang?kategori=Ladies%20Dress">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -116,7 +116,7 @@
 					</a>
 					
 					
-					<a href="/ruserba/barang?kategori=Ladies%20Shoes">
+					<a href="barang?kategori=Ladies%20Shoes">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -127,7 +127,7 @@
 					</a>
 					
 					
-					<a href="/ruserba/barang?kategori=Men%20Shirt">
+					<a href="barang?kategori=Men%20Shirt">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -138,7 +138,7 @@
 					</a>
 					
 					
-					<a href="/ruserba/barang?kategori=Men%20Shoes">
+					<a href="barang?kategori=Men%20Shoes">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -149,7 +149,7 @@
 					</a>
 					
 					
-					<a href="/ruserba/barang?kategori=Men%20Hat">
+					<a href="barang?kategori=Men%20Hat">
 						<div class="permenu per5">
 							<div class="menuborder"></div>
 							<div class="menutxt">
@@ -165,7 +165,7 @@
 						<b>www.calvinsalvy.com Official Website</b><br>Karena rasa
 						adalah segalanya.
 					</h2>
-					<a href="https://twitter.com/darksta5"><img id="footer_img" src="/ruserba/img/site/twitter.png" title="@calvinsalvy" alt=""></a>
+					<a href="https://twitter.com/darksta5"><img id="footer_img" src="img/site/twitter.png" title="@calvinsalvy" alt=""></a>
 				</div>
 			</div>
 			<div onload="RefreshCartandShow()" id="content_frame">
@@ -178,7 +178,7 @@
 </script>
 <h1 class="small-header">St. Gabrielle Red Party D</h1>
 <div class="item_pict">
-	<img width="340" height="340" onload="fitpict(this)" src="/ruserba/images/barang/8.jpg">
+	<img width="340" height="340" onload="fitpict(this)" src="images/barang/8.jpg">
 </div>
 
 <div class="item_detail">
@@ -191,7 +191,7 @@
 		<h4>IDR 890000</h4>
 		<p>stok : 2</p>
 	<!-- <form method="post" onSubmit="Stok(); return false;" >  -->
-	 <form id="form-shop" action="/ruserba/barang/update" onsubmit="pertanyaan(8,2); return false;" method="post"> 
+	 <form id="form-shop" action="barang/update" onsubmit="pertanyaan(8,2); return false;" method="post"> 
 		<label class="qty">Quantity</label>
 		<input type="number" value="1" class="qty" id="quantity_8" name="quantity">
 		<input type="hidden" id="keterangan_8" name="id_barang">
@@ -201,7 +201,7 @@
 	 </form>
 </div>
 
-<script src="/ruserba/js/validasiBarang.js"></script>
+<script src="js/validasiBarang.js"></script>
 <script>
 	var server = "";
 </script>
@@ -219,7 +219,7 @@
 					<button class="btn right" onclick="login(); return false;" type="submit">Login</button>
 				</form>
 			</div>
-			<script src="/ruserba/js/login.js"></script>
+			<script src="js/login.js"></script>
 			<script>
 				var server = "";
 			</script>
@@ -228,7 +228,7 @@
 
 	<script type="text/javascript">
 		function _opensearchbox(margin) {
-			if (margin &lt;= 0) {
+			if (margin <= 0) {
 				document.getElementById('search-popup-content').style.marginLeft = margin
 						.toString()
 						+ "px";
@@ -238,7 +238,7 @@
 			}
 		}
 		function _closesearchbox(margin) {
-			if (margin &gt;= -200) {
+			if (margin >= -200) {
 				document.getElementById('search-popup-content').style.marginLeft = margin
 						.toString()
 						+ "px";
@@ -252,7 +252,7 @@
 			}
 		}
 		function _hideicon(margin) {
-			if (margin &gt;= -70) {
+			if (margin >= -70) {
 				document.getElementById('search-popup').style.marginLeft = margin
 						.toString()
 						+ "px";
@@ -266,7 +266,7 @@
 			}
 		}
 		function _showicon(margin) {
-			if (margin &lt;= 0) {
+			if (margin <= 0) {
 				document.getElementById('search-popup').style.marginLeft = margin
 						.toString()
 						+ "px";
@@ -284,7 +284,7 @@
 	</script>
 	<div onclick="opensearch()" class="search-popup" id="search-popup"></div>
 	<div class="search-popup-content" id="search-popup-content">
-		<form method="get" action="/ruserba/barang">
+		<form method="get" action="barang">
 			<h4>Search</h4>
 			<p onclick="closesearch()">x</p>
 			<div onclick="document.getElementById('suggestions').classList.add('hidden')">

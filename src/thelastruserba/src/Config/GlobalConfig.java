@@ -8,7 +8,7 @@ public class GlobalConfig {
 	public String SQLUser = "root";
 	public String SQLPass = "tkislam123";
 	public String Path = "/home/habibie/IF3110-Tubes-II/src/ruserba/";
-	
+	public String URLService = "http://localhost:8080/thelastruserba/";
 	public GlobalConfig()
 	{
 		try
@@ -23,6 +23,7 @@ public class GlobalConfig {
 					URLSQL = "jdbc:mysql://"+mysql.getJSONObject(0).getJSONObject("credentials").getString("hostname")+":3306/"+table;
 					SQLUser = mysql.getJSONObject(0).getJSONObject("credentials").getString("username");
 					SQLPass = mysql.getJSONObject(0).getJSONObject("credentials").getString("password");
+					URLService = "http://thelastruserba.ap01.aws.af.cm/";
 				}
 			}
 		}catch (Exception e){}

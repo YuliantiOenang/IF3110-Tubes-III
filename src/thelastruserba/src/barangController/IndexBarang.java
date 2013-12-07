@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import databaseLib.DatabaseAdapter;
 
 import org.json.JSONObject;
+
+import Config.GlobalConfig;
 /**
  * Servlet implementation class IndexBarang
  */
@@ -112,10 +114,10 @@ public class IndexBarang extends HttpServlet {
 				str += "<div class=\"itembox\">";
 				str += "	<div class=\"pict\" id=\"item"+B.id.get(i)+"\">";
 				str += "		<div title=\"Ready Stock\" class=\"itembox_img\">";
-				str += "			<img onload=\"fitbarang(this)\" src=\"/ruserba/images/barang/"+B.gambar.get(i)+"\">";
+				str += "			<img onload=\"fitbarang(this)\" src=\""+new GlobalConfig().URLService+"/images/barang/"+B.gambar.get(i)+"\">";
 				str += "		</div>";
 				str += "		<div class=\"minicart_icon\">";
-				str += "			<a href=\"#\" onclick=\"goToCart("+B.id.get(i)+"); return false;\"><img src=\"/ruserba/img/site/cart_black.png\"></a>";
+				str += "			<a href=\"#\" onclick=\"goToCart("+B.id.get(i)+"); return false;\"><img src=\""+new GlobalConfig().URLService+"/img/site/cart_black.png\"></a>";
 				str += "		</div>";
 				str += "		<div class=\"item_name\"><a href=\"/ruserba/barang/detail?id="+B.id.get(i)+"\">"+B.nama.get(i)+"</a><br>IDR "+B.harga.get(i)+"</div>";
 				str += "	</div>";
