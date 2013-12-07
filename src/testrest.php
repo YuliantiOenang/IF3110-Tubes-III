@@ -8,11 +8,12 @@
 <script>
 	function send(){
 		
+		
+	}
+	
+	function onfilechange(){
 		callback = function(result){
 			document.getElementById("display").src = result;
-			cb = function(res){alert(JSON.stringify(res));};
-			
-			sendRestAjax("PUT", "image", {"imgdata" : result}, cb);
 		}
 	
 		loadBase64Image('imgfile', callback);
@@ -22,7 +23,7 @@
 
 <body>
 	<img id="display" />
-	<input type="file" id="imgfile" />
+	<input type="file" id="imgfile" onchange="onfilechange()" />
 	<button type="button" onclick="send()">test</button>
 </body>
 </html>

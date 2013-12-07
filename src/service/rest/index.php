@@ -36,7 +36,7 @@ class ShopRestHandler extends RestHandler{
 		
 		switch(@$urlpart[0]){
 			case 'barang':
-				$response = edit_barang(intval(@$urlpart[1]), @$data['token'], @$data['barang']);
+				$response = edit_barang(intval(@$urlpart[1]), @$data['token'], @$data['barang'], @$data['imgdata']);
 			break;
 			case 'user':
 				if (@$urlpart[2] == "card"){

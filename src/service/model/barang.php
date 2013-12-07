@@ -145,7 +145,7 @@ function get_populer(){
 	return $response;
 }
 
-function edit_barang($id, $token, $barang){
+function edit_barang($id, $token, $barang, $imgdata){
 	$response["status"] = "error";
 	$response["desc"] = "bukan administrator";
 	
@@ -168,6 +168,9 @@ function edit_barang($id, $token, $barang){
 		if ($db->query($query)){
 			$response["status"] = "ok";
 			unset($response["desc"]);
+			
+			if($imgdata) save_img_barang($id, $imgdata);
+			
 		}else{
 			$response["desc"] = "update gagal";
 		}
@@ -272,9 +275,8 @@ function buy($cart, $token){
 	return $response;
 }
 
-
-function saveBase64Image($filename, $rawdata){
-	$fullpath = "../image/$filename";
+function save_img_barang($id, $rawdata){
+	$fullpath = "../image/$id.jpg";
 	
 	if($rawdata){
 		$imgdata = explode(',', $rawdata)[1];	
