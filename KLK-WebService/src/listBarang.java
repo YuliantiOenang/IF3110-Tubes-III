@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,7 +111,45 @@ public class listBarang extends HttpServlet {
 	        }
 	    	
 	    } else if(data.get("action").equals("favourite")){
-	    	
+	    	System.out.println("Add favourite action here!!!");
+	    	try {
+	    		Driver asdf = new Driver();
+	            Connection koneksion = asdf.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
+	           	
+	            JSONArray arrayBarangs = new JSONArray();
+	            for(int i=0;i<5;i++){
+	            	String query = "SELECT * FROM inventori, kategori WHERE inventori.id_kategori = kategori.id_kategori AND inventori.id_kategori = " + (i+1) + " ORDER BY inventori.total_transaksi DESC LIMIT 3";
+	            	String kategori = null;
+	            	PreparedStatement asd = koneksion.prepareStatement(query);
+		            ResultSet f = asd.executeQuery();
+		            JSONObject barangs = new JSONObject();
+		            JSONArray arrayBarang = new JSONArray();
+		            while(f.next()){
+		            	if(kategori == null){
+		            		kategori = f.getString("nama_kategori");
+		            	}
+		            	JSONObject tmp = new JSONObject();
+						String name = f.getString("nama_inventori");
+						JSONObject brg = new JSONObject();
+						brg.put("nama_inventori", f.getString("nama_inventori"));
+						brg.put("id_kategori", f.getInt("id_kategori"));
+						brg.put("id_inventori", f.getInt("id_inventori"));
+						brg.put("description", f.getString("description"));
+						brg.put("harga", f.getInt("harga"));
+						brg.put("gambar", f.getString("gambar"));
+						brg.put("jumlah", f.getInt("jumlah"));
+						arrayBarang.add(brg);
+		            }
+		            barangs.put("kategori", kategori);
+		            barangs.put("data", arrayBarang);
+		            arrayBarangs.add(barangs);
+	            }
+	            	            
+	            JSONresp.put("data", arrayBarangs);
+	            System.out.println("Data in servlet: " + JSONresp.toString());
+	        } catch (SQLException ex) {
+	            //Logger.getLogger(JavaApplication3.class.getName()).log(Level.SEVERE, null, ex);
+	        }
 	    }
 	    
 		response.setHeader("Access-Control-Allow-Origin", "*");

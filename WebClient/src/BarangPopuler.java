@@ -12,6 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 import kelas.Barang;
 import kelas.Database;
 
@@ -38,47 +49,54 @@ public class BarangPopuler extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String db = "toko_imba";
-		java.sql.Connection con = null;
-
+		
+		JSONObject jsonResponse = null;
+		
+		JSONObject data = new JSONObject();
+		data.put("action", "favourite");
+		
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/listBarang");
+		
+		httppost.setEntity(new StringEntity(data.toString()));
+		CloseableHttpResponse httpresp = httpclient.execute(httppost);
 		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, Database.getUser(), Database.getPass());
-			System.out.println (db+ "database successfully opened.");
-			
-			
-			 
-			for(int i=0;i<5;i++){
-				ArrayList<Barang> barangKategori = new ArrayList<Barang>();
-				Statement state = con.createStatement();
-				ResultSet rs = state.executeQuery("SELECT * FROM inventori, kategori WHERE inventori.id_kategori = kategori.id_kategori AND inventori.id_kategori = " + (i+1) + " ORDER BY inventori.total_transaksi DESC LIMIT 3");
+			HttpEntity entity = httpresp.getEntity();
+		    if (entity != null) {
+		    	String jsonresp = EntityUtils.toString(entity);
+	            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+		    }
+		} finally {
+		    httpresp.close();
+		    httpclient.close();
+		}
+		
+		String kategori = null;
+		JSONArray arrayBarangs = (JSONArray) jsonResponse.get("data");
+		int i=0;
+		for(Object oo: arrayBarangs){
+			ArrayList<Barang> barangKategori = new ArrayList<Barang>();
+			JSONObject objKategori = (JSONObject) oo;
+			JSONArray arrayBarang = (JSONArray) objKategori.get("data");
+			for(Object o: arrayBarang){
+				JSONObject tmp = (JSONObject) o;
 				
-				String kategori = null;
-				
-				while(rs.next()){
-					if(kategori == null){
-						kategori = rs.getString("nama_kategori");
-					}
-					String name = rs.getString("nama_inventori");
-					Barang brg = new Barang(name);
-					brg.setId_cat(rs.getInt("id_kategori"));
-					brg.setId_inven(rs.getInt("id_inventori"));
-					brg.setDesc(rs.getString("description"));
-					brg.setHarga(rs.getInt("harga"));
-					brg.setGambar(rs.getString("gambar"));
-					brg.setJumlah(rs.getInt("jumlah"));
-					barangKategori.add(brg);
-					//request.setAttribute("name", name);
-				}
-				
-				//System.out.println("kategori:" + formalify(kategori));
-				request.setAttribute("namaKategori" + i, formalify(kategori));
-				request.setAttribute("barangKategori" + i, barangKategori);
+				String name = (String) tmp.get("nama_inventori");
+				Barang brg = new Barang(name);
+				//System.out.println("Data: " + tmp.get("id_kategori") + " " + tmp.get("id_inventori"));
+				brg.setId_cat(  ((Long) tmp.get("id_kategori")).intValue() );
+				brg.setId_inven(  ((Long) tmp.get("id_inventori")).intValue()  );
+				brg.setDesc((String) tmp.get("description"));
+				brg.setHarga( ((Long) tmp.get("harga")).intValue() );
+				brg.setGambar((String) tmp.get("gambar"));
+				brg.setJumlah( ((Long) tmp.get("jumlah")).intValue() );
+				barangKategori.add(brg);
 			}
+			request.setAttribute("namaKategori" + i, formalify((String) objKategori.get("kategori")));
+			request.setAttribute("barangKategori" + i, barangKategori);
+			i++;
 		}
-		catch(SQLException | ClassNotFoundException e) {
-			System.out.println("SQLException caught: " +e.getMessage());
-		}
+			
 				
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
