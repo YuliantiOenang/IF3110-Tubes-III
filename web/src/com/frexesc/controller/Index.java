@@ -89,39 +89,41 @@ public class Index extends HttpServlet {
 		Connection connection = dbConnection.mySqlConnection();
 
 		PrintWriter out = response.getWriter();
-		
-		/** Set WebService for retrieving list of Barang */
-		WebService _barang = new WebService(hostname + "barang");
-		_barang.addParam("action", "readAll");
-		_barang.addHeader("GData-Version", "2");
-		
-		try {
-			_barang.execute(WebService.REQUEST_METHOD.GET);
-			String listBarang = _barang.getResponse();
-			out.println(listBarang);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		/** End of WebService for retrieving list of Barang */
 
-		String query2 = "SELECT * FROM barang";
+	    String query2 = "SELECT * FROM barang";
 		String query3 = "SELECT * FROM kategori";
 
 		try {
-			ResultSet rs2 = connection.createStatement().executeQuery(query2);
-			ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+			// ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
 
-			while (rs2.next()) {
-				BarangBean barang = new BarangBean(Integer.valueOf(rs2
-						.getString("id")), Integer.valueOf(rs2
-						.getString("id_kategori")),
-						rs2.getString("nama_barang"), rs2.getString("gambar"),
-						Integer.valueOf(rs2.getString("harga_barang")),
-						rs2.getString("keterangan"), Integer.valueOf(rs2
-								.getString("jumlah_barang")));
-				allResults2.add(barang);
+			/** Set WebService for retrieving list of Barang */
+			WebService _barang = new WebService(hostname + "barang");
+			_barang.addParam("action", "readAll");
+			_barang.addHeader("GData-Version", "2");
+
+			try {
+				_barang.execute(WebService.REQUEST_METHOD.GET);
+				String listBarang = _barang.getResponse();
+				out.println(listBarang);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+			/** End of WebService for retrieving list of Barang */
+
+			
+			 ResultSet rs2 =
+			 connection.createStatement().executeQuery(query2);
+			 ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+			 
+			 while (rs2.next()) { BarangBean barang = new
+			 BarangBean(Integer.valueOf(rs2 .getString("id")),
+			 Integer.valueOf(rs2 .getString("id_kategori")),
+			 rs2.getString("nama_barang"), rs2.getString("gambar"),
+			 Integer.valueOf(rs2.getString("harga_barang")),
+			 rs2.getString("keterangan"), Integer.valueOf(rs2
+			 .getString("jumlah_barang"))); allResults2.add(barang); }
+			 
 
 			ResultSet rs3 = connection.createStatement().executeQuery(query3);
 			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
@@ -185,7 +187,7 @@ public class Index extends HttpServlet {
 
 		RequestDispatcher dispatcher;
 		dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-	//	dispatcher.forward(request, response);
+		// dispatcher.forward(request, response);
 	}
 
 	/**

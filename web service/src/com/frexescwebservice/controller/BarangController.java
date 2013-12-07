@@ -23,7 +23,7 @@ import com.frexescwebservice.model.BarangBean;
  */
 public class BarangController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -31,7 +31,7 @@ public class BarangController extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -41,54 +41,58 @@ public class BarangController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String requestType = request.getParameter("action");
-		
+
+		response.setContentType("application/json");
+        response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter(); // for writer
-		
+
 		if (requestType.equals("readAll")) {
 			JSONObject json = new JSONObject();
-			
+
 			DbConnection dbConnection = new DbConnection();
 			Connection connection = dbConnection.mySqlConnection();
-			
+
 			String query = "SELECT * FROM barang";
-			
+
 			try {
-				ResultSet rs2 = connection.createStatement().executeQuery(query);
+				ResultSet rs2 = connection.createStatement()
+						.executeQuery(query);
 				ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
 
 				while (rs2.next()) {
 					BarangBean barang = new BarangBean(Integer.valueOf(rs2
 							.getString("id")), Integer.valueOf(rs2
 							.getString("id_kategori")),
-							rs2.getString("nama_barang"), rs2.getString("gambar"),
-							Integer.valueOf(rs2.getString("harga_barang")),
+							rs2.getString("nama_barang"),
+							rs2.getString("gambar"), Integer.valueOf(rs2
+									.getString("harga_barang")),
 							rs2.getString("keterangan"), Integer.valueOf(rs2
 									.getString("jumlah_barang")));
 					allResults2.add(barang);
 				}
-				
+
 				/** ArrayList for storing JSONObject */
 				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
-				
+
 				if (allResults2.size() > 0) {
 					for (int i = 0; i < allResults2.size(); i++) {
 						returnResult.add(allResults2.get(i).toJSON());
 					}
 					json.put("status", "true");
-					json.put("data",  returnResult);
+					json.put("data", returnResult);
 				} else {
 					json.put("status", "false");
 				}
-				
-	            out.println(json.toString());
+
+				out.println(json.toString());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -97,7 +101,7 @@ public class BarangController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -106,7 +110,7 @@ public class BarangController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-	
+
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -117,4 +121,3 @@ public class BarangController extends HttpServlet {
 	}
 
 }
-
