@@ -1,6 +1,6 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Arrays" %>
-<form method="post">
+<form method="post" action="${pageContext.request.contextPath}/AccountSoapClient">
 	<div class='register_div'>
 		<h1 class='header'>Register</h1>
 		<div class='per_form'>
