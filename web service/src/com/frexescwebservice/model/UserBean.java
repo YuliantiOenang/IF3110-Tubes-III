@@ -1,5 +1,7 @@
 package com.frexescwebservice.model;
 
+import org.json.simple.JSONObject;
+
 public class UserBean {
 	private String username;
 	private String password;
@@ -15,7 +17,7 @@ public class UserBean {
 	private String nacard;
 	private String excard;
 	private int transaction;
-	
+
 	public UserBean() {
 		this.username = null;
 		this.password = null;
@@ -33,7 +35,10 @@ public class UserBean {
 		this.transaction = 0;
 	}
 
-	public UserBean(String username, String password, String email, String name, String telephone, String address, String province, String city, String postal, int role, String nocard, String nacard, String excard, int transaction) {
+	public UserBean(String username, String password, String email,
+			String name, String telephone, String address, String province,
+			String city, String postal, int role, String nocard, String nacard,
+			String excard, int transaction) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -162,5 +167,28 @@ public class UserBean {
 	public void setTransaction(int transaction) {
 		this.transaction = transaction;
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public JSONObject toJSON() {
+		JSONObject json = new JSONObject();
+		try {
+			json.put("username", username);
+			json.put("password", password);
+			json.put("email", email);
+			json.put("name", name);
+			json.put("telephone", telephone);
+			json.put("address", address);
+			json.put("province", province);
+			json.put("city", city);
+			json.put("postal", postal);
+			json.put("role", role);
+			json.put("nocard", nocard);
+			json.put("nacard", nacard);
+			json.put("excard", excard);
+			json.put("transaction", transaction);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
 }

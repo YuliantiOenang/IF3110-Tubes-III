@@ -42,58 +42,60 @@ public class UserController extends HttpServlet {
 		// TODO Auto-generated method stub
 String requestType = request.getParameter("action");
 		
-//		PrintWriter out = response.getWriter(); // for writer
-//		
-//		if (requestType.equals("readAll")) {
-//			JSONObject json = new JSONObject();
-//			
-//			DbConnection dbConnection = new DbConnection();
-//			Connection connection = dbConnection.mySqlConnection();
-//			
-//			String query = "SELECT * FROM user";
-//			
-//			try {
-//				ResultSet rs2 = connection.createStatement().executeQuery(query);
-//				ArrayList<UserBean> allResults2 = new ArrayList<UserBean>();
-//
-////				while (rs2.next()) {
-////					UserBean user = new UserBean(
-////							rs2.getString("username"),
-////							rs2.getString("password"),
-////							rs2.getString("email"),
-////							rs2.getString("name"),
-////							rs2.getString("handphone"),
-////							rs2.getString("alamat"),
-////							rs2.getString("provinsi"),
-////							rs2.getString("kota"),
-////							rs2.getString("kodepos"),
-////							
-////							Integer.valueOf(rs2.getString("role"))
-////							
-////							);
-////					allResults2.add(barang);
-////				}
-//				
-//				/** ArrayList for storing JSONObject */
-//				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
-//				
-//				if (allResults2.size() > 0) {
-//					for (int i = 0; i < allResults2.size(); i++) {
-//						returnResult.add(allResults2.get(i).toJSON());
-//					}
-//					json.put("status", "true");
-//					json.put("data",  returnResult);
-//				} else {
-//					json.put("status", "false");
-//				}
-//				
-//	            out.println(json.toString());
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//		}
+		PrintWriter out = response.getWriter(); // for writer
+		
+		if (requestType.equals("readAll")) {
+			JSONObject json = new JSONObject();
+			
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+			
+			String query = "SELECT * FROM user";
+			
+			try {
+				ResultSet rs2 = connection.createStatement().executeQuery(query);
+				ArrayList<UserBean> allResults2 = new ArrayList<UserBean>();
+
+				while (rs2.next()) {
+					UserBean user = new UserBean(
+							rs2.getString("username"),
+							rs2.getString("password"),
+							rs2.getString("email"),
+							rs2.getString("nama"),
+							rs2.getString("handphone"),
+							rs2.getString("alamat"),
+							rs2.getString("provinsi"),
+							rs2.getString("kota"),
+							rs2.getString("kodepos"),
+							Integer.valueOf(rs2.getString("role")),
+							rs2.getString("nomor_kartu"),
+							rs2.getString("nama_kartu"),
+							rs2.getString("expire_kartu"),
+							Integer.valueOf(rs2.getString("transaksi"))
+							);
+					allResults2.add(user);
+				}
+				
+				/** ArrayList for storing JSONObject */
+				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
+				
+				if (allResults2.size() > 0) {
+					for (int i = 0; i < allResults2.size(); i++) {
+						returnResult.add(allResults2.get(i).toJSON());
+					}
+					json.put("status", "true");
+					json.put("data",  returnResult);
+				} else {
+					json.put("status", "false");
+				}
+				
+	            out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 	/**
