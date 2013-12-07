@@ -6,15 +6,15 @@ Return value pada service merupakan string berformat xml. Tag terluar (root) sel
 	<desc>username sudah ada</desc>
  	<other_attribute>some value</other_attribute> 
 </retval>
-1.	 createUser(string username, string email, string nama_lengkap, string alamat, string provinsi, string kota, string kodepos, string telepon)
+1.	 createUser(string username, string password, string email, string nama_lengkap, string alamat, string provinsi, string kota, string kodepos, string telepon)
 menambahkan user baru
 return string berformat xml (atas):
 -	<status> berisi `ok` jika sukses, `error` jika gagal
 -	<desc> berisi error message, hanya ada jika status = `error`
 -	<token> berisi string token login, akan disimpan di cookie / local storage. Hanya ada jika status ok
 
-2.	createBarang(string token, string nama_barang, int harga, int stok, string kategori, string deskripsi)
-menambahkan user baru
+2.	createBarang(string token, string nama_barang, int harga, int stok, string kategori, string deskripsi, string imgdata)
+menambahkan user baru. Jika imgdata == "", akan digunakan gambar default
 return string berformat xml (atas):
 -	<status> berisi `ok` jika sukses, `error` jika gagal 
 -	<desc> berisi error message, hanya ada jika status = `error`
@@ -78,6 +78,7 @@ mengupdate data barang. Error jika token invalid / bukan token admin.
 PUT data berformat json:
 -	barang : json representasi barang. Seluruh isi data, kecuali id, akan berubah
 -	token : string token login user.
+-	(opsional) imgdata : string base64 untuk data image barang
 
 return string berformat json:
 -	status : `ok` jika sukses, `error` jika gagal
