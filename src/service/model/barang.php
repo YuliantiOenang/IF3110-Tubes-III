@@ -22,7 +22,7 @@ function model_barang($data){
 
 // SOAP-based
 
-function add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi){
+function add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi, $imgdata){
 	$desc = "bukan admin";
 	
 	$db = db_connect();
@@ -37,7 +37,15 @@ function add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi){
 	
 		$query = "INSERT INTO barang (nama_barang, harga, stok, kategori, deskripsi) VALUES ('$nama_barang', $harga, $stok, '$kategori', '$deskripsi')";
 		
-		if($db->query($query)) $desc = "";
+		if($db->query($query)){
+			$desc = "";
+			
+			$query = "SELECT * FROM barang ORDER BY id_barang DESC LIMIT 0, 1"; $result = $db->query($query);
+			
+			$id = $result->fetch_assoc()["id_barang"];
+			
+			save_img_barang($id, $imgdata);
+		}
 		else $desc = "barang tidak dapat ditambahkan";
 	}
 	
@@ -197,7 +205,10 @@ function del_barang($ids, $token){
 		
 		foreach($ids as $id){
 			$query = "DELETE FROM barang WHERE id_barang=$id";
-			$db->query($query);
+			
+			if (($db->query($query)) && ($db->affected_rows > 0)){
+				del_img_barang($id);
+			}
 		}
 	}
 	
@@ -284,6 +295,11 @@ function save_img_barang($id, $rawdata){
 	}else{
 		copy("../image/default.jpg", $fullpath);
 	}
+}
+
+function del_img_barang($id){
+	$fullpath = "../image/$id.jpg";
+	unlink($fullpath);
 }
 
 ?>

@@ -67,6 +67,9 @@ Julien Blitte
 		<element name="password">
 		<complexType><all><element name="value" type="string" /></all></complexType>
 		</element>
+		<element name="imgdata">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
 	</schema>
 	</types>
 <!-- response messages -->
@@ -92,6 +95,7 @@ Julien Blitte
 	<part name='stok' type='xsd:stok'/>
 	<part name='kategori' type='xsd:kategori'/>
 	<part name='deskripsi' type='xsd:deskripsi'/>
+	<part name='imgdata' type='xsd:imgdata'/>
 	</message>
 <!-- server's services -->
 	<portType name='Ruko Online'>

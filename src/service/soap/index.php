@@ -21,8 +21,8 @@ function createUser($username, $password, $email, $nama_lengkap, $alamat, $provi
 	return getXMLRetval($response);
 }
 
-function createBarang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi){
-	$desc = add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi);
+function createBarang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi, $imgdata){
+	$desc = add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi, $imgdata);
 
 	if($desc==""){
 		$response["status"] = "ok";
