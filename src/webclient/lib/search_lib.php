@@ -1,6 +1,7 @@
 <?php
 	//fungsi-fungsi pengambilan data (SELECT) barang
 	include(dirname(__FILE__)."/db.php");
+	include(dirname(__FILE__)."/rest_request.php");
 	
 	class Barang{
 		public $id, $nama, $stok, $harga, $jumlah_beli, $kategori, $deskripsi;
@@ -37,7 +38,11 @@
 	}
 	
 	function searchHome(){
-		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
+		
+		
+		$array = sendRestRequest("GET","populer",array());
+		return $array["hasil"];
+		/*global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
 		
 		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 		$statement = $conn->prepare("SELECT * FROM barang ORDER BY jumlah_terbeli DESC LIMIT 0, 10");
@@ -55,7 +60,7 @@
 		$statement->close();
 		$conn->close();
 		
-		return $result;
+		return $result;*/
 	}
 	
 	function searchAll($keyword, $page){

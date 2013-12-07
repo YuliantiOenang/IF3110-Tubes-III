@@ -25,7 +25,7 @@ function db_parameter(){
 		$param["host"] = "localhost";
 		$param["name"] = "wbd3";
 		$param["user"] = "root";
-		$param["pass"] = "root";
+		$param["pass"] = "";
 	}
 	return $param;
 }
