@@ -5,6 +5,15 @@
 				
 <script type="text/javascript" src="js/deleteBarang.js"></script>
 <h1 class="header">Administrator</h1><br>
+
+<?php
+		$var=$_GET['kategori'];
+		$nama_barang=$_GET['nama_barang'];
+		$kategori = $_GET['kategori'];
+		$harga = $_GET['harga'];
+		$OP = $_GET['operator'];
+	?>
+
 <a class="btn" href="adminAddBarang.php">+ Tambah Barang</a> 
 Kategori : 
 
@@ -17,6 +26,14 @@ Kategori :
 	<a class="btn small" href="#" onclick="init('<?=AdminBarangService;?>','harga','ASC','<?=$nama_barang;?>','Men Shirt','<?=$harga;?>','<?=$OP;?>')"> Men Shoes</a>
 
 	<a class="btn small" href="#" onclick="init('<?=AdminBarangService;?>','harga','ASC','<?=$nama_barang;?>','Men Hat','<?=$harga;?>','<?=$OP;?>')"> Men Hat</a>
+<br>
+Sort by : 
+		Nama 
+		<a class="btn small" onclick="init('<?=AdminBarangService;?>','nama','ASC','<?=$nama_barang;?>','<?=$var;?>','<?=$harga;?>','<?=$OP;?>')" href="#">ASC</a> 
+		<a class="btn small" onclick="init('<?=AdminBarangService;?>','nama','DESC','<?=$nama_barang;?>','<?=$var;?>','<?=$harga;?>','<?=$OP;?>')" href="#">DESC</a> 
+		Harga 
+		<a class="btn small" onclick="init('<?=AdminBarangService;?>','harga','ASC','<?=$nama_barang;?>','<?=$var;?>','<?=$harga;?>','<?=$OP;?>')" href="#">ASC</a> 
+		<a class="btn small" onclick="init('<?=AdminBarangService;?>','harga','DESC','<?=$nama_barang;?>','<?=$var;?>','<?=$harga;?>','<?=$OP;?>')" href="#">DESC</a>
 
 
 <br><br>		

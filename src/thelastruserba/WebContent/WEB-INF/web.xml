@@ -99,4 +99,13 @@
     <url-pattern>/thelastruserba/admin/index</url-pattern>
     <url-pattern>/admin/index</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>adminDelete</servlet-name>
+    <servlet-class>adminController.DeleteBarang</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminDelete</servlet-name>
+    <url-pattern>/thelastruserba/admin/deletebarang</url-pattern>
+    <url-pattern>/admin/deletebarang</url-pattern>
+  </servlet-mapping>
 </web-app>
