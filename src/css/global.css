@@ -1,0 +1,273 @@
+/* elemen div layout page*/
+
+html, body{
+	text-align:center;
+	background: #222;
+	padding: 0; margin: 0;
+	font-family: Sans;
+	font-size: 11pt;
+}
+
+.outer{
+	width: 80%;
+	min-height:100%;
+	text-align: left;
+	display: inline-block;
+	
+	background: white;
+}
+
+.header-wrapper{
+	width: 100%;
+	height:260px;
+	background: url(../image/header.jpg) no-repeat;
+	position : relative;
+}
+
+.content{
+	padding: 1.5em;
+	font-size: 11pt;
+}
+
+/* bagian header-float (login, signup) */
+
+.header-float{
+	width: 100%;
+	padding: 0.25em 0;
+	position: absolute;
+	top:0;
+	text-align: right;
+	background: rgba(0,0,0,0.5);
+	color: #fff;
+	font-size: 10pt;
+}
+
+.header-float a{
+	color: #f90;
+	text-decoration: none;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+
+.header-float a:hover{
+	color: #fc0;
+	text-decoration: none;
+}
+
+
+/* bagian header */
+
+.header{
+	width: 100%;
+	position: absolute;
+	bottom:0;
+}
+
+.htitle{
+	font-size: 36pt;
+	font-weight: bold;
+	padding-left: 0.25em;
+	padding-bottom: 0.2em;
+	display:block;
+}
+
+.htitle a{
+	color: white;
+	text-decoration: none;
+}
+
+.htitle a:hover{
+	color: white;
+	text-decoration: none;
+}
+
+.menu{
+	background: rgba(0,0,0,0.75);
+	display:block;
+	padding: 0;
+	width: 100%;
+	vertical-align: top;
+}
+
+.menu-wrapper{
+	display:inline-block;
+	width: 80%;
+	overflow: visible;
+}
+
+.search-wrapper{
+	display:inline-block;
+	text-align: right;
+	
+	width: 17%;
+	overflow: visible;
+}
+
+.search-wrapper form{
+	padding: 0; margin: 0; 
+}
+
+.search{
+	background: #fff;
+	border: 0;
+	padding: 0.25em 0.4em;
+	
+	-moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -khtml-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.search:focus{
+	outline: 0;
+}
+
+.search-grey{
+	color: #999;
+}
+
+.menu .item{
+	text-decoration:none;
+	color: #fff;
+	
+	font-weight:bold;
+	display: inline-block;
+	padding: 0.6em;
+}
+
+.menu .item:hover{
+	color: #f90;
+}
+
+/* elemen input */
+
+a{
+	color: #f90;
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+.main-button{
+	background: #09f;
+	border: none;
+	padding: .75em;
+	font-weight: bold;
+	color: white;
+}
+
+.main-button:hover{
+	background: #3af;
+	cursor: pointer;
+}
+
+.main-button-small{
+	background: #09f;
+	border: none;
+	padding: .75em;
+	font-weight: bold;
+	font-size:8pt;
+	color: white;
+}
+
+.main-button-small:hover{
+	background: #3af;
+	cursor: pointer;
+}
+
+.grey-button{
+	background: #bbb;
+	border: none;
+	padding: .75em;
+	font-weight: bold;
+	color: white;
+}
+
+.grey-button:hover{
+	background: #ccc;
+	cursor: pointer;
+}
+
+/* elemen lain */
+
+.loading{
+	width:12pt; height: 12pt;
+	vertical-align: middle;
+}
+
+/* alignment */
+
+.align-right{
+	text-align: right;
+}
+
+.align-left{
+	text-align: left;
+}
+
+.align-center{
+	text-align: center;
+}
+
+/* elemen table-like div */
+
+.table{
+	margin-bottom: 20px;
+}
+
+.row{
+	vertical-align:top;
+	padding-top:.25em;
+	display: block;
+	width: 100%;
+}
+
+.cell{
+	vertical-align:top;
+	display:inline-block;
+}
+
+.cell33{
+	vertical-align:top;
+	display:inline-block;
+	width: 33%;
+}
+
+.cell66{
+	vertical-align:top;
+	display:inline-block;
+	width: 66%;
+}
+
+.cell25{
+	vertical-align:top;
+	display:inline-block;
+	width: 25%;
+}
+
+.cell50{
+	vertical-align:top;
+	display:inline-block;
+	width: 49%;
+}
+
+.cell75{
+	vertical-align:top;
+	display:inline-block;
+	width: 75%;
+}
+
+.cell15{
+	vertical-align:top;
+	display:inline-block;
+	width: 15%;
+}
+
+.cell35{
+	vertical-align:top;
+	display:inline-block;
+	width: 35%;
+}
