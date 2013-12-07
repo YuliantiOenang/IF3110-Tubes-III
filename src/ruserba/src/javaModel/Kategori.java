@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 import databaseLib.DatabaseAdapter;
 
 public class Kategori {
@@ -21,8 +23,10 @@ public class Kategori {
     public static Kategori find(String query) {
         Kategori kategori = null;
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return kategori;
             if (result.next()) {
                 kategori = new Kategori();
                 kategori.id = Integer.parseInt(result.getString(1));
@@ -33,6 +37,8 @@ public class Kategori {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return kategori;
     }
@@ -46,8 +52,10 @@ public class Kategori {
     public static ArrayList<Kategori> findAll(String query) {
         ArrayList<Kategori> kategoris = new ArrayList<Kategori>();
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return kategoris;
             while (result.next()) {
                 Kategori kategori = new Kategori();
                 kategori.id = Integer.parseInt(result.getString(1));
@@ -59,6 +67,8 @@ public class Kategori {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return kategoris;
     }
@@ -78,5 +88,19 @@ public class Kategori {
     public void delete() {
         String query = "DELETE FROM kategori WHERE id=" + id;
         DBA.deleteQuery(query);
+    }
+    
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", id);
+            json.put("nama_kategori", nama_kategori);
+            json.put("gambar", gambar);
+            json.put("deskripsi", deskripsi);
+            json.put("sub_deskripsi", sub_deskripsi);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 }

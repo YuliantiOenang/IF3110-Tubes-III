@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 import databaseLib.DatabaseAdapter;
 
 public class Kredit {
@@ -21,8 +23,10 @@ public class Kredit {
     public static Kredit find(String query) {
         Kredit kredit = null;
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return kredit;
             if (result.next()) {
                 kredit = new Kredit();
                 kredit.id = Integer.parseInt(result.getString(1));
@@ -33,6 +37,8 @@ public class Kredit {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return kredit;
     }
@@ -46,8 +52,10 @@ public class Kredit {
     public static ArrayList<Kredit> findAll(String query) {
         ArrayList<Kredit> kredits = new ArrayList<Kredit>();
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return kredits;
             while (result.next()) {
                 Kredit kredit = new Kredit();
                 kredit.id = Integer.parseInt(result.getString(1));
@@ -59,6 +67,8 @@ public class Kredit {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return kredits;
     }
@@ -78,5 +88,19 @@ public class Kredit {
     public void delete() {
         String query = "DELETE FROM kredit WHERE id=" + id;
         DBA.deleteQuery(query);
+    }
+    
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", id);
+            json.put("id_account", id_account);
+            json.put("card_number", card_number);
+            json.put("name_of_card", name_of_card);
+            json.put("expired_date", expired_date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 }

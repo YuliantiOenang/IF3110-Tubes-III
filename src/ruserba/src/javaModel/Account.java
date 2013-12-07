@@ -23,8 +23,10 @@ public class Account {
     public static Account find(String query) {
         Account account = null;
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return account;
             if (result.next()) {
                 account = new Account();
                 account.id = Integer.parseInt(result.getString(1));
@@ -43,6 +45,8 @@ public class Account {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return account;
     }
@@ -56,8 +60,10 @@ public class Account {
     public static ArrayList<Account> findAll(String query) {
         ArrayList<Account> accounts = new ArrayList<Account>();
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return accounts;
             while (result.next()) {
                 Account account = new Account();
                 account.id = Integer.parseInt(result.getString(1));
@@ -77,6 +83,8 @@ public class Account {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return accounts;
     }
@@ -89,6 +97,7 @@ public class Account {
         else
             query = "UPDATE account SET username = '" + username + "', password = '" + password + "', nama = '" + nama + "', email = '" + email + "', alamat = '" + alamat + "', provinsi = '" + provinsi + "', kota = '" + kota + "', kodepos = '" + kodepos + "', telepon = '" + telepon + "', auth_key = '" + auth_key + "', role = '" + role + "', transaksi = '" + transaksi + "' WHERE id = " + id;
         DBA.insertQuery(query);
+        DBA.endQuery();
     }
 
     // delete account from db
