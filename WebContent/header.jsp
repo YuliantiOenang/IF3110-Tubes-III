@@ -1,5 +1,8 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+
+<%@ page import="tubesII.wbd.GlobalConfig" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -98,9 +101,9 @@
 	                        <%
 							try {
 								  //Load the JDBC driver
-										String uname = "root";
-										String pass = "";
-										String url = "jdbc:mysql://localhost/progin_13511059";
+										String uname = GC.getuser();
+										String pass = GC.getpass();
+										String url = GC.geturl();
 										Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 								        Connection con = DriverManager.getConnection (url, uname, pass);
 									

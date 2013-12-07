@@ -57,13 +57,6 @@ if (!name.equals("")) {
 out.println("<div id='content' class='float_l'>");
 try {
 	  //Load the JDBC driver
-			/*
-	  		OLD :
-	  			String uname = "root";
-				String pass = "";
-				String url = "jdbc:mysql://localhost/progin_13511059";
-	  		*/
-			// New "Sample"
 			GlobalConfig GC=new GlobalConfig();
 	  		String uname = GC.getuser();
 			String pass = GC.getpass();

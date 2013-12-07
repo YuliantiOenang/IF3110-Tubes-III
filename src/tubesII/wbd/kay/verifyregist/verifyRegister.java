@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import tubesII.wbd.GlobalConfig;
+
 /**
  * Servlet implementation class verifyRegister
  */
@@ -64,9 +66,9 @@ public class verifyRegister extends HttpServlet {
 		int urowcount =0;
 		int erowcount =0;
 		try{
-			String uname = "fawwazmuhammad@hotmail.com";
-			String pass = "test";
-			String url = "jdbc:mysql://radja.ap01.aws.af.cm/d46eebb7f56ab43048dce8f95e38ab8e2";
+			String uname = GC.getuser();
+			String pass = GC.getpass();
+			String url = GC.geturl();
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 	        con = DriverManager.getConnection (url, uname, pass);
 		}

@@ -1,5 +1,6 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="tubesII.wbd.GlobalConfig" %>
 <%@ include file= "./header.jsp" %>
 <%
 if((sesi== null)|| (sesi.getAttribute("username")==null))
@@ -21,9 +22,9 @@ else{
 	
 	try {
 		  //Load the JDBC driver
-				String uname = "root";
-				String pass = "";
-				String url = "jdbc:mysql://localhost/progin_13511059";
+				String uname = GC.getuser();
+				String pass = GC.getpass();
+				String url = GC.geturl();
 				Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 		        Connection con = DriverManager.getConnection (url, uname, pass);
 				int totalHarga=0;

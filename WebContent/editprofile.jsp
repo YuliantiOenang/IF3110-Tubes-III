@@ -1,14 +1,17 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+
+<%@ page import="tubesII.wbd.GlobalConfig" %>
+
 <%@ include file= "./header.jsp" %>
 <script type="text/javascript" src="verify2.js"></script>
 <form name="edit" action="javascript:verifRegis();" method="post">
 <%
 try {
 	  //Load the JDBC driver
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
+			String uname = GC.getuser();
+			String pass = GC.getpass();
+			String url = GC.geturl();
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 	        Connection con = DriverManager.getConnection (url, uname, pass);
 		
