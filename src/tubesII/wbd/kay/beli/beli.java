@@ -64,8 +64,8 @@ public class beli extends HttpServlet {
 			try{
 				boolean success = true;
 				String uname = "fawwazmuhammad@hotmail.com";
-			String pass = "test";
-			String url = "jdbc:mysql://radja.ap01.aws.af.cm/d46eebb7f56ab43048dce8f95e38ab8e2";
+				String pass = "test";
+				String url = "jdbc:mysql://radja.ap01.aws.af.cm/d46eebb7f56ab43048dce8f95e38ab8e2";
 				Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 		        con = DriverManager.getConnection (url, uname, pass);
 		        Statement s = con.createStatement();
