@@ -150,6 +150,44 @@ public class listBarang extends HttpServlet {
 	        } catch (SQLException ex) {
 	            //Logger.getLogger(JavaApplication3.class.getName()).log(Level.SEVERE, null, ex);
 	        }
+	    } else if(data.get("action").equals("view_cart")){
+	    	System.out.println("Add view_cart action here!!!");
+	    	JSONArray points = (JSONArray) data.get("data");
+	    	int total = 0;
+	    	if(points != null){
+		    	try {
+		    		Driver asdf = new Driver();
+		            Connection koneksion = asdf.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
+		            
+		            JSONArray array = new JSONArray();
+		            for(Object o: points){
+		            	JSONObject tmp = (JSONObject) o;
+		            	String query = "SELECT * FROM inventori JOIN kategori ON inventori.id_kategori = kategori.id_kategori AND inventori.id_inventori = '" + ((Long) tmp.get("x")).intValue() + "'";
+		            	
+		            	PreparedStatement asd = koneksion.prepareStatement(query);
+			            ResultSet f = asd.executeQuery();
+			            
+			            JSONObject tmp2 = new JSONObject();
+			            while(f.next()){
+			            	tmp2.put("nama_inventori", f.getString("nama_inventori"));
+			            	tmp2.put("id_kategori", f.getInt("id_kategori"));
+			            	tmp2.put("id_inventori", f.getInt("id_inventori"));
+			            	tmp2.put("description", f.getString("description"));
+			            	tmp2.put("harga", f.getInt("harga"));
+			            	tmp2.put("gambar", f.getString("gambar"));
+			            	tmp2.put("jumlah", ((Long) tmp.get("y")).intValue());
+	   						total += f.getInt("harga") * ((Long) tmp.get("y")).intValue();
+			            }
+			            array.add(tmp2);
+		            }
+		            
+		            JSONresp.put("data", array);
+		             	
+	            } catch(Exception e){
+	            	e.printStackTrace();
+	            }
+	    	}
+	    	JSONresp.put("total", (Integer) total);   
 	    }
 	    
 		response.setHeader("Access-Control-Allow-Origin", "*");

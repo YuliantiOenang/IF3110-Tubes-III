@@ -14,6 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 import kelas.Barang;
 import kelas.Database;
 
@@ -38,40 +49,69 @@ public class ViewCart extends HttpServlet {
 	 */
     
     public void viewCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		HttpSession session = request.getSession(true);
-		String db = "toko_imba";
-		java.sql.Connection con = null;
+    	JSONObject jsonResponse = null;
+		
+		JSONObject data = new JSONObject();
+		data.put("action", "view_cart");
+    	
+    	HttpSession session = request.getSession(true);
 		ArrayList<Point> cart = null;
-		int total = 0;
-		ArrayList<Barang> barangs = new ArrayList<Barang>();
+		//int total = 0;
+		
 		if(session.getAttribute("cart") != null){
-			try {
-				Class.forName("org.gjt.mm.mysql.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, Database.getUser(), Database.getPass());
-				
-				cart = (ArrayList<Point>) session.getAttribute("cart");
-				for(Point barangIndex: cart){
-					Statement state = con.createStatement();
-					ResultSet rs = state.executeQuery("SELECT * FROM inventori JOIN kategori ON inventori.id_kategori = kategori.id_kategori AND inventori.id_inventori = \"" + barangIndex.x + "\"");
-					
-					while(rs.next()){
-						String name = rs.getString("nama_inventori");
-						Barang brg = new Barang(name);
-						brg.setId_cat(rs.getInt("id_kategori"));
-						brg.setId_inven(rs.getInt("id_inventori"));
-						brg.setDesc(rs.getString("description"));
-						brg.setHarga(rs.getInt("harga"));
-						brg.setGambar(rs.getString("gambar"));
-						brg.setJumlah(barangIndex.y);
-						total += brg.getHarga() * brg.getJumlah();
-						barangs.add(brg);
-					}
-				}
+			cart = (ArrayList<Point>) session.getAttribute("cart");
+			
+			JSONArray array = new JSONArray();
+			
+			for(Point barangIndex: cart){
+				JSONObject point = new JSONObject();
+				point.put("x", (Integer) barangIndex.x);
+				point.put("y", (Integer) barangIndex.y);
+				array.add(point);
 			}
-			catch(SQLException | ClassNotFoundException e) {
-				System.out.println("SQLException caught: " +e.getMessage());
+			
+			data.put("data", array);
+		}
+		
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/listBarang");
+		
+		httppost.setEntity(new StringEntity(data.toString()));
+		CloseableHttpResponse httpresp = httpclient.execute(httppost);
+		try {
+			HttpEntity entity = httpresp.getEntity();
+		    if (entity != null) {
+		    	String jsonresp = EntityUtils.toString(entity);
+	            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+		    }
+		} finally {
+		    httpresp.close();
+		    httpclient.close();
+		}
+		
+		ArrayList<Barang> barangs = new ArrayList<Barang>();
+		
+		JSONArray array = (JSONArray) jsonResponse.get("data");
+		if(array != null){
+			for(Object o: array){
+				JSONObject tmp = (JSONObject) o;
+				
+				String name = (String) tmp.get("nama_inventori");
+				Barang brg = new Barang(name);
+				
+				//System.out.println("Data: " + tmp.get("id_kategori") + " " + tmp.get("id_inventori"));
+				brg.setId_cat(  ((Long) tmp.get("id_kategori")).intValue() );
+				brg.setId_inven(  ((Long) tmp.get("id_inventori")).intValue()  );
+				brg.setDesc((String) tmp.get("description"));
+				brg.setHarga( ((Long) tmp.get("harga")).intValue() );
+				brg.setGambar((String) tmp.get("gambar"));
+				brg.setJumlah( ((Long) tmp.get("jumlah")).intValue() );
+				barangs.add(brg);
 			}
 		}
+		
+		int total = ((Long) jsonResponse.get("total")).intValue();
+		
 		request.setAttribute("total", total);
 		request.setAttribute("barangs", barangs);
 		request.getRequestDispatcher("viewCart.jsp").forward(request, response);
