@@ -5,7 +5,7 @@
 				<div id="loading"></div>
 				<form method="post">
 					<label>Username</label><input type="text" name="Login[username]" id="login_username"><br> <label>Password</label><input type="password" name="Login[password]" id="login_password"><br>
-					<button class="btn right" onclick="login(); return false;" type="submit">Login</button>
+					<button class="btn right" onclick="login('<?=URLService;?>'); return false;" type="submit">Login</button>
 				</form>
 			</div>
 			<script src="js/login.js"></script>

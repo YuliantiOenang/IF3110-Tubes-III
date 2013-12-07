@@ -1,10 +1,9 @@
 <?php
+	if (isset($_COOKIE['isLogin']))
+	{
 	require_once('header.php');
 ?>
 			<div onload="RefreshCartandShow()" id="content_frame">
-				
-
-
 		<h1 class="header">Shopping Cart</h1>
 <div class="orderdata">
 			<div class="wrapV_m">
@@ -48,7 +47,7 @@
 					<li>Urabitur convallis varius lectus, vitae congue mauris adipiscing eu. Vivamus id ultrices mi. Aenean eget erat id massa fringilla gravida.</li>
 					
 				</ul>
-				<a href="cart/payment"><input type="btn" class="button" value="Process to payment" name="submit"></a>
+				<a href="cartPayment.php"><input type="btn" class="button" value="Process to payment" name="submit"></a>
 				<a href="barang.php"><input type="btn" class="button" value="Add Item" name="submit"></a>
 				</div>
 			</div>
@@ -59,4 +58,9 @@
 		</div>
 		<?php
 require_once('footer.php');
+}
+else
+{
+	header("Location: register.php");
+}
 ?>

@@ -1,5 +1,9 @@
 <?php
 	require_once('header.php');
+	if (isset($_COOKIE['isLogin']))
+	{
+		if ($_COOKIE['role']==2)
+		{
 ?>
 			<div onload="RefreshCartandShow()" id="content_frame">
 				
@@ -44,5 +48,9 @@ Sort by :
 <div id="loader" class="hidden"><img src="images/loader.gif" alt="" onload="init('<?=AdminBarangService;?>','harga','ASC','<?=$nama_barang;?>','<?=$var;?>','<?=$harga;?>','<?=$OP;?>')"></div>
 
 <?php
-require_once('footer.php');
+		require_once('footer.php');
+		}
+		else header("Location:index.php");
+	}
+	else header("Location:index.php");
 ?>

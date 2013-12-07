@@ -119,10 +119,10 @@ public class IndexBarang extends HttpServlet {
 				str += "		<div class=\"minicart_icon\">";
 				str += "			<a href=\"#\" onclick=\"goToCart("+B.id.get(i)+"); return false;\"><img src=\""+new GlobalConfig().URLService+"/img/site/cart_black.png\"></a>";
 				str += "		</div>";
-				str += "		<div class=\"item_name\"><a href=\"/ruserba/barang/detail?id="+B.id.get(i)+"\">"+B.nama.get(i)+"</a><br>IDR "+B.harga.get(i)+"</div>";
+				str += "		<div class=\"item_name\"><a href=\"detailBarang.php?id="+B.id.get(i)+"\">"+B.nama.get(i)+"</a><br>IDR "+B.harga.get(i)+"</div>";
 				str += "	</div>";
 				str += "	<div class=\"minicart hidden\" id=\"cart"+B.id.get(i)+"\">";
-				str += "		<form id=\"form-shop-"+B.id.get(i)+"\" method=\"post\" onsubmit=\"pertanyaan("+B.id.get(i)+","+B.stok.get(i)+"); return false;\">";
+				str += "		<form action='#' id=\"form-shop-"+B.id.get(i)+"\" method=\"post\" onsubmit=\"pertanyaan("+B.id.get(i)+","+B.stok.get(i)+"); return false;\">";
 				str += "			<label class=\"qty small\">Quantity</label>";
 				str += "			<input type=\"number\" name=\"quantity\" id=\"quantity_"+B.id.get(i)+"\" class=\"qty\" value=\"1\">";
 				str += "			<input type=\"hidden\" name=\"id_barang\" id=\"id_barang_"+B.id.get(i)+"\" value=\""+B.id.get(i)+"\">";

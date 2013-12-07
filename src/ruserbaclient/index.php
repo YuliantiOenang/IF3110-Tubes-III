@@ -112,9 +112,6 @@
 				}, 2000);
 		}
 	</script>
-	
-	
-		
 		<div id="cont1" class="home_categori " onmouseout="setRun(true,1)" onmouseover="setRun(false,1)">
 			<h1 class="header">Ladies Dress</h1>
 			<div class="triplebest">

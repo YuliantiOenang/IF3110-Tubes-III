@@ -2,7 +2,6 @@ var xmlhttpShop;
 var jumlah; 
 var keterangan;
 var id_barang;
-var topCart = 0;
 
 if (window.XMLHttpRequest)
 {// code for IE7+, Firefox, Chrome, Opera, Safari

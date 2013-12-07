@@ -68,13 +68,27 @@ public class LoginController extends HttpServlet {
 						session.setAttribute("role",Integer.parseInt(RS.getObject(12).toString()));
 						session.setMaxInactiveInterval(0);
 						*/
+						/*
 						Cookie C = new Cookie("isLogin",username);
 						C.setMaxAge(60*60*24*30); //30 Hari
 						C.setPath("/");
 						response.addCookie(C);
-						
+						*/
 						JSONObject json = new JSONObject();
 						json.put("success", true);
+						
+						json.put("isLogin", true);
+						json.put("username", username);
+						json.put("role", Integer.parseInt(RS.getObject(12).toString()));
+						int ID = Integer.parseInt(RS.getObject(1).toString());
+						String queryCC = "select * from kredit where id_account = '" + ID + "' limit 1";
+						DBA.executeQuery(queryCC);
+						ResultSet RSCC = DBA.getQueryResult();
+						if (!RSCC.isBeforeFirst()) {
+							json.put("isCreditCard", false);
+						} else {
+							json.put("isCreditCard", true);
+						}
 						out.write(json.toString());
 					}
 				} catch (SQLException | JSONException e) {

@@ -1,4 +1,6 @@
 <?php
+	if (isset($_COOKIE['isLogin']))
+	{
 	require_once('header.php');
 ?>
 			<div onload="RefreshCartandShow()" id="content_frame">
@@ -40,4 +42,8 @@
 		</div>
 		<?php
 require_once('footer.php');
+}else
+{
+	header("Location: register.php");
+}
 ?>

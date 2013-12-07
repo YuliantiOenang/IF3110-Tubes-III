@@ -20,7 +20,7 @@
 			<input type="text" id="expired_date" name="expired_date" value=""><br>
 		</div>
 		<button class="btn small full" type="submit">Submit</button>
-		<a class="btn small full" href="profile/index?ignore=1" type="button">Skip</a><br>
+		<a class="btn small full" href="profil.php" type="button">Skip</a><br>
 	</div>
 </form>
 <script type="text/javascript" src="js/date.js"></script>
