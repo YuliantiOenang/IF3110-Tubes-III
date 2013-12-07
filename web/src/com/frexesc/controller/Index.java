@@ -1,8 +1,6 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -75,24 +73,24 @@ public class Index extends HttpServlet {
 				}
 			}
 		}
-		
-//		if (isLogin && sessions.getAttribute("user_id") == null) {
-//			try {
-//				ResultSet rs = new DbConnection()
-//						.mySqlConnection()
-//						.createStatement()
-//						.executeQuery(
-//								"SELECT role FROM user WHERE id='" + userid
-//										+ "'");
-//				rs.next();
-//				sessions.setAttribute("role", rs.getString("role"));
-//				sessions.setAttribute("user_id", userid);
-//				sessions.setAttribute("username", username);
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+
+		// if (isLogin && sessions.getAttribute("user_id") == null) {
+		// try {
+		// ResultSet rs = new DbConnection()
+		// .mySqlConnection()
+		// .createStatement()
+		// .executeQuery(
+		// "SELECT role FROM user WHERE id='" + userid
+		// + "'");
+		// rs.next();
+		// sessions.setAttribute("role", rs.getString("role"));
+		// sessions.setAttribute("user_id", userid);
+		// sessions.setAttribute("username", username);
+		// } catch (SQLException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
 
 		ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
 
@@ -116,24 +114,28 @@ public class Index extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			JSONArray infoBarang = (JSONArray) mainJSON.get("data"); // Get
-																		// info
 
-			/** Suppress warning for Compilation level */
-			@SuppressWarnings("unchecked")
-			Iterator<JSONObject> iterator = infoBarang.iterator();
-			while (iterator.hasNext()) {
-				JSONObject jsonBarang = iterator.next(); // each barang info
-				BarangBean barang = new BarangBean(
-						(Long) jsonBarang.get("id"),
-						(Long) jsonBarang.get("id_category"),
-						(String) jsonBarang.get("name"),
-						(String) jsonBarang.get("picture"),
-						Integer.valueOf(String.valueOf(jsonBarang.get("price"))),
-						(String) jsonBarang.get("description"), Integer
-								.valueOf(String.valueOf(jsonBarang
-										.get("total_item"))));
-				allResults2.add(barang);
+			if (mainJSON.get("status").equals("true")) {
+				JSONArray infoBarang = (JSONArray) mainJSON.get("data"); // Get
+				// info
+
+				/** Suppress warning for Compilation level */
+				@SuppressWarnings("unchecked")
+				Iterator<JSONObject> iterator = infoBarang.iterator();
+				while (iterator.hasNext()) {
+					JSONObject jsonBarang = iterator.next(); // each barang info
+					BarangBean barang = new BarangBean(
+							(Long) jsonBarang.get("id"),
+							(Long) jsonBarang.get("id_category"),
+							(String) jsonBarang.get("name"),
+							(String) jsonBarang.get("picture"),
+							Integer.valueOf(String.valueOf(jsonBarang
+									.get("price"))),
+							(String) jsonBarang.get("description"),
+							Integer.valueOf(String.valueOf(jsonBarang
+									.get("total_item"))));
+					allResults2.add(barang);
+				}
 			}
 
 		} catch (Exception e1) {
@@ -164,32 +166,38 @@ public class Index extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			JSONArray infoKategori = (JSONArray) mainJSON.get("data"); // Get
-																		// info
+			
+			if (mainJSON.get("status").equals("true")) {
+				JSONArray infoKategori = (JSONArray) mainJSON.get("data"); // Get
+				// info
 
-			/** Suppress warning for Compilation level */
-			@SuppressWarnings("unchecked")
-			Iterator<JSONObject> iterator = infoKategori.iterator();
-			while (iterator.hasNext()) {
-				JSONObject jsonKategori = iterator.next(); // each kategori
-															// info
-				KategoriBean kategori = new KategoriBean(Integer.valueOf(String
-						.valueOf(jsonKategori.get("id"))),
-						(String) jsonKategori.get("name"));
-				allResults3.add(kategori);
+				/** Suppress warning for Compilation level */
+				@SuppressWarnings("unchecked")
+				Iterator<JSONObject> iterator = infoKategori.iterator();
+				while (iterator.hasNext()) {
+					JSONObject jsonKategori = iterator.next(); // each kategori
+					// info
+					KategoriBean kategori = new KategoriBean(
+							Integer.valueOf(String.valueOf(jsonKategori
+									.get("id"))),
+							(String) jsonKategori.get("name"));
+					allResults3.add(kategori);
+				}
 			}
+
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		/** End of WebService for retrieving list of Kategori */
-
+		
 		for (int i = 0; i < allResults3.size(); i++) {
 			ArrayList<Integer> searchResults = new ArrayList<Integer>();
 
 			/** Set WebService (REST) for retrieving list of Item Rank */
 			WebService _rank = new WebService(hostname + "baranguser");
 			_rank.addParam("action", "homeRank");
+			_rank.addParam("id", String.valueOf(allResults3.get(i).getId()));
 			_rank.addHeader("GData-Version", "2");
 
 			try {
@@ -207,16 +215,19 @@ public class Index extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				JSONArray infoRank = (JSONArray) mainJSON.get("data"); // Get
-																		// info
 
-				/** Suppress warning for Compilation level */
-				@SuppressWarnings("unchecked")
-				Iterator<JSONObject> iterator = infoRank.iterator();
-				while (iterator.hasNext()) {
-					JSONObject jsonRank = iterator.next(); // each rank info
-					searchResults.add(Integer.valueOf(String.valueOf(jsonRank
-							.get("id"))));
+				if (mainJSON.get("status").equals("true")) {
+					JSONArray infoRank = (JSONArray) mainJSON.get("data"); // Get
+					// info
+
+					/** Suppress warning for Compilation level */
+					@SuppressWarnings("unchecked")
+					Iterator<JSONObject> iterator = infoRank.iterator();
+					while (iterator.hasNext()) {
+						JSONObject jsonRank = iterator.next(); // each rank info
+						searchResults.add(Integer.valueOf(String
+								.valueOf(jsonRank.get("id"))));
+					}
 				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

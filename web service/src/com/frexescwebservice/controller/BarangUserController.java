@@ -72,7 +72,7 @@ public class BarangUserController extends HttpServlet {
 				if (allResults.size() > 0) {
 					for (int i = 0; i < allResults.size(); i++) {
 						JSONObject jsons = new JSONObject();
-						json.put("id", allResults.get(i));
+						jsons.put("id", allResults.get(i));
 						returnResult.add(jsons);
 					}
 					json.put("status", "true");
