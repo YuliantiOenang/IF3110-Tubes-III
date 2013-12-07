@@ -131,7 +131,50 @@ public class BarangUserController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (requestType.equals("read")) {
+			Long id = Long.parseLong(request.getParameter("id"));
+			JSONObject json = new JSONObject();
 
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "SELECT * FROM barang_user WHERE id=" + id;
+
+			try {
+				ResultSet rss = connection.createStatement()
+						.executeQuery(query);
+
+				ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
+
+				while (rss.next()) {
+					BarangUserBean barang = new BarangUserBean(Long.valueOf(rss
+							.getString("id")), Long.valueOf(rss
+							.getString("id_barang")), Long.valueOf(rss
+							.getString("id_user")), Integer.valueOf(rss
+							.getString("status")), Integer.valueOf(rss
+							.getString("jumlah_barang")),
+							rss.getString("deskripsi_tambahan"));
+					allResults.add(barang);
+				}
+
+				/** ArrayList for storing JSONObject */
+				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
+
+				if (allResults.size() > 0) {
+					for (int i = 0; i < allResults.size(); i++) {
+						returnResult.add(allResults.get(i).toJSON());
+					}
+					json.put("status", "true");
+					json.put("data", returnResult);
+				} else {
+					json.put("status", "false");
+				}
+
+				out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -142,6 +185,29 @@ public class BarangUserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String requestType = request.getParameter("action");
+
+		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+
+		if (requestType.equals("updateCart")) {
+			Long id = Long.parseLong(request.getParameter("id"));
+			Integer new_value = Integer.parseInt(request
+					.getParameter("new_value"));
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "UPDATE barang_user SET jumlah_barang=" // update
+					// barang_user
+					+ new_value + " WHERE id=" + id;
+			try {
+				connection.createStatement().executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

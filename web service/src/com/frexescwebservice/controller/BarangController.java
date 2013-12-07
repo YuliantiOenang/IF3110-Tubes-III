@@ -280,6 +280,29 @@ public class BarangController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String requestType = request.getParameter("action");
+
+		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+
+		if (requestType.equals("updateCart")) {
+			Long id = Long.parseLong(request.getParameter("id"));
+			Integer new_value = Integer.parseInt(request
+					.getParameter("new_value"));
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "UPDATE barang SET jumlah_barang=" // update
+					// stock
+					+ new_value + " WHERE id=" + id;
+			try {
+				connection.createStatement().executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
