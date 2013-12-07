@@ -100,9 +100,11 @@ public class AccountController extends HttpServlet {
         for (String data : datas) {
             System.out.println(data);
             String[] tuple = data.split("=");
-            String key = URLDecoder.decode(tuple[0], "UTF-8");
-            String value = URLDecoder.decode(tuple[1], "UTF-8");
-            map.put(key, value);
+            if (tuple.length > 1) {
+                String key = URLDecoder.decode(tuple[0], "UTF-8");
+                String value = URLDecoder.decode(tuple[1], "UTF-8");
+                map.put(key, value);
+            }
         }
         
         Integer id = Integer.parseInt(map.get("id"));
