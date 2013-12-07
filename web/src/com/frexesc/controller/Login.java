@@ -1,6 +1,7 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -44,6 +45,7 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		String username;
 		String password;
+		PrintWriter out = response.getWriter();
 		if (request.getAttribute("register") == null) {
 			username = request.getParameter("username");
 			password = request.getParameter("password");
@@ -66,15 +68,16 @@ public class Login extends HttpServlet {
 		try {
 			_user.execute(WebService.REQUEST_METHOD.POST);
 			String user = _user.getResponse();
-			
+			out.println(user);
+			out.println("jamban");
 			JSONParser parser = new JSONParser();
 			JSONObject mainJSON = null;
 			try {
 				mainJSON = (JSONObject) parser.parse(user);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			if (mainJSON.get("status").toString().equals("true")) {
 				JSONObject data = (JSONObject) mainJSON.get("data"); // Get
 				
