@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
-import com.frexesc.service.WebService;
 
 /**
  * 
@@ -87,24 +86,12 @@ public class Index extends HttpServlet {
 
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
-	
 
 		PrintWriter out = response.getWriter();
-		
-		/** Set WebService for retrieving list of Barang */
-		WebService _barang = new WebService(hostname + "barang");
-		_barang.addParam("action", "action");
-		_barang.addHeader("GData-Version", "2");
-		
-		try {
-			_barang.execute(WebService.REQUEST_METHOD.GET);
-			String listBarang = _barang.getResponse();
-			out.println(listBarang);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		/** End of WebService for retrieving list of Barang */
+		out.println(dbConnection.test);
+		out.println(dbConnection.url);
+		out.println(dbConnection.username);
+		out.println(dbConnection.password);
 
 		String query2 = "SELECT * FROM barang";
 		String query3 = "SELECT * FROM kategori";
@@ -184,9 +171,9 @@ public class Index extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		RequestDispatcher dispatcher;
-		dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-	//	dispatcher.forward(request, response);
+		//RequestDispatcher dispatcher;
+		//dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+		//dispatcher.forward(request, response);
 	}
 
 	/**

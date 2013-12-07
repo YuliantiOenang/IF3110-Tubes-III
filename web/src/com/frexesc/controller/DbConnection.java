@@ -20,7 +20,8 @@ public class DbConnection {
 	public String password = " ";
 	public String test = "";
 	
-	public DbConnection() {
+	public DbConnection() {}
+	public DbConnection(int x) {
 
 		/** Get VCAP_SERVICES from Web Service */
 		String vcapServices = java.lang.System.getenv("VCAP_SERVICES");

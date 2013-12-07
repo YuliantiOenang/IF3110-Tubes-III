@@ -1,11 +1,21 @@
 package com.frexescwebservice.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+
+import com.frexescwebservice.model.BarangBean;
+import com.frexescwebservice.model.UserBean;
 
 /**
  * 
@@ -30,6 +40,60 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+String requestType = request.getParameter("action");
+		
+//		PrintWriter out = response.getWriter(); // for writer
+//		
+//		if (requestType.equals("readAll")) {
+//			JSONObject json = new JSONObject();
+//			
+//			DbConnection dbConnection = new DbConnection();
+//			Connection connection = dbConnection.mySqlConnection();
+//			
+//			String query = "SELECT * FROM user";
+//			
+//			try {
+//				ResultSet rs2 = connection.createStatement().executeQuery(query);
+//				ArrayList<UserBean> allResults2 = new ArrayList<UserBean>();
+//
+////				while (rs2.next()) {
+////					UserBean user = new UserBean(
+////							rs2.getString("username"),
+////							rs2.getString("password"),
+////							rs2.getString("email"),
+////							rs2.getString("name"),
+////							rs2.getString("handphone"),
+////							rs2.getString("alamat"),
+////							rs2.getString("provinsi"),
+////							rs2.getString("kota"),
+////							rs2.getString("kodepos"),
+////							
+////							Integer.valueOf(rs2.getString("role"))
+////							
+////							);
+////					allResults2.add(barang);
+////				}
+//				
+//				/** ArrayList for storing JSONObject */
+//				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
+//				
+//				if (allResults2.size() > 0) {
+//					for (int i = 0; i < allResults2.size(); i++) {
+//						returnResult.add(allResults2.get(i).toJSON());
+//					}
+//					json.put("status", "true");
+//					json.put("data",  returnResult);
+//				} else {
+//					json.put("status", "false");
+//				}
+//				
+//	            out.println(json.toString());
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//		}
 	}
 	
 	/**
