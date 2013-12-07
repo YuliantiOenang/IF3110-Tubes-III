@@ -110,7 +110,7 @@
   </servlet-mapping>
   <servlet>
   	<servlet-name>profileController</servlet-name>
-  	<servlet-class>userController.ProfileConroller</servlet-class>
+  	<servlet-class>userController.ProfileController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>profileController</servlet-name>
@@ -118,5 +118,18 @@
   	<url-pattern>/profile/index</url-pattern>
   	<url-pattern>/thelastruserba/profile</url-pattern>
   	<url-pattern>/profile</url-pattern>
+  	<url-pattern>/thelastruserba/profile/index/</url-pattern>
+  	<url-pattern>/profile/index/</url-pattern>
+  	<url-pattern>/thelastruserba/profile/</url-pattern>
+  	<url-pattern>/profile/</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>profileEditController</servlet-name>
+  	<servlet-class>userController.ProfilEditController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>profileEditController</servlet-name>
+  	<url-pattern>/thelastruserba/profile/edit</url-pattern>
+  	<url-pattern>/profile/edit</url-pattern>
   </servlet-mapping>
 </web-app>

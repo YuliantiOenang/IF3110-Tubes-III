@@ -2,8 +2,6 @@ package userController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import javaModel.Helper;
 import javaModel.Profile;
 
 import javax.servlet.ServletException;
@@ -27,24 +25,16 @@ public class ProfileController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter();
-//		if (request.getParameter("ignore")==null)
-//			if (!Helper.isCreditCard(request.getSession())) {
-//				response.sendRedirect("/ruserba/profile/credit");
-//				return;
-//			}
-//		String username = Helper.getUserLogged(request.getSession());
-//		if (username.isEmpty()) {
-//			response.sendRedirect("/ruserba/register");
-//			return;
-//		}
-		String username = (String) request.getAttribute("username");
+		String username = request.getParameter("username");
+		System.out.println(username);
 		String q = "select * from account where username = '" + username  + "' limit 1";
 		Profile P = new Profile(DBA);
 		P.executeQuery(q);
 		String result = null;
 		try {
-			JSONObject json = new JSONObject().put("nam_lengkap", P.nama.get(0));
+			JSONObject json = new JSONObject().put("nama_lengkap", P.nama.get(0));
 			json.put("username", P.username.get(0));
 			json.put("email", P.email.get(0));
 			json.put("provinsi", P.provinsi.get(0));

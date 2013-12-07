@@ -2,8 +2,6 @@ package userController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import javaModel.Helper;
 import javaModel.Profile;
 
 import javax.servlet.ServletException;
@@ -24,12 +22,9 @@ public class ProfilEditController extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter();
-		String username = Helper.getUserLogged(request.getSession());
-		if (username.isEmpty()) {
-			response.sendRedirect("/ruserba/register");
-			return;
-		}
+		String username = request.getParameter("username");
 		String q = "select * from account where username = '" + username  + "' limit 1";
 		Profile P = new Profile(DBA);
 		P.executeQuery(q);
@@ -43,7 +38,6 @@ public class ProfilEditController extends HttpServlet {
 			json.put("no_telp", P.telepon.get(0));
 			json.put("alamat", P.alamat.get(0));
 			json.put("kode_pos", P.kodepos.get(0));
-			json.put("transaksi", P.transaksi.get(0));
 			result = json.toString();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -60,7 +54,9 @@ public class ProfilEditController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = Helper.getUserLogged(request.getSession());
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		// String username = Helper.getUserLogged(request.getSession());
+		String username = request.getParameter("username");
 		String prof_nama = request.getParameter("prof_nama");
 		String prof_password = request.getParameter("prof_password");
 		String prof_alamat = request.getParameter("prof_alamat");
@@ -75,7 +71,9 @@ public class ProfilEditController extends HttpServlet {
         
         Query += " WHERE username = '" + username + "'";
         DBA.insertQuery(Query);
-        response.sendRedirect("/ruserba/profile");
+        PrintWriter out = response.getWriter();
+        out.print("{\"status\":\"success\"}");
+        out.close();
 	}
 
 }
