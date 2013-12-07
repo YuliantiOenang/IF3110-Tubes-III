@@ -11,7 +11,7 @@
 
         
         <message name='response'>
-        <part name='result' type='xsd:result'/>
+        <part name='result' type='xsd:string'/>
         </message>
 		
         <message name='createUserRequest'>
