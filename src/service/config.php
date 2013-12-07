@@ -1,5 +1,10 @@
 <?php
 
+//  tobe deleted
+
+header('Pragma: no-cache');
+header('Cache-Control: s-maxage=0, max-age=0, must-revalidate, no-cache');
+
 /*** Service Configuration ***/
 
 /** Database Parameter **/

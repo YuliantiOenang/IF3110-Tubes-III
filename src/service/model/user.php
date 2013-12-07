@@ -1,6 +1,6 @@
 <?php
 
-require_once "config.php";
+require_once "../config.php";
 
 // model: username, password, email, nama_lengkap, alamat, provinsi, kota, kodepos, telepon, jumlah_transaksi, has_card, role
 // db : username, password, email, nama_lengkap, alamat, provinsi, kota, kodepos, telepon, jumlah_transaksi, role, card_name, card_number, card_date
