@@ -2,12 +2,12 @@ package dto;
 
 import java.util.ArrayList;
 
-public class Kategori {
+public class Category {
 	private int id;
 	private String name;
 	private ArrayList<Barang> itemList;
 
-	public Kategori(int id, String name) {
+	public Category(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;

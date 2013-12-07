@@ -12,13 +12,13 @@ import model.AccessManager;
 
 import dto.Course;
 
-@Path("/courseService")
-public class CourseService
+@Path("/userService")
+public class UserService
 {
 	@GET
-	@Path("/courses")
+	@Path("/users")
 	@Produces("application/json")
-	public String courses()
+	public String users()
 	{
 		String courses = null;
 		ArrayList<Course> courseList = new ArrayList<Course>();

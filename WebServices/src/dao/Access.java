@@ -31,6 +31,5 @@ public class Access
 			e.printStackTrace();
 		}
 		return courseList;
-		
 	}
 }
