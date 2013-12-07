@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.HashMap;
-
 import javaModel.Account;
 
 import javax.servlet.ServletException;
@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import Config.GlobalConfig;
 
 /**
  * Servlet implementation class AccountController
@@ -39,7 +38,7 @@ public class AccountController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
-        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
         try {
             Integer id = Integer.parseInt(request.getParameter("id"));
@@ -69,7 +68,7 @@ public class AccountController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
-        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -92,45 +91,57 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-        resp.setHeader("Access-Control-Allow-Origin","*");
+        resp.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = resp.getWriter();
         BufferedReader in = new BufferedReader(new InputStreamReader(req.getInputStream()));
         String input = in.readLine();
         String[] datas = input.split("&");
         HashMap<String, String> map = new HashMap<String, String>();
-        for (String data : datas)
-        {
-        	System.out.println(data);
-        	String[] tuple = data.split("=");
-        	map.put(tuple[0], tuple[1]);
+        for (String data : datas) {
+            System.out.println(data);
+            String[] tuple = data.split("=");
+            String key = URLDecoder.decode(tuple[0], "UTF-8");
+            String value = URLDecoder.decode(tuple[1], "UTF-8");
+            map.put(key, value);
         }
-        Integer id = Integer.parseInt(map.get("id"));
         
+        Integer id = Integer.parseInt(map.get("id"));
         Account user = Account.findByPk(id);
         try {
             if (user != null) {
-                //parameter atribut account
-                user.username = map.get("username");
-                user.password = map.get("password");
-                user.nama = map.get("nama");
-                user.email = map.get("email");
-                user.alamat = map.get("alamat");
-                user.provinsi = map.get("provinsi");
-                user.kota = map.get("kota");
-                user.kodepos = map.get("kodepos");
-                user.telepon = map.get("telepon");
-                user.role = Integer.parseInt(map.get("role"));
-                user.transaksi = Integer.parseInt(map.get("telepon"));
+                // parameter atribut account
+                // user.username = map.get("username");
+                if (map.get("password")!=null)
+                    user.password = map.get("password");
+                if (map.get("nama")!=null)
+                    user.nama = map.get("nama");
+                // user.email = map.get("email");
+                if (map.get("alamat")!=null)
+                    user.alamat = map.get("alamat");
+                if (map.get("provinsi")!=null)
+                    user.provinsi = map.get("provinsi");
+                if (map.get("kota")!=null)
+                    user.kota = map.get("kota");
+                if (map.get("kodepos")!=null)
+                    user.kodepos = map.get("kodepos");
+                if (map.get("telepon")!=null)
+                    user.telepon = map.get("telepon");
+                // user.role = Integer.parseInt(map.get("role"));
+                if (map.get("transaksi")!=null)
+                    user.transaksi = Integer.parseInt(map.get("transaksi"));
+                System.out.println(user.kota);
                 user.save();
                 JSONObject json = new JSONObject();
-                json.put("status", "true");
-                out.println(json.toString());
+                json.put("status", true);
+                out.write(json.toString());
             } else {
-                out.println("{\"status\":\"false\"}");
+                JSONObject json = new JSONObject();
+                json.put("status", false);
+                out.write(json.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         out.close();
-	}
+    }
 }

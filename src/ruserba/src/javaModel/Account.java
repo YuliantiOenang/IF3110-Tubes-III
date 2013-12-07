@@ -96,6 +96,7 @@ public class Account {
             query = "INSERT INTO account (username, password, nama, email, alamat, provinsi, kota, kodepos, telepon, auth_key, role, transaksi) VALUES ('" + username  + "', '" + password  + "', '" + nama  + "', '" + email  + "', '" + alamat  + "', '" + provinsi  + "', '" + kota  + "', '" + kodepos  + "', '" + telepon  + "', '" + auth_key  + "', '" + role  + "', '" + transaksi  + "')";
         else
             query = "UPDATE account SET username = '" + username + "', password = '" + password + "', nama = '" + nama + "', email = '" + email + "', alamat = '" + alamat + "', provinsi = '" + provinsi + "', kota = '" + kota + "', kodepos = '" + kodepos + "', telepon = '" + telepon + "', auth_key = '" + auth_key + "', role = '" + role + "', transaksi = '" + transaksi + "' WHERE id = " + id;
+        DBA = new DatabaseAdapter();
         DBA.insertQuery(query);
         DBA.endQuery();
     }
@@ -103,7 +104,9 @@ public class Account {
     // delete account from db
     public void delete() {
         String query = "DELETE FROM account WHERE id=" + id;
+        DBA = new DatabaseAdapter();
         DBA.deleteQuery(query);
+        DBA.endQuery();
     }
     
     public JSONObject toJSON() {
