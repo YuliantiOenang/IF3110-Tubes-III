@@ -1,5 +1,6 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="tubesII.wbd.GlobalConfig" %>
 <%@ include file= "./header.jsp" %>
 <div id="content" class="float_l">
  <%
@@ -42,9 +43,18 @@
  
  try {
 	  //Load the JDBC driver
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
+	  		/*
+	  		OLD :
+	  			String uname = "root";
+				String pass = "";
+				String url = "jdbc:mysql://localhost/progin_13511059";
+	  		*/
+			// New "Sample"
+			GlobalConfig GC=new GlobalConfig();
+	  		String uname = GC.getuser();
+			String pass = GC.getpass();
+			String url = GC.geturl();
+	  		
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 	        Connection con = DriverManager.getConnection (url, uname, pass);
 		
