@@ -1,10 +1,8 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.BarangUserBean;
+import com.frexesc.service.WebService;
 
 /**
  * 
@@ -45,56 +49,121 @@ public class Cart extends HttpServlet {
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");
 		} else {
-			DbConnection dbConnection = new DbConnection();
-			Connection connection = dbConnection.mySqlConnection();
-
-			String query = "SELECT * FROM barang_user WHERE id_user="
-					+ session.getAttribute("user_id") + " AND status=0";
-			String query2 = "SELECT * FROM barang";
+			ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
+			/** Set WebService (REST) for retrieving list of Barang User */
+			WebService _barangUser = new WebService(hostname + "baranguser");
+			_barangUser.addParam("action", "readAll");
+			_barangUser.addParam("user_id",
+					String.valueOf(session.getAttribute("user_id")));
+			_barangUser.addHeader("GData-Version", "2");
 
 			try {
-				ResultSet rs = connection.createStatement().executeQuery(query);
+				_barangUser.execute(WebService.REQUEST_METHOD.GET);
+				String listBarangUser = _barangUser.getResponse();
 
-				ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
-
-				while (rs.next()) {
-					BarangUserBean barangUser = new BarangUserBean(
-							Integer.valueOf(rs.getString("id")),
-							Integer.valueOf(rs.getString("id_barang")),
-							Integer.valueOf(rs.getString("id_user")),
-							Integer.valueOf(rs.getString("status")),
-							Integer.valueOf(rs.getString("jumlah_barang")),
-							rs.getString("deskripsi_tambahan"));
-					allResults.add(barangUser);
+				/*
+				 * JSON Parser, using json_simple-1.1.jar
+				 */
+				JSONParser parser = new JSONParser();
+				JSONObject mainJSON = null;
+				try {
+					mainJSON = (JSONObject) parser.parse(listBarangUser);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 
-				ResultSet rs2 = connection.createStatement().executeQuery(
-						query2);
-				ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+				if (mainJSON.get("status") == "true") {
+					JSONArray infoBarangUser = (JSONArray) mainJSON.get("data"); // Get
+					// info
 
-				while (rs2.next()) {
-					BarangBean barang = new BarangBean(Integer.valueOf(rs2
-							.getString("id")), Integer.valueOf(rs2
-							.getString("id_kategori")),
-							rs2.getString("nama_barang"),
-							rs2.getString("gambar"), Integer.valueOf(rs2
-									.getString("harga_barang")),
-							rs2.getString("keterangan"), Integer.valueOf(rs2
-									.getString("jumlah_barang")));
-					allResults2.add(barang);
+					/** Suppress warning for Compilation level */
+					@SuppressWarnings("unchecked")
+					Iterator<JSONObject> iterator = infoBarangUser.iterator();
+					while (iterator.hasNext()) {
+						JSONObject jsonBarangUser = iterator.next(); // each
+																		// barang
+						// user info
+						BarangUserBean barangUser = new BarangUserBean(
+								(Long) jsonBarangUser.get("id"),
+								(Long) jsonBarangUser.get("id_item"),
+								(Long) jsonBarangUser.get("id_user"),
+								Integer.valueOf(String.valueOf(jsonBarangUser
+										.get("status"))),
+								Integer.valueOf(String.valueOf(jsonBarangUser
+										.get("total_item"))),
+								(String) jsonBarangUser.get("desicription"));
+
+						allResults.add(barangUser);
+					}
 				}
 
-				request.setAttribute("user_items", allResults);
-				request.setAttribute("items", allResults2);
-
-				RequestDispatcher dispatcher = getServletContext()
-						.getRequestDispatcher("/barang/cart.jsp");
-				dispatcher.forward(request, response);
-
-			} catch (SQLException e) {
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
+			/** End of WebService for retrieving list of Barang User */
+
+			ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+
+			/** Set WebService (REST) for retrieving list of Barang */
+			WebService _barang = new WebService(hostname + "barang");
+			_barang.addParam("action", "readAll");
+			_barang.addHeader("GData-Version", "2");
+
+			try {
+				_barang.execute(WebService.REQUEST_METHOD.GET);
+				String listBarang = _barang.getResponse();
+
+				/*
+				 * JSON Parser, using json_simple-1.1.jar
+				 */
+				JSONParser parser = new JSONParser();
+				JSONObject mainJSON = null;
+				try {
+					mainJSON = (JSONObject) parser.parse(listBarang);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if (mainJSON.get("status") == "true") {
+					JSONArray infoBarang = (JSONArray) mainJSON.get("data"); // Get
+					// info
+
+					/** Suppress warning for Compilation level */
+					@SuppressWarnings("unchecked")
+					Iterator<JSONObject> iterator = infoBarang.iterator();
+					while (iterator.hasNext()) {
+						JSONObject jsonBarang = iterator.next(); // each barang
+																	// info
+						BarangBean barang = new BarangBean(
+								(Long) jsonBarang.get("id"),
+								(Long) jsonBarang.get("id_category"),
+								(String) jsonBarang.get("name"),
+								(String) jsonBarang.get("picture"),
+								Integer.valueOf(String.valueOf(jsonBarang
+										.get("price"))),
+								(String) jsonBarang.get("description"),
+								Integer.valueOf(String.valueOf(jsonBarang
+										.get("total_item"))));
+						allResults2.add(barang);
+					}
+				}
+
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			/** End of WebService for retrieving list of Barang */
+
+			request.setAttribute("user_items", allResults);
+			request.setAttribute("items", allResults2);
+
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher("/barang/cart.jsp");
+			dispatcher.forward(request, response);
+
 		}
 
 	}

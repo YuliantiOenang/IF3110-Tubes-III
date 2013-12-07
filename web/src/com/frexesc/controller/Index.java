@@ -60,7 +60,6 @@ public class Index extends HttpServlet {
 		String userid = null;
 		String username = null;
 		String role = null;
-		
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
 				Cookie cookie = cookies[i];
@@ -76,6 +75,7 @@ public class Index extends HttpServlet {
 				}
 			}
 		}
+		
 //		if (isLogin && sessions.getAttribute("user_id") == null) {
 //			try {
 //				ResultSet rs = new DbConnection()

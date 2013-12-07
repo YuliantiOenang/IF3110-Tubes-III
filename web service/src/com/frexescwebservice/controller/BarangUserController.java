@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import com.frexescwebservice.model.BarangUserBean;
+
 /**
  * 
  * Servlet implementation class BarangUser Controller
@@ -84,6 +86,52 @@ public class BarangUserController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (requestType.equals("readAll")) {
+			Long id = Long.parseLong(request.getParameter("user_id"));
+			JSONObject json = new JSONObject();
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "SELECT * FROM barang_user WHERE id_user=" + id
+					+ " AND status=0";
+
+			try {
+				ResultSet rss = connection.createStatement()
+						.executeQuery(query);
+
+				ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
+
+				while (rss.next()) {
+					BarangUserBean barang = new BarangUserBean(Long.valueOf(rss
+							.getString("id")), Long.valueOf(rss
+							.getString("id_barang")), Long.valueOf(rss
+							.getString("id_user")), Integer.valueOf(rss
+							.getString("status")), Integer.valueOf(rss
+							.getString("jumlah_barang")),
+							rss.getString("deskripsi_tambahan"));
+					allResults.add(barang);
+				}
+
+				/** ArrayList for storing JSONObject */
+				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
+
+				if (allResults.size() > 0) {
+					for (int i = 0; i < allResults.size(); i++) {
+						returnResult.add(allResults.get(i).toJSON());
+					}
+					json.put("status", "true");
+					json.put("data", returnResult);
+				} else {
+					json.put("status", "false");
+				}
+
+				out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 
