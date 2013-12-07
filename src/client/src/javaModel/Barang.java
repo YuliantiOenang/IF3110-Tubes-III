@@ -1,7 +1,14 @@
 package javaModel;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import org.apache.http.HttpException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import databaseLib.DatabaseAdapter;
 
@@ -40,7 +47,35 @@ public class Barang {
 			}
 		}catch (Exception e){}
 	}
-	
+	public void findTopThreeRest() {
+        String output = "";
+        try {
+            output = RestClient.doGet("barang?action=readTopThree");
+        } catch (HttpException | IOException | URISyntaxException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        JSONObject json;
+        try {
+            json = new JSONObject(output);
+            if (json.getBoolean("status")) {
+                JSONArray data = (JSONArray) json.get("data");
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject brg = (JSONObject) data.get(i);
+                    id.add(brg.get("id").toString());
+                    nama.add(brg.get("nama").toString());
+                    harga.add(brg.get("harga").toString());
+                    gambar.add(brg.get("gambar").toString());
+                    stok.add(brg.get("stok").toString());
+                    counter.add(brg.get("counter").toString());
+                    keterangan.add(brg.get("keterangan").toString());
+                    id_kat.add(brg.get("id_kategori").toString());
+                }
+            }   
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 	public void executeQuery2(String query)
 	{
 		DBA.executeQuery(query);

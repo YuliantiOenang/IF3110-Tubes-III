@@ -79,7 +79,7 @@ public class ProfileEditController extends HttpServlet {
         // Query += " WHERE username = '" + username + "'";
         // DBA.insertQuery(Query);
 
-        //response.sendRedirect("/ruserba/profile");
+        response.sendRedirect("/ruserba/profile");
     }
 
 }

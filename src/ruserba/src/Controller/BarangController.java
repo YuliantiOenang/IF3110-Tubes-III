@@ -65,7 +65,18 @@ public class BarangController extends HttpServlet {
                 } else {
                     out.println("{\"status\":\"false\"}");
                 }
-    	    }
+    	    }  else if (action.equals("readTopThree")) {
+    	        ArrayList<JSONObject> jsons = new ArrayList<JSONObject>();
+    	        JSONObject json = new JSONObject();
+    	        json.put("status", "true");
+                for (int i = 1; i <= 3; i++) {
+                    ArrayList<Barang> barangs = Barang.findAll("SELECT * FROM barang WHERE id_kategori = '" + i + "' ORDER BY counter DESC LIMIT 0, 4");
+                    for (Barang barang : barangs)
+                        jsons.add(barang.toJSON());
+                }
+                json.put("data", new JSONArray(jsons));
+                out.println(json.toString());
+            }
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }

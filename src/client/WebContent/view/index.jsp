@@ -116,21 +116,21 @@
 		}
 	</script>
 	
-	<% 	Kategori K = ((Kategori) request.getAttribute("kategoris")); 
-		Map<Integer, Barang> topbarangs = ((Map<Integer, Barang>) request.getAttribute("topbarangs"));
-		for(int i = 0; i < K.id.size(); i++) { %>
+	<% 	Kategori K = Helper.findAllKategori(); 
+		Barang topbarangs = ((Barang) request.getAttribute("topbarangs"));
+		for(int i = 0; i < 3; i++) { %>
 		
 		<div onmouseover='setRun(false,<%= i+1 %>)' onmouseout='setRun(true,<%= i+1 %>)' class='home_categori <%= (i != 0)?"hidden":"" %>' id='cont<%= i+1 %>'>
 			<h1 class='header'><%= K.nama_kategori.get(i) %></h1>
 			<div class="triplebest">
-				<% Barang B = topbarangs.get(Integer.parseInt(K.id.get(i))); %>
-				<% System.out.println("Hello world "+B.id.size()); %>
-				<% for (int j = 0; j < B.id.size(); j++) { %>
-					<a href="/ruserba/barang/detail?id=<%= B.id.get(j) %>">
-						<div class="best">
-							<img alt="" title="<%= B.nama.get(j) %>  (<%= B.harga.get(j) %>)" onload="fitBest(this)" src="images/barang/<%= B.gambar.get(j) %>" />
-						</div>
-					</a>	
+				<% for (int s = 0; s < topbarangs.id.size(); s++) {%>
+					<% if (Integer.parseInt(topbarangs.id_kat.get(s)) == i+1) { %>
+						<a href="/ruserba/barang/detail?id=<%= topbarangs.id.get(s) %>">
+							<div class="best">
+								<img alt="" title="<%= topbarangs.nama.get(s) %>  (<%= topbarangs.harga.get(s) %>)" onload="fitBest(this)" src="images/barang/<%= topbarangs.gambar.get(s) %>" />
+							</div>
+						</a>
+					<% } %>	
 				<% } %>
 			</div>
 		</div>

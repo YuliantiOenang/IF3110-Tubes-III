@@ -43,19 +43,13 @@ public class IndexController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Config.GlobalConfig.cekLogin(request, response);
-		Kategori K = Helper.findAllKategori();
-		request.setAttribute("kategoris", K);
 		request.setAttribute("effect", !(Boolean.parseBoolean(request.getParameter("e"))));
 		
-		Map<Integer, Barang> topbarangs = new HashMap();
-		for(int i = 0; i < K.id.size(); i++) {
-			String q = "select * from barang where id_kategori = "+K.id.get(i)+" order by counter desc limit 0, 4";
-			Barang B = new Barang(DBA);
-			B.executeQuery(q);
-			topbarangs.put(Integer.parseInt(K.id.get(i)), B);
-		}
+		Map<Integer, Barang> topbarangs = new HashMap<Integer, Barang>();
+		Barang B = new Barang(DBA);
+		B.findTopThreeRest();
 		
-		request.setAttribute("topbarangs", topbarangs);
+		request.setAttribute("topbarangs", B);
 		
 		request.setAttribute("includeJspContent", "index.jsp");
 		request.getRequestDispatcher("/view/layout.jsp").forward(request, response);
