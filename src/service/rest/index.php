@@ -25,6 +25,9 @@ class ShopRestHandler extends RestHandler{
 			case 'logout':
 				$response = logout(@$data["username"], @$data["token"]);
 			break;
+			case 'test':
+				$response = array("status" => "ok", "method" => "POST", "url" => $urlpart, "data" => $data);
+			break;
 		}
 		
 		echo json_encode($response);
@@ -44,6 +47,9 @@ class ShopRestHandler extends RestHandler{
 				}else{
 					$response = edit_user(@$urlpart[1], @$data["user"], @$data["token"]);
 				}
+			break;
+			case 'test':
+				$response = array("status" => "ok", "method" => "PUT", "url" => $urlpart, "data" => $data);
 			break;
 		}
 		
@@ -82,6 +88,9 @@ class ShopRestHandler extends RestHandler{
 					$response = get_user(@$urlpart[1], $data["token"]);
 				}
 			break;
+			case 'test':
+				$response = array("status" => "ok", "method" => "GET", "url" => $urlpart, "data" => $data);
+			break;
 		}
 		
 		echo json_encode($response);
@@ -94,6 +103,9 @@ class ShopRestHandler extends RestHandler{
 		switch(@$urlpart[0]){
 			case 'barang':
 				$response = del_barang(@$data["ids"], @$data["token"]);
+			break;
+			case 'test':
+				$response = array("status" => "ok", "method" => "DELETE", "url" => $urlpart, "data" => $data);
 			break;
 		}
 		
