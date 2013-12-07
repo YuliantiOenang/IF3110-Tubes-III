@@ -27,14 +27,14 @@ import kelas.Barang;
 /**
  * Servlet implementation class listBarang
  */
-@WebServlet("/listBarang")
-public class listBarang extends HttpServlet {
+@WebServlet("/Actions")
+public class Actions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public listBarang() {
+    public Actions() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -188,6 +188,32 @@ public class listBarang extends HttpServlet {
 	            }
 	    	}
 	    	JSONresp.put("total", (Integer) total);   
+	    } else if(data.get("action").equals("detail")){
+	    	Driver asdf = new Driver();
+	    	
+	    	try{
+	            Connection koneksion = asdf.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
+		    	
+	            int barangId = ((Long) data.get("gid")).intValue();
+		    	String query = "SELECT * FROM inventori NATURAL JOIN kategori WHERE id_inventori = " + barangId;
+	        	PreparedStatement asd = koneksion.prepareStatement(query);
+	            ResultSet f = asd.executeQuery();
+	            
+	            JSONObject tmp2 = new JSONObject();
+	            while(f.next()){
+	            	tmp2.put("nama_inventori", f.getString("nama_inventori"));
+	            	tmp2.put("id_kategori", f.getInt("id_kategori"));
+	            	tmp2.put("id_inventori", f.getInt("id_inventori"));
+	            	tmp2.put("description", f.getString("description"));
+	            	tmp2.put("harga", f.getInt("harga"));
+	            	tmp2.put("gambar", f.getString("gambar"));
+	            	tmp2.put("jumlah", f.getInt("jumlah"));
+	            }
+	            
+	            JSONresp.put("data", tmp2);
+	    	} catch(Exception e){
+	    		e.printStackTrace();
+	    	}
 	    }
 	    
 		response.setHeader("Access-Control-Allow-Origin", "*");

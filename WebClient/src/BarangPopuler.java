@@ -56,7 +56,7 @@ public class BarangPopuler extends HttpServlet {
 		data.put("action", "favourite");
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/listBarang");
+		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
 		
 		httppost.setEntity(new StringEntity(data.toString()));
 		CloseableHttpResponse httpresp = httpclient.execute(httppost);

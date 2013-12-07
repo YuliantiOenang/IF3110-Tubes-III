@@ -1,5 +1,6 @@
 
 
+import java.awt.Point;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,6 +12,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import kelas.Barang;
 import kelas.Database;
@@ -33,10 +46,10 @@ public class DetailBarang extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		JSONObject jsonResponse = null;
 		
-		String db = "toko_imba";
-		java.sql.Connection con = null;
+		JSONObject data = new JSONObject();
+		
 		int barangId = -1;
 		try{
 			barangId = Integer.parseInt(request.getParameter("gid"));
@@ -44,31 +57,37 @@ public class DetailBarang extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		Barang barang = null;
+		data.put("action", "detail");
+    	data.put("gid", new Integer(barangId));
+    	
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+		
+		httppost.setEntity(new StringEntity(data.toString()));
+		CloseableHttpResponse httpresp = httpclient.execute(httppost);
 		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, Database.getUser(), Database.getPass());
-			System.out.println (db+ "database successfully opened.");
-			
-			Statement state = con.createStatement();
-			ResultSet rs = state.executeQuery("SELECT * FROM inventori NATURAL JOIN kategori WHERE id_inventori = " + barangId);
-
-			while(rs.next()){
-				String name = rs.getString("nama_inventori");
-				barang = new Barang(name);
-				barang.setId_cat(rs.getInt("id_kategori"));
-				barang.setId_inven(rs.getInt("id_inventori"));
-				barang.setDesc(rs.getString("description"));
-				barang.setHarga(rs.getInt("harga"));
-				barang.setGambar(rs.getString("gambar"));
-				barang.setJumlah(rs.getInt("jumlah"));
-			}
-			
-			request.setAttribute("barang", barang);
+			HttpEntity entity = httpresp.getEntity();
+		    if (entity != null) {
+		    	String jsonresp = EntityUtils.toString(entity);
+	            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+		    }
+		} finally {
+		    httpresp.close();
+		    httpclient.close();
 		}
-		catch(SQLException | ClassNotFoundException e) {
-			System.out.println("SQLException caught: " +e.getMessage());
-		}
+		
+		JSONObject resp = (JSONObject) jsonResponse.get("data");
+		
+		String name = (String) resp.get("nama_inventori");
+		Barang barang = new Barang(name);
+		barang.setId_cat(((Long)resp.get("id_kategori")).intValue());
+		barang.setId_inven(((Long)resp.get("id_inventori")).intValue());
+		barang.setDesc((String) resp.get("description"));
+		barang.setHarga(((Long) resp.get("harga")).intValue());
+		barang.setGambar((String) resp.get("gambar"));
+		barang.setJumlah(((Long) resp.get("jumlah")).intValue());
+		
+		request.setAttribute("barang", barang);
 		
 		request.getRequestDispatcher("detail.jsp").forward(request, response);
 		

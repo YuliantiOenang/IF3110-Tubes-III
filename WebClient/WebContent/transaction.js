@@ -19,7 +19,7 @@ function validate(id_barang, id_div){
 		return;
 	}
 	
-	data = "id=" + id_barang;
+	data = "data=" + {"id":id_barang};
 	
 	//lakukan koneksi ke servlet
 	var xmlhttp;

@@ -58,7 +58,7 @@ public class showList extends HttpServlet {
 		data.put("sort_type", request.getParameter("type"));
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/listBarang");
+		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
 		
 		httppost.setEntity(new StringEntity(data.toString()));
 		CloseableHttpResponse httpresp = httpclient.execute(httppost);
