@@ -1,5 +1,6 @@
 package com.frexescwebservice.model;
 
+import org.json.simple.JSONObject;
 
 public class BarangUserBean {
 	private long id;
@@ -66,6 +67,22 @@ public class BarangUserBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@SuppressWarnings("unchecked")
+	public JSONObject toJSON() {
+		JSONObject json = new JSONObject();
+		try {
+			json.put("id", id);
+			json.put("id_item", id_item);
+			json.put("id_user", id_user);
+			json.put("status", status);
+			json.put("total_item", total_item);
+			json.put("description", description);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return json;
 	}
 
 }

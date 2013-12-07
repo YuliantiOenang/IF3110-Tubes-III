@@ -2,6 +2,8 @@ package com.frexescwebservice.model;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONObject;
+
 public class KategoriBean {
 	private int id;
 	private String name;
@@ -44,6 +46,24 @@ public class KategoriBean {
 
 	public void setItemList(BarangBean itemList) {
 		this.itemList.add(itemList);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject toJSON() {
+		JSONObject json = new JSONObject();
+		try {
+            json.put("id", id);
+            json.put("name", name);
+            /** Convert each Item to JSON */
+            ArrayList<JSONObject> itemListObject = new ArrayList<JSONObject>();
+            for (int i = 0; i < itemList.size(); i++) {
+            	itemListObject.add(itemList.get(i).toJSON());
+            }
+            json.put("itemList", itemListObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return json;
 	}
 
 }
