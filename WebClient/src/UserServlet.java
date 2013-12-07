@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.postgresql.Driver;
+
 import kelas.Database;
+
+
 
 /**
  * Servlet implementation class UserServlet
@@ -40,6 +44,7 @@ public class UserServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		if (request.getParameter("type").equals("registration")){
 			
 			// Ambil parameter request
@@ -48,6 +53,8 @@ public class UserServlet extends HttpServlet {
 			
 			// JSON Object untuk response
 			String responsetext;
+			
+			
 			
 			if (CheckUsername(username)){
 				responsetext = "1";
@@ -158,13 +165,14 @@ public class UserServlet extends HttpServlet {
 			Connection conn = null;
 			Statement stmt = null;	
 			
+			Driver drive = new Driver();
+			
 			// Coba buka koneksi
 			try{
-				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection(DBURL, USER, PASS);
+				conn = drive.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
 				
 				// Konstruksi query
-				String query = "INSERT INTO user(id,email,password,full_name,alamat,provinsi,kotakabupaten,kodepos,nomor_handphone) VALUES ('" + id + "','" + email + "','" + password + "','" + fullname + "','" + alamat + "','" + provinsi + "','" + kota + "'," + kodepos + "," + hp + ")" ;
+				String query = "INSERT INTO userr(id,email,password,full_name,alamat,provinsi,kotakabupaten,kodepos,nomor_handphone) VALUES ('" + id + "','" + email + "','" + password + "','" + fullname + "','" + alamat + "','" + provinsi + "','" + kota + "'," + kodepos + "," + hp + ")" ;
 				System.out.println(query);
 				
 				stmt = conn.createStatement();
@@ -264,17 +272,24 @@ public class UserServlet extends HttpServlet {
 	// Mengembalikan true apabila telah terdapat user dengan id Username, false bila tidak
 	private boolean CheckUsername(String Username){
 			// Variabel akses
+		
 					Connection conn = null;
 					Statement stmt = null;
 					int Result = 0;
+					System.out.println("tes0");
+					Driver driv = new Driver();
+					
 					
 					// Coba buka koneksi
 					try{
-						Class.forName("com.mysql.jdbc.Driver");
-						conn = DriverManager.getConnection(DBURL, USER, PASS);
+						
+						System.out.println("TES1");
+						conn = driv.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
+						System.out.println("TES2");
+						
 						
 						// Konstruksi query
-						String query = "SELECT COUNT(1) as hasil FROM user WHERE id = " + "'" + Username + "'";
+						String query = "SELECT COUNT(1) as hasil FROM userr WHERE id = " + "'" + Username + "'";
 						System.out.println(query);
 						
 						stmt = conn.createStatement();
@@ -311,14 +326,16 @@ public class UserServlet extends HttpServlet {
 			Connection conn = null;
 			Statement stmt = null;
 			int Result = 0;
+			Driver driv = null;
 			
 			// Coba buka koneksi
 			try{
-				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection(DBURL, USER, PASS);
+				driv = new Driver();
+				conn = driv.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
+
 				
 				// Konstruksi query
-				String query = "SELECT COUNT(1) as hasil FROM user WHERE email = " + "'" + Email + "'";
+				String query = "SELECT COUNT(1) as hasil FROM userr WHERE email = " + "'" + Email + "'";
 				System.out.println(query);
 				
 				stmt = conn.createStatement();
@@ -446,13 +463,15 @@ public class UserServlet extends HttpServlet {
 		ResultSet rs = null;
 		String responsetext = "";
 		
+		Driver driv = new Driver();
+		
 		// Coba buka koneksi
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(DBURL, USER, PASS);
+			
+			conn = driv.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
 								
 			// Konstruksi query
-			String query = "SELECT * FROM user WHERE id = '" + id + "'";
+			String query = "SELECT * FROM userr WHERE id = '" + id + "'";
 			System.out.println(query);
 								
 			stmt = conn.createStatement();
