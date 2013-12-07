@@ -23,8 +23,10 @@ public class Kategori {
     public static Kategori find(String query) {
         Kategori kategori = null;
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return kategori;
             if (result.next()) {
                 kategori = new Kategori();
                 kategori.id = Integer.parseInt(result.getString(1));
@@ -35,6 +37,8 @@ public class Kategori {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return kategori;
     }
@@ -48,8 +52,10 @@ public class Kategori {
     public static ArrayList<Kategori> findAll(String query) {
         ArrayList<Kategori> kategoris = new ArrayList<Kategori>();
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return kategoris;
             while (result.next()) {
                 Kategori kategori = new Kategori();
                 kategori.id = Integer.parseInt(result.getString(1));
@@ -61,6 +67,8 @@ public class Kategori {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return kategoris;
     }

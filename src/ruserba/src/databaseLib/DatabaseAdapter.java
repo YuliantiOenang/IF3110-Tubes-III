@@ -10,62 +10,77 @@ import Config.GlobalConfig;
 
 public class DatabaseAdapter {
 
-	private Connection con = null;  
+    private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
+
+    public DatabaseAdapter() {
+        // Koneksiin ke MySQL
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            GlobalConfig.init();
+            con = DriverManager.getConnection(GlobalConfig.URLSQL, GlobalConfig.SQLUser, GlobalConfig.SQLPass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void executeQuery(String Query) {
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(Query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertQuery(String Query) {
+        try {
+            stmt = con.createStatement();
+            stmt.execute(Query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteQuery(String Query) {
+        // khusus delete
+        try {
+            stmt = con.createStatement();
+            stmt.execute(Query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
-	public DatabaseAdapter()
-	{
-		//Koneksiin ke MySQL
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			//GlobalConfig.init();
-	  	  	con = DriverManager.getConnection(GlobalConfig.URLSQL,GlobalConfig.SQLUser,GlobalConfig.SQLPass);
-		}catch (Exception e){System.out.println(e.getMessage());}
-	}
-	
-	public void executeQuery(String Query)
-	{
-		try
-		{
-			stmt = con.createStatement();
-	  	  	rs = stmt.executeQuery(Query);
-		}catch (SQLException e){System.out.println("Error saat execute : "+e.getMessage());}
-	}
-	
-	public void insertQuery(String Query)
-	{
-		try
-		{
-			stmt = con.createStatement();
-	  	  	stmt.execute(Query);
-		}catch (SQLException e){System.out.println("Error saat execute : "+e.getMessage());}
-	}
-	
-	public void deleteQuery(String Query)
-	{
-		//khusus delete
-		try {
-			stmt = con.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			stmt.execute(Query);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public ResultSet getQueryResult(){
-		if (rs == null)
-		{
-			System.out.println("Keanehan");
-			return null;
-		}
-		else
-			return rs;
-	}
+   public void endQuery() {
+        try { 
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+            }// nothing we can do
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }// end finally try
+        }
+    }
+
+    public ResultSet getQueryResult() {
+        if (rs == null) {
+            System.out.println("Keanehan");
+            return null;
+        } else
+            return rs;
+    }
+
 }

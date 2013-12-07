@@ -22,8 +22,10 @@ public class Barang {
     public static Barang find(String query) {
         Barang barang = null;
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return barang;
             if (result.next()) {
                 barang = new Barang();
                 barang.id = Integer.parseInt(result.getString(1));
@@ -37,6 +39,8 @@ public class Barang {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return barang;
     }
@@ -50,8 +54,10 @@ public class Barang {
     public static ArrayList<Barang> findAll(String query) {
         ArrayList<Barang> barangs = new ArrayList<Barang>();
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return barangs;
             while (result.next()) {
                 Barang barang = new Barang();
                 barang.id = Integer.parseInt(result.getString(1));
@@ -66,6 +72,8 @@ public class Barang {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return barangs;
     }

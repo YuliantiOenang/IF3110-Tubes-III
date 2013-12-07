@@ -23,8 +23,10 @@ public class Kredit {
     public static Kredit find(String query) {
         Kredit kredit = null;
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return kredit;
             if (result.next()) {
                 kredit = new Kredit();
                 kredit.id = Integer.parseInt(result.getString(1));
@@ -35,6 +37,8 @@ public class Kredit {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return kredit;
     }
@@ -48,8 +52,10 @@ public class Kredit {
     public static ArrayList<Kredit> findAll(String query) {
         ArrayList<Kredit> kredits = new ArrayList<Kredit>();
         try {
+            DBA = new DatabaseAdapter();
             DBA.executeQuery(query);
             result = DBA.getQueryResult();
+            if (!result.isBeforeFirst()) return kredits;
             while (result.next()) {
                 Kredit kredit = new Kredit();
                 kredit.id = Integer.parseInt(result.getString(1));
@@ -61,6 +67,8 @@ public class Kredit {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DBA.endQuery();
         }
         return kredits;
     }
