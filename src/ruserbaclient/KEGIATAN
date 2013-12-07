@@ -1,4 +1,4 @@
-2) Transaction Controller
+2) Transaction Controller (tinggal update ke database (delete Barang), (update jml transaksi), (insert ke order & order_item//ntar aja))
 4) Admin Edit / Tambah (Paling belakangan)
 5) Tambah User, Tambah Kredit Card (PAKE SOAP, Ntar)
-6) IsCreditCard taro di cookie (UDAH)
+

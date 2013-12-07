@@ -3,8 +3,9 @@
 	{
 	require_once('header.php');
 ?>
+	<img src="img/titik.png" onload="editRefreshProfil('<?=URLService;?>');">
     <div onload="RefreshCartandShow()" id="content_frame">
-    <form id="editRefreshProfil" method="post" onsubmit="return sendEditProfil()">
+    <form id="editRefreshProfil" method="post" onsubmit="return sendEditProfil('<?=URLService;?>')">
 	<div class="register_div">
 		<h1 class="header">Edit Profile</h1>
 		<div class="per_form">
@@ -86,7 +87,7 @@
 		<button class="btn" onclick="return Register.compareDefault()" id="btn" type="submit">Simpan</button>
 	</div>
 <script>
-    function editRefreshProfil() {
+    function editRefreshProfil(URL) {
         var form = document.getElementById("editRefreshProfil");
         var xmlHttpEditProfil;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -114,10 +115,10 @@
                     }
             }
         }
-        xmlHttpEditProfil.open("GET","http://localhost:8080/thelastruserba/profile/edit?username="+getCookie('username'),true);
+        xmlHttpEditProfil.open("GET",URL+"/profile/edit?username="+getCookie('username'),true);
 		xmlHttpEditProfil.send();
     }
-    function sendEditProfil()
+    function sendEditProfil(URL)
     {
         var form = document.getElementById("editRefreshProfil");
         var xmlHttpEditProfil;
@@ -130,12 +131,12 @@
             if (xmlHttpEditProfil.readyState==4 && xmlHttpEditProfil.status==200) {
                 var data = JSON.parse(xmlHttpEditProfil.responseText);
                 if(data.status === "success")
-                    window.location.href = "http://localhost/ruserbaclient/profil.php";
+                    window.location.href = "profil.php";
                 else
                     alert("Something wrong...");
             }
         }
-        xmlHttpEditProfil.open("POST","http://localhost:8080/thelastruserba/profile/edit",true);
+        xmlHttpEditProfil.open("POST",URL+"profile/edit",true);
         xmlHttpEditProfil.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         var data = "username=" + form.prof_username.value + 
             "&prof_nama=" + form.prof_nama.value + 
@@ -148,7 +149,6 @@
 		xmlHttpEditProfil.send(data);
         return false;
     }
-    editRefreshProfil();
 </script>
 </form>
 

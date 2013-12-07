@@ -4,7 +4,7 @@ var keterangan;
 var id_barang;
 var topCart = 0;
 
-function pertanyaan(id_b,stok,harga)
+function pertanyaan(nama_barang, id_b,stok,harga)
 {
 	id_barang = id_b;
 	jumlah = document.getElementById("quantity_"+id_b).value;
@@ -15,7 +15,7 @@ function pertanyaan(id_b,stok,harga)
 	else if (jumlah > stok) alert("Pemesanan barang melebihi stok, hanya tersisa "+stok+" barang");
 	else
 	{
-		if (((getCookie('isLogin')) != null) && (getCookie('username') != ""))	
+		if (((getCookie('isLogin')) != null) && (getCookie('isLogin') != ""))	
 		{
 			var top = getCookie('topCart');
 			if (top == null)
@@ -23,16 +23,16 @@ function pertanyaan(id_b,stok,harga)
 			top = parseInt(top);
 			top++;
 			topCart=top;
-			setCookie(topCart,id_b+"-"+jumlah+"-"+harga,30);
-			alert(topCart);
-			alert(getCookie(topCart));
+			setCookie(topCart,id_b+"-"+jumlah+"-"+harga+"-"+nama_barang+"-"+stok,30);
+			//alert(topCart);
+			//alert(getCookie(topCart));
 			setCookie('topCart',topCart);		
 			alert("Berhasil");
 		}
 		else
 		{	
 			alert("Silahkan daftar dan login untuk membeli");
-			window.url="register.php";
+			window.location.href = "register.php";
 		}
 	}
 }

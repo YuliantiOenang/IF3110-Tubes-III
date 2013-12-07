@@ -8,8 +8,9 @@
 <div id="profileRefresh" class="register_div">
 	<h1 class="header">Loading...</h1>
 </div>
+<img src="img/titik.png" onload="refreshGetProfil('<?=URLService;?>');">
 <script>
-    function refreshGetProfil() {
+    function refreshGetProfil(URL) {
         var fld = document.getElementById("profileRefresh");
         var xmlHttpGetProfil;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -34,10 +35,9 @@
                     "<a class=\"btn\" href=\"editProfil.php\">Edit Profile</a>";
             }
         }
-        xmlHttpGetProfil.open("GET","http://localhost:8080/thelastruserba/profile?username="+getCookie('username'),true);
+        xmlHttpGetProfil.open("GET",URL+"/profile?username="+getCookie('username'),true);
 		xmlHttpGetProfil.send();
     }
-    refreshGetProfil();
 </script>
 </div>
 			</div>

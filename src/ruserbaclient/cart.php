@@ -5,6 +5,8 @@
 ?>
 			<div onload="RefreshCartandShow()" id="content_frame">
 		<h1 class="header">Shopping Cart</h1>
+		<script src="js/deletecart.js"></script>
+		<script src="js/updatecart.js"></script>
 <div class="orderdata">
 			<div class="wrapV_m">
 				<div class="orderdetail"><h4>Order details</h4></div>
@@ -18,20 +20,35 @@
 						<div id="subtotal" class="list_head"><h6>Sub Total</h6></div>
 						<div id="remove" class="list_head"><h6>X</h6></div>
 					</div>
-					
+					<?php
+					$TopCart = $_COOKIE['topCart'];
+					$total = 0;					
+					for ($i=1;$i<=$TopCart;$i++)
+					{
+						$cook = $_COOKIE[$i];
+						$pieces = explode("-", $cook);
+						$id = $pieces[0];
+						$jml = $pieces[1];
+						$harga = $pieces[2];
+						$nama = $pieces[3];
+						$stok = $pieces[4];
+						$total = $total + ($jml*$harga);
+					?>
 							<div class="row">
-							<div id="no" class="list_body"><p>1</p></div>
-							<div id="item" class="list_body"><p><b>Ladies Shoes :</b><br> &nbsp; &nbsp; &nbsp;Chaterine Purple Wedges</p></div>
-							<div id="price" class="list_body"><p>IDR 650000</p></div>
-							<div id="qty" class="list_body"><input type="number" value="1" onchange="updateCart(18)" id="quantity_18"></div>
-							<input type="hidden" value="Chaterine Purple Wedges" id="id_barang_Chaterine Purple Wedges">
-							<div id="subtotal" class="list_body"><p>IDR 650000</p></div>
-							<div id="remove" class="list_body"><a title="Remove Chaterine Purple Wedges from your Shopping Cart" href="cart/delete?id=18">x</a></div>
+							<div id="no" class="list_body"><p><?=$i;?></p></div>
+							<div id="item" class="list_body"><p>&nbsp; &nbsp; &nbsp;<?=$nama;?></p></div>
+							<div id="price" class="list_body"><p>IDR <?=$harga;?></p></div>
+							<div id="qty" class="list_body"><input type="number" value="<?=$jml;?>" onchange="updateCart(<?=$i;?>,<?=$stok;?>,<?=$id;?>,<?=$harga;?>,'<?=$nama;?>')" id="quantity_<?=$i;?>"></div>
+							<input type="hidden" value="<?=$nama;?>" id="id_barang_<?=$nama;?>">
+							<div id="subtotal" class="list_body"><p>IDR <?=$harga*$jml;?></p></div>
+							<div id="remove" class="list_body"><a onclick="deleteCart(<?=$i;?>);return false;" title="Remove <?=$nama;?> from your Shopping Cart" href="#">x</a></div>
 							</div>
-						
+					<?php
+					}
+					?>
 						<div class="row">
 							<div id="totallabel" class="list_foot"><h6>TOTAL</h6></div>
-							<div id="total" class="list_foot"><p>IDR 650000</p></div>
+							<div id="total" class="list_foot"><p>IDR <?=$total;?></p></div>
 						</div>
 					<h2>Free delivery cost. :)</h2>
 				</div>
@@ -52,8 +69,6 @@
 				</div>
 			</div>
 		</div>
-<script src="js/updatecart.js"></script>
-
 			</div>
 		</div>
 		<?php

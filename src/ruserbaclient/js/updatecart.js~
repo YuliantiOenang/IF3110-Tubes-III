@@ -7,6 +7,6 @@ function updateCart(id,stok,idBarang,harga,nama)
 		var str = idBarang+"-"+valueBarang+"-"+harga+"-"+nama+"-"+stok;
 		setCookie(id,str);
 		alert("Berhasil diganti");
-		window.location.href = "cart.php";
+		
 	}
 }
