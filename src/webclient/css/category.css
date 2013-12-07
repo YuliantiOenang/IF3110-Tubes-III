@@ -1,0 +1,36 @@
+.imgbarang{
+	width: 90px; height: 90px;
+}
+
+#infobottom{
+	width: 100%; text-align: center;
+	padding:0.5em 0;
+	color: #666;
+	font-weight: bold;
+	
+}
+
+.backgrey{
+	background: #ccc;
+}
+
+#cattable {
+	width: 100%;
+	margin:0;
+	margin-top: 10px;
+}
+
+#cattable .rowbarang{
+	width: 300px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+h3{
+	margin:0;
+	
+}
+
+.title{
+	font-weight: bold;
+}
