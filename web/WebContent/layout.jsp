@@ -51,8 +51,7 @@
 					href='${pageContext.request.contextPath}/register'>Register now</a>)
 			</p>
 			<%
-				} else if (request.getSession(true).getAttribute("role")
-						.equals("0")) {
+				} else if (request.getSession(true).getAttribute("role").toString().equals("0")) {
 			%>
 			<p class="left">
 				welcome, <a
@@ -66,8 +65,7 @@
 					class='img_layout' />
 			</p>
 			<%
-				} else if (request.getSession(true).getAttribute("role")
-						.equals("1")) {
+				} else if (request.getSession(true).getAttribute("role").toString().equals("1")) {
 			%>
 			<p class="left">
 				welcome, <a

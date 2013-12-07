@@ -183,6 +183,7 @@ public class UserBean {
 	public JSONObject toJSON() {
 		JSONObject json = new JSONObject();
 		try {
+			json.put("id", id);
 			json.put("username", username);
 			json.put("password", password);
 			json.put("email", email);

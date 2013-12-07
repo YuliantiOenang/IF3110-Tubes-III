@@ -44,10 +44,13 @@ public class Logout extends HttpServlet {
 			/* Emptying cookie */
 			Cookie idCookie = new Cookie("user_id", null);
 			Cookie usernameCookie = new Cookie("username", null);
+			Cookie roleCookie = new Cookie("role", null);
 			idCookie.setMaxAge(0);
 			usernameCookie.setMaxAge(0);
+			roleCookie.setMaxAge(0);
 			response.addCookie(idCookie);
 			response.addCookie(usernameCookie);
+			response.addCookie(roleCookie);
 
 			request.setAttribute("ref", "y");
 

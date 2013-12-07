@@ -83,22 +83,29 @@ public class Login extends HttpServlet {
 				
 				session.setAttribute("user_id", data.get("id"));
 				session.setAttribute("username", data.get("username"));
-				session.setAttribute("role", data.get("role"));	
+				session.setAttribute("role", data.get("role"));
+				
+				out.println(data.get("id"));
+				out.println(data.get("username"));
+				out.println(data.get("role"));
 				
 				/* Creating cookies */
-				Cookie idCookie = new Cookie("user_id", (String) data.get("id"));
+				Cookie idCookie = new Cookie("user_id", data.get("id").toString());
 				Cookie usernameCookie = new Cookie("username", (String) data.get("username"));
+				Cookie roleCookie = new Cookie ("role", data.get("role").toString());
 				idCookie.setMaxAge(60 * 60 * 24 * 30);
 				usernameCookie.setMaxAge(60 * 60 * 24 * 30);
+				roleCookie.setMaxAge(60 * 60 * 24 * 30);
 				
 				/* Adding cookies to response */
 				response.addCookie(idCookie);
 				response.addCookie(usernameCookie);
+				response.addCookie(roleCookie);
 				if (request.getAttribute("register") == null) {
 					response.sendRedirect("login");
-			} else {
-				response.sendRedirect("card");
-			}
+				} else {
+					response.sendRedirect("card");
+				}
 		} else 
 			response.sendRedirect("index?login=gagal");
 
