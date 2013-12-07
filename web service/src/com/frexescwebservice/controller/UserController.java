@@ -24,7 +24,7 @@ import com.frexescwebservice.model.UserBean;
  */
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -32,7 +32,7 @@ public class UserController extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -40,64 +40,70 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-String requestType = request.getParameter("action");
-		
-		PrintWriter out = response.getWriter(); // for writer
-		
-		if (requestType.equals("readAll")) {
-			JSONObject json = new JSONObject();
-			
-			DbConnection dbConnection = new DbConnection();
-			Connection connection = dbConnection.mySqlConnection();
-			
-			String query = "SELECT * FROM user";
-			
-			try {
-				ResultSet rs2 = connection.createStatement().executeQuery(query);
-				ArrayList<UserBean> allResults2 = new ArrayList<UserBean>();
+		String requestType = request.getParameter("action");
 
-				while (rs2.next()) {
-					UserBean user = new UserBean(
-							rs2.getString("username"),
-							rs2.getString("password"),
-							rs2.getString("email"),
-							rs2.getString("nama"),
-							rs2.getString("handphone"),
-							rs2.getString("alamat"),
-							rs2.getString("provinsi"),
-							rs2.getString("kota"),
-							rs2.getString("kodepos"),
-							Integer.valueOf(rs2.getString("role")),
-							rs2.getString("nomor_kartu"),
-							rs2.getString("nama_kartu"),
-							rs2.getString("expire_kartu"),
-							Integer.valueOf(rs2.getString("transaksi"))
-							);
-					allResults2.add(user);
-				}
-				
-				/** ArrayList for storing JSONObject */
-				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
-				
-				if (allResults2.size() > 0) {
-					for (int i = 0; i < allResults2.size(); i++) {
-						returnResult.add(allResults2.get(i).toJSON());
-					}
-					json.put("status", "true");
-					json.put("data",  returnResult);
-				} else {
-					json.put("status", "false");
-				}
-				
-	            out.println(json.toString());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		response.setContentType("application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		PrintWriter out = response.getWriter(); // for writer
+
+		if (requestType.equals("action")) {
+			JSONObject json = new JSONObject();
+			json.put("status", "true");
+			out.println(json.toString());
 			
+			if (requestType.equals("readAll")) {
+				JSONObject json1 = new JSONObject();
+
+				DbConnection dbConnection = new DbConnection();
+				Connection connection = dbConnection.mySqlConnection();
+
+				String query = "SELECT * FROM user";
+
+				try {
+					ResultSet rs2 = connection.createStatement().executeQuery(
+							query);
+					ArrayList<UserBean> allResults2 = new ArrayList<UserBean>();
+
+					while (rs2.next()) {
+						UserBean user = new UserBean(rs2.getString("username"),
+								rs2.getString("password"),
+								rs2.getString("email"), rs2.getString("nama"),
+								rs2.getString("handphone"),
+								rs2.getString("alamat"),
+								rs2.getString("provinsi"),
+								rs2.getString("kota"),
+								rs2.getString("kodepos"), 
+								Integer.valueOf(rs2.getString("role")),
+								rs2.getString("nomor_kartu"),
+								rs2.getString("nama_kartu"),
+								rs2.getString("expire_kartu"),
+								Integer.valueOf(rs2.getString("transaksi")));
+						allResults2.add(user);
+					}
+
+					/** ArrayList for storing JSONObject */
+					ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
+
+					if (allResults2.size() > 0) {
+						for (int i = 0; i < allResults2.size(); i++) {
+							returnResult.add(allResults2.get(i).toJSON());
+						}
+						json.put("status", "true");
+						json.put("data", returnResult);
+					} else {
+						json.put("status", "false");
+					}
+
+					out.println(json.toString());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
 		}
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -106,7 +112,7 @@ String requestType = request.getParameter("action");
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -115,7 +121,7 @@ String requestType = request.getParameter("action");
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-	
+
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse
 	 *      response)
