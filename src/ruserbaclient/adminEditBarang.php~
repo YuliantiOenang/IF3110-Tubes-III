@@ -1,0 +1,115 @@
+<?php
+	require_once('header.php');
+?><div class="conctr">
+			<div class="head">
+				<a href="home"><div class="logo"></div></a>
+				<div class="status">
+					
+						<p class="left"> welcome, <a href="profile/index">sonny</a>! (<a href="logout">Logout</a>)
+						 (<a href="admin">Admin</a>)
+						</p>
+						<p class="right">
+							<a href="cart">Shopping Cart</a> <img style="margin-right:5px;" src="img/site/cart_white.png" alt="">
+						</p>
+					
+				</div>
+				<div class="menu">
+					
+					
+					<a href="barang?kategori=Ladies%20Dress">
+						<div class="permenu per5">
+							<div class="menuborder"></div>
+							<div class="menutxt">
+								<h1 class="menu">Ladies Dress</h1>
+							</div>
+							<div class="menuborder"></div>
+						</div> 
+					</a>
+					
+					
+					<a href="barang?kategori=Ladies%20Shoes">
+						<div class="permenu per5">
+							<div class="menuborder"></div>
+							<div class="menutxt">
+								<h1 class="menu">Ladies Shoes</h1>
+							</div>
+							<div class="menuborder"></div>
+						</div> 
+					</a>
+					
+					
+					<a href="barang?kategori=Men%20Shirt">
+						<div class="permenu per5">
+							<div class="menuborder"></div>
+							<div class="menutxt">
+								<h1 class="menu">Men Shirt</h1>
+							</div>
+							<div class="menuborder"></div>
+						</div> 
+					</a>
+					
+					
+					<a href="barang?kategori=Men%20Shoes">
+						<div class="permenu per5">
+							<div class="menuborder"></div>
+							<div class="menutxt">
+								<h1 class="menu">Men Shoes</h1>
+							</div>
+							<div class="menuborder"></div>
+						</div> 
+					</a>
+					
+					
+					<a href="barang?kategori=Men%20Hat">
+						<div class="permenu per5">
+							<div class="menuborder"></div>
+							<div class="menutxt">
+								<h1 class="menu">Men Hat</h1>
+							</div>
+							<div class="menuborder"></div>
+						</div> 
+					</a>
+					
+				</div>
+				<div class="footer">
+					<h2 id="footer_txt">
+						<b>www.calvinsalvy.com Official Website</b><br>Karena rasa
+						adalah segalanya.
+					</h2>
+					<a href="https://twitter.com/darksta5"><img id="footer_img" src="img/site/twitter.png" title="@calvinsalvy" alt=""></a>
+				</div>
+			</div>
+			<div onload="RefreshCartandShow()" id="content_frame">
+				<script type="text/javascript" src="js/cekUnik.js"></script>
+
+<hr>
+
+
+<form enctype="multipart/form-data" method="POST" action="admin/editbarang?id=17">
+	
+	<div class="register_div">
+		<h1 class="header">Edit Barang</h1>
+
+		<div class="per_form">
+			<label>Nama</label>
+			<input type="text" autocomplete="off" value="Valentia Black Heels2" name="nama_barang" onkeyup="cekUnik(this.value)" id="nama_barang"><span id="message"></span>
+		</div>
+		<div class="per_form">
+			<label>Harga</label>
+			<input type="text" value="470000" name="harga_barang">
+		</div>
+		<div class="per_form">
+			<img width="100" height="100" src="images/barang/17.jpg"><br>
+			<label>Gambar</label>
+			<input type="file" value="17.jpg" name="file">
+		</div>
+		<button class="btn small full" name="submit" id="submitEditBarang" type="submit">Edit</button>
+		<a class="btn small full" href="admin">Kembali</a>
+	</div>
+</form>
+
+			</div>
+		</div>
+		<?php
+require_once('footer.php');
+?>

@@ -90,4 +90,13 @@
     <url-pattern>/thelastruserba/barang/detail</url-pattern>
     <url-pattern>/barang/detail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>adminIndex</servlet-name>
+    <servlet-class>adminController.AdminIndex</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminIndex</servlet-name>
+    <url-pattern>/thelastruserba/admin/index</url-pattern>
+    <url-pattern>/admin/index</url-pattern>
+  </servlet-mapping>
 </web-app>
