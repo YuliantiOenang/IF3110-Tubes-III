@@ -76,6 +76,83 @@ public class Barang {
             e.printStackTrace();
         }
     }
+	public void adminRest(Integer id_kateg) {
+        String output = "";
+        try {
+            output = RestClient.doGet("barang?action=admin&kateg="+id_kateg);
+        } catch (HttpException | IOException | URISyntaxException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        JSONArray data;
+        try {
+            data = new JSONArray(output);
+            for (int i = 0; i < data.length(); i++) {
+                JSONObject brg = (JSONObject) data.get(i);
+                id.add(brg.get("id").toString());
+                nama.add(brg.get("nama").toString());
+                harga.add(brg.get("harga").toString());
+                gambar.add(brg.get("gambar").toString());
+                stok.add(brg.get("stok").toString());
+                counter.add(brg.get("counter").toString());
+                keterangan.add(brg.get("keterangan").toString());
+                id_kat.add(brg.get("id_kategori").toString());
+            }   
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+	public static String searchRest(String params) {
+        String output = "";
+        try {
+            output = RestClient.doGet("barang?action=search&"+params);
+        } catch (HttpException | IOException | URISyntaxException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        return output;
+    }
+	public void adminEdit(Integer id_barang) {
+        String output = "";
+        try {
+            output = RestClient.doGet("barang?action=adminEdit&id_barang="+id_barang);
+            JSONObject brg = new JSONObject(output);
+            id.add(brg.get("id").toString());
+            nama.add(brg.get("nama").toString());
+            harga.add(brg.get("harga").toString());
+            gambar.add(brg.get("gambar").toString());
+            stok.add(brg.get("stok").toString());
+            counter.add(brg.get("counter").toString());
+            keterangan.add(brg.get("keterangan").toString());
+            id_kat.add(brg.get("id_kategori").toString());
+        } catch (HttpException | IOException | URISyntaxException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public static void updateRest(String params) {
+        Boolean output = false;
+        try {
+            output = RestClient.doPut("barang", params);
+        } catch (URISyntaxException | HttpException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(output);
+    }
+    public static void deleteRest(Integer id_barang) {
+        Boolean output = false;
+        try {
+            output = RestClient.doDelete("barang?id="+id_barang);
+        } catch (URISyntaxException | HttpException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(output);
+    }
 	public void executeQuery2(String query)
 	{
 		DBA.executeQuery(query);

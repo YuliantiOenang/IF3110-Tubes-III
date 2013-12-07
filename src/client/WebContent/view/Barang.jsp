@@ -79,11 +79,11 @@
 	<div class="sorting">
 		Sort by : 
 		Nama 
-		<a href="#" onclick="init('/ruserba/barang','nama','ASC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')" class="btn small">ASC</a> 
-		<a href="#" onclick="init('/ruserba/barang','nama','DESC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')" class="btn small">DESC</a> 
+		<a href="#" onclick="init('http://calvinsalvy.ap01.aws.af.cm/barang','nama','ASC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')" class="btn small">ASC</a> 
+		<a href="#" onclick="init('http://calvinsalvy.ap01.aws.af.cm/barang','nama','DESC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')" class="btn small">DESC</a> 
 		Harga 
-		<a href="#" onclick="init('/ruserba/barang','harga','ASC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')" class="btn small">ASC</a> 
-		<a href="#" onclick="init('/ruserba/barang','harga','DESC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')" class="btn small">DESC</a>
+		<a href="#" onclick="init('http://calvinsalvy.ap01.aws.af.cm/barang','harga','ASC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')" class="btn small">ASC</a> 
+		<a href="#" onclick="init('http://calvinsalvy.ap01.aws.af.cm/barang','harga','DESC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')" class="btn small">DESC</a>
 	</div>
 </div>
 
@@ -93,4 +93,4 @@
 
 </div>
 
-<div id="loader" class="hidden"><img src="/ruserba/images/loader.gif" alt="" onload="init('/ruserba/barang','harga','DESC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')"></div>
+<div id="loader" class="hidden"><img src="/ruserba/images/loader.gif" alt="" onload="init('http://calvinsalvy.ap01.aws.af.cm/barang','harga','DESC','<%=request.getAttribute("NamaBarang")%>','<%=request.getAttribute("kategori")%>','<%=request.getAttribute("harga")%>','<%=request.getAttribute("OP")%>')"></div>

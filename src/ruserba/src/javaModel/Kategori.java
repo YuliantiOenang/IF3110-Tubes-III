@@ -81,13 +81,17 @@ public class Kategori {
             query = "INSERT INTO kategori (nama_kategori, gambar, deskripsi, sub_deskripsi) VALUES ('" + nama_kategori + "', '" + gambar + "', '" + deskripsi + "', '" + sub_deskripsi + "')";
         else
             query = "UPDATE kategori SET nama_kategori = '" + nama_kategori + "', gambar = '" + gambar + "', deskripsi = '" + deskripsi + "', sub_deskripsi = '" + sub_deskripsi + "' WHERE id = " + id;
+        DBA = new DatabaseAdapter();
         DBA.insertQuery(query);
+        DBA.endQuery();
     }
 
     // delete kategori from db
     public void delete() {
         String query = "DELETE FROM kategori WHERE id=" + id;
+        DBA = new DatabaseAdapter();
         DBA.deleteQuery(query);
+        DBA.endQuery();
     }
     
     public JSONObject toJSON() {

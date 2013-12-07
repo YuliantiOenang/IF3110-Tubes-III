@@ -16,7 +16,7 @@ public class GlobalConfig {
     public static String URLSQL = "jdbc:mysql://localhost:3306/ruserba";
     public static String SQLUser = "root";
     public static String SQLPass = "";
-    public static String Path = "/home/habibie/IF3110-Tubes-II/src/ruserba/";
+    public static String Path = "D:\\if\\sem 5\\WEB\\webservice\\src\\client\\WebContent\\images\\barang";
     private static DatabaseAdapter DBA = new DatabaseAdapter();
     private static boolean success = false;
 

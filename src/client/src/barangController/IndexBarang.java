@@ -88,9 +88,9 @@ public class IndexBarang extends HttpServlet {
 		{
 			try
 			{
-				Barang B2 = new Barang(DBA);
-				B2.executeQuery("select * from barang");
-				int jmlData = B2.nama.size();
+//				Barang B2 = new Barang(DBA);
+//				B2.executeQuery("select * from barang");
+//				int jmlData = B2.nama.size();
 //				System.out.println(jmlData);
 				
 				//HTTP/1.1 200 OK Content-Type
@@ -98,49 +98,66 @@ public class IndexBarang extends HttpServlet {
 				response.setCharacterEncoding("UTF-8");
 				//header harus diset
 				PrintWriter out = response.getWriter();
-				Integer limit = Integer.parseInt(page) * 10;
-				Integer offset = limit - 10;
-				String Query = genQuery(request);
-				Query = Query + " LIMIT "+offset+",10 ";
+//				Integer limit = Integer.parseInt(page) * 10;
+//				Integer offset = limit - 10;
+//				String Query = genQuery(request);
+//				Query = Query + " LIMIT "+offset+",10 ";
 
 				Barang B = new Barang(DBA);
-				B.executeQuery2(Query);
+//				B.executeQuery2(Query);
 //				System.out.println(Query);
+				String search = request.getParameter("nama_barang");
+                String kategori = request.getParameter("kategori");
+                String harga = request.getParameter("harga");
+                String operator = request.getParameter("operator");
+                String sort = request.getParameter("sort");
+                String jenisSort = request.getParameter("jenisSort");
+                String params = "";
+                if (search != null) params += "&search=" + search;
+                if (kategori != null) params += "&kategori=" + kategori;
+                if (harga != null) params += "&harga=" + harga;
+                if (operator != null) params += "&operator=" + operator;
+                if (sort != null) params += "&sort=" + sort;
+                if (jenisSort != null) params += "&jenisSort=" + jenisSort;
+                if (page != null) params += "&page=" + page;
+                String output = Barang.searchRest(params);
+                out.write(output);
+                out.close();
 				
-				int size = B.nama.size();
-				int i;
-				String str="";
-				for (i=0;i<size;i++)
-				{
-					str += "<div class=\"itembox\">";
-					str += "	<div class=\"pict\" id=\"item"+B.id.get(i)+"\">";
-					str += "		<div title=\"Ready Stock\" class=\"itembox_img\">";
-					str += "			<img onload=\"fitbarang(this)\" src=\"/ruserba/images/barang/"+B.gambar.get(i)+"\">";
-					str += "		</div>";
-					str += "		<div class=\"minicart_icon\">";
-					str += "			<a href=\"#\" onclick=\"goToCart("+B.id.get(i)+"); return false;\"><img src=\"/ruserba/img/site/cart_black.png\"></a>";
-					str += "		</div>";
-					str += "		<div class=\"item_name\"><a href=\"/ruserba/barang/detail?id="+B.id.get(i)+"\">"+B.nama.get(i)+"</a><br>IDR "+B.harga.get(i)+"</div>";
-					str += "	</div>";
-					str += "	<div class=\"minicart hidden\" id=\"cart"+B.id.get(i)+"\">";
-					str += "		<form id=\"form-shop-"+B.id.get(i)+"\" method=\"post\" onsubmit=\"pertanyaan("+B.id.get(i)+","+B.stok.get(i)+"); return false;\">";
-					str += "			<label class=\"qty small\">Quantity</label>";
-					str += "			<input type=\"number\" name=\"quantity\" id=\"quantity_"+B.id.get(i)+"\" class=\"qty\" value=\"1\">";
-					str += "			<input type=\"hidden\" name=\"id_barang\" id=\"id_barang_"+B.id.get(i)+"\" value=\""+B.id.get(i)+"\">";
-					str += "			<p>Request Message :</p>";
-					str += "			<textarea class=\"req_msg small\" name=\"req_msg\" id=\"keterangan_"+B.id.get(i)+"\"></textarea>";
-					str += "			<input type=\"submit\" class=\"cart small\" value=\"Add to Cart\">";
-					str += "			<p class=\"back\" href=\"#\" onclick=\"backToPict("+B.id.get(i)+")\">back</p>";
-					str += "		</form>";
-					str += "	</div>";
-					str += "</div>";
-				}
-				JSONObject json = new JSONObject();
-				json.put("content",str);
-				json.put("pageOf",page);
-				json.put("jmlPage", jmlData/10);
-				out.write(json.toString());
-				out.close();
+//				int size = B.nama.size();
+//				int i;
+//				String str="";
+//				for (i=0;i<size;i++)
+//				{
+//					str += "<div class=\"itembox\">";
+//					str += "	<div class=\"pict\" id=\"item"+B.id.get(i)+"\">";
+//					str += "		<div title=\"Ready Stock\" class=\"itembox_img\">";
+//					str += "			<img onload=\"fitbarang(this)\" src=\"/ruserba/images/barang/"+B.gambar.get(i)+"\">";
+//					str += "		</div>";
+//					str += "		<div class=\"minicart_icon\">";
+//					str += "			<a href=\"#\" onclick=\"goToCart("+B.id.get(i)+"); return false;\"><img src=\"/ruserba/img/site/cart_black.png\"></a>";
+//					str += "		</div>";
+//					str += "		<div class=\"item_name\"><a href=\"/ruserba/barang/detail?id="+B.id.get(i)+"\">"+B.nama.get(i)+"</a><br>IDR "+B.harga.get(i)+"</div>";
+//					str += "	</div>";
+//					str += "	<div class=\"minicart hidden\" id=\"cart"+B.id.get(i)+"\">";
+//					str += "		<form id=\"form-shop-"+B.id.get(i)+"\" method=\"post\" onsubmit=\"pertanyaan("+B.id.get(i)+","+B.stok.get(i)+"); return false;\">";
+//					str += "			<label class=\"qty small\">Quantity</label>";
+//					str += "			<input type=\"number\" name=\"quantity\" id=\"quantity_"+B.id.get(i)+"\" class=\"qty\" value=\"1\">";
+//					str += "			<input type=\"hidden\" name=\"id_barang\" id=\"id_barang_"+B.id.get(i)+"\" value=\""+B.id.get(i)+"\">";
+//					str += "			<p>Request Message :</p>";
+//					str += "			<textarea class=\"req_msg small\" name=\"req_msg\" id=\"keterangan_"+B.id.get(i)+"\"></textarea>";
+//					str += "			<input type=\"submit\" class=\"cart small\" value=\"Add to Cart\">";
+//					str += "			<p class=\"back\" href=\"#\" onclick=\"backToPict("+B.id.get(i)+")\">back</p>";
+//					str += "		</form>";
+//					str += "	</div>";
+//					str += "</div>";
+//				}
+//				JSONObject json = new JSONObject();
+//				json.put("content",str);
+//				json.put("pageOf",page);
+//				json.put("jmlPage", jmlData/10);
+//				out.write(json.toString());
+//				out.close();
 			}catch (Exception e){}
 		}
 		else

@@ -23,7 +23,7 @@ import org.apache.http.protocol.HTTP;
 
 public class RestClient {
     public static final int HTTP_OK = 200;
-    public static final String SERVER_URL = "http://calvinsalvy.ap01.aws.af.cm/";
+    public static final String SERVER_URL = "http://localhost:8080/CalvinSalvyWebservice/";
 
     public static String doGet(final String url) throws HttpException, IOException, URISyntaxException {
 

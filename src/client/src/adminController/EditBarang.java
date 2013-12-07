@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import javaModel.Barang;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -52,7 +53,10 @@ public class EditBarang extends HttpServlet {
 		if (isLogin)
 		{
 			DBA.executeQuery("select * from barang where id="+request.getParameter("id"));
-			request.setAttribute("edit",DBA.getQueryResult());
+			Integer id_barang = Integer.parseInt(request.getParameter("id"));
+			Barang B = new Barang(DBA);
+			B.adminEdit(id_barang);
+			request.setAttribute("edit",B);
 			request.setAttribute("id", request.getParameter("id"));
 
 			request.setAttribute("includeJspContent","/view/adminEditBarang.jsp");
@@ -132,15 +136,21 @@ public class EditBarang extends HttpServlet {
 			            filecontent.close();
 			        }
 			        
-			        String Query;
-			        if (isUpload)
-			        	Query = "UPDATE barang SET gambar='"+fileName+"', nama='"+nama_barang+"', harga='"+harga_barang+"'";
-			        else
-			        	Query = "UPDATE barang SET nama='"+nama_barang+"', harga='"+harga_barang+"'";
+			        // String Query;
+			        // if (isUpload)
+			        // 	Query = "UPDATE barang SET gambar='"+fileName+"', nama='"+nama_barang+"', harga='"+harga_barang+"'";
+			        // else
+			        // 	Query = "UPDATE barang SET nama='"+nama_barang+"', harga='"+harga_barang+"'";
 			        
-			        Query = Query + " WHERE id="+request.getParameter("id")+" ";
-			        System.out.println(Query);
-			        DBA.insertQuery(Query);
+			        // Query = Query + " WHERE id="+request.getParameter("id")+" ";
+			        // System.out.println(Query);
+			        // DBA.insertQuery(Query);
+			        Integer id = Integer.parseInt(request.getParameter("id"));
+			        String params = "id="+id+"&nama="+nama_barang+"&harga="+harga_barang;
+			        if (isUpload) {
+			        	params += "&gambar="+fileName;
+			        }
+			        Barang.updateRest(params);
 			    }
 		    }
 		    else System.out.println("filename null");

@@ -44,13 +44,16 @@ public class IndexAdmin extends HttpServlet {
 		if (isLogin)
 		{
 			String kateg = request.getParameter("kateg");
+			
 			if (kateg != null)
 			{
+			    Integer id_kateg = Integer.parseInt(kateg);
 				Barang B = new Barang(DBA);
-				String Query = "select barang.id, barang.nama, barang.harga, " +
-						"barang.gambar, barang.stok, kategori.nama_kategori, kategori.gambar from barang" +
-						" join kategori on barang.id_kategori = kategori.id and kategori.id="+kateg; //jangan lupa diubah ke per kategori
-				B.executeQuery2(Query);
+//				String Query = "select barang.id, barang.nama, barang.harga, " +
+//						"barang.gambar, barang.stok, kategori.nama_kategori, kategori.gambar from barang" +
+//						" join kategori on barang.id_kategori = kategori.id and kategori.id="+kateg; //jangan lupa diubah ke per kategori
+//				B.executeQuery2(Query);
+				B.adminRest(id_kateg);
 				request.setAttribute("barang", B);
 			}
 			

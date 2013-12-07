@@ -81,13 +81,18 @@ public class Kredit {
             query = "INSERT INTO kredit (id_account, card_number, name_of_card, expired_date) VALUES ('" + id_account + "', '" + card_number + "', '" + name_of_card + "', '" + expired_date + "')";
         else
             query = "UPDATE kredit SET id_account = '" + id_account + "', card_number = '" + card_number + "', name_of_card = '" + name_of_card + "', expired_date = '" + expired_date + "' WHERE id = " + id;
+        DBA = new DatabaseAdapter();
         DBA.insertQuery(query);
+        DBA.endQuery();
     }
 
     // delete kredit from db
     public void delete() {
         String query = "DELETE FROM kredit WHERE id=" + id;
+        DBA = new DatabaseAdapter();
         DBA.deleteQuery(query);
+        DBA.endQuery();
+
     }
     
     public JSONObject toJSON() {

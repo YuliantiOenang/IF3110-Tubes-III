@@ -54,7 +54,7 @@ function init(URL,name,jenis,searchName,searchKateg,searchHarga,searchOP)
 		bookmark[i] = false;
 		GScroll[i] = (i-2) * 150;
 	}
-	xmlhttpEA.open("GET",GURL+"?page="+CurPage+"&sort="+GName+"&jenisSort="+GJenis+"&search="+GsearchName+"&kategori="+GsearchKateg+"&harga="+GsearchHarga+"&operator="+GsearchOP,true); //URL samain
+	xmlhttpEA.open("GET",GURL+"?action=search&page="+CurPage+"&sort="+GName+"&jenisSort="+GJenis+"&search="+GsearchName+"&kategori="+GsearchKateg+"&harga="+GsearchHarga+"&operator="+GsearchOP,true); //URL samain
 	CurPage++;
 	xmlhttpEA.send();
 }
@@ -68,7 +68,7 @@ onscroll = function() {
 	bookmark[CurPage] = true;
 	document.getElementById("loader").classList.remove("hidden");
 	setTimeout(function(){		
-		xmlhttpEA.open("GET",GURL+"?page="+CurPage+"&sort="+GName+"&jenisSort="+GJenis+"&search="+GsearchName+"&kategori="+GsearchKateg+"&harga="+GsearchHarga+"&operator="+GsearchOP,true);
+		xmlhttpEA.open("GET",GURL+"?action=search&page="+CurPage+"&sort="+GName+"&jenisSort="+GJenis+"&search="+GsearchName+"&kategori="+GsearchKateg+"&harga="+GsearchHarga+"&operator="+GsearchOP,true);
 	 CurPage++;
 	 xmlhttpEA.send();
 	},2000);
