@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
@@ -90,11 +96,10 @@ public class Index extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
-	    String query2 = "SELECT * FROM barang";
 		String query3 = "SELECT * FROM kategori";
 
 		try {
-			// ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+			ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
 
 			/** Set WebService for retrieving list of Barang */
 			WebService _barang = new WebService(hostname + "barang");
@@ -104,26 +109,42 @@ public class Index extends HttpServlet {
 			try {
 				_barang.execute(WebService.REQUEST_METHOD.GET);
 				String listBarang = _barang.getResponse();
-				out.println(listBarang);
+
+				/*
+				 * JSON Parser, using json_simple-1.1.jar
+				 */
+				JSONParser parser = new JSONParser();
+				JSONObject mainJSON = null;
+				try {
+					mainJSON = (JSONObject) parser.parse(listBarang);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JSONArray infoBarang = (JSONArray) mainJSON.get("data"); // Get
+																			// info
+
+				/** Suppress warning for Compilation level */
+				@SuppressWarnings("unchecked")
+				Iterator<JSONObject> iterator = infoBarang.iterator();
+				while (iterator.hasNext()) {
+					JSONObject jsonBarang = iterator.next(); // each peer info
+					BarangBean barang = new BarangBean(
+							(Long) jsonBarang.get("id"),
+							(Long) jsonBarang.get("id_category"),
+							(String) jsonBarang.get("name"),
+							(String) jsonBarang.get("picture"),
+							Integer.valueOf(String.valueOf(jsonBarang.get("price"))),
+							(String) jsonBarang.get("description"),
+							Integer.valueOf(String.valueOf(jsonBarang.get("total_item"))));
+					allResults2.add(barang);
+				}
+
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			/** End of WebService for retrieving list of Barang */
-
-			
-			 ResultSet rs2 =
-			 connection.createStatement().executeQuery(query2);
-			 ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
-			 
-			 while (rs2.next()) { BarangBean barang = new
-			 BarangBean(Integer.valueOf(rs2 .getString("id")),
-			 Integer.valueOf(rs2 .getString("id_kategori")),
-			 rs2.getString("nama_barang"), rs2.getString("gambar"),
-			 Integer.valueOf(rs2.getString("harga_barang")),
-			 rs2.getString("keterangan"), Integer.valueOf(rs2
-			 .getString("jumlah_barang"))); allResults2.add(barang); }
-			 
 
 			ResultSet rs3 = connection.createStatement().executeQuery(query3);
 			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
@@ -187,7 +208,7 @@ public class Index extends HttpServlet {
 
 		RequestDispatcher dispatcher;
 		dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-		// dispatcher.forward(request, response);
+		dispatcher.forward(request, response);
 	}
 
 	/**
