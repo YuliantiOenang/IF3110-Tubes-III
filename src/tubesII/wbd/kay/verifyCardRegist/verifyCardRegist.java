@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 
 import tubesII.wbd.kay.verifylogin.logger;
 
+import tubesII.wbd.GlobalConfig;
+
 /**
  * Servlet implementation class verifyCardRegist
  */
@@ -56,9 +58,9 @@ public class verifyCardRegist extends HttpServlet {
 		String namecard = request.getParameter("namecard");
 		String expdate = request.getParameter("expdate");
 		try{
-			String uname = "fawwazmuhammad@hotmail.com";
-			String pass = "test";
-			String url = "jdbc:mysql://radja.ap01.aws.af.cm/d46eebb7f56ab43048dce8f95e38ab8e2";
+			String uname = GC.getuser();
+			String pass = GC.getpass();
+			String url = GC.geturl();
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 	        con = DriverManager.getConnection (url, uname, pass);
 		}

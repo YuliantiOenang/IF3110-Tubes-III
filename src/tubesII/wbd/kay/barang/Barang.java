@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import tubesII.wbd.GlobalConfig;
+
 public class Barang {
 	public int id_barang, harga_barang, kategori_barang, n_beli, stok;
 	public String nama_barang, gambar_barang, keterangan;
@@ -14,9 +16,9 @@ public class Barang {
 	public static Connection con = null;
 	public static Statement state = null;
 	public static ResultSet result = null;
-	public static String user = "fawwazmuhammad@hotmail.com";
-	public static String pass = "test";
-	public static String url = "jdbc:mysql://radja.ap01.aws.af.cm/d46eebb7f56ab43048dce8f95e38ab8e2";
+	public static String uname = GC.getuser();
+	public static String pass = GC.getpass();
+	public static String url = GC.geturl();
 	
 
 	public Barang() {
