@@ -1,5 +1,20 @@
 var REST_URL = "http://localhost/IF3110-Tubes-III/src/service/rest/";
 
+function loadBase64Image(formid, callback){
+	var files = document.getElementById(formid).files;
+	if (files.length > 0){
+		var file = files[0];
+
+		var reader = new FileReader();
+
+		reader.onload = function(e){
+			if(callback!=null) callback(e.target.result);
+		};
+
+		reader.readAsDataURL(file);
+	}
+}
+
 function sendRestAjax(method, resource, data, callback){
 	target = REST_URL + resource;
 	var request = new XMLHttpRequest();

@@ -272,4 +272,16 @@ function buy($cart, $token){
 	return $response;
 }
 
+
+function saveBase64Image($filename, $rawdata){
+	$fullpath = "../image/$filename";
+	
+	if($rawdata){
+		$imgdata = explode(',', $rawdata)[1];	
+		file_put_contents($fullpath, base64_decode($imgdata));
+	}else{
+		copy("../image/default.jpg", $fullpath);
+	}
+}
+
 ?>

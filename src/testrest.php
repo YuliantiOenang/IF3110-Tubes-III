@@ -7,17 +7,22 @@
 
 <script>
 	function send(){
-		data = {"test" : "lalala"};
-		callback = function(response){
-			alert(JSON.stringify(response));
+		
+		callback = function(result){
+			document.getElementById("display").src = result;
+			cb = function(res){alert(JSON.stringify(res));};
+			
+			sendRestAjax("PUT", "image", {"imgdata" : result}, cb);
 		}
 	
-		sendRestAjax("GET", "barang/23", data, callback);
+		loadBase64Image('imgfile', callback);
 	}
 </script>
 </head>
 
 <body>
+	<img id="display" />
+	<input type="file" id="imgfile" />
 	<button type="button" onclick="send()">test</button>
 </body>
 </html>
