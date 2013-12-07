@@ -1,3 +1,4 @@
+#Client
 #ignore everything under the 'bin' folder
 bin/
 build/
@@ -5,3 +6,11 @@ build/
 CVS/
 #ignore the eclipse configuration files
 .classpath
+#WebServices
+#ignore everything under the 'bin' folder
+../WebServices/bin/
+../WebServices/build/
+#ignore everything under any CVS folders
+../WebServices/CVS/
+#ignore the eclipse configuration files
+../WebServices/.classpath
