@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE urlrewrite
+    PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+    "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite>
+
+    <rule>
+        <from>^/search/([^\/\\]+)/?$</from>
+        <to last="true">/index.jsp?page=search&amp;q=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/search/([^\/\\]+)/([0-9]+)/?$</from>
+        <to last="true">/index.jsp?page=search&amp;q=$1&amp;p=$2</to>
+    </rule>
+
+    <rule>
+        <from>^/search/?$</from>
+        <to last="true">/index.jsp?page=error</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/name/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;orderby=name</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/name/asc/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;orderby=name&amp;sort=asc</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/name/desc/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;orderby=name&amp;sort=desc</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/price/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;price</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/price/asc/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;orderby=price&amp;sort=asc</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/price/desc/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;orderby=price&amp;sort=desc</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/([0-9]+)/name/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;p=$2&amp;orderby=name</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/([0-9]+)/name/asc/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;p=$2&amp;orderby=name&amp;sort=asc</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/([0-9]+)/name/desc/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;p=$2&amp;orderby=name&amp;sort=desc</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/([0-9]+)/price/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;p=$2&amp;price</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/([0-9]+)/price/asc/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;p=$2&amp;orderby=price&amp;sort=asc</to>
+    </rule>
+
+    <rule>
+        <from>^/kategori/([0-9]+)/([0-9]+)/price/desc/?$</from>
+        <to last="true">/index.jsp?page=kategori&amp;id=$1&amp;p=$2&amp;orderby=price&amp;sort=desc</to>
+    </rule>
+
+    <rule>
+        <from>^/barang/([0-9]+)/?$</from>
+        <to last="true">/index.jsp?page=barang&amp;id=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/barang/?$</from>
+        <to last="true">/index.jsp?page=error</to>
+    </rule>
+
+    <rule>
+        <condition type="request-url">^(.(?!Servlet))*?$</condition>
+        <from>^/([a-z0-9]+)/?$</from>
+        <to last="true">/index.jsp?page=$1</to>
+    </rule>
+
+</urlrewrite>
