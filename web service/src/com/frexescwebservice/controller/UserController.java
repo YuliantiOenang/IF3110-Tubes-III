@@ -102,7 +102,8 @@ public class UserController extends HttpServlet {
 		PrintWriter out = response.getWriter(); // for writer
 
 		if (requestType.equals("edit_profile")) {
-			String password = request.getParameter("password1");
+			String id = request.getParameter("id");
+			String password = request.getParameter("password");
 			String email = request.getParameter("email");
 			String name = request.getParameter("name");
 			String telephone = request.getParameter("telephone");
@@ -118,8 +119,7 @@ public class UserController extends HttpServlet {
 					+ "', password='" + password + "', email='" + email
 					+ "', handphone='" + telephone + "', alamat='" + address
 					+ "', kota='" + city + "', provinsi='" + province
-					+ "', kodepos='" + postal + "' WHERE id='"
-					+ request.getSession(true).getAttribute("user_id") + "'";
+					+ "', kodepos='" + postal + "' WHERE id='"+ id + "'";
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(updateQuery);

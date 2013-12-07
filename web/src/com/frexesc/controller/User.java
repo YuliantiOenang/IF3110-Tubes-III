@@ -13,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.ant.SessionsTask;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -172,10 +174,14 @@ public class User extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		HttpSession sessions = request.getSession(true);
 		String action = request.getParameter("action");
 
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
+		
+		String id = sessions.getAttribute("user_id").toString();
 		String password = request.getParameter("password1");
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
@@ -184,6 +190,7 @@ public class User extends HttpServlet {
 		String province = request.getParameter("province");
 		String city = request.getParameter("city");
 		String postal = request.getParameter("postal");
+		
 		if (action.equals("register")) {
 			String username = request.getParameter("username");
 			// HttpSession session = request.getSession(true);
@@ -198,10 +205,11 @@ public class User extends HttpServlet {
 				e.printStackTrace();
 			}
 			getServletContext().getRequestDispatcher("/login").forward(request, response);
-		} else if (action.equals("edit")) {
+		} else if (action.equals("edit_profile")) {
 			/** Set WebService (REST) for retrieving list of User */
 			WebService _user = new WebService(hostname + "user");
 			_user.addParam("action", "edit_profile");
+			_user.addParam("id", id);
 			_user.addParam("password", password);
 			_user.addParam("email", email);
 			_user.addParam("name", name);
@@ -213,10 +221,12 @@ public class User extends HttpServlet {
 			_user.addHeader("GData-Version", "2");
 			try {
 				_user.execute(WebService.REQUEST_METHOD.POST);
-				//String user = _user.getResponse();
+				String user = _user.getResponse();
+				out.print(user);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 //			String updateQuery = "UPDATE user SET nama='" + name + "', password='" + password + "', email='" + email + "', handphone='" + telephone + "', alamat='" + address + "', kota='" + city + "', provinsi='" + province + "', kodepos='" + postal + "' WHERE id='" + request.getSession(true).getAttribute("user_id") + "'";
 //			System.out.println(updateQuery);
 //			try {
@@ -225,7 +235,7 @@ public class User extends HttpServlet {
 //			} catch (SQLException e) {
 //				e.printStackTrace();
 //			}
-			response.sendRedirect("user?id=" + request.getSession(true).getAttribute("user_id"));
+			//response.sendRedirect("user?id=" + request.getSession(true).getAttribute("user_id"));
 		}
 
 	}

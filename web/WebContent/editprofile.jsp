@@ -108,7 +108,7 @@ function isChanged(nama, tel, add, cit, prov, posta) {
 				lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
 				dolor sit amet lorem ipsum dolor sit amet</p>
 
-			<input id="action" name="action" type="hidden" value="edit" />
+			<input id="action" name="action" type="hidden" value="edit_profile" />
 			<button type="submit" id="btn" onclick="" class="btn">Simpan</button>
 		</div>
 	</form>
