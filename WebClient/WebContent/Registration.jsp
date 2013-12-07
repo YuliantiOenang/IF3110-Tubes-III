@@ -27,7 +27,7 @@
 					<span><br>Kodepos:* <input type="text" name="kodepos"id="kodepos"></span>
 					<span><br>Password: <input id="pass" type="password" name="password" onkeyup='validate("password")' required><label id ="password2"></label></span> 
 					<span><br>Confirm Password: <input type="password" name="confirm" onkeyup='validate("confirm")' required><label id = "confirm"></label></span> 
-					<br><br><input type="button" id="submitbutton" onclick = "SubmitRegistration()" value="Register">
+					<br><br><input type="button" id="submitbutton" onclick = "SubmitRegistration()" value="Register" disabled="disabled">
 					<p>*optional</p>
 				</form>
 			</div>
