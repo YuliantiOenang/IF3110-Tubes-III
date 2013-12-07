@@ -1,9 +1,8 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.frexesc.model.BarangBean;
+import com.frexesc.service.WebService;
 
 /**
  * 
@@ -38,127 +43,76 @@ public class Gallery extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		DbConnection dbConnection = new DbConnection();
-		Connection connection = dbConnection.mySqlConnection();
+		ArrayList<BarangBean> allResults = new ArrayList<BarangBean>();
 
-		int sort = 0;
-		int jenisSort = 0;
-		int page = 0;
-
-		if (request.getParameter("sort") != null) {
-			sort = Integer.valueOf(request.getParameter("sort"));
-		}
-
-		if (request.getParameter("jenisSort") != null) {
-			jenisSort = Integer.valueOf(request.getParameter("jenisSort"));
-		}
-
-		if (request.getParameter("page") != null) {
-			page = Integer.valueOf(request.getParameter("page")) - 1;
-		}
+		/** Set WebService (REST) for retrieving list of Barang */
+		WebService _barang = new WebService(hostname + "barang");
+		_barang.addParam("action", "search");
+		if (request.getParameter("sort") != null)
+			_barang.addParam("sort", request.getParameter("sort"));
+		if (request.getParameter("jenisSort") != null)
+			_barang.addParam("jenisSort", request.getParameter("jenisSort"));
+		if (request.getParameter("page") != null)
+			_barang.addParam("page", request.getParameter("page"));
+		if (request.getParameter("name") != null)
+			_barang.addParam("name", request.getParameter("name"));
+		if (request.getParameter("category") != null)
+			_barang.addParam("category", request.getParameter("category"));
+		if (request.getParameter("price") != null)
+			_barang.addParam("price", request.getParameter("price"));
+		_barang.addHeader("GData-Version", "2");
 
 		try {
-			String partial1 = "";
-			String partial2 = "";
-			String partial3 = "";
-			String partial4 = "";
-			String partial5 = "";
+			_barang.execute(WebService.REQUEST_METHOD.GET);
+			String listBarang = _barang.getResponse();
 
-			if (sort != 0) {
-				if (sort == 1)
-					partial1 = " ORDER BY barang.nama_barang ";
-				else if (sort == 2)
-					partial1 = " ORDER BY kategori.nama ";
-				else if (sort == 3)
-					partial1 = " ORDER BY barang.harga_barang ";
+			/*
+			 * JSON Parser, using json_simple-1.1.jar
+			 */
+			JSONParser parser = new JSONParser();
+			JSONObject mainJSON = null;
+			try {
+				mainJSON = (JSONObject) parser.parse(listBarang);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
-			if (jenisSort != 0) {
-				if (jenisSort == 1) {
-					partial2 = " ASC ";
-				} else if (jenisSort == 2) {
-					partial2 = " DESC ";
-				}
-			}
+			if (mainJSON.get("status").equals("true")) {
+				JSONArray infoBarang = (JSONArray) mainJSON.get("data"); // Get
+				// info
 
-			if (request.getParameter("name") != null) {
-				partial3 = " AND ( barang.nama_barang LIKE '%"
-						+ request.getParameter("name") + "%' ) ";
-			}
-
-			if (request.getParameter("category") != null) {
-				if (Integer.parseInt(request.getParameter("category")) != 0)
-					partial4 = " AND barang.id_kategori="
-							+ Integer
-									.parseInt(request.getParameter("category"))
-							+ " ";
-			}
-
-			if (request.getParameter("price") != null) {
-				if (Integer.parseInt(request.getParameter("price")) != 0)
-					partial5 = " AND barang.harga_barang="
-							+ Integer.parseInt(request.getParameter("price"))
-							+ " ";
-			}
-
-			if (page != 0) {
-				page = page * 10;
-			}
-
-			String query = "SELECT kategori.nama, barang.gambar, barang.id, barang.id_kategori, barang.nama_barang, barang.harga_barang, barang.jumlah_barang, barang.keterangan FROM barang JOIN kategori ON barang.id_kategori=kategori.id "
-					+ partial3
-					+ partial4
-					+ partial5
-					+ partial1
-					+ partial2
-					+ "LIMIT " + page + ",10"; // Select
-			// all
-			// items
-			// based
-			// on
-			// selection
-			ResultSet rs = connection.createStatement().executeQuery(query);
-
-			ArrayList<BarangBean> allResults = new ArrayList<BarangBean>();
-
-			while (rs.next()) {
-				BarangBean barang = new BarangBean(Integer.valueOf(rs
-						.getString("id")), Integer.valueOf(rs
-						.getString("id_kategori")),
-						rs.getString("nama_barang"), rs.getString("gambar"),
-						Integer.valueOf(rs.getString("harga_barang")),
-						rs.getString("keterangan"), Integer.valueOf(rs
-								.getString("jumlah_barang")));
-				allResults.add(barang);
-			}
-
-			String query2 = "SELECT COUNT(id) AS JmlBarang FROM barang WHERE id=id "
-					+ partial3 + partial4 + partial5;
-
-			ResultSet rs2 = connection.createStatement().executeQuery(query2);
-			rs2.next();
-
-			if (request.getParameter("category") != null) {
-				if (Integer.parseInt(request.getParameter("category")) != 0) {
-					String query3 = "SELECT * FROM kategori WHERE id="
-							+ Integer
-									.parseInt(request.getParameter("category"));
-					ResultSet rs3 = connection.createStatement().executeQuery(
-							query3);
-					rs3.next();
-					request.setAttribute("category_name", rs3.getString("nama"));
+				/** Suppress warning for Compilation level */
+				@SuppressWarnings("unchecked")
+				Iterator<JSONObject> iterator = infoBarang.iterator();
+				while (iterator.hasNext()) {
+					JSONObject jsonBarang = iterator.next(); // each barang info
+					BarangBean barang = new BarangBean(
+							(Long) jsonBarang.get("id"),
+							(Long) jsonBarang.get("id_category"),
+							(String) jsonBarang.get("name"),
+							(String) jsonBarang.get("picture"),
+							Integer.valueOf(String.valueOf(jsonBarang
+									.get("price"))),
+							(String) jsonBarang.get("description"),
+							Integer.valueOf(String.valueOf(jsonBarang
+									.get("total_item"))));
+					allResults.add(barang);
 				}
 			}
 
 			request.setAttribute("items", allResults);
-			request.setAttribute("total_pages", rs2.getString("JmlBarang"));
+			request.setAttribute("total_pages", (String) mainJSON.get("total_pages"));
 
-			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/barang/index.jsp");
-			dispatcher.forward(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		/** End of WebService for retrieving list of Barang */
+
+		RequestDispatcher dispatcher = getServletContext()
+				.getRequestDispatcher("/barang/index.jsp");
+		dispatcher.forward(request, response);
 
 	}
 
