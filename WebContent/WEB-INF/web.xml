@@ -18,4 +18,13 @@
     <servlet-name>verifyRegister</servlet-name>
     <url-pattern>/verifyRegister.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>tubesII.wbd.kay.test</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
 </web-app>
