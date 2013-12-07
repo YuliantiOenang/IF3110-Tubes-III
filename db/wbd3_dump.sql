@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2013 at 04:17 PM
+-- Generation Time: Dec 07, 2013 at 06:33 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `barang` (
   `jumlah_beli` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_barang`),
   UNIQUE KEY `nama_barang` (`nama_barang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `barang`
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `barang` (
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `kategori`, `deskripsi`, `jumlah_beli`) VALUES
 (1, 'sate padang', 100, 7, 'makanan', 'lololo', 4),
-(2, 'soto', 6000, 93, 'makanan', '', 107),
+(2, 'soto', 6000, 93, 'makanan', '', 100),
 (6, 'ikan teri', 1000, 10, 'makanan', '', 0);
 
 -- --------------------------------------------------------
@@ -98,8 +98,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `email`, `nama_lengkap`, `alamat`, `provinsi`, `kota`, `kodepos`, `telepon`, `jumlah_transaksi`, `role`, `card_name`, `card_number`, `card_date`) VALUES
-('abcd', 'abcd', 'abcd@email.com', '', '', '', '', '', '', 2, 'user', NULL, NULL, NULL),
-('admin', 'admin', 'admin@a.com', '', '', '', '', '', '', 1, 'admin', NULL, NULL, NULL),
+('abcd', 'abcd', 'abcd@email.com', '', 'alamat2', 'p1', 'kota1', '', '', 2, 'user', 'abcd', '14543', '12/21'),
+('admin', 'admin', 'admin@a.com', '', '', '', '', '', '', 1, 'admin', 'abcde', 'asdasd', 'asdad'),
 ('user', 'user', 'user@a.com', '', '', '', '', '', '', 0, 'user', NULL, NULL, NULL);
 
 --
