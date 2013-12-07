@@ -83,4 +83,5 @@ public class DatabaseAdapter {
         } else
             return rs;
     }
+
 }
