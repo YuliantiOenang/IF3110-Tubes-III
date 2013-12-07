@@ -8,6 +8,7 @@ public class AccountSoap {
 		Account A = new Account();
 		A.username = username;
 		A.password = password;
+		A.nama = nama;
 		A.email = email;
 		A.alamat = alamat;
 		A.provinsi = provinsi;

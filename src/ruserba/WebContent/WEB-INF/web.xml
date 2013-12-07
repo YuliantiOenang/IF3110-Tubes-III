@@ -72,4 +72,13 @@
     <url-pattern>/kredit</url-pattern>
     <url-pattern>/api/kredit</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>soapClient</servlet-name>
+    <servlet-class>soapClient.accountClient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>soapClient</servlet-name>
+    <url-pattern>/accClient</url-pattern>
+    <url-pattern>/soapClient/accClient</url-pattern>
+  </servlet-mapping>
 </web-app>

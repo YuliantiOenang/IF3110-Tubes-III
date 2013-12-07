@@ -18,7 +18,7 @@ public class DatabaseAdapter {
         // Koneksiin ke MySQL
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            GlobalConfig.init();
+            //GlobalConfig.init();
             con = DriverManager.getConnection(GlobalConfig.URLSQL, GlobalConfig.SQLUser, GlobalConfig.SQLPass);
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +55,8 @@ public class DatabaseAdapter {
     
    public void endQuery() {
         try { 
-            rs.close();
+        	if (rs!=null)
+        		rs.close();
             stmt.close();
             con.close();
         } catch (SQLException e) {
