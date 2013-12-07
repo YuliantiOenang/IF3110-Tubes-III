@@ -1,11 +1,14 @@
 package com.frexescwebservice.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 /**
  * 
@@ -27,9 +30,19 @@ public class BarangController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String requestType = request.getParameter("action");
+		
+		PrintWriter out = response.getWriter(); // for writer
+		
+		if (requestType.equals("action")) {
+			JSONObject json = new JSONObject();
+            json.put("status", "true");
+            out.println(json.toString());
+		}
 	}
 	
 	/**
