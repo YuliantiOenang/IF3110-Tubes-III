@@ -58,6 +58,27 @@ public class UserBean {
 		this.excard = excard;
 		this.transaction = transaction;
 	}
+	
+	public UserBean(String username, String password, String email,
+			String name, String telephone, String address, String province,
+			String city, String postal, int role, String nocard, String nacard,
+			String excard, int transaction) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.telephone = telephone;
+		this.address = address;
+		this.province = province;
+		this.city = city;
+		this.postal = postal;
+		this.role = role;
+		this.nocard = nocard;
+		this.nacard = nacard;
+		this.excard = excard;
+		this.transaction = transaction;
+	}
 
 	public int getId() {
 		return id;

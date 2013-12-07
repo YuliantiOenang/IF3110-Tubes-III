@@ -58,9 +58,7 @@ public class User extends HttpServlet {
 				_user.addHeader("GData-Version", "2");
 				try {
 					_user.execute(WebService.REQUEST_METHOD.GET);
-					String user = _user.getResponse();
-					out.println(user);
-					
+					String user = _user.getResponse();					
 					JSONParser parser = new JSONParser();
 					JSONObject mainJSON = null;
 					try {
@@ -69,21 +67,22 @@ public class User extends HttpServlet {
 						e.printStackTrace();
 					}
 					JSONObject data = (JSONObject) mainJSON.get("data");
+					out.println(user);
 					UserBean active_user = new UserBean(
 							data.get("username").toString(), 
 							data.get("password").toString(), 
 							data.get("email").toString(), 
-							data.get("nama").toString(), 
-							data.get("handphone").toString(), 
-							data.get("alamat").toString(), 
-							data.get("provinsi").toString(), 
-							data.get("kota").toString(), 
-							data.get("kodepos").toString(), 
+							data.get("name").toString(), 
+							data.get("telephone").toString(), 
+							data.get("address").toString(), 
+							data.get("province").toString(), 
+							data.get("city").toString(), 
+							data.get("postal").toString(), 
 							Integer.parseInt(data.get("role").toString()), 
-							data.get("nomor_kartu").toString(),
-							data.get("nama_kartu").toString(), 
-							data.get("expire_kartu").toString(), 
-							Integer.parseInt(data.get("transaksi").toString()));
+							data.get("nocard").toString(),
+							data.get("nacard").toString(), 
+							data.get("excard").toString(), 
+							Integer.parseInt(data.get("transaction").toString()));
 					request.setAttribute("user", active_user);
 					request.setAttribute("id", user_id);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profile.jsp");
@@ -107,22 +106,62 @@ public class User extends HttpServlet {
 //					e.printStackTrace();
 //				}
 				
-			} else {
-				DbConnection dbConnection = new DbConnection();
-				Connection connection = dbConnection.mySqlConnection();
-				String id = request.getParameter("id");
+			} 
+			else {
+				//DbConnection dbConnection = new DbConnection();
+				//Connection connection = dbConnection.mySqlConnection();
+				String user_id = request.getParameter("id");
+				/** Set WebService (REST) for retrieving list of User */
+				WebService _user = new WebService(hostname + "user");
+				_user.addParam("action", "view_profile");
+				_user.addParam("user_id", user_id);
+				_user.addHeader("GData-Version", "2");
 				try {
-					Statement statement = connection.createStatement();
-					ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id='" + id + "' LIMIT 1");
-					if (rs.next()) {
-						UserBean user = new UserBean(rs.getString("username"), rs.getString("password"), rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), Integer.parseInt(rs.getString("transaksi")));
-						request.setAttribute("user", user);
+					_user.execute(WebService.REQUEST_METHOD.GET);
+					String user = _user.getResponse();					
+					JSONParser parser = new JSONParser();
+					JSONObject mainJSON = null;
+					try {
+						mainJSON = (JSONObject) parser.parse(user);
+					} catch (ParseException e) {
+						e.printStackTrace();
 					}
+					JSONObject data = (JSONObject) mainJSON.get("data");
+					out.println(user);
+					UserBean active_user = new UserBean(
+							data.get("username").toString(), 
+							data.get("password").toString(), 
+							data.get("email").toString(), 
+							data.get("name").toString(), 
+							data.get("telephone").toString(), 
+							data.get("address").toString(), 
+							data.get("province").toString(), 
+							data.get("city").toString(), 
+							data.get("postal").toString(), 
+							Integer.parseInt(data.get("role").toString()), 
+							data.get("nocard").toString(),
+							data.get("nacard").toString(), 
+							data.get("excard").toString(), 
+							Integer.parseInt(data.get("transaction").toString()));
+					request.setAttribute("user", active_user);
+					request.setAttribute("id", user_id);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editprofile.jsp");
 					dispatcher.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+//				try {
+//					Statement statement = connection.createStatement();
+//					ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id='" + id + "' LIMIT 1");
+//					if (rs.next()) {
+//						UserBean user = new UserBean(rs.getString("username"), rs.getString("password"), rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), Integer.parseInt(rs.getString("transaksi")));
+//						request.setAttribute("user", user);
+//					}
+//					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editprofile.jsp");
+//					dispatcher.forward(request, response);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
 			}
 		}
 	}

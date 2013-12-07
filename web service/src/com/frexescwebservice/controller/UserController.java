@@ -60,8 +60,8 @@ public class UserController extends HttpServlet {
 				ResultSet rs2 = connection.createStatement()
 						.executeQuery(query);
 				if (rs2.next()) {
-					UserBean user = new UserBean(Integer.valueOf(rs2
-							.getString("id")), rs2.getString("username"),
+					UserBean user = new UserBean(
+							rs2.getString("username"),
 							rs2.getString("password"), rs2.getString("email"),
 							rs2.getString("nama"), rs2.getString("handphone"),
 							rs2.getString("alamat"), rs2.getString("provinsi"),
