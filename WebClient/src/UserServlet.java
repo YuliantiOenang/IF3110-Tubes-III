@@ -45,6 +45,8 @@ public class UserServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
 		if (request.getParameter("type").equals("registration")){
 			
 			// Ambil parameter request
@@ -90,6 +92,8 @@ public class UserServlet extends HttpServlet {
 			response.getWriter().write(responsetext);
 		}
 		else if (request.getParameter("type").equals("profile")){
+			
+			
 			
 			// Ambil parameter request
 			String username = request.getParameter("id");	
@@ -202,13 +206,14 @@ public class UserServlet extends HttpServlet {
 			Connection conn = null;
 			Statement stmt = null;	
 				
+			Driver driv = new Driver();
+			
 			// Coba buka koneksi
 			try{
-				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection(DBURL, USER, PASS);
+				conn = driv.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
 						
 				// Konstruksi query
-				String query = "UPDATE user SET creditcardname = '" + creditname + "', creditcardnum = " + creditnum + ", expireddate = '" + expired + "' WHERE id='" + id + "'";
+				String query = "UPDATE userr SET creditcardname = '" + creditname + "', creditcardnum = " + creditnum + ", expireddate = '" + expired + "' WHERE id='" + id + "'";
 				System.out.println(query);
 						
 				stmt = conn.createStatement();
@@ -238,13 +243,14 @@ public class UserServlet extends HttpServlet {
 			Connection conn = null;
 			Statement stmt = null;	
 				
+			Driver driv = new Driver();
+			
 			// Coba buka koneksi
 			try{
-				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection(DBURL, USER, PASS);
+				conn = driv.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
 						
 				// Konstruksi query
-				String query = "UPDATE user SET password = '" + password + "', full_name = '" + fullname + "', alamat = '" + alamat + "', provinsi= '" + provinsi + "', kotakabupaten = '" + kota + "', kodepos = " + kodepos + ", nomor_handphone = " + hp + " WHERE id='" + id + "'";	
+				String query = "UPDATE userr SET password = '" + password + "', full_name = '" + fullname + "', alamat = '" + alamat + "', provinsi= '" + provinsi + "', kotakabupaten = '" + kota + "', kodepos = " + kodepos + ", nomor_handphone = " + hp + " WHERE id='" + id + "'";	
 				System.out.println(query);
 						
 				stmt = conn.createStatement();
@@ -373,13 +379,14 @@ public class UserServlet extends HttpServlet {
 				Statement stmt = null;
 				int Result = 0;
 				
+				Driver driv = new Driver();
+				
 				// Coba buka koneksi
 				try{
-					Class.forName("com.mysql.jdbc.Driver");
-					conn = DriverManager.getConnection(DBURL, USER, PASS);
+					conn = driv.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
 					
 					// Konstruksi query
-					String query = "SELECT COUNT(1) as hasil FROM user WHERE creditcardnum = " +  CreditCard;
+					String query = "SELECT COUNT(1) as hasil FROM userr WHERE creditcardnum = " +  CreditCard;
 					System.out.println(query);
 					
 					stmt = conn.createStatement();
@@ -416,14 +423,15 @@ public class UserServlet extends HttpServlet {
 		Connection conn = null;
 		Statement stmt = null;
 		int Result = 0;
-					
+		
+		Driver driv = new Driver();
+		
 		// Coba buka koneksi
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(DBURL, USER, PASS);
+			conn = driv.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
 						
 			// Konstruksi query
-			String query = "SELECT COUNT(1) as hasil FROM user WHERE id = '" + id + "' AND password = '" + password + "'";
+			String query = "SELECT COUNT(1) as hasil FROM userr WHERE id = '" + id + "' AND password = '" + password + "'";
 			System.out.println(query);
 						
 			stmt = conn.createStatement();

@@ -96,7 +96,7 @@ function SubmitNewProfile(){
 	if (CheckChange()){
 		var data="";
 		data = "type=profile";
-		data=data+"&id="+document.getElementById("username").innerHTML;
+		data=data+"&id="+document.getElementById("username2").innerHTML;
 		data=data+"&password="+document.forms["registration"]["password"].value;
 		data=data+"&fullname="+document.forms["registration"]["fullname"].value;
 		data=data+"&alamat="+document.forms["registration"]["alamat"].value;
@@ -116,6 +116,8 @@ function SubmitNewProfile(){
 		// code for IE6, IE5
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}	
+		
+		
 		
 		xmlhttp.onreadystatechange=function(){ProcessProfileResponse(xmlhttp);};
 		xmlhttp.open("POST","servlet", false);
