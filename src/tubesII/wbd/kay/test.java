@@ -36,7 +36,33 @@ public class test extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().print("Ada hasilnya dari test");
+		PrintWriter out =  response.getWriter();
+		GlobalConfig GC = new GlobalConfig();
+		out.print("Diakses dari halaman test metode get");
+		out.print("Username mysql:"+ GC.getuser());
+		out.print("PASS  mysql:"+ GC.getpass());
+		out.print("URL mysql:"+ GC.geturl());
+		
+		//Contoh query mysql
+		out.print("<h1>Contoh query myqsl</h1><br>SELECT:");
+
+		ArrayList<String> AL = new ArrayList<String>();
+		try{
+			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
+		    Connection con = DriverManager.getConnection (GC.geturl(), GC.getuser(), GC.getpass());
+		    Statement state1 = con.createStatement();
+		    ResultSet uresult = state1.executeQuery("SELECT * FROM user");
+		    while(uresult.next()){
+					out.println(uresult.getObject(1)+"<br>");
+					AL.add(uresult.getObject(1));
+			}
+			JSONArray myjson = new JSONArray(AL);
+			out.print(myjson.toString());
+			out.print(myjson);
+		}catch (Exception e){
+			e.getMessage();
+		}
+		
 	}
 
 	/**
