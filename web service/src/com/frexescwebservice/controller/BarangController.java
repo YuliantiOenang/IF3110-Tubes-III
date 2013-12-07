@@ -43,56 +43,51 @@ public class BarangController extends HttpServlet {
 		String requestType = request.getParameter("action");
 
 		response.setContentType("application/json");
-        response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter(); // for writer
 
-		if (requestType.equals("action")) {
+		if (requestType.equals("readAll")) {
 			JSONObject json = new JSONObject();
-            json.put("status", "true");
-            out.println(json.toString());
-            
-			if (requestType.equals("readAll")) {
-				JSONObject json1 = new JSONObject();
-	
-				DbConnection dbConnection = new DbConnection();
-				Connection connection = dbConnection.mySqlConnection();
-	
-				String query = "SELECT * FROM barang";
-	
-				try {
-					ResultSet rs2 = connection.createStatement().executeQuery(query);
-					ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
-	
-					while (rs2.next()) {
-						BarangBean barang = new BarangBean(Integer.valueOf(rs2
-								.getString("id")), Integer.valueOf(rs2
-								.getString("id_kategori")),
-								rs2.getString("nama_barang"),
-								rs2.getString("gambar"), Integer.valueOf(rs2
-										.getString("harga_barang")),
-								rs2.getString("keterangan"), Integer.valueOf(rs2
-										.getString("jumlah_barang")));
-						allResults2.add(barang);
-					}
-	
-					/** ArrayList for storing JSONObject */
-					ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
-	
-					if (allResults2.size() > 0) {
-						for (int i = 0; i < allResults2.size(); i++) {
-							returnResult.add(allResults2.get(i).toJSON());
-						}
-						json1.put("status", "true");
-						json1.put("data", returnResult);
-					} else {
-						json1.put("status", "false");
-					}
-	
-					out.println(json1.toString());
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "SELECT * FROM barang";
+
+			try {
+				ResultSet rs2 = connection.createStatement()
+						.executeQuery(query);
+				ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+
+				while (rs2.next()) {
+					BarangBean barang = new BarangBean(Integer.valueOf(rs2
+							.getString("id")), Integer.valueOf(rs2
+							.getString("id_kategori")),
+							rs2.getString("nama_barang"),
+							rs2.getString("gambar"), Integer.valueOf(rs2
+									.getString("harga_barang")),
+							rs2.getString("keterangan"), Integer.valueOf(rs2
+									.getString("jumlah_barang")));
+					allResults2.add(barang);
 				}
+
+				/** ArrayList for storing JSONObject */
+				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
+
+				if (allResults2.size() > 0) {
+					for (int i = 0; i < allResults2.size(); i++) {
+						returnResult.add(allResults2.get(i).toJSON());
+					}
+					json.put("status", "true");
+					json.put("data", returnResult);
+				} else {
+					json.put("status", "false");
+				}
+
+				out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

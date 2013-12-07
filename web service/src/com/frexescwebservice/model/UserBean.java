@@ -3,6 +3,7 @@ package com.frexescwebservice.model;
 import org.json.simple.JSONObject;
 
 public class UserBean {
+	private int id;
 	private String username;
 	private String password;
 	private String email;
@@ -19,6 +20,7 @@ public class UserBean {
 	private int transaction;
 
 	public UserBean() {
+		this.id = 0;
 		this.username = null;
 		this.password = null;
 		this.email = null;
@@ -35,11 +37,12 @@ public class UserBean {
 		this.transaction = 0;
 	}
 
-	public UserBean(String username, String password, String email,
+	public UserBean(int id, String username, String password, String email,
 			String name, String telephone, String address, String province,
 			String city, String postal, int role, String nocard, String nacard,
 			String excard, int transaction) {
 		super();
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -54,6 +57,14 @@ public class UserBean {
 		this.nacard = nacard;
 		this.excard = excard;
 		this.transaction = transaction;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getRole() {

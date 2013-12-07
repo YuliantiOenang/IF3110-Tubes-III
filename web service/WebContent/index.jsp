@@ -4,9 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Ruko</title>
+<title>Web Service Home</title>
 </head>
 <body>
-Ruko Web Services
 </body>
 </html>

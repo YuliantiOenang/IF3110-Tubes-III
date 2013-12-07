@@ -1,6 +1,7 @@
 package com.frexesc.model;
 
 public class UserBean {
+	private int id;
 	private String username;
 	private String password;
 	private String email;
@@ -15,8 +16,9 @@ public class UserBean {
 	private String nacard;
 	private String excard;
 	private int transaction;
-	
+
 	public UserBean() {
+		this.id = 0;
 		this.username = null;
 		this.password = null;
 		this.email = null;
@@ -33,7 +35,32 @@ public class UserBean {
 		this.transaction = 0;
 	}
 
-	public UserBean(String username, String password, String email, String name, String telephone, String address, String province, String city, String postal, int role, String nocard, String nacard, String excard, int transaction) {
+	public UserBean(int id, String username, String password, String email,
+			String name, String telephone, String address, String province,
+			String city, String postal, int role, String nocard, String nacard,
+			String excard, int transaction) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.telephone = telephone;
+		this.address = address;
+		this.province = province;
+		this.city = city;
+		this.postal = postal;
+		this.role = role;
+		this.nocard = nocard;
+		this.nacard = nacard;
+		this.excard = excard;
+		this.transaction = transaction;
+	}
+	
+	public UserBean(String username, String password, String email,
+			String name, String telephone, String address, String province,
+			String city, String postal, int role, String nocard, String nacard,
+			String excard, int transaction) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -49,6 +76,14 @@ public class UserBean {
 		this.nacard = nacard;
 		this.excard = excard;
 		this.transaction = transaction;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getRole() {
@@ -162,5 +197,5 @@ public class UserBean {
 	public void setTransaction(int transaction) {
 		this.transaction = transaction;
 	}
-	
+
 }

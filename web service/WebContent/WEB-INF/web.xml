@@ -20,10 +20,6 @@
 		<servlet-class>com.frexescwebservice.controller.UserController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/Login</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
 		<servlet-name>BarangController</servlet-name>
 		<url-pattern>/barang</url-pattern>
 	</servlet-mapping>

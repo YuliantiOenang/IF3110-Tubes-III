@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -45,63 +46,98 @@ public class UserController extends HttpServlet {
 		response.setContentType("application/json");
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter(); // for writer
-
-		if (requestType.equals("action")) {
-			JSONObject json = new JSONObject();
-			json.put("status", "true");
-			out.println(json.toString());
+		
+		if (requestType.equals("login")) {
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
 			
-			if (requestType.equals("readAll")) {
-				JSONObject json1 = new JSONObject();
-
-				DbConnection dbConnection = new DbConnection();
-				Connection connection = dbConnection.mySqlConnection();
-
-				String query = "SELECT * FROM user";
-
-				try {
-					ResultSet rs2 = connection.createStatement().executeQuery(
-							query);
-					ArrayList<UserBean> allResults2 = new ArrayList<UserBean>();
-
-					while (rs2.next()) {
-						UserBean user = new UserBean(rs2.getString("username"),
-								rs2.getString("password"),
-								rs2.getString("email"), rs2.getString("nama"),
-								rs2.getString("handphone"),
-								rs2.getString("alamat"),
-								rs2.getString("provinsi"),
-								rs2.getString("kota"),
-								rs2.getString("kodepos"), 
-								Integer.valueOf(rs2.getString("role")),
-								rs2.getString("nomor_kartu"),
-								rs2.getString("nama_kartu"),
-								rs2.getString("expire_kartu"),
-								Integer.valueOf(rs2.getString("transaksi")));
-						allResults2.add(user);
-					}
-
-					/** ArrayList for storing JSONObject */
-					ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
-
-					if (allResults2.size() > 0) {
-						for (int i = 0; i < allResults2.size(); i++) {
-							returnResult.add(allResults2.get(i).toJSON());
-						}
-						json.put("status", "true");
-						json.put("data", returnResult);
-					} else {
-						json.put("status", "false");
-					}
-
-					out.println(json.toString());
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			JSONObject json = new JSONObject();
+			
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+			
+			String query = "SELECT * FROM user WHERE username='" + username + "' and password='" + password + "' LIMIT 1";
+			try {
+				UserBean user = null;
+				ResultSet rs2 = connection.createStatement().executeQuery(query);
+				if (rs2.next()) {
+					user = new UserBean(
+							Integer.valueOf(rs2.getString("id")),
+							rs2.getString("username"),
+							rs2.getString("password"), rs2.getString("email"),
+							rs2.getString("nama"), rs2.getString("handphone"),
+							rs2.getString("alamat"), rs2.getString("provinsi"),
+							rs2.getString("kota"), rs2.getString("kodepos"),
+							Integer.valueOf(rs2.getString("role")),
+							rs2.getString("nomor_kartu"),
+							rs2.getString("nama_kartu"),
+							rs2.getString("expire_kartu"), 
+							Integer.valueOf(rs2.getString("transaksi"))
+							);
+					JSONObject returnResult = new JSONObject();
+					returnResult = user.toJSON();
+					json.put("status", "true");
+					json.put("data", returnResult);				
+				} else {
+					json.put("status", "false");
 				}
-
+				out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
+		
+		if (requestType.equals("readAll")) {
+			JSONObject json = new JSONObject();
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "SELECT * FROM user";
+
+			try {
+				ResultSet rs2 = connection.createStatement()
+						.executeQuery(query);
+				ArrayList<UserBean> allResults2 = new ArrayList<UserBean>();
+
+				while (rs2.next()) {
+					UserBean user = new UserBean(
+							Integer.valueOf(rs2.getString("id")),
+							rs2.getString("username"),
+							rs2.getString("password"), rs2.getString("email"),
+							rs2.getString("nama"), rs2.getString("handphone"),
+							rs2.getString("alamat"), rs2.getString("provinsi"),
+							rs2.getString("kota"), rs2.getString("kodepos"),
+							Integer.valueOf(rs2.getString("role")),
+							rs2.getString("nomor_kartu"),
+							rs2.getString("nama_kartu"),
+							rs2.getString("expire_kartu"), Integer.valueOf(rs2
+									.getString("transaksi")));
+					allResults2.add(user);
+				}
+
+				/** ArrayList for storing JSONObject */
+				ArrayList<JSONObject> returnResult = new ArrayList<JSONObject>();
+
+				if (allResults2.size() > 0) {
+					for (int i = 0; i < allResults2.size(); i++) {
+						returnResult.add(allResults2.get(i).toJSON());
+					}
+					json.put("status", "true");
+					json.put("data", returnResult);
+				} else {
+					json.put("status", "false");
+				}
+
+				out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
 	}
 
 	/**
