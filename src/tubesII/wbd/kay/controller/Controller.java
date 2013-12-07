@@ -70,9 +70,9 @@ public class Controller extends HttpServlet {
 		String password = request.getParameter("password");
 		//Connect to database
 		try{
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
+			String uname = "fawwazmuhammad@hotmail.com";
+			String pass = "test";
+			String url = "jdbc:mysql://radja.ap01.aws.af.cm/d46eebb7f56ab43048dce8f95e38ab8e2";
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 	        con = DriverManager.getConnection (url, uname, pass);
 		}

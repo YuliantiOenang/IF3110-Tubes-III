@@ -14,9 +14,10 @@ public class Barang {
 	public static Connection con = null;
 	public static Statement state = null;
 	public static ResultSet result = null;
-	public static String user = "root";
-	public static String pass = "";
-	public static String url = "jdbc:mysql://localhost/progin_13511059";
+	public static String user = "fawwazmuhammad@hotmail.com";
+	public static String pass = "test";
+	public static String url = "jdbc:mysql://radja.ap01.aws.af.cm/d46eebb7f56ab43048dce8f95e38ab8e2";
+	
 
 	public Barang() {
 		id_barang = -1;
