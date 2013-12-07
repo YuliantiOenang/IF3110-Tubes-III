@@ -73,7 +73,7 @@ public class Cart extends HttpServlet {
 					e.printStackTrace();
 				}
 
-				if (mainJSON.get("status") == "true") {
+				if (mainJSON.get("status").equals("true")) {
 					JSONArray infoBarangUser = (JSONArray) mainJSON.get("data"); // Get
 					// info
 
@@ -127,7 +127,7 @@ public class Cart extends HttpServlet {
 					e.printStackTrace();
 				}
 
-				if (mainJSON.get("status") == "true") {
+				if (mainJSON.get("status").equals("true")) {
 					JSONArray infoBarang = (JSONArray) mainJSON.get("data"); // Get
 					// info
 
