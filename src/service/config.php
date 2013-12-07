@@ -2,15 +2,12 @@
 
 /*** Service Configuration ***/
 
-// is released version?
-$RELEASE = false;
-
 /** Database Parameter **/
 
 function db_parameter(){
 	global $RELEASE; $param = array();
 	
-	if ($RELEASE){
+	if (getenv("RELEASE_VERSION")){
 		$env = json_decode(getenv("VCAP_SERVICES"), true);
 		$mysqls = $env["mysql-5.1"];
 		
