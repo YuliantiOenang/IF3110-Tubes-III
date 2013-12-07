@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://soap" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap" xmlns:intf="http://soap" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="createAcc">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="nama" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="alamat" type="xsd:string"/>
+      <element name="provinsi" type="xsd:string"/>
+      <element name="kota" type="xsd:string"/>
+      <element name="kodepos" type="xsd:string"/>
+      <element name="telepon" type="xsd:string"/>
+      <element name="role" type="xsd:int"/>
+      <element name="transaksi" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAccResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="createAccRequest">
+
+      <wsdl:part element="impl:createAcc" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createAccResponse">
+
+      <wsdl:part element="impl:createAccResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="AccountSoap">
+
+      <wsdl:operation name="createAcc">
+
+         <wsdl:input message="impl:createAccRequest" name="createAccRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createAccResponse" name="createAccResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="AccountSoapSoapBinding" type="impl:AccountSoap">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="createAcc">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createAccRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createAccResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AccountSoapService">
+
+      <wsdl:port binding="impl:AccountSoapSoapBinding" name="AccountSoap">
+
+         <wsdlsoap:address location="http://localhost:8080/CalvinSalvyWebservice/services/AccountSoap"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
