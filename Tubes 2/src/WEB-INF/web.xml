@@ -1,0 +1,244 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+version="2.5">
+<display-name>My First Servlet - www.way4code.com</display-name>
+<description>
+My First Servlet
+</description>    
+
+<multipart-config>
+    <location>/tmp</location>
+    <max-file-size>20848820</max-file-size>
+    <max-request-size>418018841</max-request-size>
+    <file-size-threshold>1048576</file-size-threshold>
+</multipart-config>
+<servlet> 
+   <servlet-name>LoginServlet</servlet-name> 
+   <servlet-class>npackage.LoginServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>CartController</servlet-name> 
+   <servlet-class>npackage.CartController</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>FileUploadServlet</servlet-name> 
+   <servlet-class>npackage.FileUploadServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>insertbarang</servlet-name> 
+   <servlet-class>npackage.insertbarang</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>editbarang</servlet-name> 
+   <servlet-class>npackage.editbarang</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>DeleteSelectedItem</servlet-name> 
+   <servlet-class>npackage.DeleteSelectedItem</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>NamaBarangValidationServlet</servlet-name> 
+   <servlet-class>npackage.NamaBarangValidationServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>ENamaBarangValidationServlet</servlet-name> 
+   <servlet-class>npackage.ENamaBarangValidationServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>getadmin</servlet-name> 
+   <servlet-class>npackage.getadmin</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>UpdateServlet</servlet-name> 
+   <servlet-class>npackage.UpdateServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>getdatamember</servlet-name> 
+   <servlet-class>npackage.getdatamember</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>getbestbuy</servlet-name> 
+   <servlet-class>npackage.getbestbuy</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>getsearch</servlet-name> 
+   <servlet-class>npackage.getsearch</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>getberas</servlet-name> 
+   <servlet-class>npackage.getberas</servlet-class> 
+</servlet>
+<servlet> 
+   <servlet-name>getdaging</servlet-name> 
+   <servlet-class>npackage.getdaging</servlet-class> 
+</servlet>
+<servlet> 
+   <servlet-name>getsayuran</servlet-name> 
+   <servlet-class>npackage.getsayuran</servlet-class> 
+</servlet>
+<servlet> 
+   <servlet-name>getfrozen</servlet-name> 
+   <servlet-class>npackage.getfrozen</servlet-class> 
+</servlet>
+<servlet> 
+   <servlet-name>getsnack</servlet-name> 
+   <servlet-class>npackage.getsnack</servlet-class> 
+</servlet>
+<servlet> 
+   <servlet-name>getbarang</servlet-name> 
+   <servlet-class>npackage.getbarang</servlet-class> 
+</servlet>
+<servlet> 
+   <servlet-name>insertdata</servlet-name> 
+   <servlet-class>npackage.insertdata</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>insertcreditcard</servlet-name> 
+   <servlet-class>npackage.insertcreditcard</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>UsernameValidationServlet</servlet-name> 
+   <servlet-class>npackage.UsernameValidationServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>CardNumberValidationServlet</servlet-name> 
+   <servlet-class>npackage.CardNumberValidationServlet</servlet-class> 
+</servlet> 
+
+<servlet> 
+   <servlet-name>EmailValidationServlet</servlet-name> 
+   <servlet-class>npackage.EmailValidationServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>NameCardValidationServlet</servlet-name> 
+   <servlet-class>npackage.NameCardValidationServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>ExpireDateValidationServlet</servlet-name> 
+   <servlet-class>npackage.ExpireDateValidationServlet</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>CookieExample</servlet-name> 
+   <servlet-class>CookieExample</servlet-class> 
+</servlet> 
+<servlet> 
+   <servlet-name>Coba</servlet-name> 
+   <servlet-class>Coba</servlet-class> 
+</servlet> 
+<!-- servlet mapping --> 
+<servlet-mapping> 
+   <servlet-name>UsernameValidationServlet</servlet-name> 
+   <url-pattern>/UsernameValidationServlet</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>FileUploadServlet</servlet-name> 
+   <url-pattern>/FileUploadServlet</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>NamaBarangValidationServlet</servlet-name> 
+   <url-pattern>/NamaBarangValidationServlet</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>ENamaBarangValidationServlet</servlet-name> 
+   <url-pattern>/ENamaBarangValidationServlet</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getdatamember</servlet-name> 
+   <url-pattern>/getdatamember</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>CartController</servlet-name> 
+   <url-pattern>/CartController</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>DeleteSelectedItem</servlet-name> 
+   <url-pattern>/DeleteSelectedItem</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getadmin</servlet-name> 
+   <url-pattern>/getadmin</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>editbarang</servlet-name> 
+   <url-pattern>/editbarang</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getbestbuy</servlet-name> 
+   <url-pattern>/getbestbuy</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getsearch</servlet-name> 
+   <url-pattern>/getsearch</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getberas</servlet-name> 
+   <url-pattern>/getberas</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getdaging</servlet-name> 
+   <url-pattern>/getdaging</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getsayuran</servlet-name> 
+   <url-pattern>/getsayuran</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getfrozen</servlet-name> 
+   <url-pattern>/getfrozen</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getsnack</servlet-name> 
+   <url-pattern>/getsnack</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>getbarang</servlet-name> 
+   <url-pattern>/getbarang</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>CardNumberValidationServlet</servlet-name> 
+   <url-pattern>/CardNumberValidationServlet</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>NameCardValidationServlet</servlet-name> 
+   <url-pattern>/NameCardValidationServlet</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>ExpireDateValidationServlet</servlet-name> 
+   <url-pattern>/ExpireDateValidationServlet</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>insertdata</servlet-name> 
+   <url-pattern>/insertdata</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>insertbarang</servlet-name> 
+   <url-pattern>/insertbarang</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>insertcreditcard</servlet-name> 
+   <url-pattern>/insertcreditcard</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>EmailValidationServlet</servlet-name> 
+   <url-pattern>/EmailValidationServlet</url-pattern> 
+</servlet-mapping> 
+
+<servlet-mapping> 
+   <servlet-name>LoginServlet</servlet-name> 
+   <url-pattern>/LoginServlet</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>UpdateServlet</servlet-name> 
+   <url-pattern>/UpdateServlet</url-pattern> 
+</servlet-mapping> 
+
+<servlet-mapping> 
+   <servlet-name>Coba</servlet-name> 
+   <url-pattern>/Coba</url-pattern> 
+</servlet-mapping> 
+<servlet-mapping> 
+   <servlet-name>CookieExample</servlet-name> 
+   <url-pattern>/CookieExample</url-pattern> 
+</servlet-mapping>  
+</web-app> 
