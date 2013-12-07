@@ -65,7 +65,7 @@ public class ProfileEditController extends HttpServlet {
         String kodepos = request.getParameter("prof_kodepos");
         String telepon = request.getParameter("prof_telepon");
 
-        String params = "id="+id+"&nama=" + nama + "&password=" + password + "&alamat=" + alamat + "&provinsi=" + provinsi + "&kota=" + kota + "&kodepos=" + kodepos + "&telepon=" + telepon;
+        String params = "id="+id+"&nama=" + nama;
         Profile.updateRest(params);
         // String Query =
         // "UPDATE account SET nama = '"+prof_nama+"', alamat = '"+prof_alamat+"', provinsi = '"+prof_provinsi+"', kota = '"+prof_kota+"', kodepos = '"+prof_kodepos+"', telepon = '"+prof_telepon+"'";

@@ -128,7 +128,7 @@
 				<% for (int j = 0; j < B.id.size(); j++) { %>
 					<a href="/ruserba/barang/detail?id=<%= B.id.get(j) %>">
 						<div class="best">
-							<img alt="" title="<%= B.nama.get(j) %>  (<%= B.harga.get(j) %>)" onload="fitBest(this)" src="img/barang/<%= B.gambar.get(j) %>" />
+							<img alt="" title="<%= B.nama.get(j) %>  (<%= B.harga.get(j) %>)" onload="fitBest(this)" src="images/barang/<%= B.gambar.get(j) %>" />
 						</div>
 					</a>	
 				<% } %>
