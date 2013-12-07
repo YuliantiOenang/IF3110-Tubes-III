@@ -103,6 +103,7 @@ require_once('config.php');
 						<p class="left"> welcome, <a href="profil.php"><?=$_COOKIE['username'];?></a>! (<a href="logout.php">Logout</a>)
 						<?php
 						if ($_COOKIE['role']==2)
+
 						{
 						?>						 
 							(<a href="adminIndex.php">Admin</a>)

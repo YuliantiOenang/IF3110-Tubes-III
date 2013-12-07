@@ -70,7 +70,7 @@ public class DetailBarang extends HttpServlet {
 				str += "<div class=\"item_pict\"><img width=\"340\" height=\"340\" onload=\"fitpict(this)\" src=\""+new GlobalConfig().URLService+"/images/barang/"+B.gambar.get(0)+"\"></div>";
 				str += "<div class=\"item_detail\"><h4>product description</h4><p>"+B.keterangan.get(0)+"</p></div>";
 				str += "<div class=\"item_price\"><p>get it for :</p><h4>IDR "+B.harga.get(0)+"</h4><p>stok : "+B.stok.get(0)+"</p>";
-				str += "<form id=\"form-shop\" action=\"#\" onsubmit=\"pertanyaan("+B.id.get(0)+","+B.stok.get(0)+"); return false;\" method=\"post\">";
+				str += "<form id=\"form-shop\" action=\"#\" onsubmit=\"pertanyaan("+B.id.get(0)+","+B.stok.get(0)+","+B.harga.get(0)+"); return false;\" method=\"post\">";
 				str += "<label class=\"qty\">Quantity</label><input type=\"number\" value=\"1\" class=\"qty\" id=\"quantity_"+B.id.get(0)+"\" name=\"quantity\">";
 				str += "<input type=\"hidden\" id=\"keterangan_"+B.id.get(0)+"\" name=\"id_barang\">";
 				str += "<p>Request Message :</p>";

@@ -89,19 +89,44 @@ require_once('config.php');
 <script type="text/javascript" src="js/generatedContent.js"></script>
 <script type="text/javascript" src="js/suggest.js"></script>
 <script type="text/javascript" src="js/shop.js"></script>
+<script type="text/javascript" src="js/cookie.js"></script>
 </head>
 <body>
 <div class="conctr">
 			<div class="head">
-				<a href=""><div class="logo"></div></a>
+				<a href="index.php"><div class="logo"></div></a>
 				<div class="status">
-					
-						<p class="left"> welcome, <a href="profil.php">sonny</a>! (<a href="logout">Logout</a>)
-						 (<a href="adminIndex.php">Admin</a>)
+					<?php
+					if (isset($_COOKIE['isLogin']))
+					{
+					?>
+						<p class="left"> welcome, <a href="profil.php"><?=$_COOKIE['username'];?></a>! (<a href="logout.php">Logout</a>)
+						<?php
+						if ($_COOKIE['role']==2)
+
+						{
+						?>						 
+							(<a href="adminIndex.php">Admin</a>)
+						<?php
+						}
+						?>
 						</p>
 						<p class="right">
 							<a href="cart.php">Shopping Cart</a> <img style="margin-right:5px;" src="img/site/cart_white.png" alt="">
 						</p>
+					<?php
+					}else
+					{
+					?>	
+						<p>
+							You are not login. (
+							<a onclick="showLogin()" href="#">Login</a>
+							or
+							<a href="/ruserba/register">Register now</a>
+							)
+							</p>
+					<?php }
+					?>
 					
 				</div>
 				<div class="menu">
