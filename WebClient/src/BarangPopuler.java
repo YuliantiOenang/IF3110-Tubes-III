@@ -74,6 +74,9 @@ public class BarangPopuler extends HttpServlet {
 		String kategori = null;
 		JSONArray arrayBarangs = (JSONArray) jsonResponse.get("data");
 		int i=0;
+		
+		System.out.println("JSON RESPONSE: " + jsonResponse);
+		
 		for(Object oo: arrayBarangs){
 			ArrayList<Barang> barangKategori = new ArrayList<Barang>();
 			JSONObject objKategori = (JSONObject) oo;
