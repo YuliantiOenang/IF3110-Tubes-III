@@ -14,6 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 import kelas.Database;
 
 /**
@@ -41,52 +51,59 @@ public class updateBarang extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String db = "toko_imba";
-		java.sql.Connection con = null;
+		
+		JSONObject jsonResponse = null;
+		
 		int id = Integer.parseInt(request.getParameter("id_barang"));
+		
+		JSONObject data = new JSONObject();
+		
+		data.put("action", "get_jumlah");
+		data.put("id", new Integer(id));
+		
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+		
+		httppost.setEntity(new StringEntity(data.toString()));
+		CloseableHttpResponse httpresp = httpclient.execute(httppost);
+		try {
+			HttpEntity entity = httpresp.getEntity();
+		    if (entity != null) {
+		    	String jsonresp = EntityUtils.toString(entity);
+	            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+		    }
+		} finally {
+		    httpresp.close();
+		    httpclient.close();
+		}
+		
 		int jml = Integer.parseInt(request.getParameter("jumlah"));
 		
-		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, Database.getUser(), Database.getPass());
-			System.out.println (db+ "database successfully opened.");
+		int jumlahDiDatabaseWow = ((Long) jsonResponse.get("jumlah")).intValue();
 		
-			Statement state = con.createStatement();
-			ResultSet rs = state.executeQuery("SELECT * FROM inventori WHERE id_inventori = " + id);
-			int jumlahDiDatabaseWow = 0;
-			while(rs.next()){
-				jumlahDiDatabaseWow = rs.getInt("jumlah");
-				break;
+		if(jml <= jumlahDiDatabaseWow){
+			HttpSession session = request.getSession(true);
+			
+			System.out.println("masuk ke yg udah ada");
+
+			boolean found = false;
+			ArrayList<Point> cart = (ArrayList<Point>) session.getAttribute("cart");
+			for(Point p: cart){
+				if(p.x == id){
+					found = true;
+					response.getWriter().write("Updated!");
+					p.y = jml;
+					break;
+				}
 			}
 			
-			
-			if(jml <= jumlahDiDatabaseWow){
-				HttpSession session = request.getSession(true);
-				
-				System.out.println("masuk ke yg udah ada");
-
-				boolean found = false;
-				ArrayList<Point> cart = (ArrayList<Point>) session.getAttribute("cart");
-				for(Point p: cart){
-					if(p.x == id){
-						found = true;
-						response.getWriter().write("Updated!");
-						p.y = jml;
-						break;
-					}
-				}
-				
-				if(!found){
-					response.getWriter().write("Item tidak ditemukan!");
-				}
-				session.setAttribute("cart", cart);
-				
-			} else {
-				response.getWriter().write("Jumlah tidak mencukupi!");
+			if(!found){
+				response.getWriter().write("Item tidak ditemukan!");
 			}
-
-		} catch (SQLException | ClassNotFoundException e) {
-			System.out.println("SQLException caught: " +e.getMessage());
+			session.setAttribute("cart", cart);
+			
+		} else {
+			response.getWriter().write("Jumlah tidak mencukupi! Sisa barang " + jumlahDiDatabaseWow + " buah.");
 		}		
 	}
 }

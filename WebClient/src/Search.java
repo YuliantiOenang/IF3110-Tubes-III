@@ -12,6 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 import kelas.Barang;
 import kelas.Database;
 
@@ -35,8 +46,6 @@ public class Search extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String db = "toko_imba";
-		java.sql.Connection con = null;
 		ArrayList<Barang> barangs = new ArrayList<Barang>();
 		String query_name, query_category, query_price;
 		
@@ -44,50 +53,48 @@ public class Search extends HttpServlet {
 		query_category = request.getParameter("query_category");
 		query_price = request.getParameter("query_price");
 		
+		JSONObject jsonResponse = null;
+		
+		JSONObject data = new JSONObject();
+		data.put("action", "search");
+		
+		data.put("query_name", request.getParameter("query_name"));
+		data.put("query_category", request.getParameter("query_category"));
+		data.put("query_price", request.getParameter("query_price"));
+		
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+		
+		httppost.setEntity(new StringEntity(data.toString()));
+		CloseableHttpResponse httpresp = httpclient.execute(httppost);
 		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, Database.getUser(), Database.getPass());
-			System.out.println (db+ "database successfully opened.");
-			
-			Statement state = con.createStatement();
-			
-			String query = "SELECT * FROM inventori, kategori WHERE inventori.id_kategori = kategori.id_kategori";
-			
-			if(!query_name.equals("")){
-				query += " AND inventori.nama_inventori LIKE \"%" + query_name + "%\"";
-			}
-			
-			if(!query_category.equals("")){
-				query += " AND kategori.nama_kategori LIKE \"%" + query_category + "%\"";
-			}
-			
-			if(!query_price.equals("")){
-				query += " AND inventori.harga = " + query_price;
-			}
-			
-			
-			System.out.println("Query: " + query);
-			ResultSet rs = state.executeQuery(query);
-			
-			while(rs.next()){
-				String name = rs.getString("nama_inventori");
-				Barang brg = new Barang(name);
-				brg.setId_cat(rs.getInt("id_kategori"));
-				brg.setId_inven(rs.getInt("id_inventori"));
-				brg.setDesc(rs.getString("description"));
-				brg.setHarga(rs.getInt("harga"));
-				brg.setGambar(rs.getString("gambar"));
-				brg.setJumlah(rs.getInt("jumlah"));
-				barangs.add(brg);
-				//request.setAttribute("name", name);
-			}
-			
-			request.setAttribute("barangs", barangs);
-		}
-		catch(SQLException | ClassNotFoundException e) {
-			System.out.println("SQLException caught: " +e.getMessage());
+			HttpEntity entity = httpresp.getEntity();
+		    if (entity != null) {
+		    	String jsonresp = EntityUtils.toString(entity);
+	            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+		    }
+		} finally {
+		    httpresp.close();
+		    httpclient.close();
 		}
 		
+		JSONArray arrayBarang = (JSONArray) jsonResponse.get("data");
+		
+		for(Object o: arrayBarang){
+			JSONObject tmp = (JSONObject) o;
+			
+			String name = (String) tmp.get("nama_inventori");
+			Barang brg = new Barang(name);
+			brg.setId_cat(((Long) tmp.get("id_kategori")).intValue());
+			brg.setId_inven(((Long) tmp.get("id_inventori")).intValue());
+			brg.setDesc((String) tmp.get("description"));
+			brg.setHarga(((Long) tmp.get("harga")).intValue());
+			brg.setGambar((String) tmp.get("gambar"));
+			brg.setJumlah(((Long) tmp.get("jumlah")).intValue());
+			barangs.add(brg);
+		}
+					
+		request.setAttribute("barangs", barangs);	
 		request.getRequestDispatcher("search.jsp").forward(request, response);
 	}
 

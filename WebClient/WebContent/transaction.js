@@ -19,7 +19,7 @@ function validate(id_barang, id_div){
 		return;
 	}
 	
-	data = "data=" + {"id":id_barang};
+	data = "id=" + id_barang;
 	
 	//lakukan koneksi ke servlet
 	var xmlhttp;
@@ -39,13 +39,13 @@ function validate(id_barang, id_div){
 			if(parseInt(jumlahBarang) >= parseInt(jml_beli)){
 				addToCart(id_barang, id_div);
 			} else {
-				notif_bar.innerHTML = "Jumlah tidak mencukupi!";
+				notif_bar.innerHTML = "Jumlah tidak mencukupi! Tersisa " + parseInt(jumlahBarang) + " buah barang.";
 				//alert("Jumlah tidak mencukupi!");
 			}
 			
 		}
 	};
-	xmlhttp.open("POST","validateBarang", false);
+	xmlhttp.open("POST","validateBarang", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(data);
 }
@@ -87,7 +87,7 @@ function changeItemCount(inv_id, div_id){
 			//document.getElementById("quant" + div_id).value = newVal;
 		}
 	};
-	xmlhttp.open("POST","updateBarang", false);
+	xmlhttp.open("POST","updateBarang", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	//alert("Change item count called");
 	xmlhttp.send(data);
@@ -135,7 +135,7 @@ function buyCart(){
 			//alert(responsecode);
 		}
 	};
-	xmlhttp.open("POST","viewCart", false);
+	xmlhttp.open("POST","viewCart", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(data);
 }
@@ -165,7 +165,7 @@ function clearCart(){
 			//alert(responsecode);
 		}
 	};
-	xmlhttp.open("POST","viewCart", false);
+	xmlhttp.open("POST","viewCart", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(data);
 }
@@ -204,7 +204,7 @@ function addToCart(id_barang, id_div){
 			//alert(responsecode);
 		}
 	};
-	xmlhttp.open("POST","addToCart", false);
+	xmlhttp.open("POST","addToCart", true);
 	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xmlhttp.send(data);
 }
