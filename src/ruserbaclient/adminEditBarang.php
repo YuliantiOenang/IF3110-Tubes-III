@@ -1,6 +1,6 @@
 <?php
 	require_once('header.php');
-    $id = 17;
+    $id = $_GET['id'];
 ?>
 			<div onload="RefreshCartandShow()" id="content_frame">
 				<script type="text/javascript" src="js/cekUnik.js"></script>
