@@ -16,10 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
-import com.frexesc.model.UserBean;
 import com.frexesc.model.UserBean2;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -33,7 +31,7 @@ import com.google.gson.JsonParser;
  */
 public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	WebServicesKit webkit = new WebServicesKit();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -74,41 +72,31 @@ public class Index extends HttpServlet {
 		}
 		if (isLogin && sessions.getAttribute("user_id") == null) {
 			try {
+				/**port*/
 
-
-				WebServicesKit webkit = new WebServicesKit();
-				String json = webkit.readUrl ("http://localhost:8080/web-services/UserService/userservice/user/"+userid);
-				
-				Gson gson = new Gson();
-				JsonParser jsonParser = new JsonParser();
-				JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
-				List<UserBean2> categoriesList = new ArrayList<UserBean2>();
-				for (JsonElement category : categoryArray)
-				{
-					UserBean2 courseObj = gson.fromJson(category, UserBean2.class);
-					categoriesList.add(courseObj);
-				}
-				
-
-				
-//				for (UserBean courseObj : categoriesList)
+//				String json = webkit.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"+userid);
+//				
+//				Gson gson = new Gson();
+//				JsonParser jsonParser = new JsonParser();
+//				JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
+//				List<UserBean2> categoriesList = new ArrayList<UserBean2>();
+//				for (JsonElement category : categoryArray)
 //				{
-//					System.out.println("ADDRESS : " + courseObj.getAddress());
-//					System.out.println("USERNAME : " + courseObj.getUsername());
+//					UserBean2 courseObj = gson.fromJson(category, UserBean2.class);
+//					categoriesList.add(courseObj);
 //				}
-
-				
-				
-				sessions.setAttribute("role", categoriesList.get(0).getRole());
-				sessions.setAttribute("user_id", categoriesList.get(0).getID());
-				sessions.setAttribute("username", categoriesList.get(0).getUsername());
-/**old*/
-//				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");				
-//				rs.next();
-				
-//				sessions.setAttribute("role", rs.getString("role"));
+//				
+//				sessions.setAttribute("role", categoriesList.get(0).getRole());
 //				sessions.setAttribute("user_id", userid);
 //				sessions.setAttribute("username", username);
+				
+				
+				/**OLD*/
+				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");
+				rs.next();				
+				sessions.setAttribute("role", rs.getString("role"));
+				sessions.setAttribute("user_id", userid);
+				sessions.setAttribute("username", username);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -122,7 +110,6 @@ public class Index extends HttpServlet {
 		Connection connection = dbConnection.mySqlConnection();
 
 		String query2 = "SELECT * FROM barang";
-		String query3 = "SELECT * FROM kategori";
 
 		try {
 			ResultSet rs2 = connection.createStatement().executeQuery(query2);
@@ -138,6 +125,22 @@ public class Index extends HttpServlet {
 								.getString("jumlah_barang")));
 				allResults2.add(barang);
 			}
+			
+			/**Port*/
+//			String json2 = webkit.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories/");
+//			Gson gson = new Gson();
+//			JsonParser jsonParser = new JsonParser();
+//			JsonArray categoryArray = jsonParser.parse(json2).getAsJsonArray();
+//			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
+//			for (JsonElement category : categoryArray)
+//			{
+//				KategoriBean kategoriObj = gson.fromJson(category, KategoriBean.class);
+//				allResults3.add(kategoriObj);
+//			}			
+			/**Port*/
+			
+			/**OLD*/
+			String query3 = "SELECT * FROM kategori";
 
 			ResultSet rs3 = connection.createStatement().executeQuery(query3);
 			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
@@ -147,7 +150,8 @@ public class Index extends HttpServlet {
 						.getString("id")), rs3.getString("nama"));
 				allResults3.add(kategori);
 			}
-
+			/**OLD*/
+			
 			for (int i = 0; i < allResults3.size(); i++) {
 				String searchQuery = "SELECT barang.id FROM barang JOIN barang_user ON barang.id=barang_user.id_barang AND barang.id_kategori="
 						+ allResults3.get(i).getId()
@@ -192,6 +196,9 @@ public class Index extends HttpServlet {
 			request.setAttribute("items", allResults3);
 
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
