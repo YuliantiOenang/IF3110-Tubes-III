@@ -1,0 +1,28 @@
+/* Agar tidak mengubah non-content, selalu tambahkan "#content" sebelum elemen yang diacu. */
+#content p	{
+	color: #444;
+	line-height: 40px;
+}
+
+#content #gambar	{
+	float: right;
+	width: 200px;
+	margin: 20px;
+}
+
+#register_form {
+	width:95%;
+	margin:auto;
+	height:520px;
+	padding-top:30px;
+	display:block;
+}
+
+#register_form label{
+	display : inline-block;
+	width: 30%;
+	font-family: Tahoma;
+	color: #3B5999;
+	line-height: 40px;
+	letter-spacing:1px;
+}
