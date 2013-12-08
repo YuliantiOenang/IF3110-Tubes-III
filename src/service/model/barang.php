@@ -85,6 +85,8 @@ function get_kategori($cat, $page, $sort, $order){
 	$response["desc"] = "barang tidak ditemukan";
 	
 	if ($cat == "") return response;
+	
+	$page *= 10;
 
 	$db = db_connect();
 	$query = "SELECT * FROM barang WHERE kategori = '$cat' ORDER BY $sort $order LIMIT $page, 10";
@@ -110,6 +112,8 @@ function search_barang($q, $page, $sort, $order){
 	if ($q == "") return response;
 
 	$db = db_connect();
+	
+	$page *= 10;
 	
 	$search = "kategori LIKE '%$q%' or nama_barang LIKE '%$q%'";
 	
