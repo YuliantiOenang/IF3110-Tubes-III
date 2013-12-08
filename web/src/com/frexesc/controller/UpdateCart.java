@@ -51,7 +51,7 @@ public class UpdateCart extends HttpServlet {
 			if (request.getParameter("submit") != null) {
 				ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
 
-				/** Set WebService (REST) for retrieving list of Item Rank */
+				/** Set WebService (REST) for retrieving list of Barang */
 				WebService _rank = new WebService(hostname + "baranguser");
 				_rank.addParam("action", "read");
 				_rank.addParam("id", request.getParameter("id"));
@@ -103,7 +103,7 @@ public class UpdateCart extends HttpServlet {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				/** End of WebService for retrieving list of Item Rank */
+				/** End of WebService for retrieving Barang */
 
 				ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
 
