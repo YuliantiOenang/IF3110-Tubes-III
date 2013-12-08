@@ -58,12 +58,12 @@ public class Search extends HttpServlet {
 		JSONObject data = new JSONObject();
 		data.put("action", "search");
 		
-		data.put("query_name", request.getParameter("query_name"));
+		data.put("query_name",request.getParameter("query_name"));
 		data.put("query_category", request.getParameter("query_category"));
 		data.put("query_price", request.getParameter("query_price"));
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+		HttpPost httppost = new HttpPost(Database.WebServiceURL + "Actions");
 		
 		httppost.setEntity(new StringEntity(data.toString()));
 		CloseableHttpResponse httpresp = httpclient.execute(httppost);
@@ -80,18 +80,20 @@ public class Search extends HttpServlet {
 		
 		JSONArray arrayBarang = (JSONArray) jsonResponse.get("data");
 		
-		for(Object o: arrayBarang){
-			JSONObject tmp = (JSONObject) o;
-			
-			String name = (String) tmp.get("nama_inventori");
-			Barang brg = new Barang(name);
-			brg.setId_cat(((Long) tmp.get("id_kategori")).intValue());
-			brg.setId_inven(((Long) tmp.get("id_inventori")).intValue());
-			brg.setDesc((String) tmp.get("description"));
-			brg.setHarga(((Long) tmp.get("harga")).intValue());
-			brg.setGambar((String) tmp.get("gambar"));
-			brg.setJumlah(((Long) tmp.get("jumlah")).intValue());
-			barangs.add(brg);
+		if(arrayBarang != null){
+			for(Object o: arrayBarang){
+				JSONObject tmp = (JSONObject) o;
+				
+				String name = (String) tmp.get("nama_inventori");
+				Barang brg = new Barang(name);
+				brg.setId_cat(((Long) tmp.get("id_kategori")).intValue());
+				brg.setId_inven(((Long) tmp.get("id_inventori")).intValue());
+				brg.setDesc((String) tmp.get("description"));
+				brg.setHarga(((Long) tmp.get("harga")).intValue());
+				brg.setGambar((String) tmp.get("gambar"));
+				brg.setJumlah(((Long) tmp.get("jumlah")).intValue());
+				barangs.add(brg);
+			}
 		}
 					
 		request.setAttribute("barangs", barangs);	
