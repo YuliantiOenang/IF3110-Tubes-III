@@ -92,7 +92,7 @@
 		$hasil = array();
 		
 		foreach ($ids as $id) {
-				$array = sendRestRequest("GET","barang/".$id);
+				$array = sendRestRequest("GET","barang/".$id, array());
 				if ($array["status"] == "ok") {
 					array_push ($hasil, $array["barang"]);
 				} else {
@@ -142,7 +142,7 @@
 				$response["barang"] = array();
 				foreach($hasil as $barang){
 					if($barang!=null){
-						array_push($response["barang"], $barang->buildJSON());
+						array_push($response["barang"], $barang);
 					}else{
 						array_push($response["barang"], null);
 					}

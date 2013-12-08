@@ -29,7 +29,7 @@ function editCart(id_barang, defValue, edit_callback){
 		return;
 	}
 	
-	var data = {"action" : "add", "id_barang" : id_barang, "jumlah" : jumlah};
+	var data = {"action" : "add", "id_barang" : id_barang, "jumlah" : jumlah, "token": getLoginInfo().id};
 	
 	var callback = function(response){	
 		if(response.status == "ok"){
@@ -47,7 +47,7 @@ function editCart(id_barang, defValue, edit_callback){
 			alert("Jumlah barang sudah diatur");
 			if (edit_callback!=null) edit_callback();
 		}else{
-			alert("Jumlah barang tidak mencukupi! Barang yang tersisa tinggal " + response.sisa);
+			alert(response.desc);
 		}
 	};
 	

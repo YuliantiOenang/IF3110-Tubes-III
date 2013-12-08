@@ -1,26 +1,17 @@
 <?php
-	include(dirname(__FILE__)."/db.php");
+	//require_once dirname(__FILE__)."/rest_request.php";
 
 	//fungsi-fungsi transaksi barang
 	
-	function addToCart($id_barang, $jumlah){
+	function addToCart($id_barang, $jumlah, $token){
 		// mengecek apakah masih bisa meng-add barang dengan id tertentu sejumlah tertentu
-		// return -1 jika sukses, dan sisa barang jika gagal
-		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
-		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 		
-		$statement = $conn->prepare("SELECT stok FROM barang WHERE id_barang = ?");
+		$data["jumlah"]=$jumlah;
+		$data["token"]=$token;
 		
-		$statement->bind_param("i", $id_barang);
-		$statement->execute();
+		$response = sendRestRequest("POST", "cart/$id_barang", $data);
 		
-		$statement->bind_result($sisa);
-		$statement->fetch();
-		$statement->close();
-		
-		$conn->close();
-		
-		return $sisa >= $jumlah ? -1 : $sisa;
+		return $response;
 	}
 	
 	function checkCreditCart($id){
@@ -108,11 +99,7 @@
 		
 		switch($request["action"]){
 			case "add":
-				$sisa = addToCart($request["id_barang"], $request["jumlah"]);
-				if ($sisa == -1)
-					$response["status"] = "ok";
-				else
-					$response["sisa"] = $sisa;
+				$response = addToCart($request["id_barang"], $request["jumlah"], $request["token"]);
 			break;
 			case "buy":
 				$result = buy($request["list"], $request["id"]);

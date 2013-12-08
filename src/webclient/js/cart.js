@@ -70,7 +70,7 @@ function refreshCart(){
 			cart.innerHTML += s;
 			
 		}else{
-			cart.innerHTML = "error " + response.details;
+			cart.innerHTML = "error " + response.details + response.raw;
 		}
 	};
 	
