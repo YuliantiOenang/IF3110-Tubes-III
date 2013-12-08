@@ -12,9 +12,11 @@ function login(URL) {
 			if (data.success) {
 				// alert('Anda berhasil login');
 				document.getElementById('loading').innerHTML = "Anda berhasil login";
+				setCookie('usernameID',data.usernameID);
 				setCookie('isLogin','1');
 				setCookie('username',data.username);
 				setCookie('role',data.role);
+				setCookie('jmlTrans',data.jmlTransaksi);
 				if (data.isCreditCard)
 				{
 					setCookie('isCreditCard','1');

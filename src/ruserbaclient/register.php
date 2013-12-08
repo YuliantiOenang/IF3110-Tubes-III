@@ -2,7 +2,7 @@
 	require_once('header.php');
 ?>
 			<div onload="RefreshCartandShow()" id="content_frame">
-<form method="post">
+<form method="post" action="registerprocess.php">
 	<div class="register_div">
 		<h1 class="header">Register</h1>
 		<div class="per_form">

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<definitions name="Online Shop Web Service"
+	targetNamespace="thelastruserba.wsdl"
+	xmlns:tns="thelastruserba.wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="thelastruserba.xsd"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<!-- definition of datatypes -->
+	<types>
+	<schema targetNamespace="thelastruserba.xsd" xmlns="http://www.w3.org/2000/10/XMLSchema">
+		<element name="result">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="username">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="password">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="email">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="nama_lengkap">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="alamat">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="provinsi">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="kota">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="kodepos">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="telepon">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="nama_barang">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="harga">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+		<element name="stok">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+		<element name="kategori">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="deskripsi">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="card_number">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="name_of_card">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="expired_date">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="id_account">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+	</schema>
+	</types>
+<!-- response messages -->
+	<message name='returns_result'>
+	<part name='result' type='xsd:result'/>
+	</message>
+<!-- request messages -->
+	<message name='createUser'>
+	<part name='username' type='xsd:username'/>
+	<part name='username' type='xsd:password'/>
+	<part name='email' type='xsd:email'/>
+	<part name='nama_lengkap' type='xsd:nama_lengkap'/>
+	<part name='alamat' type='xsd:alamat'/>
+	<part name='provinsi' type='xsd:provinsi'/>
+	<part name='kota' type='xsd:kota'/>
+	<part name='kodepos' type='xsd:kodepos'/>
+	<part name='telepon' type='xsd:telepon'/>
+	</message>
+	<message name='createBarang'>
+	<part name='nama_barang' type='xsd:nama_barang'/>
+	<part name='harga' type='xsd:harga'/>
+	<part name='stok' type='xsd:stok'/>
+	<part name='kategori' type='xsd:kategori'/>
+	<part name='deskripsi' type='xsd:deskripsi'/>
+	</message>
+	<message name='createKartu'>
+	<part name='id_account' type='xsd:id_account'/>
+	<part name='card_number' type='xsd:card_number'/>
+	<part name='name_of_card' type='xsd:name_of_card'/>
+	<part name='expired_date' type='xsd:expired_date'/>
+	</message>
+
+<!-- server's services -->
+	<portType name='Ruko Online'>
+		<operation name='createUser'>
+		<input message='tns:createUser'/>
+		<output message='tns:returns_result'/>
+		</operation>
+		<operation name='createBarang'>
+		<input message='tns:createBarang'/>
+		<output message='tns:returns_result'/>
+		</operation>
+		<operation name='createKartu'>
+		<input message='tns:createKartu'/>
+		<output message='tns:returns_result'/>
+		</operation>
+	</portType>
+
+<!-- server encoding -->
+	<binding name='Ruko Online_webservices' type='tns:Ruko Online'>
+	<soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+		<operation name='createUser'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#createUser'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+		<operation name='createBarang'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#createBarang'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+		<operation name='createKartu'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#createKartu'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+	</binding>
+
+<!-- access to service provider -->
+	<service name='WBD'>
+	<port name='WBD_0' binding='Ruko Online_webservices'>
+	<!--<soap:address location='http://localhost/soap2'/>-->
+	<soap:address location='http://thelastruserbasoap.ap01.aws.af.cm/'/>
+	</port>
+	</service>
+</definitions>

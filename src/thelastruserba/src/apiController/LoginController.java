@@ -76,9 +76,10 @@ public class LoginController extends HttpServlet {
 						*/
 						JSONObject json = new JSONObject();
 						json.put("success", true);
-						
+						json.put("usernameID", Integer.parseInt(RS.getObject(1).toString()));
 						json.put("isLogin", true);
 						json.put("username", username);
+						json.put("jmlTransaksi", Integer.parseInt(RS.getObject(13).toString()));
 						json.put("role", Integer.parseInt(RS.getObject(12).toString()));
 						int ID = Integer.parseInt(RS.getObject(1).toString());
 						String queryCC = "select * from kredit where id_account = '" + ID + "' limit 1";
