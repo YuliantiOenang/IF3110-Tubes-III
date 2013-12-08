@@ -25,3 +25,8 @@ src/*/.buildpath
 
 # TeXlipse plugin
 src/*/.texlipse
+
+#Linux Cache
+*/*/*~
+*/*~
+*~

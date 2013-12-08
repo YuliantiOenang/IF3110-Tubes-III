@@ -98,6 +98,28 @@
     <servlet-name>adminIndex</servlet-name>
     <url-pattern>/thelastruserba/admin/index</url-pattern>
     <url-pattern>/admin/index</url-pattern>
+    <url-pattern>/thelastruserba/admin</url-pattern>
+    <url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>adminEditBarang</servlet-name>
+    <servlet-class>adminController.EditBarang</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminEditBarang</servlet-name>
+    <url-pattern>/thelastruserba/admin/editbarang</url-pattern>
+    <url-pattern>/admin/editbarang</url-pattern>
+    <url-pattern>/thelastruserba/admin/editBarang</url-pattern>
+    <url-pattern>/admin/editBarang</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>adminCekBarang</servlet-name>
+    <servlet-class>adminController.CekBarang</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminCekBarang</servlet-name>
+    <url-pattern>/thelastruserba/admin/cekBarang</url-pattern>
+    <url-pattern>/admin/cekBarang</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>adminDelete</servlet-name>

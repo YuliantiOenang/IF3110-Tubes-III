@@ -4,10 +4,10 @@ import org.json.JSONObject;
 
 public class GlobalConfig {
 
-	public String URLSQL = "jdbc:mysql://localhost:3306/ruserba";
-	public String SQLUser = "root";
-	public String SQLPass = "tkislam123";
-	public String Path = "/home/habibie/IF3110-Tubes-II/src/ruserba/";
+	public String URLSQL = "jdbc:mysql://localhost:3306/tugas_wbd3";
+	public String SQLUser = "wbd_user3";
+	public String SQLPass = "wbd@if3110";
+	public static String Path = "/home/habibie/IF3110-Tubes-II/src/ruserba/";
 	public String URLService = "http://localhost:8080/thelastruserba/";
 	public GlobalConfig()
 	{
