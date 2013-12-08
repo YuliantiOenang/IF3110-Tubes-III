@@ -74,7 +74,7 @@ public class ViewCart extends HttpServlet {
 		}
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+		HttpPost httppost = new HttpPost(Database.WebServiceURL + "Actions");
 		
 		httppost.setEntity(new StringEntity(data.toString()));
 		CloseableHttpResponse httpresp = httpclient.execute(httppost);
@@ -156,7 +156,7 @@ public class ViewCart extends HttpServlet {
 				
 				
 				for(Point barangIndex: cart){
-					HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+					HttpPost httppost = new HttpPost(Database.WebServiceURL + "Actions");
 					
 					data.put("action", "get_jumlah");
 					data.put("id", new Integer(barangIndex.x));

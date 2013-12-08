@@ -274,6 +274,7 @@ public class Actions extends HttpServlet {
 		    	}
 		    } else if(data.get("action").equals("search")){
 		    	try{
+		    		System.out.println("Searching...");
 		    		String query_name = (String) data.get("query_name");
 		    		String query_category = (String) data.get("query_category");
 		    		String query_price = (String) data.get("query_price");
@@ -281,11 +282,11 @@ public class Actions extends HttpServlet {
 		            String query = "SELECT * FROM inventori, kategori WHERE inventori.id_kategori = kategori.id_kategori";
 		        	
 		            if(!query_name.equals("")){
-						query += " AND inventori.nama_inventori LIKE \"%" + query_name + "%\"";
+						query += " AND inventori.nama_inventori LIKE '%" + query_name + "%'";
 					}
 					
 					if(!query_category.equals("")){
-						query += " AND kategori.nama_kategori LIKE \"%" + query_category + "%\"";
+						query += " AND kategori.nama_kategori LIKE '%" + query_category + "%'";
 					}
 					
 					if(!query_price.equals("")){
