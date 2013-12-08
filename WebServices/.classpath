@@ -20,6 +20,5 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jersey-server-1.0.3.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsr311-api-1.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Salvian/xampp/tomcat/lib/catalina.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
