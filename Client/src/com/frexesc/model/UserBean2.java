@@ -52,7 +52,15 @@ public class UserBean2 {
 		this.excard = excard;
 		this.transaction = transaction;
 	}
-
+	
+	public int getID() {
+		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+		
 	public int getRole() {
 		return role;
 	}

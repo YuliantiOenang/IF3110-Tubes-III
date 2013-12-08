@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
 import com.frexesc.model.UserBean;
+import com.frexesc.model.UserBean2;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -81,10 +82,10 @@ public class Index extends HttpServlet {
 				Gson gson = new Gson();
 				JsonParser jsonParser = new JsonParser();
 				JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
-				List<UserBean> categoriesList = new ArrayList<UserBean>();
+				List<UserBean2> categoriesList = new ArrayList<UserBean2>();
 				for (JsonElement category : categoryArray)
 				{
-					UserBean courseObj = gson.fromJson(category, UserBean.class);
+					UserBean2 courseObj = gson.fromJson(category, UserBean2.class);
 					categoriesList.add(courseObj);
 				}
 				
@@ -99,7 +100,7 @@ public class Index extends HttpServlet {
 				
 				
 				sessions.setAttribute("role", categoriesList.get(0).getRole());
-				sessions.setAttribute("user_id", categoriesList.get(0).get);
+				sessions.setAttribute("user_id", categoriesList.get(0).getID());
 				sessions.setAttribute("username", categoriesList.get(0).getUsername());
 /**old*/
 //				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");				
