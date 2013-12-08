@@ -71,7 +71,9 @@ public class Actions extends HttpServlet {
 		
 	    JSONObject JSONresp = new JSONObject();
 	    JSONObject data = (JSONObject) JSONValue.parse(getContent(request));
-	    //System.out.println("Data yang dikirimkan: " + sb.toString());
+	    
+	    System.out.println("Data yang didapat: " + data.toString());
+	    
 	    Driver asdf = new Driver();
         Connection koneksion;
 		try {
@@ -316,6 +318,24 @@ public class Actions extends HttpServlet {
 		    	} catch(Exception e){
 		    		e.printStackTrace();
 		    	}
+		    } else if(data.get("action").equals("edit_barang")){
+		    	Barang barang = (Barang) data.get("barang");
+		    	int id = ((Long) data.get("id")).intValue();
+		    	StringBuilder query = new StringBuilder();
+		    	
+		    	System.out.println("Nama barang baru: " + barang.getNama());
+		    	
+		    	query.append("UPDATE inventori SET ");
+				query.append("id_kategori = ").append(barang.getId_cat()).append(",");
+				query.append("nama_inventori = '").append(barang.getNama()).append("',");
+				query.append("jumlah = ").append(barang.getJumlah()).append(",");
+				query.append("description = '").append(barang.getDesc()).append("',");
+				query.append("harga = ").append(barang.getHarga());
+				query.append(" WHERE id_inventori = ").append(id);
+				
+				//String query = "UPDATE inventori SET total_transaksi=total_transaksi + " + jumlah + " WHERE id_inventori=" + id;
+	        	Statement asd = koneksion.createStatement();
+	            asd.executeUpdate(query.toString());
 		    }
 		    koneksion.close();
 		} catch (SQLException e1) {

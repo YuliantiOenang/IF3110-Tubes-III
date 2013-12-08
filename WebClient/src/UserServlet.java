@@ -99,14 +99,14 @@ public class UserServlet extends HttpServlet {
 				else
 						kp = 0;
 				
-			if(!hp.equals(""))
+				if(!hp.equals(""))
 					hape = Integer.parseInt(kodepos);
-			else
+				else
 					hape = 0;
 				
-				HePro.addUser(username, email, password, fullname, alamat, provinsi, kota, kp, hape);
-				responsetext = GetData(username);
-			}
+					HePro.addUser(username, email, password, fullname, alamat, provinsi, kota, kp, hape);
+					responsetext = GetData(username);
+				}
 			
 			response.getWriter().write(responsetext);
 		}
