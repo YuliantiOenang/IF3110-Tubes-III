@@ -36,7 +36,7 @@
   </servlet>
   <servlet-mapping>
   <servlet-name>User Service</servlet-name>
-  <url-pattern>/User/*</url-pattern>
+  <url-pattern>/UserService/*</url-pattern>
   </servlet-mapping>
   
 </web-app>
