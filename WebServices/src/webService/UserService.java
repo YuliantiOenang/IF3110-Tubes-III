@@ -15,6 +15,13 @@ import dto.Category;
 import dto.Course;
 import dto.User;
 
+
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.QueryParam;
+import dto.UserBean;
+
+
 @Path("/userservice")
 public class UserService
 {	
@@ -112,6 +119,60 @@ public class UserService
 				e.printStackTrace();
 		}
 		return user;
+	}
+	
+	//USER UPDATE
+	@POST
+	@Path("/updatecard")
+	public void updateCard(@FormParam("name") String name, @FormParam("num") String num, @FormParam("date") String date, @FormParam("id") String id)
+	{
+		try
+		{
+			new AccessManager().updateCard(name, num, date, id);
+		} catch (Exception e)
+		{
+				e.printStackTrace();
+		}
+	}
+	
+	@POST
+	@Path("/updatetrans")
+	public void updateTranscation(@FormParam("num") String num,  @FormParam("id") String id)
+	{
+		try
+		{
+			new AccessManager().updateTransaction(num, id);
+		} catch (Exception e)
+		{
+				e.printStackTrace();
+		}
+	}
+	
+	
+	@POST
+	@Path("/updateuser")
+	public void updateUser(@FormParam("name") String  name ,@FormParam("pass") String password ,@FormParam("email") String email ,@FormParam("phone") String  telephone ,@FormParam("add") String address ,@FormParam("city") String city ,@FormParam("prov") String province ,@FormParam("post") String postal ,@FormParam("id") String id)
+	{
+		try
+		{
+			new AccessManager().updateUser(name, password, email, telephone, address, city, province, postal, id);
+		} catch (Exception e)
+		{
+				e.printStackTrace();
+		}
+	}
+	
+	@POST
+	@Path("/insertuser")
+	public void insertUser(@FormParam("name") String  name, @FormParam("user") String  username ,@FormParam("pass") String password ,@FormParam("email") String email ,@FormParam("phone") String  telephone ,@FormParam("add") String address ,@FormParam("city") String city ,@FormParam("prov") String province ,@FormParam("post") String postal)
+	{
+		try
+		{
+			new AccessManager().insertUser(name, username, password, email, telephone, address, city, province, postal);
+		} catch (Exception e)
+		{
+				e.printStackTrace();
+		}
 	}
 	
 }

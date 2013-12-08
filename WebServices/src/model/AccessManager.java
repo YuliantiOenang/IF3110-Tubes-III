@@ -9,6 +9,9 @@ import dao.Database;
 import dto.Category;
 import dto.Course;
 import dto.User;
+import dto.BarangUserBean;
+import dto.UserBean;
+
 
 public class AccessManager
 {
@@ -85,5 +88,91 @@ public class AccessManager
 		Access access = new Access();
 		userList = access.getUserByNamePass(con,paramName,paramPass);
 		return userList;
+	}
+	
+	//BARANG_USER
+	public void insertBarangUser(String id_barang, String user_id, String qty, String desc) throws Exception
+	{
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		access.insertBarangUser(con, id_barang, user_id, qty, desc);
+	}
+	
+	public ArrayList<BarangUserBean> getBarangUserById(String id) throws Exception
+	{
+		ArrayList<BarangUserBean> user = new ArrayList<BarangUserBean>();
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		user = access.getBarangUserById(con, id);
+		return user;
+	}
+	
+	public ArrayList<BarangUserBean> getStatusZero(String id) throws Exception
+	{
+		ArrayList<BarangUserBean> user = new ArrayList<BarangUserBean>();
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		user = access.getStatusZero(con, id);
+		return user;
+	}
+	
+	public void deleteBarangUser(String id) throws Exception
+	{
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		access.deleteBarangUser(con, id);
+	}
+	
+	public void updateStatusBarangUser(String id) throws Exception
+	{
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		access.updateStatusBarangUser(con, id);
+	}
+	
+	public void updateJumlahBarangUser(String qty, String id) throws Exception
+	{
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		access.updateJumlahBarangUser(con, qty, id);
+	}
+	
+	//USER UPDATE
+	public void updateCard(String name, String num, String date, String id) throws Exception
+	{
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		access.updateCard(con, name, num, date, id);
+	}
+	
+	public void updateTransaction(String num, String id) throws Exception
+	{
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		access.updateTransaction(con, num, id);
+	}
+	
+	public void updateUser(String  name ,String password ,String email ,String  telephone ,String address ,String city ,String province ,String postal ,String id) throws Exception
+	{
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		access.updateUser(con, name, password, email, telephone, address, city, province, postal, id);
+	}
+	
+	public void insertUser(String  name , String username, String password ,String email ,String  telephone ,String address ,String city ,String province ,String postal) throws Exception
+	{
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		access.insertUser(con, name, username, password, email, telephone, address, city, province, postal);
 	}
 }
