@@ -6,9 +6,7 @@
 		$data["username"] = $user;
 		$data["password"] = $password;
 		
-		$res = sendRestRequest("POST", "login", $data);
-		
-		$response = simplexml_load_string($res);
+		$response = sendRestRequest("POST", "login", $data);
 		
 		if ($response["status"] == "ok"){
 			return $response["token"];
