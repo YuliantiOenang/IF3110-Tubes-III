@@ -1,6 +1,7 @@
 package com.frexescwebservice.model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.json.simple.JSONObject;
 
@@ -13,8 +14,9 @@ public class BarangUserBean {
 	private int status;
 	private int total_item;
 	private String description;
-	
-	public BarangUserBean() {}
+
+	public BarangUserBean() {
+	}
 
 	public BarangUserBean(long id, long id_item, long id_user, int status,
 			int total_item, String description) {
@@ -90,10 +92,24 @@ public class BarangUserBean {
 		}
 		return json;
 	}
-	
+
 	public void save() {
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
-	}
 
+		String query = "INSERT INTO barang_user (id_barang,id_user,status,jumlah_barang,deskripsi_tambahan) VALUES ("
+				+ id_item
+				+ ", "
+				+ id_user
+				+ ", 0, "
+				+ total_item
+				+ ", \""
+				+ description + "\")";
+
+		try {
+			connection.createStatement().executeUpdate(query);
+		} catch (SQLException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

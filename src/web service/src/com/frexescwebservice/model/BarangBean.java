@@ -1,6 +1,7 @@
 package com.frexescwebservice.model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.json.simple.JSONObject;
 
@@ -14,8 +15,9 @@ public class BarangBean {
 	private int price;
 	private String description;
 	private int total_item;
-	
-	public BarangBean() {}
+
+	public BarangBean() {
+	}
 
 	public BarangBean(long id, long id_category, String name, String picture,
 			int price, String description, int total_item) {
@@ -84,27 +86,43 @@ public class BarangBean {
 	public void setTotal_item(int total_item) {
 		this.total_item = total_item;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public JSONObject toJSON() {
 		JSONObject json = new JSONObject();
 		try {
-            json.put("id", id);
-            json.put("id_category", id_category);
-            json.put("name", name);
-            json.put("picture", picture);
-            json.put("price", price);
-            json.put("description", description);
-        	json.put("total_item", total_item);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			json.put("id", id);
+			json.put("id_category", id_category);
+			json.put("name", name);
+			json.put("picture", picture);
+			json.put("price", price);
+			json.put("description", description);
+			json.put("total_item", total_item);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return json;
 	}
-	
+
 	public void save() {
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
+
+		String insertQuery = "INSERT INTO barang (id_kategori, nama_barang, gambar, harga_barang, keterangan, jumlah_barang) VALUES ('"
+				+ id_category
+				+ "','"
+				+ name
+				+ "','"
+				+ picture
+				+ "','"
+				+ price
+				+ "','" + description + "','" + total_item + "')";
+
+		try {
+			connection.createStatement().executeUpdate(insertQuery);
+		} catch (SQLException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

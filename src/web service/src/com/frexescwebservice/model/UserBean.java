@@ -1,6 +1,7 @@
 package com.frexescwebservice.model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.json.simple.JSONObject;
 
@@ -232,5 +233,26 @@ public class UserBean {
 	public void save() {
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
+		
+		String insertQuery = "INSERT INTO user (nama, username, password, email, handphone, alamat, kota, provinsi, kodepos) VALUES ('"
+				+ name
+				+ "','"
+				+ username
+				+ "','"
+				+ password
+				+ "','"
+				+ email
+				+ "','"
+				+ telephone
+				+ "','"
+				+ address
+				+ "','"
+				+ city + "','" + province + "','" + postal + "')";
+		
+		try {
+			connection.createStatement().executeUpdate(insertQuery);
+		} catch (SQLException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
