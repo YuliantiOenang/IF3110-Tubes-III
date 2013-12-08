@@ -1,0 +1,172 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  version="3.0"
+  metadata-complete="true">
+ 
+	<welcome-file-list>
+		<welcome-file>home.jsp</welcome-file>
+	</welcome-file-list>
+ 
+	<servlet>
+		<servlet-name>ValidateCart</servlet-name>
+		<servlet-class>ValidateCart</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>ValidateCart</servlet-name>
+		<url-pattern>/AddToCart</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DatabaseAccess</servlet-name> 
+		<servlet-class>DatabaseAccess</servlet-class> 
+	</servlet> 
+ 
+	<servlet-mapping> 
+		<servlet-name>DatabaseAccess</servlet-name> 
+		<url-pattern>/Barang</url-pattern> 
+	</servlet-mapping> 
+	
+	<servlet>
+		<servlet-name>Checkout</servlet-name>
+		<servlet-class>Checkout</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>Checkout</servlet-name>
+		<url-pattern>/Checkout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SearchDB</servlet-name>
+		<servlet-class>SearchDB</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>SearchDB</servlet-name>
+		<url-pattern>/Search</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DetailBarang</servlet-name>
+		<servlet-class>DetailBarang</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>DetailBarang</servlet-name>
+		<url-pattern>/DetailBarang</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditDagang</servlet-name>
+		<servlet-class>EditDagang</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>EditDagang</servlet-name>
+		<url-pattern>/EditDagang</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddDagang</servlet-name>
+		<servlet-class>AddDagang</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>AddDagang</servlet-name>
+		<url-pattern>/AddDagang</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>deletebarang</servlet-name>
+		<servlet-class>deletebarang</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>deletebarang</servlet-name>
+		<url-pattern>/deletebarang</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ValidateLogin</servlet-name>
+		<servlet-class>ValidateLogin</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>ValidateLogin</servlet-name>
+		<url-pattern>/ValidateLogin</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>Logout</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/Logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UpdateProfile</servlet-name>
+		<servlet-class>UpdateProfile</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>UpdateProfile</servlet-name>
+		<url-pattern>/UpdateProfile</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Registrasi</servlet-name>
+		<servlet-class>Registrasi</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>Registrasi</servlet-name>
+		<url-pattern>/Registrasi</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ValidateRegistrasi</servlet-name>
+		<servlet-class>ValidateRegistrasi</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>ValidateRegistrasi</servlet-name>
+		<url-pattern>/ValidateRegistrasi</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RegistrasiKartu</servlet-name>
+		<servlet-class>RegistrasiKartu</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>RegistrasiKartu</servlet-name>
+		<url-pattern>/RegistrasiKartu</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>BestBuy</servlet-name>
+		<servlet-class>BestBuy</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>BestBuy</servlet-name>
+		<url-pattern>/BestBuy</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FileUploadServlet</servlet-name>
+		<servlet-class>FileUploadServlet</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>FileUploadServlet</servlet-name>
+		<url-pattern>/FileUploadServlet</url-pattern>
+	</servlet-mapping>
+
+</web-app>
