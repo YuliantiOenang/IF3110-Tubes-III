@@ -45,6 +45,7 @@ if ($barang == null) header("Location: index.php");
 		echo '<div class="row kategori"><div class="cell33">Kategori</div><div class="cell66">: ';
 		echo '<a href="category.php?cat='.$barang["kategori"].'">';
 		echo $barang["kategori"].'</a></div></div>';
+		echo '<div class="row jumlah"><div class="cell33">Stok</div><div class="cell66">: '.$barang["stok"].'</div></div>'; 
 		echo '<div class="row"><div class="cell33">Deskripsi</div><div class="cell66">:</div></div>';
 		echo '<div class="row deskripsi">'.$barang["deskripsi"].'</div>';
 		echo '</div>';
