@@ -133,50 +133,120 @@ public class ViewCart extends HttpServlet {
     
     public void buyCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     	System.out.println("Buying...");
+    	
     	String id_user = request.getParameter("user_id");
-    	System.out.println("ID user: " + id_user);
+    	//System.out.println("ID user: " + id_user);
     	
     	HttpSession session = request.getSession(true);
-		String db = "toko_imba";
-		java.sql.Connection con = null;
+		
+    	JSONObject jsonResponse = null;
+		
+		//int id = Integer.parseInt(request.getParameter("id_barang"));
+		
 		ArrayList<Point> cart = null;
 		int total = 0;
 		ArrayList<Barang> barangs = new ArrayList<Barang>();
 		if(session.getAttribute("cart") != null){
 			try {
-				Class.forName("org.gjt.mm.mysql.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, Database.getUser(), Database.getPass());
-				
 				cart = (ArrayList<Point>) session.getAttribute("cart");
+				
+				JSONObject data = new JSONObject();
+				
+				CloseableHttpClient httpclient = HttpClients.createDefault();
+				
+				
 				for(Point barangIndex: cart){
-					Statement state = con.createStatement();
+					HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+					
+					data.put("action", "get_jumlah");
+					data.put("id", new Integer(barangIndex.x));
+					httppost.setEntity(new StringEntity(data.toString()));
+					CloseableHttpResponse httpresp = httpclient.execute(httppost);
+					try {
+						HttpEntity entity = httpresp.getEntity();
+					    if (entity != null) {
+					    	String jsonresp = EntityUtils.toString(entity);
+				            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+					    }    
+					} finally {
+					    httpresp.close();
+					}
+					
+					//Statement state = con.createStatement();
 					
 					System.out.println("Executing query...");
-					
-					ResultSet rs = state.executeQuery("SELECT * FROM inventori WHERE id_inventori = " + barangIndex.x);
-					
+										
 					int jumlah = 0;
-					while(rs.next()){
-						jumlah = rs.getInt("jumlah");
+					if(jsonResponse != null){
+						jumlah = ((Long) jsonResponse.get("jumlah")).intValue();
 					}
 					
 					if(barangIndex.y <= jumlah){
-						//Update jumlah transaksi yang di inventori
-						state.executeUpdate("UPDATE inventori SET jumlah=jumlah - " + barangIndex.y + " WHERE id_inventori=" + barangIndex.x);
+						data.clear();
+						data.put("action", "decrease_inventori");
+						data.put("id", new Integer(barangIndex.x));
+						data.put("jumlah", new Integer(barangIndex.y));
+						httppost.setEntity(new StringEntity(data.toString()));
 						
+						httpresp = httpclient.execute(httppost);
+						try {
+							HttpEntity entity = httpresp.getEntity();
+						    if (entity != null) {
+						    	String jsonresp = EntityUtils.toString(entity);
+					            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+						    }    
+						} finally {
+						    httpresp.close();
+						}
+						//Update jumlah transaksi yang di inventori
+						//state.executeUpdate("UPDATE inventori SET jumlah=jumlah - " + barangIndex.y + " WHERE id_inventori=" + barangIndex.x);
+						
+						data.clear();
+						data.put("action", "increase_transaction_user");
+						data.put("id_user", id_user);
+						data.put("jumlah", new Integer(barangIndex.y));
+						httppost.setEntity(new StringEntity(data.toString()));
+						
+						httpresp = httpclient.execute(httppost);
+						try {
+							HttpEntity entity = httpresp.getEntity();
+						    if (entity != null) {
+						    	String jsonresp = EntityUtils.toString(entity);
+					            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+						    }    
+						} finally {
+						    httpresp.close();
+						}
 						//Update jumlah transaksi yang di user
-						state.executeUpdate("UPDATE user SET transaction = transaction + " + barangIndex.y +  " WHERE id='" + id_user +"'");
+						//state.executeUpdate("UPDATE user SET transaction = transaction + " + barangIndex.y +  " WHERE id='" + id_user +"'");
 						
+						data.clear();
+						data.put("action", "increase_transaction_inv");
+						data.put("id", new Integer(barangIndex.x));
+						data.put("jumlah", new Integer(barangIndex.y));
+						httppost.setEntity(new StringEntity(data.toString()));
+						
+						httpresp = httpclient.execute(httppost);
+						try {
+							HttpEntity entity = httpresp.getEntity();
+						    if (entity != null) {
+						    	String jsonresp = EntityUtils.toString(entity);
+					            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+						    }    
+						} finally {
+						    httpresp.close();
+						}
 						//Update jumlah transaksi yang di inventori
-						state.executeUpdate("UPDATE inventori SET total_transaksi=total_transaksi + " + barangIndex.y + " WHERE id_inventori=" + barangIndex.x);
+						//state.executeUpdate("UPDATE inventori SET total_transaksi=total_transaksi + " + barangIndex.y + " WHERE id_inventori=" + barangIndex.x);
 					}
 				}
+				httpclient.close();
 				
 				//Clear cart
 				session.removeAttribute("cart");
 				session.setAttribute("cart", new ArrayList<Point>());
 			}
-			catch(SQLException | ClassNotFoundException e) {
+			catch(Exception e) {
 				System.out.println("SQLException caught: " +e.getMessage());
 			}
 		}
