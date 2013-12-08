@@ -47,7 +47,7 @@ import org.postgresql.Driver;
 public class InventoriAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String DB_NAME = "toko_imba";
-	static final String helloService = "http://localhost:8080/KLK-WebService/services/Hello";
+	static final String helloService = "http://heroku-postgres-8655a651.herokuapp.com/services/Hello";
        
     /**
      * @see HttpServlet#HttpServlet()

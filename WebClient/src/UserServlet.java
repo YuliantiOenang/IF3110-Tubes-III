@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
 	
 	static final String JDBCDRIVER = "com.mysql.jdbc.DRIVER";
 	static final String DBURL = "jdbc:mysql://localhost/toko_imba";
-	static final String helloService = "http://localhost:8080/KLK-WebService/services/Hello";
+	static final String helloService = "http://heroku-postgres-8655a651.herokuapp.com/services/Hello";
 	
 	
 	static final String USER = Database.getUser();

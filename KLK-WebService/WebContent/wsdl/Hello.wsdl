@@ -77,7 +77,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdl:port binding="impl:HelloSoapBinding" name="Hello">
 
-         <wsdlsoap:address location="http://localhost:8080/KLK-WebService/services/Hello"/>
+         <wsdlsoap:address location="http://heroku-postgres-8655a651.herokuapp.com/services/Hello"/>
 
       </wsdl:port>
 
