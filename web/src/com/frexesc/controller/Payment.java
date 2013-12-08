@@ -66,17 +66,33 @@ public class Payment extends HttpServlet {
 
 				if (mainJSON.get("status").equals("true")) {
 					JSONObject data = (JSONObject) mainJSON.get("data");
-					UserBean active_user = new UserBean(data.get("username")
-							.toString(), data.get("password").toString(), data
-							.get("email").toString(), data.get("name")
-							.toString(), data.get("telephone").toString(), data
-							.get("address").toString(), data.get("province")
-							.toString(), data.get("city").toString(), data.get(
-							"postal").toString(), Integer.parseInt(data.get(
-							"role").toString()), data.get("nocard").toString(),
-							data.get("nacard").toString(), data.get("excard")
-									.toString(), Integer.parseInt(data.get(
-									"transaction").toString()));
+
+					String noCard = "";
+					String naCard = "";
+					String exCard = "";
+
+					if (data.get("nocard") != null)
+						noCard = data.get("nocard").toString();
+					if (data.get("nacard") != null)
+						naCard = data.get("nacard").toString();
+					if (data.get("excard") != null)
+						exCard = data.get("excard").toString();
+
+					UserBean active_user = new UserBean(
+							data.get("username").toString(),
+							data.get("password").toString(),
+							data.get("email").toString(),
+							data.get("name").toString(),
+							data.get("telephone").toString(),
+							data.get("address").toString(),
+							data.get("province").toString(),
+							data.get("city").toString(),
+							data.get("postal").toString(),
+							Integer.parseInt(data.get("role").toString()),
+							noCard,
+							naCard,
+							exCard,
+							Integer.parseInt(data.get("transaction").toString()));
 
 					if (active_user.getNocard() == null
 							|| active_user.getNocard().equals("")) {
