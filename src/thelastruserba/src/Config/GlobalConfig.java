@@ -15,7 +15,7 @@ public class GlobalConfig {
 		{
 			if (java.lang.System.getenv("VCAP_SERVICES") != null)
 			{
-				if (java.lang.System.getenv("VCAP_SERVICES").equals(""))
+				if (!java.lang.System.getenv("VCAP_SERVICES").equals(""))
 				{
 					JSONObject jsonVCAP = new JSONObject(java.lang.System.getenv("VCAP_SERVICES"));
 					JSONArray mysql = jsonVCAP.getJSONArray("mysql-5.1");

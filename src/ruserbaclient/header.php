@@ -122,7 +122,7 @@ require_once('config.php');
 							You are not login. (
 							<a onclick="showLogin()" href="#">Login</a>
 							or
-							<a href="/ruserba/register">Register now</a>
+							<a href="register.php">Register now</a>
 							)
 							</p>
 					<?php }

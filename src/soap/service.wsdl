@@ -78,7 +78,7 @@
 <!-- request messages -->
 	<message name='createUser'>
 	<part name='username' type='xsd:username'/>
-	<part name='username' type='xsd:password'/>
+	<part name='password' type='xsd:password'/>
 	<part name='email' type='xsd:email'/>
 	<part name='nama_lengkap' type='xsd:nama_lengkap'/>
 	<part name='alamat' type='xsd:alamat'/>
@@ -140,7 +140,6 @@
 <!-- access to service provider -->
 	<service name='WBD'>
 	<port name='WBD_0' binding='Ruko Online_webservices'>
-	<!--<soap:address location='http://localhost/soap2'/>-->
 	<soap:address location='http://thelastruserbasoap.ap01.aws.af.cm/'/>
 	</port>
 	</service>

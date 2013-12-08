@@ -8,7 +8,7 @@
 <hr>
 
 
-<form id="editRefreshBarang" method="POST" onsubmit="return saveBarang()">
+<form id="editRefreshBarang" method="POST" onsubmit="return saveBarang('<?=URLService;?>')">
 	<div class="register_div">
 		<h1 class="header">Edit Barang</h1>
         <input type="hidden" name="id" value="<?=$id?>">
@@ -29,7 +29,7 @@
 	</div>
 </form>
 <script>
-    function getBarangIdentity() {
+    function getBarangIdentity(URL) {
         var form = document.getElementById("editRefreshBarang");
         var xmlEditBarangRequest;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -50,13 +50,12 @@
             }
         }
         
-        xmlEditBarangRequest.open("GET","http://localhost:8080/thelastruserba/admin/editbarang?id=" + form.id.value,true);
+        xmlEditBarangRequest.open("GET",URL+"/admin/editbarang?id=" + form.id.value,true);
         xmlEditBarangRequest.send();
     }
     document.getElementById("submitEditBarang").disabled=true;
-    getBarangIdentity();
     
-    function saveBarang() {
+    function saveBarang(URL) {
         var form = document.getElementById("editRefreshBarang");
         var xmlEditBarangRequest;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -69,14 +68,14 @@
             if (xmlEditBarangRequest.readyState==4 && xmlEditBarangRequest.status==200) {
                 var data = JSON.parse(xmlEditBarangRequest.responseText);
                 if(data.status === "updated") {
-                    window.location.href = "http://localhost/ruserbaclient/adminIndex.php";
+                    window.location.href = "adminIndex.php";
                 } else {
                     alert(data.status);
                 }
             }
         }
         
-        xmlEditBarangRequest.open("POST","http://localhost:8080/thelastruserba/admin/editbarang",true);
+        xmlEditBarangRequest.open("POST",URL+"/admin/editbarang",true);
         xmlEditBarangRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         var data_send = "id=" + form.id.value + 
             "&nama_barang=" + form.nama_barang.value +
@@ -85,6 +84,7 @@
         return false;
     }
 </script>
+<img src="img/titik.png" onload="getBarangIdentity('<?=URLService;?>');">
 			</div>
 		</div>
 		<?php
