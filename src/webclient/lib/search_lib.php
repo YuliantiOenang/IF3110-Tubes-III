@@ -37,125 +37,54 @@
 		
 	}
 	
-	function searchHome(){
-		
-		
+	function searchHome(){	
 		$array = sendRestRequest("GET","populer",array());
-		return $array["hasil"];
-		/*global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
-		
-		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
-		$statement = $conn->prepare("SELECT * FROM barang ORDER BY jumlah_terbeli DESC LIMIT 0, 10");
-		
-		$statement->execute();
-		$statement->bind_result($id, $nama, $stok, $harga, $jumlah_beli, $kategori, $deskripsi);
-		
-		$result = array();
-		while($statement->fetch()){
-			$barang = new Barang();
-			$barang->set($id, $nama, $stok, $harga, $jumlah_beli, $kategori, $deskripsi);
-			array_push($result, $barang);
+		if ($array["status"] == "ok") {
+			return $array["hasil"];
+		} else {
+			return $array["desc"];
 		}
-		
-		$statement->close();
-		$conn->close();
-		
-		return $result;*/
 	}
 	
 	function searchAll($keyword, $page){
 		// mengambil barang yg punya keyword tertentu (entah nama, kategori, deskripsi, dll).
 		// page dimulai dari 0, 1 page 10 barang
 		// kembalian: array of Barang
-		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
-		
-		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
-		$statement = $conn->prepare("SELECT * FROM barang WHERE nama_barang REGEXP ? OR kategori REGEXP ? OR deskripsi REGEXP ? OR harga = ? LIMIT ?, 10");
-		
-		$oldkeyword = $keyword;
-		$keyword = str_replace(" ", "|", $keyword);	
-		
-		$page *= 10;
-		
-		$statement->bind_param("ssssi", $keyword, $keyword, $keyword, $oldkeyword, $page);
-		
-		$statement->execute();
-		$statement->bind_result($id, $nama, $stok, $harga, $jumlah_beli, $kategori, $deskripsi);
-		
-		$result = array();
-		while($statement->fetch()){
-			$barang = new Barang();
-			$barang->set($id, $nama, $stok, $harga, $jumlah_beli, $kategori, $deskripsi);
-			array_push($result, $barang);
+		$data["page"] = $page;
+		$array = sendRestRequest("GET","search/".$keyword, $data);
+		if ($array["status"] == "ok") {
+			return $array["hasil"];
+		} else {
+			return $array["desc"];
 		}
-		
-		$statement->close();
-		$conn->close();
-		
-		return $result;
 	}
 	
 	function searchCategory($category, $page, $srt, $ord){
 		// mengambil data barang dengan kategori tertentu, dengan pengurutan berdasarkan $sort dengan order $order
 		// page dimulai dari 0, 1 page 10 barang
 		// kembalian: array of Barang
+		$data["page"] = $page;
+		$data["sort"] = $srt;
+		$data["order"] = $ord;
 		
-		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
-		
-		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
-		
-		$sort = ($srt == "harga") ? "harga" : "nama_barang";
-		$order = ($ord == "desc") ? "DESC" : "ASC";
-				
-		$statement = $conn->prepare("SELECT * FROM barang WHERE kategori = ? ORDER BY ".$sort." ".$order." LIMIT ?, 10");
-		
-		$page = $page * 10;
-		
-		$statement->bind_param("si", $category, $page);
-		
-		$statement->execute();
-		
-		$statement->bind_result($id, $nama, $stok, $harga, $jumlah_beli, $kategori, $deskripsi);
-		$result = array();
-		while($statement->fetch()){
-			$barang = new Barang();
-			$barang->set($id, $nama, $stok, $harga, $jumlah_beli, $kategori, $deskripsi);
-			array_push($result, $barang);
+		$array = sendRestRequest("GET","kategori/".$category, $data);
+		if ($array["status"] == "ok") {
+			return $array["hasil"];
+		} else {
+			return $array["desc"];
 		}
 		
-		$statement->close();
-		$conn->close();
-		
-		return $result;
 	}
 
 	function searchId($id_barang){
 		// mengambil data barang dengan id tertentu (spesifik)
 		// kembalian: Barang
 		
-		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
-		
-		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
-		
-		$statement = $conn->prepare("SELECT * FROM barang WHERE id_barang = ?");
-		
-		$statement->bind_param("i", $id_barang);
-		
-		$statement->execute();
-		
-		$barang = new Barang();
-		
-		$statement->bind_result($barang->id, $barang->nama, $barang->stok, $barang->harga, $barang->jumlah_beli, $barang->kategori, $barang->deskripsi);
-		if($statement->fetch()){
-			$statement->close();
-			$conn->close();
-		
-			return $barang;
-		}else{
-			$statement->close();
-			$conn->close();
-			
-			return null;
+		$array = sendRestRequest("GET","barang/".$id_barang);
+		if ($array["status"] == "ok") {
+			return $array["barang"];
+		} else {
+			return $array["desc"];
 		}
 	}
 	

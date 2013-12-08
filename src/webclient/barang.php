@@ -10,7 +10,7 @@ if(isset($_POST["ajax"])){
 	}
 	
 	exit();	
-}else if(!isset($_GET["id"])){
+} else if(!isset($_GET["id"])){
 	header("Location: index.php");
 }
 
@@ -39,17 +39,17 @@ if ($barang == null) header("Location: index.php");
 	<div class='content'>
 	<?php
 		echo '<div class="barang table">';
-		echo '<div class="row title">'.$barang->nama.'</div>';
-		echo '<div class="row"><img class="imgbarang" src="image/'.$barang->id.'.jpg" /></div>';
-		echo '<div class="row harga"><div class="cell33">Harga</div><div class="cell66">: Rp. '.formatCurrency($barang->harga).'</div></div>';
+		echo '<div class="row title">'.$barang["nama"].'</div>';
+		echo '<div class="row"><img class="imgbarang" src="'.$IMAGE_BASE_URL.$barang["id"].'.jpg" /></div>';
+		echo '<div class="row harga"><div class="cell33">Harga</div><div class="cell66">: Rp. '.formatCurrency($barang["harga"]).'</div></div>';
 		echo '<div class="row kategori"><div class="cell33">Kategori</div><div class="cell66">: ';
-		echo '<a href="category.php?cat='.$barang->kategori.'">';
-		echo $barang->kategori.'</a></div></div>';
+		echo '<a href="category.php?cat='.$barang["kategori"].'">';
+		echo $barang["kategori"].'</a></div></div>';
 		echo '<div class="row"><div class="cell33">Deskripsi</div><div class="cell66">:</div></div>';
-		echo '<div class="row deskripsi">'.$barang->deskripsi.'</div>';
+		echo '<div class="row deskripsi">'.$barang["deskripsi"].'</div>';
 		echo '</div>';
 		
-		echo '<input class="main-button" type="button" value="Tambahkan ke Keranjang" onclick="addCart('.$barang->id.')"/>';
+		echo '<input class="main-button" type="button" value="Tambahkan ke Keranjang" onclick="addCart('.$barang["id"].')"/>';
 	?>
 	</div>
 </div>
