@@ -62,7 +62,7 @@ public class updateBarang extends HttpServlet {
 		data.put("id", new Integer(id));
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+		HttpPost httppost = new HttpPost(Database.WebServiceURL + "Actions");
 		
 		httppost.setEntity(new StringEntity(data.toString()));
 		CloseableHttpResponse httpresp = httpclient.execute(httppost);
