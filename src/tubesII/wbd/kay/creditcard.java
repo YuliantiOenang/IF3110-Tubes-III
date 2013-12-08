@@ -64,8 +64,9 @@ public class creditcard extends HttpServlet {
 				String cardnum = parameter[0];
 				String namecard = parameter[1];
 				String expdate = parameter[2];
+				String username = parameter[3];
 				
-				String query = "INSERT INTO `progin_13511059`.`creditcard` (`card_id`, `card_nameon`, `card_expdate`, `card_owner`) VALUES ('"+cardnum+"','"+namecard+"', '"+expdate+"', '"+session.getAttribute("username")+"')";
+				String query = "INSERT INTO `progin_13511059`.`creditcard` (`card_id`, `card_nameon`, `card_expdate`, `card_owner`) VALUES ('"+cardnum+"','"+namecard+"', '"+expdate+"', '"+username+"')";
 				
 				int status;
 				status = statement.executeUpdate(query);

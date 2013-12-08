@@ -7,6 +7,7 @@ if((sesi== null)|| (sesi.getAttribute("username")==null))
 	out.print("<script>window.location='register.jsp';</script>");
 try {
 	  //Load the JDBC driver
+	  	GlobalConfig GC = new GlobalConfig();
 			String uname = GC.getuser();
 			String pass = GC.getpass();
 			String url = GC.geturl();

@@ -1,4 +1,4 @@
-package tubesII.wbd.kay.barang;
+package tubesII.wbd.kay.barangaja;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +16,7 @@ public class Barang {
 	public static Connection con = null;
 	public static Statement state = null;
 	public static ResultSet result = null;
+	public static GlobalConfig GC = new GlobalConfig();
 	public static String uname = GC.getuser();
 	public static String pass = GC.getpass();
 	public static String url = GC.geturl();
@@ -28,7 +29,7 @@ public class Barang {
 	public static void startDbCon() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			con = DriverManager.getConnection(url, user, pass);
+			Connection con = DriverManager.getConnection(url, uname, pass);
 		} catch (Exception e) {
 			System.out.println("Cannot connect to database " + e.getMessage());
 		}

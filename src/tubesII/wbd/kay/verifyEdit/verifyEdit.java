@@ -60,6 +60,7 @@ public class verifyEdit extends HttpServlet {
 		String kecamatan = request.getParameter("kecamatan");
 		String postcode = request.getParameter("postcode");
 		try{
+			GlobalConfig GC = new GlobalConfig();
 			String uname = GC.getuser();
 			String pass = GC.getpass();
 			String url = GC.geturl();

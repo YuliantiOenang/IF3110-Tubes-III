@@ -71,6 +71,7 @@ public class Controller extends HttpServlet {
 		String password = request.getParameter("password");
 		//Connect to database
 		try{
+			GlobalConfig GC = new GlobalConfig();
 			String uname = GC.getuser();
 			String pass = GC.getpass();
 			String url = GC.geturl();

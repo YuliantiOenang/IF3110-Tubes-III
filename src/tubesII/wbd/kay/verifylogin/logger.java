@@ -16,6 +16,7 @@ public class logger {
 		boolean status = false;
 		
 		try{
+			GlobalConfig GC = new GlobalConfig();
 			String uname = GC.getuser();
 			String pass = GC.getpass();
 			String url = GC.geturl();

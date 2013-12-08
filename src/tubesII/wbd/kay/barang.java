@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import tubesII.wbd.kay.barang.Barang;
+import tubesII.wbd.kay.barangaja.Barang;
 import tubesII.wbd.GlobalConfig;
+
 import org.json.*;
 
 import com.google.gson.Gson;
@@ -95,6 +96,7 @@ public class barang extends HttpServlet {
 				String n_beli = parameter[4];
 				String keterangan = parameter[5];
 				String stok = parameter[6];
+				String id_barang =  parameter[7];
 				
 				String query = "UPDATE barang SET nama_barang='" + nama_barang + "', gambar_barang='" + gambar_barang + "', harga_barang=" + harga_barang + ", kategori_barang=" + kategori_barang + ", n_beli=" + n_beli + ", keterangan='" + keterangan + "', stok=" + stok + " WHERE id_barang=" + id_barang;
 				
@@ -115,14 +117,14 @@ public class barang extends HttpServlet {
 				
 				String query = "DELETE FROM barang WHERE id_barang=" + id_barang;
 				
-				int status;
-				status = statement.execute(query);
 				
-				if(status==0){
+				boolean status = statement.execute(query);
+				
+				if(status){ // kalau true
 					out.print("{ \"Status_operasi\" : \"berhasil\" }");
 				}else{
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
-					
+				}
 			}else if(action.equals("find")){
 				Statement statement = con.createStatement();
 				
@@ -131,11 +133,11 @@ public class barang extends HttpServlet {
 				boolean status = false;
 				ResultSet result = null;
 				
-				result = executeQuery(query);
+				result = statement.executeQuery(query);
 				status = result.next();
 				
 				if (status) {
-					barang = new Barang();
+					/*barang = new Barang();
 					barang.id_barang = Integer.parseInt(result.getString(1));
 					barang.nama_barang = result.getString(2);
 					barang.gambar_barang = result.getString(3);
@@ -145,7 +147,7 @@ public class barang extends HttpServlet {
 					barang.keterangan = result.getString(7);
 					barang.stok = Integer.parseInt(result.getString(8));
 					Gson gson = new Gson();
-					out.print(gson.toJson(barang));
+					out.print(gson.toJson(barang));*/
 				} else {
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
 				}
@@ -157,11 +159,11 @@ public class barang extends HttpServlet {
 				boolean status = false;
 				ResultSet result = null;
 				
-				result = executeQuery("SELECT * FROM barang WHERE id_barang=" + id);
+				result = statement.executeQuery("SELECT * FROM barang WHERE id_barang=" + id);
 				status = result.next();
 				
 				if (status) {
-					barang = new Barang();
+					/*barang = new Barang();
 					barang.id_barang = Integer.parseInt(result.getString(1));
 					barang.nama_barang = result.getString(2);
 					barang.gambar_barang = result.getString(3);
@@ -171,7 +173,7 @@ public class barang extends HttpServlet {
 					barang.keterangan = result.getString(7);
 					barang.stok = Integer.parseInt(result.getString(8));
 					Gson gson = new Gson();
-					out.print(gson.toJson(barang));
+					out.print(gson.toJson(barang));*/
 				} else {
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
 				}
@@ -183,10 +185,10 @@ public class barang extends HttpServlet {
 				boolean status = false;
 				ResultSet result = null;
 				
-				result = executeQuery(query);
+				result = statement.executeQuery(query);
 				
 				while(result.next()){
-					barang = new Barang();
+					/*barang = new Barang();
 					barang.id_barang = Integer.parseInt(result.getString(1));
 					barang.nama_barang = result.getString(2);
 					barang.gambar_barang = result.getString(3);
@@ -196,7 +198,7 @@ public class barang extends HttpServlet {
 					barang.keterangan = result.getString(7);
 					barang.stok = Integer.parseInt(result.getString(8));
 					Gson gson = new Gson();
-					out.print(gson.toJson(barang));
+					out.print(gson.toJson(barang));*/
 				}
 			}
 		}catch(Exception e){

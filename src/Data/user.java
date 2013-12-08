@@ -1,4 +1,4 @@
-package tubesII.wbd.kay;
+package Data;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import tubesII.wbd.GlobalConfig;
 
 import org.json.*;
+import com.google.gson.*;
 
 /**
  * Servlet implementation class verifyRegister
@@ -50,7 +51,8 @@ public class user extends HttpServlet {
 			String parameter[]=parameters.split(",");
 			GlobalConfig GC = new GlobalConfig();
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-			Connection con = DriverManager.getConnection (GC.geturl(), GC.getuser(), GC.getpass());
+			//Connection con = DriverManager.getConnection (GC.geturl(), GC.getuser(), GC.getpass());
+			Connection con = DriverManager.getConnection ("jdbc:mysql://localhost/progin_13511059", "root", "");
 			PrintWriter out =  response.getWriter();
 			// End OF DONT CHANGE
 			
@@ -73,12 +75,12 @@ public class user extends HttpServlet {
 				String kecamatan = parameter[7];
 				String postcode = parameter[8];
 				
-				String query = "INSERT INTO `progin_13511059`.`user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`) VALUES ('"+username+"','"+fullname+"','"+password+"','"+email+"','"+hpnum+"','"+address+"','"+province+"','"+kecamatan+"','"+postcode+"')";
+				String query = "INSERT INTO `user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`) VALUES ('"+username+"','"+fullname+"','"+password+"','"+email+"','"+hpnum+"','"+address+"','"+province+"','"+kecamatan+"','"+postcode+"')";
 				
 				int status;
 				status = statement.executeUpdate(query);
 				
-				if(status==0){
+				if(status==1){
 					out.print("{ \"Status_operasi\" : \"berhasil\" }");
 				}else{
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
@@ -99,12 +101,12 @@ public class user extends HttpServlet {
 				String kecamatan = parameter[7];
 				String postcode = parameter[8];
 				
-				String query = "UPDATE `progin_13511059`.`user` SET nama_lengkap='"+fullname+"', password='"+password+"', handphone="+hpnum+", address='"+address+"', province='"+province+"', state='"+kecamatan+"', postcode ="+postcode+", email='"+email+"'  WHERE username= '"+ username+"'";
+				String query = "UPDATE `user` SET nama_lengkap='"+fullname+"', password='"+password+"', handphone="+hpnum+", address='"+address+"', province='"+province+"', state='"+kecamatan+"', postcode ="+postcode+", email='"+email+"'  WHERE username= '"+ username+"'";
 				
-				int status;
-				status = statement.executeUpdate(query);
 				
-				if(status==0){
+				int status = statement.executeUpdate(query);
+				
+				if(status==1){
 					out.print("{ \"Status_operasi\" : \"berhasil\" }");
 				}else{
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
@@ -124,7 +126,7 @@ public class user extends HttpServlet {
 				status = rs.next();
 				
 				if (status)
-					out.print("{ \"Status_operasi\" : \"berhasil\" }");
+					out.print("{ \"Status_operasi\" : \"berhasil\" , \"Username\" : \""+username+"\"}");
 				else
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
 					
@@ -134,10 +136,14 @@ public class user extends HttpServlet {
 				String username = parameter[0];
 				
 				boolean status = false;
-				ResultSet rs = null;
+				//ResultSet rs = null;
 				
-				rs = statement.executeQuery("SELECT * FROM user where username ='"+username+"'");
+				ResultSet rs = statement.executeQuery("SELECT * FROM user where username ='"+username+"'");
 				
+				
+				
+				
+				/*
 				ArrayList<String> HasilQuery_username= new ArrayList<>();
 				ArrayList<String> HasilQuery_nama_lengkap= new ArrayList<>();
 				ArrayList<String> HasilQuery_password= new ArrayList<>();
@@ -147,10 +153,30 @@ public class user extends HttpServlet {
 				ArrayList<String> HasilQuery_province= new ArrayList<>();
 				ArrayList<String> HasilQuery_state= new ArrayList<>();
 				ArrayList<String> HasilQuery_postcode= new ArrayList<>();
+				*/
+				ArrayList<user_data> List_User_data = new ArrayList<>();
 
-				
 				while(rs.next()){
-					HasilQuery_username.add((String) rs.getObject(1));
+					user_data UD = new user_data();
+					
+					out.print(rs.getObject(1).toString());
+					
+					UD.setUsername(rs.getObject(1).toString());
+					UD.setNama_lengkap(rs.getObject(2).toString());
+					UD.setPassword(rs.getObject(3).toString());
+					UD.setEmail(rs.getObject(4).toString());
+					UD.setHandphone(rs.getObject(5).toString());
+					UD.setAddress(rs.getObject(6).toString());
+					UD.setProvince(rs.getObject(7).toString());
+					UD.setState(rs.getObject(8).toString());
+					UD.setPostcode(rs.getObject(9).toString());
+					UD.setN_pembelian(rs.getObject(10).toString());
+
+					
+
+					List_User_data.add(UD);
+					/*
+					HasilQuery_username.add();
 					HasilQuery_nama_lengkap.add((String) rs.getObject(2));
 					HasilQuery_password.add((String) rs.getObject(3));
 					HasilQuery_email.add((String) rs.getObject(4));
@@ -159,10 +185,17 @@ public class user extends HttpServlet {
 					HasilQuery_province.add((String) rs.getObject(7));
 					HasilQuery_state.add((String) rs.getObject(8));
 					HasilQuery_postcode .add((String) rs.getObject(9));
-					
+					*/
 				}
-				if (status)
-					out.print("{ \"Status_operasi\" : \"berhasil\" }");
+				
+				
+				//Convert Java Object into JSON object
+				Gson gson = new Gson();
+				
+				String output = gson.toJson(List_User_data);
+				status = List_User_data.isEmpty();
+				if (!status)
+					out.print("{ \"Status_operasi\" : \"berhasil\" , \"hasil\" : "+output+"  }");
 				else
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
 				
@@ -172,6 +205,16 @@ public class user extends HttpServlet {
 		}
 	}
 
+	/*
+	 * USED for data
+	 * */
+	
+	
+		
+		
+		
+		
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

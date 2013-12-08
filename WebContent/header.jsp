@@ -101,6 +101,7 @@
 	                        <%
 							try {
 								  //Load the JDBC driver
+								  		GlobalConfig GC = new GlobalConfig();
 										String uname = GC.getuser();
 										String pass = GC.getpass();
 										String url = GC.geturl();

@@ -66,6 +66,7 @@ public class verifyRegister extends HttpServlet {
 		int urowcount =0;
 		int erowcount =0;
 		try{
+			GlobalConfig GC = new GlobalConfig();
 			String uname = GC.getuser();
 			String pass = GC.getpass();
 			String url = GC.geturl();

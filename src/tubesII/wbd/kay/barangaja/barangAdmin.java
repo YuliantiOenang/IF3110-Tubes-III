@@ -1,4 +1,4 @@
-package tubesII.wbd.kay.barang;
+package tubesII.wbd.kay.barangaja;
 
 import java.io.File;
 import java.io.IOException;

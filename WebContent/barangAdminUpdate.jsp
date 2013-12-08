@@ -1,5 +1,5 @@
 <%@ include file= "./header.jsp" %>
-<%@ page import="tubesII.wbd.kay.barang.*" %>
+<%@ page import="tubesII.wbd.kay.barangaja.*" %>
 <%
 	Barang barang = (Barang)(request.getAttribute("barang"));
 %>

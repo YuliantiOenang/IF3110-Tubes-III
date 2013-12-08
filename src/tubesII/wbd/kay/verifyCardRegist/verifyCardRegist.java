@@ -58,6 +58,7 @@ public class verifyCardRegist extends HttpServlet {
 		String namecard = request.getParameter("namecard");
 		String expdate = request.getParameter("expdate");
 		try{
+			GlobalConfig GC = new GlobalConfig();
 			String uname = GC.getuser();
 			String pass = GC.getpass();
 			String url = GC.geturl();
