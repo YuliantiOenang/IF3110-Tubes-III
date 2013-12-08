@@ -13,25 +13,14 @@
 	}
 	
 	function handleEditProfileAjax(){
-		// handle ajax untuk aksi2 transaksi
+		// handle ajax untuk aksi2 edit profile
 		// syarat: $_POST["ajax"] terdefinisi
 		
 		$request = json_decode($_POST["ajax"], true);
 		$response = array("status" => "error");
 		
 		$response = updateUser($request);
-		/*if ($sisa >= 0){
-			$response["status"] = "ok";
-			$response["id"] = $sisa;
-		}else{
-			$response["status"] = "error";
-			if ($sisa == -1){
-				$response["message"] = "Username sudah terdaftar sebelumnya";
-			}
-			else{
-				$response["message"] = "Email sudah terdaftar sebelumnya";
-			}
-		}*/
+
 			
 		return json_encode($response);
 	}
