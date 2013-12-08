@@ -1,0 +1,57 @@
+/* File CSS untuk date.js
+ *  Dongkol Ampas Bro
+ */
+		.calendar {
+			font-size: 0.9em;
+			background-color: #FFF;
+			color: #333;
+			border: 1px solid #DDD;
+			padding: 0.2em;
+			width: 14em;
+		}
+			
+		.calendar .months {
+			background-color: #CABEDE;
+			border: 1px solid #DECAFE;
+			color: #FFF;
+			padding: 0.2em;
+			text-align: center;
+		}
+			
+		.calendar .prev-month {
+			float: left;
+		}
+			
+		.calendar .next-month {
+			float: right;
+		}
+			
+		.calendar .current-month {
+			margin: 0 auto;
+		}
+			
+		.calendar table {
+			border-collapse: collapse;
+			padding: 0;
+			font-size: 0.8em;
+			width: 100%;
+		}
+			
+		.calendar th {
+			text-align: center;
+		}
+			
+		.calendar td {
+			text-align: right;
+			padding: 1px;
+			width: 14.3%;
+		}
+			
+		.calendar td span {
+			display: block;
+			color: #1C94C4;
+			background-color: #F6F6F6;
+			border: 1px solid #CCC;
+			padding: 0.2em;
+			cursor: pointer;
+		}
