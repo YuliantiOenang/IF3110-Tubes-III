@@ -91,7 +91,7 @@ public class Access
 
 	public ArrayList<User> getUsersByIdlimit1(Connection con, int id) throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE id="+id+" LIMIT 1");
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE id= "+id+" LIMIT 1");
 		ResultSet rs = stmt.executeQuery();
 		try
 		{
@@ -109,7 +109,7 @@ public class Access
 	
 	public ArrayList<User> getUserByNoKartu(Connection con, String noKartu) throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE nomor_kartu="+noKartu+" LIMIT 1");
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE nomor_kartu= '"+noKartu+"' LIMIT 1");
 		ResultSet rs = stmt.executeQuery();
 		try
 		{
@@ -127,7 +127,7 @@ public class Access
 	
 	public ArrayList<User> getUserByNamaKartu(Connection con, String namaKartu) throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE nama_kartu="+namaKartu+" LIMIT 1");
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE nama_kartu= '"+namaKartu+"' LIMIT 1");
 		ResultSet rs = stmt.executeQuery();
 		try
 		{
@@ -146,7 +146,7 @@ public class Access
 	public ArrayList<User> getUserByNamePass(Connection con, String paramName,
 			String paramPass) throws SQLException {
 		ArrayList<User> userList = new ArrayList<User>();
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE username="+paramName+"and password="+paramPass+" LIMIT 1");
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE username= '"+paramName+"' AND password= '"+paramPass+"' LIMIT 1");
 		ResultSet rs = stmt.executeQuery();
 		try
 		{

@@ -18,8 +18,6 @@ import dto.User;
 @Path("/userservice")
 public class UserService
 {	
-
-	
 	@GET
 	@Path("/user/{paramID}")
 	@Produces("application/json")
