@@ -133,55 +133,57 @@ if (!reg.test(a)){
 <div class="outer">
 	<?php
 		include("header.php");
-		sendRestRequest("GET","user/".$u,$data);
-	
-echo"<div class='content'>"
-echo"<h3>Edit Profile</h3>"
-echo"<form id='form1' name='form1' method='post'>"
-echo"<div id='regtable' class='table'>"
-echo"<div class='row'>"
-echo"		<div class='cell50'>Name:</div>"
-		<div class="cell50"><input type="text" name="name" value="/></div>
-	  </div>
-	  <div class="row">
-		<div class="cell50">Address:</div>
-		<div class="cell50"><input type="text" name="address" /></div>
-	  </div>
-	  <div class="row">
-		<div class="cell50">Province:</div>
-		<div class="cell50"><input type="text" name="province" /></div>
-	  </div>
-	  <div class="row">
-		<div class="cell50">City:</div>
-		<div class="cell50"><input type="text" name="city" /></div>
-	  </div>
-	  <div class="row">
-		<div class="cell50">Zip Code:</div>
-		<div class="cell50"><input type="text" name="zipcode" /></div>
-	  </div>
-	  <div class="row">
-		<div class="cell50">Contact No.:</div>
-		<div class="cell50"><input type="text" name="contact" /></div>
-	  </div>
-	  <div class="row">
-		<div class="cell50">Email:</div>
-		<div class="cell50"><input type="text" name="email" /></div>
-	  </div>
-	 <div class="row">
-		<div class="cell50">Password:</div>
-		<div class="cell50"><input type="password" name="password" /></div>
-	  </div>
-	  <div class="row">
-		<div class="cell50">Confirm Password:</div>
-		<div class="cell50"><input type="password" name="cpassword" /></div>
-	  </div>
-	  <div class="row">
-		<div class="cell50"></div>
-		<div class="cell50"><input name="submit" type="button" onclick="return ValidateForm()" value="Submit" /></div>
-	  </div>
+		include("lib/rest_request.php");
+		$data["token"]=$_GET["t"];
+		$result = sendRestRequest("GET","user/".$_GET["u"],$data);
+		$user = $result["user"];
+echo"<div class='content'>";
+echo"<h3>Edit Profile</h3>";
+echo"<form id='form1' name='form1' method='post'>";
+echo"<div id='regtable' class='table'>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Name:</div>";
+echo"		<div class='cell50'><input type='text' name='name' value=".$user["nama_lengkap"]."/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Address:</div>";
+echo"		<div class='cell50'><input type='text' name='name' value=".$user["alamat"]."/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Province:</div>";
+echo"		<div class='cell50'><input type='text' name='name' value=".$user["provinsi"]."/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>City:</div>";
+echo"		<div class='cell50'><input type='text' name='name' value=".$user["kota"]."/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Zip Code:</div>";
+echo"		<div class='cell50'><input type='text' name='name' value=".$user["kodepos"]."/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Contact No:</div>";
+echo"		<div class='cell50'><input type='text' name='name' value=".$user["telepon"]."/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Email:</div>";
+echo"		<div class='cell50'><input type='text' name='name' value=".$user["email"]."/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Username:</div>";
+echo"		<div class='cell50'><input type='text' name='name' value=".$user["username"]."/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Password:</div>";
+echo"		<div class='cell50'><input type='text' name='password'/></div>";
+echo"</div>";
+echo"<div class='row'>";
+echo"		<div class='cell50'>Confirm Password:</div>";
+echo"		<div class='cell50'><input type='text' name='cpassword'/></div>";
+echo"</div>
 	</div>
 	</form>
 </div></div>
 </body>
-</html>
+</html>";
 ?>
