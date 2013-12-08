@@ -22,7 +22,7 @@ public class KreditSoapServiceLocator extends org.apache.axis.client.Service imp
     }
 
     // Use to get a proxy class for KreditSoap
-    private java.lang.String KreditSoap_address = "http://localhost:8080/CalvinSalvyWebservice/services/KreditSoap";
+    private java.lang.String KreditSoap_address = "http://calvinsalvy.ap01.aws.af.cm/services/KreditSoap";
 
     public java.lang.String getKreditSoapAddress() {
         return KreditSoap_address;

@@ -22,7 +22,7 @@ public class AccountSoapServiceLocator extends org.apache.axis.client.Service im
     }
 
     // Use to get a proxy class for AccountSoap
-    private java.lang.String AccountSoap_address = "http://localhost:8080/CalvinSalvyWebservice/services/AccountSoap";
+    private java.lang.String AccountSoap_address = "http://calvinsalvy.ap01.aws.af.cm/services/AccountSoap";
 
     public java.lang.String getAccountSoapAddress() {
         return AccountSoap_address;

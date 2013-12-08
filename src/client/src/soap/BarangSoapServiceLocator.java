@@ -22,7 +22,7 @@ public class BarangSoapServiceLocator extends org.apache.axis.client.Service imp
     }
 
     // Use to get a proxy class for BarangSoap
-    private java.lang.String BarangSoap_address = "http://localhost:8080/CalvinSalvyWebservice/services/BarangSoap";
+    private java.lang.String BarangSoap_address = "http://calvinsalvy.ap01.aws.af.cm/services/BarangSoap";
 
     public java.lang.String getBarangSoapAddress() {
         return BarangSoap_address;
