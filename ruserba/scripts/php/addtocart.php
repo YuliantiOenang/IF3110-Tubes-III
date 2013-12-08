@@ -1,14 +1,14 @@
 <?php
 	if (isset($_POST['id'])) {
-		$query = 'select * from barang where id_barang=?';
-		$params = array($_POST['id']);
-		include 'query.php';
-		if (count($result)>0){
+		$rest = "http://ditra77.ap01.aws.af.cm";
+		ini_set('max_execution_time', 300);
+		$barang = simplexml_load_file($rest."/barang/".$_POST['id'].".xml");
+		if (count($barang->children())>0){
 			$amount = 1;
 			if (isset($_POST['amount'])) {
 				$amount = $_POST['amount'];
 			}
-			if($result[0]['tersedia']>=$amount){
+			if($barang->tersedia>=$amount){
 				session_start();
 				if (isset($_SESSION['cart'])){
 					if (array_key_exists($_POST['id'], $_SESSION['cart'])) {

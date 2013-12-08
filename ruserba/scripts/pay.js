@@ -5,7 +5,6 @@ window.addEventListener('load', function() {
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/ruserba/scripts/php/pay.php', true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		var postParams = 'username=' + localStorage.getItem('username');
 		xhr.send(postParams);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {

@@ -3,6 +3,17 @@
 	<h2 id='formtitle'></h2>
 	<br />
 	<form id='formprofile' method='post'>
+		<?php
+			echo '<input type="hidden" name="username" value ="'.$_SESSION['username'].'">';
+			echo '<input type="hidden" name="name_old" value ="'.$_SESSION['nama'].'">';
+			echo '<input type="hidden" name="password_old" value ="'.$_SESSION['password'].'">';
+			echo '<input type="hidden" name="email" value ="'.$_SESSION['email'].'">';
+			echo '<input type="hidden" name="alamat_old" value ="'.$_SESSION['alamat'].'">';
+			echo '<input type="hidden" name="provinsi_old" value ="'.$_SESSION['provinsi'].'">';
+			echo '<input type="hidden" name="kotakabupaten_old" value ="'.$_SESSION['kota'].'">';
+			echo '<input type="hidden" name="kodepos_old" value ="'.$_SESSION['kodepos'].'">';
+			echo '<input type="hidden" name="nohp_old" value ="'.$_SESSION['nomor_ponsel'].'">';
+		?>
 		<span class='formlabel'>Nama lengkap</span><input type='text' name='name'value = ' '><br />
 		<span id='errorname' class='formerrortext'>Nama lengkap harus terdiri dari paling sedikit 2 kata</span><br />
 		

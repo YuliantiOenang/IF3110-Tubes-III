@@ -19,8 +19,8 @@
 </div>
 <?php } else { ?>
 <div id='loggedin'>
-	<div id='welcome'>Selamat datang, <a id='user'></a>!</div>
-	<a id='logoutbutton' class='button' href='javascript:void(0)'><div>Keluar</div></a>
+	<div id='welcome'>Selamat datang, <a href="/ruserba/profile"><?php echo $_SESSION['username'];?></a>!</div>
+	<a id='logoutbutton' class='button' href='/ruserba/scripts/php/logout.php'><div>Keluar</div></a>
 	<br />
 	<a id='cartbutton' class='button' href='/ruserba/cart'><div>
 		<img src='/ruserba/assets/cart.png' />

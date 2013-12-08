@@ -1,7 +1,4 @@
 window.addEventListener('load', function() {
-	if (localStorage.getItem('auth_token') === null) {
-		window.location.href = '/ruserba/register';
-	}
 
 	var inputjumlah = document.getElementsByClassName('inputjumlah');
 

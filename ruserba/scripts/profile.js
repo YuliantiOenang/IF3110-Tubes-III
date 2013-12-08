@@ -1,42 +1,30 @@
 window.addEventListener('load', function() {
-	if (localStorage.getItem('auth_token') === null) {
-		window.location.href = '/ruserba/register';
-	}
-	
-	document.getElementById('formtitle').innerHTML = 'Profil ' + localStorage.getItem('username');
-
 	var name = document.getElementsByName('name')[0];
 	var password = document.getElementsByName('password')[0];
 	var confirm = document.getElementsByName('confirm')[0];
 	var alamat = document.getElementsByName('alamat')[0];
 	var provinsi = document.getElementsByName('provinsi')[0];
 	var kotakabupaten = document.getElementsByName('kotakabupaten')[0];
-	var kodepos= document.getElementsByName('kodepos')[0];
+	var kodepos = document.getElementsByName('kodepos')[0];
 	var nohp = document.getElementsByName('nohp')[0];
 	var submit = document.getElementsByName('esubmit')[0];
-
-	var record;
-
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/ruserba/scripts/php/retrieve_profile.php', true);
-	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhr.send('username=' + localStorage.getItem('username'));
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			var response = JSON.parse(xhr.responseText);
-			if (response['status'] == 'success') {
-				record = response['record'];
-				name.value = record['nama'];
-				password.value = record['password'];
-				confirm.value = record['password'];
-				alamat.value = record['alamat'];
-				provinsi.value = record['provinsi'];
-				kotakabupaten.value = record['kota'];
-				kodepos.value = record['kode_pos'];
-				nohp.value = record['nomor_ponsel'];
-			}
-		}
-	}
+	var name_old = document.getElementsByName('name_old')[0];
+	var password_old = document.getElementsByName('password_old')[0];
+	var alamat_old = document.getElementsByName('alamat_old')[0];
+	var provinsi_old = document.getElementsByName('provinsi_old')[0];
+	var kotakabupaten_old = document.getElementsByName('kotakabupaten_old')[0];
+	var kodepos_old = document.getElementsByName('kodepos_old')[0];
+	var nohp_old = document.getElementsByName('nohp_old')[0];
+	var username = document.getElementsByName('username')[0];
+	var email = document.getElementsByName('email')[0];
+	name.value=name_old.value;
+	password.value=password_old.value;
+	confirm.value=password_old.value;
+	alamat.value=alamat_old.value;
+	provinsi.value=provinsi_old.value;
+	kotakabupaten.value=kotakabupaten_old.value;
+	kodepos.value=kodepos_old.value;
+	nohp.value=nohp_old.value;
 	
 	var errorname = document.getElementById('errorname');
 	var errorpass = document.getElementById('errorpass');
@@ -137,29 +125,29 @@ window.addEventListener('load', function() {
 	};
 	
 	document.getElementById('formprofile').onsubmit = function() {
-		if (record['alamat'] == null) {
-			record['alamat'] = '';
+		if (alamat_old.value == null) {
+			alamat_old.value = '';
 		}
-		if (record['kota'] == null) {
-			record['kota'] = '';
+		if (kotakabupaten_old.value == null) {
+			kotakabupaten_old.value = '';
 		}
-		if (record['kode_pos'] == null) {
-			record['kode_pos'] = '';
+		if (kodepos_old.value == null) {
+			kodepos_old.value = '';
 		}
-		if (record['provinsi'] == null) {
-			record['provinsi'] = '';
+		if (provinsi_old.value == null) {
+			provinsi_old.value = '';
 		}
-		if (record['nomor_ponsel'] == null) {
-			record['nomor_ponsel'] = '';
+		if (nohp_old.value == null) {
+			nohp_old = '';
 		}
-		if (name.value != record['nama'] || password.value != record['password'] || alamat.value != record['alamat'] || provinsi.value != record['provinsi'] || kotakabupaten.value != record['kota'] || kodepos.value != record['kode_pos'] || nohp.value != record['nomor_ponsel']) {
-			if (record['username'] != password.value) {
-				if (record['email'] != password.value) {
+		if (name.value != name_old.value || password.value != password_old.value || alamat.value != alamat_old.value || provinsi.value != provinsi_old.value || kotakabupaten.value != kotakabupaten_old.value || kodepos.value != kodepos_old.value || nohp.value != nohp_old.value) {
+			if (username.value != password.value) {
+				if (email.value != password.value) {
 					if (password.value == confirm.value) {
 						var xhr = new XMLHttpRequest();
 						xhr.open('POST', '/ruserba/scripts/php/save_profile.php', true);
 						xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-						var postParams = 'username=' + record['username'];
+						var postParams = 'username=' + username.value;
 						postParams += '&password=' + password.value;
 						postParams += '&nama=' + name.value;
 						postParams += '&alamat=' + alamat.value;
