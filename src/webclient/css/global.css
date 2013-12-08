@@ -8,6 +8,10 @@ html, body{
 	font-size: 11pt;
 }
 
+
+pre {
+	font-family : Sans;
+}
 .outer{
 	width: 80%;
 	min-height:100%;
