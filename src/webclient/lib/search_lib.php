@@ -146,7 +146,7 @@
 					
 					foreach($hasil as $barang){
 						if($barang!=null){
-							array_push($response["barang"], $barang->buildJSON());
+							array_push($response["barang"], $barang);
 						}else{
 							array_push($response["barang"], null);
 						}
@@ -162,7 +162,7 @@
 					
 					foreach($hasil as $barang){
 						if($barang!=null){
-							array_push($response["barang"], $barang->buildJSON());
+							array_push($response["barang"], $barang);
 						}else{
 							array_push($response["barang"], null);
 						}
