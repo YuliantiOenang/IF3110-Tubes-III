@@ -8,12 +8,12 @@
 			<div onload="RefreshCartandShow()" id="content_frame">
 				<script type="text/javascript" src="js/cekUnik.js"></script>
 
-<form enctype="multipart/form-data" method="POST" action="admin/addbarang">
+<form enctype="multipart/form-data" method="POST" action="adminAddBarangProcess.php">
 <div class="register_div">
 	<h1 class="header">Tambah Barang</h1>
 	<div class="per_form">
 		<label>Nama</label>
-		<input type="text" autocomplete="off" name="nama_barang" onkeyup="cekUnik(this.value)" id="nama_barang"> <span id="message"></span>
+		<input type="text" autocomplete="off" name="nama_barang" onkeyup="cekUnik('<?=URLService;?>',this.value)" id="nama_barang"> <span id="message"></span>
 	</div>
 	<div class="per_form">
 		<label>Kategori</label>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:javaee="http://xmlns.jcp.org/xml/ns/javaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:javaee="http://xmlns.jcp.org/xml/ns/javaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xmlns:web_1="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <servlet>
     <servlet-name>Index</servlet-name>
     <servlet-class>indexController.Index</servlet-class>
@@ -109,27 +109,45 @@
     <url-pattern>/admin/deletebarang</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>profileController</servlet-name>
-  	<servlet-class>userController.ProfileController</servlet-class>
+    <servlet-name>profileController</servlet-name>
+    <servlet-class>userController.ProfileController</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>profileController</servlet-name>
-  	<url-pattern>/thelastruserba/profile/index</url-pattern>
-  	<url-pattern>/profile/index</url-pattern>
-  	<url-pattern>/thelastruserba/profile</url-pattern>
-  	<url-pattern>/profile</url-pattern>
-  	<url-pattern>/thelastruserba/profile/index/</url-pattern>
-  	<url-pattern>/profile/index/</url-pattern>
-  	<url-pattern>/thelastruserba/profile/</url-pattern>
-  	<url-pattern>/profile/</url-pattern>
+    <servlet-name>profileController</servlet-name>
+    <url-pattern>/thelastruserba/profile/index</url-pattern>
+    <url-pattern>/profile/index</url-pattern>
+    <url-pattern>/thelastruserba/profile</url-pattern>
+    <url-pattern>/profile</url-pattern>
+    <url-pattern>/thelastruserba/profile/index/</url-pattern>
+    <url-pattern>/profile/index/</url-pattern>
+    <url-pattern>/thelastruserba/profile/</url-pattern>
+    <url-pattern>/profile/</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>profileEditController</servlet-name>
-  	<servlet-class>userController.ProfilEditController</servlet-class>
+    <servlet-name>profileEditController</servlet-name>
+    <servlet-class>userController.ProfilEditController</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>profileEditController</servlet-name>
-  	<url-pattern>/thelastruserba/profile/edit</url-pattern>
-  	<url-pattern>/profile/edit</url-pattern>
+    <servlet-name>profileEditController</servlet-name>
+    <url-pattern>/thelastruserba/profile/edit</url-pattern>
+    <url-pattern>/profile/edit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Transaksi</servlet-name>
+    <servlet-class>apiController.TransactionProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Transaksi</servlet-name>
+    <url-pattern>/thelastruserba/api/transaction</url-pattern>
+    <url-pattern>/api/transaction</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CekBarang</servlet-name>
+    <servlet-class>adminController.CekBarang</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CekBarang</servlet-name>
+    <url-pattern>/thelastruserba/admin/cekBarang</url-pattern>
+    <url-pattern>/admin/cekBarang</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -77,17 +77,18 @@
 </script>
 
 <div class="header_divider">
-	<h1 class="header">Ladies Dress</h1>
-</div>
-<div class="header_divider">
-	<div class="sorting">
-	<?php
+<?php
 		$var=$_GET['kategori'];
 		$nama_barang=$_GET['nama_barang'];
 		$kategori = $_GET['kategori'];
 		$harga = $_GET['harga'];
 		$OP = $_GET['operator'];
 	?>
+	<h1 class="header"><?=$var;?></h1>
+</div>
+<div class="header_divider">
+	<div class="sorting">
+	
 		Sort by : 
 		Nama 
 		<a class="btn small" onclick="init('<?=BarangService;?>','nama','ASC','<?=$nama_barang;?>','<?=$var;?>','<?=$harga;?>','<?=$OP;?>')" href="#">ASC</a> 

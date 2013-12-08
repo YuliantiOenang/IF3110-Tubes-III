@@ -25,7 +25,7 @@
 			<input type="text" value="470000" name="harga_barang">
 		</div>
 		<div class="per_form">
-			<img width="100" height="100" src="images/barang/17.jpg"><br>
+			<img width="100" height="100" src="img/barang/17.jpg"><br>
 			<label>Gambar</label>
 			<input type="file" value="17.jpg" name="file">
 		</div>

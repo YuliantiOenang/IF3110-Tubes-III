@@ -24,7 +24,7 @@ if (isset($_COOKIE['isCreditCard']))
 ?>
 	<img src="img/titik.png" onload="payment('<?=URLService;?>','','',true)">
 <?php
-	header("Location: barang.php");
+	//header("Location: barang.php");
 }
 else
 {
