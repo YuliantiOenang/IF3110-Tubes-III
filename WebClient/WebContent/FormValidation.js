@@ -1,5 +1,5 @@
 	//. Variabel global
-	usernameflag, passwordflag, fullnameflag, emailflag, confirmflag = false;
+	var usernameflag, passwordflag, fullnameflag, emailflag, confirmflag = false;
 
 	// Fungsi validasi format input di registrasi
 	function validate(type){

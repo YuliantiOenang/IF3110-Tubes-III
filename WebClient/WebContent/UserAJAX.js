@@ -284,7 +284,8 @@ function ProcessRegistrationResponse(xmlhttp){
 function InitializeValue(){
 	document.getElementById("username2").innerHTML = localStorage.user_id;
 	document.getElementById("email").innerHTML = localStorage.email;
-	document.getElementById("transaksi").innerHTML = localStorage.transaction;
+	document.getElementById("transaksi").innerHTML = "Mohon tunggu...";
+	getTransactionCountValue();
 	document.forms["registration"]["password"].value = localStorage.password;
 	document.forms["registration"]["confirm"].value = localStorage.password;
 	document.forms["registration"]["fullname"].value = localStorage.fullname;
@@ -294,6 +295,33 @@ function InitializeValue(){
 	document.forms["registration"]["kodepos"].value = localStorage.kodepos;
 	document.forms["registration"]["hp"].value = localStorage.hp;
 }
+
+function getTransactionCountValue(){
+	var data = "id_user=" + localStorage.user_id;
+	data += "&type=transaksi";
+	
+	//document.getElementById("transaksi").innerHTML = "Mohon tunggu...";
+	
+	//lakukan koneksi ke servlet
+	var xmlhttp;
+	if (window.XMLHttpRequest){
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	 }
+	else{
+	// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}	
+	
+	xmlhttp.onreadystatechange=function(){
+		document.getElementById("transaksi").innerHTML = xmlhttp.responseText;
+	};
+	xmlhttp.open("POST","servlet", true);
+	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlhttp.send(data);
+}
+
+
 function CheckChange(){
 	if(document.forms["registration"]["password"].value == localStorage.password &&
 		document.forms["registration"]["fullname"].value == localStorage.fullname && 
