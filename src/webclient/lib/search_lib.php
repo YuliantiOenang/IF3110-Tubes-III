@@ -91,6 +91,18 @@
 	function searchIds($ids){
 		$hasil = array();
 		
+		foreach ($ids as $id) {
+				$array = sendRestRequest("GET","barang/".$id);
+				if ($array["status"] == "ok") {
+					array_push ($hasil, $array["barang"]);
+				} else {
+					return $array["desc"];
+				}
+
+		}
+		
+		return $hasil;
+		/*
 		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
 		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 	
@@ -112,7 +124,7 @@
 		
 		$conn->close();
 		
-		return $hasil;
+		return $hasil;*/
 	}
 	
 	function handleSearchAjax(){
