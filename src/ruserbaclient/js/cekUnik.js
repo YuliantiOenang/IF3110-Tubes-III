@@ -25,7 +25,7 @@ xmlhttpUnik.onreadystatechange=function()
 	}
 };
 
-function cekUnik(URL,name)
+function cekUnik(name)
 {
 	if (name=="")
 	{
@@ -34,7 +34,7 @@ function cekUnik(URL,name)
 	}
 	else
 	{
-		xmlhttpUnik.open("GET",URL+"/admin/cekBarang?name="+name,true);
+		xmlhttpUnik.open("GET","http://localhost:8080/thelastruserba/admin/cekBarang?name="+name,true);
 		xmlhttpUnik.send();
 	}
 }
