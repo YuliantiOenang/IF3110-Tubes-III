@@ -80,7 +80,7 @@
 		// mengambil data barang dengan id tertentu (spesifik)
 		// kembalian: Barang
 		
-		$array = sendRestRequest("GET","barang/".$id_barang);
+		$array = sendRestRequest("GET","barang/".$id_barang, array());
 		if ($array["status"] == "ok") {
 			return $array["barang"];
 		} else {
@@ -158,7 +158,7 @@
 					
 					foreach($hasil as $barang){
 						if($barang!=null){
-							array_push($response["barang"], $barang->buildJSON());
+							array_push($response["barang"], $barang);
 						}else{
 							array_push($response["barang"], null);
 						}
@@ -174,7 +174,7 @@
 					
 					foreach($hasil as $barang){
 						if($barang!=null){
-							array_push($response["barang"], $barang->buildJSON());
+							array_push($response["barang"], $barang);
 						}else{
 							array_push($response["barang"], null);
 						}
