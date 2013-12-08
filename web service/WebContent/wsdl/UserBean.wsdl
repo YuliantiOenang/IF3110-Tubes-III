@@ -1,0 +1,1767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://model.frexescwebservice.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://model.frexescwebservice.com" xmlns:intf="http://model.frexescwebservice.com" xmlns:tns1="http://simple.json.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://model.frexescwebservice.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://simple.json.org"/>
+   <element name="setPassword">
+    <complexType>
+     <sequence>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPasswordResponse">
+    <complexType/>
+   </element>
+   <element name="setId">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setIdResponse">
+    <complexType/>
+   </element>
+   <element name="getRole">
+    <complexType/>
+   </element>
+   <element name="getRoleResponse">
+    <complexType>
+     <sequence>
+      <element name="getRoleReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setRole">
+    <complexType>
+     <sequence>
+      <element name="role" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setRoleResponse">
+    <complexType/>
+   </element>
+   <element name="getUsername">
+    <complexType/>
+   </element>
+   <element name="getUsernameResponse">
+    <complexType>
+     <sequence>
+      <element name="getUsernameReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setUsername">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setUsernameResponse">
+    <complexType/>
+   </element>
+   <element name="toJSON">
+    <complexType/>
+   </element>
+   <element name="toJSONResponse">
+    <complexType>
+     <sequence>
+      <element name="toJSONReturn" type="xsd:anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getNocard">
+    <complexType/>
+   </element>
+   <element name="getNocardResponse">
+    <complexType>
+     <sequence>
+      <element name="getNocardReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setNocard">
+    <complexType>
+     <sequence>
+      <element name="nocard" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setNocardResponse">
+    <complexType/>
+   </element>
+   <element name="getNacard">
+    <complexType/>
+   </element>
+   <element name="getNacardResponse">
+    <complexType>
+     <sequence>
+      <element name="getNacardReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setNacard">
+    <complexType>
+     <sequence>
+      <element name="nacard" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setNacardResponse">
+    <complexType/>
+   </element>
+   <element name="getExcard">
+    <complexType/>
+   </element>
+   <element name="getExcardResponse">
+    <complexType>
+     <sequence>
+      <element name="getExcardReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setExcard">
+    <complexType>
+     <sequence>
+      <element name="excard" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setExcardResponse">
+    <complexType/>
+   </element>
+   <element name="getEmail">
+    <complexType/>
+   </element>
+   <element name="getEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="getEmailReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setEmail">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setEmailResponse">
+    <complexType/>
+   </element>
+   <element name="getTelephone">
+    <complexType/>
+   </element>
+   <element name="getTelephoneResponse">
+    <complexType>
+     <sequence>
+      <element name="getTelephoneReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setTelephone">
+    <complexType>
+     <sequence>
+      <element name="telephone" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setTelephoneResponse">
+    <complexType/>
+   </element>
+   <element name="getProvince">
+    <complexType/>
+   </element>
+   <element name="getProvinceResponse">
+    <complexType>
+     <sequence>
+      <element name="getProvinceReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setProvince">
+    <complexType>
+     <sequence>
+      <element name="province" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setProvinceResponse">
+    <complexType/>
+   </element>
+   <element name="getCity">
+    <complexType/>
+   </element>
+   <element name="getCityResponse">
+    <complexType>
+     <sequence>
+      <element name="getCityReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setCity">
+    <complexType>
+     <sequence>
+      <element name="city" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setCityResponse">
+    <complexType/>
+   </element>
+   <element name="getPostal">
+    <complexType/>
+   </element>
+   <element name="getPostalResponse">
+    <complexType>
+     <sequence>
+      <element name="getPostalReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPostal">
+    <complexType>
+     <sequence>
+      <element name="postal" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPostalResponse">
+    <complexType/>
+   </element>
+   <element name="getTransaction">
+    <complexType/>
+   </element>
+   <element name="getTransactionResponse">
+    <complexType>
+     <sequence>
+      <element name="getTransactionReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setTransaction">
+    <complexType>
+     <sequence>
+      <element name="transaction" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setTransactionResponse">
+    <complexType/>
+   </element>
+   <element name="getAddress">
+    <complexType/>
+   </element>
+   <element name="getAddressResponse">
+    <complexType>
+     <sequence>
+      <element name="getAddressReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getName">
+    <complexType/>
+   </element>
+   <element name="getNameResponse">
+    <complexType>
+     <sequence>
+      <element name="getNameReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getId">
+    <complexType/>
+   </element>
+   <element name="getIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getIdReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setName">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setNameResponse">
+    <complexType/>
+   </element>
+   <element name="getPassword">
+    <complexType/>
+   </element>
+   <element name="getPasswordResponse">
+    <complexType>
+     <sequence>
+      <element name="getPasswordReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setAddress">
+    <complexType>
+     <sequence>
+      <element name="address" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setAddressResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="setProvinceResponse">
+
+      <wsdl:part element="impl:setProvinceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRoleResponse">
+
+      <wsdl:part element="impl:getRoleResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getIdResponse">
+
+      <wsdl:part element="impl:getIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setRoleResponse">
+
+      <wsdl:part element="impl:setRoleResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNameRequest">
+
+      <wsdl:part element="impl:getName" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setProvinceRequest">
+
+      <wsdl:part element="impl:setProvince" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setRoleRequest">
+
+      <wsdl:part element="impl:setRole" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setPasswordRequest">
+
+      <wsdl:part element="impl:setPassword" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPasswordRequest">
+
+      <wsdl:part element="impl:getPassword" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setCityRequest">
+
+      <wsdl:part element="impl:setCity" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEmailRequest">
+
+      <wsdl:part element="impl:getEmail" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTelephoneRequest">
+
+      <wsdl:part element="impl:getTelephone" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUsernameResponse">
+
+      <wsdl:part element="impl:getUsernameResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setCityResponse">
+
+      <wsdl:part element="impl:setCityResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setUsernameRequest">
+
+      <wsdl:part element="impl:setUsername" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProvinceRequest">
+
+      <wsdl:part element="impl:getProvince" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setTransactionRequest">
+
+      <wsdl:part element="impl:setTransaction" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNacardRequest">
+
+      <wsdl:part element="impl:getNacard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setEmailRequest">
+
+      <wsdl:part element="impl:setEmail" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEmailResponse">
+
+      <wsdl:part element="impl:getEmailResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setNameResponse">
+
+      <wsdl:part element="impl:setNameResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExcardResponse">
+
+      <wsdl:part element="impl:getExcardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getExcardRequest">
+
+      <wsdl:part element="impl:getExcard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="toJSONResponse">
+
+      <wsdl:part element="impl:toJSONResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="toJSONRequest">
+
+      <wsdl:part element="impl:toJSON" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTransactionRequest">
+
+      <wsdl:part element="impl:getTransaction" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getUsernameRequest">
+
+      <wsdl:part element="impl:getUsername" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setExcardResponse">
+
+      <wsdl:part element="impl:setExcardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProvinceResponse">
+
+      <wsdl:part element="impl:getProvinceResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setPasswordResponse">
+
+      <wsdl:part element="impl:setPasswordResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAddressResponse">
+
+      <wsdl:part element="impl:getAddressResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNocardResponse">
+
+      <wsdl:part element="impl:getNocardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPostalRequest">
+
+      <wsdl:part element="impl:getPostal" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setNacardRequest">
+
+      <wsdl:part element="impl:setNacard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setIdResponse">
+
+      <wsdl:part element="impl:setIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setTelephoneRequest">
+
+      <wsdl:part element="impl:setTelephone" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setTransactionResponse">
+
+      <wsdl:part element="impl:setTransactionResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setAddressResponse">
+
+      <wsdl:part element="impl:setAddressResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setNameRequest">
+
+      <wsdl:part element="impl:setName" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTransactionResponse">
+
+      <wsdl:part element="impl:getTransactionResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNameResponse">
+
+      <wsdl:part element="impl:getNameResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setNacardResponse">
+
+      <wsdl:part element="impl:setNacardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setNocardResponse">
+
+      <wsdl:part element="impl:setNocardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setEmailResponse">
+
+      <wsdl:part element="impl:setEmailResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCityRequest">
+
+      <wsdl:part element="impl:getCity" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setPostalRequest">
+
+      <wsdl:part element="impl:setPostal" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setAddressRequest">
+
+      <wsdl:part element="impl:setAddress" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setIdRequest">
+
+      <wsdl:part element="impl:setId" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setNocardRequest">
+
+      <wsdl:part element="impl:setNocard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTelephoneResponse">
+
+      <wsdl:part element="impl:getTelephoneResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAddressRequest">
+
+      <wsdl:part element="impl:getAddress" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPostalResponse">
+
+      <wsdl:part element="impl:getPostalResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCityResponse">
+
+      <wsdl:part element="impl:getCityResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRoleRequest">
+
+      <wsdl:part element="impl:getRole" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPasswordResponse">
+
+      <wsdl:part element="impl:getPasswordResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getIdRequest">
+
+      <wsdl:part element="impl:getId" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNacardResponse">
+
+      <wsdl:part element="impl:getNacardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setExcardRequest">
+
+      <wsdl:part element="impl:setExcard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getNocardRequest">
+
+      <wsdl:part element="impl:getNocard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setPostalResponse">
+
+      <wsdl:part element="impl:setPostalResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setUsernameResponse">
+
+      <wsdl:part element="impl:setUsernameResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setTelephoneResponse">
+
+      <wsdl:part element="impl:setTelephoneResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="UserBean">
+
+      <wsdl:operation name="setPassword">
+
+         <wsdl:input message="impl:setPasswordRequest" name="setPasswordRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setPasswordResponse" name="setPasswordResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setId">
+
+         <wsdl:input message="impl:setIdRequest" name="setIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setIdResponse" name="setIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRole">
+
+         <wsdl:input message="impl:getRoleRequest" name="getRoleRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getRoleResponse" name="getRoleResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setRole">
+
+         <wsdl:input message="impl:setRoleRequest" name="setRoleRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setRoleResponse" name="setRoleResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUsername">
+
+         <wsdl:input message="impl:getUsernameRequest" name="getUsernameRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getUsernameResponse" name="getUsernameResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setUsername">
+
+         <wsdl:input message="impl:setUsernameRequest" name="setUsernameRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setUsernameResponse" name="setUsernameResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="toJSON">
+
+         <wsdl:input message="impl:toJSONRequest" name="toJSONRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:toJSONResponse" name="toJSONResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNocard">
+
+         <wsdl:input message="impl:getNocardRequest" name="getNocardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getNocardResponse" name="getNocardResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setNocard">
+
+         <wsdl:input message="impl:setNocardRequest" name="setNocardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setNocardResponse" name="setNocardResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNacard">
+
+         <wsdl:input message="impl:getNacardRequest" name="getNacardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getNacardResponse" name="getNacardResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setNacard">
+
+         <wsdl:input message="impl:setNacardRequest" name="setNacardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setNacardResponse" name="setNacardResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExcard">
+
+         <wsdl:input message="impl:getExcardRequest" name="getExcardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getExcardResponse" name="getExcardResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setExcard">
+
+         <wsdl:input message="impl:setExcardRequest" name="setExcardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setExcardResponse" name="setExcardResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEmail">
+
+         <wsdl:input message="impl:getEmailRequest" name="getEmailRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getEmailResponse" name="getEmailResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setEmail">
+
+         <wsdl:input message="impl:setEmailRequest" name="setEmailRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setEmailResponse" name="setEmailResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTelephone">
+
+         <wsdl:input message="impl:getTelephoneRequest" name="getTelephoneRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTelephoneResponse" name="getTelephoneResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setTelephone">
+
+         <wsdl:input message="impl:setTelephoneRequest" name="setTelephoneRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setTelephoneResponse" name="setTelephoneResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProvince">
+
+         <wsdl:input message="impl:getProvinceRequest" name="getProvinceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getProvinceResponse" name="getProvinceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setProvince">
+
+         <wsdl:input message="impl:setProvinceRequest" name="setProvinceRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setProvinceResponse" name="setProvinceResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCity">
+
+         <wsdl:input message="impl:getCityRequest" name="getCityRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCityResponse" name="getCityResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setCity">
+
+         <wsdl:input message="impl:setCityRequest" name="setCityRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setCityResponse" name="setCityResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPostal">
+
+         <wsdl:input message="impl:getPostalRequest" name="getPostalRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPostalResponse" name="getPostalResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setPostal">
+
+         <wsdl:input message="impl:setPostalRequest" name="setPostalRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setPostalResponse" name="setPostalResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTransaction">
+
+         <wsdl:input message="impl:getTransactionRequest" name="getTransactionRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTransactionResponse" name="getTransactionResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setTransaction">
+
+         <wsdl:input message="impl:setTransactionRequest" name="setTransactionRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setTransactionResponse" name="setTransactionResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAddress">
+
+         <wsdl:input message="impl:getAddressRequest" name="getAddressRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAddressResponse" name="getAddressResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getName">
+
+         <wsdl:input message="impl:getNameRequest" name="getNameRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getNameResponse" name="getNameResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getId">
+
+         <wsdl:input message="impl:getIdRequest" name="getIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getIdResponse" name="getIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setName">
+
+         <wsdl:input message="impl:setNameRequest" name="setNameRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setNameResponse" name="setNameResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPassword">
+
+         <wsdl:input message="impl:getPasswordRequest" name="getPasswordRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPasswordResponse" name="getPasswordResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setAddress">
+
+         <wsdl:input message="impl:setAddressRequest" name="setAddressRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setAddressResponse" name="setAddressResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="UserBeanSoapBinding" type="impl:UserBean">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="setPassword">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setPasswordRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setPasswordResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRole">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getRoleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getRoleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setRole">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setRoleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setRoleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getUsername">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUsernameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUsernameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setUsername">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setUsernameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setUsernameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="toJSON">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="toJSONRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="toJSONResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNocard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNocardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNocardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setNocard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setNocardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setNocardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getNacard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNacardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNacardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setNacard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setNacardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setNacardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getExcard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getExcardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getExcardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setExcard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setExcardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setExcardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTelephone">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTelephoneRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTelephoneResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setTelephone">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setTelephoneRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setTelephoneResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProvince">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getProvinceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getProvinceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setProvince">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setProvinceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setProvinceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCity">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCityRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCityResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setCity">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setCityRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setCityResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPostal">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPostalRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPostalResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setPostal">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setPostalRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setPostalResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTransaction">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTransactionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTransactionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setTransaction">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setTransactionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setTransactionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAddress">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAddressRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAddressResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getName">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getNameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getNameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setName">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setNameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setNameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPassword">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPasswordRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPasswordResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setAddress">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setAddressRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setAddressResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="UserBeanService">
+
+      <wsdl:port binding="impl:UserBeanSoapBinding" name="UserBean">
+
+         <wsdlsoap:address location="http://localhost:8080/FrexescWebService/services/UserBean"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

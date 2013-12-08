@@ -8,6 +8,8 @@ public class BarangUserBean {
 	private int status;
 	private int total_item;
 	private String description;
+	
+	public BarangUserBean() {}
 
 	public BarangUserBean(long id, long id_item, long id_user, int status,
 			int total_item, String description) {

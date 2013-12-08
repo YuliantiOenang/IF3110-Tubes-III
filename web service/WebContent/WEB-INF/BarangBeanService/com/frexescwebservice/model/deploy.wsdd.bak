@@ -1,0 +1,143 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from BarangBeanService WSDL service -->
+
+  <service name="BarangBean" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://model.frexescwebservice.com"/>
+      <parameter name="wsdlServiceElement" value="BarangBeanService"/>
+      <parameter name="schemaQualified" value="http://model.frexescwebservice.com"/>
+      <parameter name="wsdlServicePort" value="BarangBean"/>
+      <parameter name="className" value="com.frexescwebservice.model.BarangBeanSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="BarangBean"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="setId" qname="operNS:setId" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://model.frexescwebservice.com" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getTotal_item" qname="operNS:getTotal_item" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getTotal_itemReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setTotal_item" qname="operNS:setTotal_item" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:total_item" xmlns:pns="http://model.frexescwebservice.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getId_category" qname="operNS:getId_category" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getId_categoryReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:long" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setId_category" qname="operNS:setId_category" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:id_category" xmlns:pns="http://model.frexescwebservice.com" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getPicture" qname="operNS:getPicture" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getPictureReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setPicture" qname="operNS:setPicture" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:picture" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getPrice" qname="operNS:getPrice" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getPriceReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setPrice" qname="operNS:setPrice" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:price" xmlns:pns="http://model.frexescwebservice.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="toJSON" qname="operNS:toJSON" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:toJSONReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:anyType" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getName" qname="operNS:getName" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getNameReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getId" qname="operNS:getId" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getIdReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:long" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setName" qname="operNS:setName" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:name" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getDescription" qname="operNS:getDescription" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getDescriptionReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setDescription" qname="operNS:setDescription" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:description" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="setId_category getDescription getPrice setTotal_item getTotal_item setPrice toJSON setDescription getId_category getPicture getName setPicture setName setId getId"/>
+
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setDescription"
+        type="java:com.frexescwebservice.model.SetDescription"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getName"
+        type="java:com.frexescwebservice.model.GetName"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getDescriptionResponse"
+        type="java:com.frexescwebservice.model.GetDescriptionResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getNameResponse"
+        type="java:com.frexescwebservice.model.GetNameResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getIdResponse"
+        type="java:com.frexescwebservice.model.GetIdResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setName"
+        type="java:com.frexescwebservice.model.SetName"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getId"
+        type="java:com.frexescwebservice.model.GetId"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setNameResponse"
+        type="java:com.frexescwebservice.model.SetNameResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setDescriptionResponse"
+        type="java:com.frexescwebservice.model.SetDescriptionResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getDescription"
+        type="java:com.frexescwebservice.model.GetDescription"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

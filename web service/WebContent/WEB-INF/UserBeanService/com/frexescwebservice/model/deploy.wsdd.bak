@@ -1,0 +1,487 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from UserBeanService WSDL service -->
+
+  <service name="UserBean" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://model.frexescwebservice.com"/>
+      <parameter name="wsdlServiceElement" value="UserBeanService"/>
+      <parameter name="schemaQualified" value="http://model.frexescwebservice.com"/>
+      <parameter name="wsdlServicePort" value="UserBean"/>
+      <parameter name="className" value="com.frexescwebservice.model.UserBeanSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="UserBean"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="setPassword" qname="operNS:setPassword" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:password" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="setId" qname="operNS:setId" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://model.frexescwebservice.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getRole" qname="operNS:getRole" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getRoleReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setRole" qname="operNS:setRole" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:role" xmlns:pns="http://model.frexescwebservice.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getUsername" qname="operNS:getUsername" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getUsernameReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setUsername" qname="operNS:setUsername" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="toJSON" qname="operNS:toJSON" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:toJSONReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:anyType" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getNocard" qname="operNS:getNocard" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getNocardReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setNocard" qname="operNS:setNocard" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:nocard" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getNacard" qname="operNS:getNacard" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getNacardReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setNacard" qname="operNS:setNacard" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:nacard" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getExcard" qname="operNS:getExcard" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getExcardReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setExcard" qname="operNS:setExcard" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:excard" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getEmail" qname="operNS:getEmail" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getEmailReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setEmail" qname="operNS:setEmail" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:email" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getTelephone" qname="operNS:getTelephone" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getTelephoneReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setTelephone" qname="operNS:setTelephone" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:telephone" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getProvince" qname="operNS:getProvince" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getProvinceReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setProvince" qname="operNS:setProvince" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:province" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCity" qname="operNS:getCity" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getCityReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setCity" qname="operNS:setCity" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:city" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getPostal" qname="operNS:getPostal" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getPostalReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setPostal" qname="operNS:setPostal" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:postal" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getTransaction" qname="operNS:getTransaction" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getTransactionReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setTransaction" qname="operNS:setTransaction" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:transaction" xmlns:pns="http://model.frexescwebservice.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAddress" qname="operNS:getAddress" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getAddressReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getName" qname="operNS:getName" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getNameReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getId" qname="operNS:getId" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getIdReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setName" qname="operNS:setName" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:name" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getPassword" qname="operNS:getPassword" xmlns:operNS="http://model.frexescwebservice.com" returnQName="retNS:getPasswordReturn" xmlns:retNS="http://model.frexescwebservice.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setAddress" qname="operNS:setAddress" xmlns:operNS="http://model.frexescwebservice.com" soapAction="" >
+        <parameter qname="pns:address" xmlns:pns="http://model.frexescwebservice.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="setExcard getTelephone setUsername setPostal getEmail setProvince getRole getExcard setPassword getPostal getCity getId getAddress setId setEmail setCity setNacard setAddress getPassword getNacard getTransaction setNocard toJSON setTelephone getName setTransaction setRole getUsername setName getNocard getProvince"/>
+
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setCityResponse"
+        type="java:com.frexescwebservice.model.SetCityResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getPostal"
+        type="java:com.frexescwebservice.model.GetPostal"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getName"
+        type="java:com.frexescwebservice.model.GetName"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getAddress"
+        type="java:com.frexescwebservice.model.GetAddress"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setAddress"
+        type="java:com.frexescwebservice.model.SetAddress"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setAddressResponse"
+        type="java:com.frexescwebservice.model.SetAddressResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getNacard"
+        type="java:com.frexescwebservice.model.GetNacard"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getNameResponse"
+        type="java:com.frexescwebservice.model.GetNameResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setNacardResponse"
+        type="java:com.frexescwebservice.model.SetNacardResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getPasswordResponse"
+        type="java:com.frexescwebservice.model.GetPasswordResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setEmail"
+        type="java:com.frexescwebservice.model.SetEmail"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getIdResponse"
+        type="java:com.frexescwebservice.model.GetIdResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setNacard"
+        type="java:com.frexescwebservice.model.SetNacard"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getNocardResponse"
+        type="java:com.frexescwebservice.model.GetNocardResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getProvinceResponse"
+        type="java:com.frexescwebservice.model.GetProvinceResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getProvince"
+        type="java:com.frexescwebservice.model.GetProvince"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getTransaction"
+        type="java:com.frexescwebservice.model.GetTransaction"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getAddressResponse"
+        type="java:com.frexescwebservice.model.GetAddressResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getTransactionResponse"
+        type="java:com.frexescwebservice.model.GetTransactionResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setTelephoneResponse"
+        type="java:com.frexescwebservice.model.SetTelephoneResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setProvinceResponse"
+        type="java:com.frexescwebservice.model.SetProvinceResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getEmailResponse"
+        type="java:com.frexescwebservice.model.GetEmailResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getTelephoneResponse"
+        type="java:com.frexescwebservice.model.GetTelephoneResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setPostalResponse"
+        type="java:com.frexescwebservice.model.SetPostalResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getNocard"
+        type="java:com.frexescwebservice.model.GetNocard"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setExcard"
+        type="java:com.frexescwebservice.model.SetExcard"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getNacardResponse"
+        type="java:com.frexescwebservice.model.GetNacardResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setPostal"
+        type="java:com.frexescwebservice.model.SetPostal"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setProvince"
+        type="java:com.frexescwebservice.model.SetProvince"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getPassword"
+        type="java:com.frexescwebservice.model.GetPassword"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setNocardResponse"
+        type="java:com.frexescwebservice.model.SetNocardResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getTelephone"
+        type="java:com.frexescwebservice.model.GetTelephone"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getExcardResponse"
+        type="java:com.frexescwebservice.model.GetExcardResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setExcardResponse"
+        type="java:com.frexescwebservice.model.SetExcardResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getEmail"
+        type="java:com.frexescwebservice.model.GetEmail"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setName"
+        type="java:com.frexescwebservice.model.SetName"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getId"
+        type="java:com.frexescwebservice.model.GetId"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setNameResponse"
+        type="java:com.frexescwebservice.model.SetNameResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getPostalResponse"
+        type="java:com.frexescwebservice.model.GetPostalResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setTelephone"
+        type="java:com.frexescwebservice.model.SetTelephone"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setEmailResponse"
+        type="java:com.frexescwebservice.model.SetEmailResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getCity"
+        type="java:com.frexescwebservice.model.GetCity"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setNocard"
+        type="java:com.frexescwebservice.model.SetNocard"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setTransactionResponse"
+        type="java:com.frexescwebservice.model.SetTransactionResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getExcard"
+        type="java:com.frexescwebservice.model.GetExcard"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setTransaction"
+        type="java:com.frexescwebservice.model.SetTransaction"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>getCityResponse"
+        type="java:com.frexescwebservice.model.GetCityResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.frexescwebservice.com"
+        qname="ns:>setCity"
+        type="java:com.frexescwebservice.model.SetCity"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
