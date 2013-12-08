@@ -1,16 +1,29 @@
 
+import java.awt.Point;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.postgresql.Driver;
 
 import kelas.Database;
@@ -155,7 +168,33 @@ public class UserServlet extends HttpServlet {
 			
 			response.getWriter().write(responsetext);
 		}
-		else{
+		else if(request.getParameter("type").equals("transaksi")){
+			String id_user = request.getParameter("id_user");
+			
+			JSONObject jsonResponse = null;
+			
+			JSONObject data = new JSONObject();
+			data.put("action", "jumlah_transaksi_user");
+			data.put("id_user", id_user);
+			
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+			HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+			
+			httppost.setEntity(new StringEntity(data.toString()));
+			CloseableHttpResponse httpresp = httpclient.execute(httppost);
+			try {
+				HttpEntity entity = httpresp.getEntity();
+			    if (entity != null) {
+			    	String jsonresp = EntityUtils.toString(entity);
+		            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+			    }
+			} finally {
+			    httpresp.close();
+			    httpclient.close();
+			}
+			
+			response.getWriter().write(jsonResponse.get("jumlah").toString());
+		} else {
 			response.getWriter().write("Unknown Type"); 		
 		}
 	}
