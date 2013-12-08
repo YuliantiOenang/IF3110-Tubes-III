@@ -1,6 +1,6 @@
-package dto;
+package com.frexesc.model;
 
-public class User {
+public class UserBean2 {
 	private int id;
 	private String username;
 	private String password;
@@ -17,8 +17,8 @@ public class User {
 	private String excard;
 	private int transaction;
 	
-	public User() {
-		this.id = 0;
+	public UserBean2() {
+		this.id = id;
 		this.username = null;
 		this.password = null;
 		this.email = null;
@@ -35,9 +35,8 @@ public class User {
 		this.transaction = 0;
 	}
 
-	public User(int id, String username, String password, String email, String name, String telephone, String address, String province, String city, String postal, int role, String nocard, String nacard, String excard, int transaction) {
+	public UserBean2(String username, String password, String email, String name, String telephone, String address, String province, String city, String postal, int role, String nocard, String nacard, String excard, int transaction) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -54,14 +53,6 @@ public class User {
 		this.transaction = transaction;
 	}
 
-	public int getID(){
-		return id;
-	}
-	
-	public void setID(int id){
-		this.id = id;
-	}
-	
 	public int getRole() {
 		return role;
 	}

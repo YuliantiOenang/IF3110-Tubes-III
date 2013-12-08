@@ -73,34 +73,41 @@ public class Index extends HttpServlet {
 		}
 		if (isLogin && sessions.getAttribute("user_id") == null) {
 			try {
-				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");
 
-//				WebServicesKit webkit = new WebServicesKit();
-//				String json = webkit.readUrl ("http://localhost:8080/web-services/UserService/userservice/user/"+userid);
-//				
-//				Gson gson = new Gson();
-//				JsonParser jsonParser = new JsonParser();
-//				JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
-//				List<UserBean> categoriesList = new ArrayList<UserBean>();
-//				for (JsonElement category : categoryArray)
+
+				WebServicesKit webkit = new WebServicesKit();
+				String json = webkit.readUrl ("http://localhost:8080/web-services/UserService/userservice/user/"+userid);
+				
+				Gson gson = new Gson();
+				JsonParser jsonParser = new JsonParser();
+				JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
+				List<UserBean> categoriesList = new ArrayList<UserBean>();
+				for (JsonElement category : categoryArray)
+				{
+					UserBean courseObj = gson.fromJson(category, UserBean.class);
+					categoriesList.add(courseObj);
+				}
+				
+
+				
+//				for (UserBean courseObj : categoriesList)
 //				{
-//					UserBean courseObj = gson.fromJson(category, UserBean.class);
-//					categoriesList.add(courseObj);
+//					System.out.println("ADDRESS : " + courseObj.getAddress());
+//					System.out.println("USERNAME : " + courseObj.getUsername());
 //				}
-//				
-//				categoriesList.get(0)
-//				
-////				for (UserBean courseObj : categoriesList)
-////				{
-////					System.out.println("ADDRESS : " + courseObj.getAddress());
-////					System.out.println("USERNAME : " + courseObj.getUsername());
-////				}
-//				
+
+				
+				
+				sessions.setAttribute("role", categoriesList.get(0).getRole());
+				sessions.setAttribute("user_id", categoriesList.get(0).get);
+				sessions.setAttribute("username", categoriesList.get(0).getUsername());
+/**old*/
+//				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");				
 //				rs.next();
-//				
-				sessions.setAttribute("role", rs.getString("role"));
-				sessions.setAttribute("user_id", userid);
-				sessions.setAttribute("username", username);
+				
+//				sessions.setAttribute("role", rs.getString("role"));
+//				sessions.setAttribute("user_id", userid);
+//				sessions.setAttribute("username", username);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
