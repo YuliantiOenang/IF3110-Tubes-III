@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://soap.frexescwebservice.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.frexescwebservice.com" xmlns:intf="http://soap.frexescwebservice.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap.frexescwebservice.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="addBarang">
+    <complexType>
+     <sequence>
+      <element name="id_category" type="xsd:long"/>
+      <element name="name" type="xsd:string"/>
+      <element name="picture" type="xsd:string"/>
+      <element name="price" type="xsd:int"/>
+      <element name="description" type="xsd:string"/>
+      <element name="total_item" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addBarangResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="addBarangResponse">
+
+      <wsdl:part element="impl:addBarangResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addBarangRequest">
+
+      <wsdl:part element="impl:addBarang" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="BarangSoap">
+
+      <wsdl:operation name="addBarang">
+
+         <wsdl:input message="impl:addBarangRequest" name="addBarangRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addBarangResponse" name="addBarangResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="BarangSoapSoapBinding" type="impl:BarangSoap">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="addBarang">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addBarangRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addBarangResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="BarangSoapService">
+
+      <wsdl:port binding="impl:BarangSoapSoapBinding" name="BarangSoap">
+
+         <wsdlsoap:address location="http://localhost:8080/FrexescWebService/services/BarangSoap"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

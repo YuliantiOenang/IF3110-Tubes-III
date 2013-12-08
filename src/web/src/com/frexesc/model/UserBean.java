@@ -1,5 +1,9 @@
 package com.frexesc.model;
 
+import java.sql.Connection;
+
+import com.frexesc.controller.DbConnection;
+
 public class UserBean {
 	private int id;
 	private String username;

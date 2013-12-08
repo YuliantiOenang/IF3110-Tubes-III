@@ -1,6 +1,10 @@
 package com.frexescwebservice.model;
 
+import java.sql.Connection;
+
 import org.json.simple.JSONObject;
+
+import com.frexescwebservice.controller.DbConnection;
 
 public class UserBean {
 	private int id;
@@ -58,7 +62,7 @@ public class UserBean {
 		this.excard = excard;
 		this.transaction = transaction;
 	}
-	
+
 	public UserBean(String username, String password, String email,
 			String name, String telephone, String address, String province,
 			String city, String postal, int role, String nocard, String nacard,
@@ -223,5 +227,10 @@ public class UserBean {
 			e.printStackTrace();
 		}
 		return json;
+	}
+
+	public void save() {
+		DbConnection dbConnection = new DbConnection();
+		Connection connection = dbConnection.mySqlConnection();
 	}
 }
