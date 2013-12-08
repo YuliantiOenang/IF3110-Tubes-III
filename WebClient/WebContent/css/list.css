@@ -1,5 +1,16 @@
 .gambar{
 	float: left;
+	animation-name:myfirst;
+	animation-duration:5s;
+	animation-timing-function:linear;
+	animation-delay:0s;
+	animation-play-state:running;
+}
+
+@keyframes myfirst
+{
+0%   {opacity:0;}
+100% {opacity:1.0;}
 }
 
 .pull_left{
