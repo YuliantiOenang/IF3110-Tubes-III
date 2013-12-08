@@ -71,7 +71,9 @@ public class Actions extends HttpServlet {
 		
 	    JSONObject JSONresp = new JSONObject();
 	    JSONObject data = (JSONObject) JSONValue.parse(getContent(request));
-	    //System.out.println("Data yang dikirimkan: " + sb.toString());
+	    
+	    System.out.println("Data yang didapat: " + data.toString());
+	    
 	    Driver asdf = new Driver();
         Connection koneksion;
 		try {

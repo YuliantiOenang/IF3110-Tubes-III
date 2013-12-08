@@ -1,5 +1,7 @@
 
 
+import insertBarang.HelloProxy;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,6 +38,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.postgresql.Driver;
 
 /**
  * Servlet implementation class DetailBarang
@@ -43,6 +46,7 @@ import org.json.simple.JSONValue;
 public class InventoriAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String DB_NAME = "toko_imba";
+	static final String helloService = "http://localhost:8080/KLK-WebService/services/Hello";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -121,6 +125,7 @@ public class InventoriAdmin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		if(!ServletFileUpload.isMultipartContent(request)){
 			response.getWriter().write("Non-multipart");
 			return;			
@@ -148,17 +153,21 @@ public class InventoriAdmin extends HttpServlet {
 			        barang.setGambar(item.getName());
 			    }
 			}
+		;
 		
-		
+			Driver driv = new Driver();
+			
 			java.sql.Connection con = null;
 			Class.forName("org.gjt.mm.mysql.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/"+DB_NAME, Database.getUser(), Database.getPass());
+			con = driv.connect("jdbc:postgresql://ec2-107-22-234-129.compute-1.amazonaws.com:5432/dd5q059l0v49cm?user=igsiblnhyllajh&password=aFEyJCyJ4bES-kRZV_bKZrCI6f&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory", null);
 			System.out.println (DB_NAME+ "database successfully opened.");
 			
 			Statement statement = con.createStatement();
 			
+			System.out.println("tes1");
 			if(action.equals("add")){
 				id = add(multiparts, statement, barang);
+				System.out.println("tes2");
 			}else if(action.equals("edit")){
 				edit(id, barang);
 			}else if(action.equals("delete")){
@@ -177,7 +186,7 @@ public class InventoriAdmin extends HttpServlet {
 	}
 	
 	private static String quote(String str){
-		return new StringBuilder().append('"').append(str).append('"').toString();
+		return new StringBuilder().append("'").append(str).append("'").toString();
 	}
 	
 	private static void copyFile(File src, File dest) throws IOException {
@@ -244,15 +253,24 @@ public class InventoriAdmin extends HttpServlet {
 		query.append(quote(barang.getDesc())).append(",");
 		query.append(barang.getHarga()).append(")");
 		
-		statement.executeUpdate(query.toString());
+		
+		//statement.executeUpdate(query.toString());
+		//PENGGANTI ATAS
+		insertBarang.HelloProxy HePro = new HelloProxy(helloService);
+		
+		try{
+			HePro.insertBarang(query.toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		// get id
 		
-		ResultSet rs = statement.executeQuery("SELECT * FROM inventori ORDER BY id_inventori DESC LIMIT 0, 1");
+		ResultSet rs = statement.executeQuery("SELECT * FROM inventori ORDER BY id_inventori DESC");
 		
-		while(rs.next()){
+		rs.next();
 			barang.setId_inven(rs.getInt("id_inventori"));
-		}
+		
 		
 		System.out.println("id :" + barang.getId_inven());
 		
