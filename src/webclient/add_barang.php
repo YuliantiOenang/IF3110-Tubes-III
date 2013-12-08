@@ -2,13 +2,6 @@
 
 require_once "lib/search_lib.php";
 
-if(!isset($_GET["id"])){
-	header("Location: index.php");
-}
-
-$barang = searchId($_GET["id"]);
-if ($barang == null) header("Location: index.php");
-
 ?>
 
 <html>
@@ -23,7 +16,7 @@ if ($barang == null) header("Location: index.php");
 <script>
 	var changed = false;
 
-	function edit(id_barang){
+	function addBarang(){
 		nama = document.getElementById("namabarang").value;
 		harga = document.getElementById("hargabarang").value;
 		stok = document.getElementById("stokbarang").value;
@@ -33,7 +26,7 @@ if ($barang == null) header("Location: index.php");
 		
 		log = getLoginInfo();
 		
-		data = {"token" : log.id, "imgdata" : img, "barang" : { "id": id_barang, "nama" : nama, "harga" : harga, "stok" : stok, "kategori" : cat, "deskripsi" : desc}};
+		data = {"token" : log.id, "imgdata" : img, "barang" : { "nama" : nama, "harga" : harga, "stok" : stok, "kategori" : cat, "deskripsi" : desc}};
 			
 		callback = function(response){
 			
@@ -45,7 +38,7 @@ if ($barang == null) header("Location: index.php");
 			
 		};
 		
-		sendRestAjax("PUT", "barang/"+id_barang, data, callback);
+		sendAjax(data, "handle_add_barang.php", callback);
 		
 	}
 	
@@ -65,21 +58,23 @@ if ($barang == null) header("Location: index.php");
 	<?php
 		include("header.php");
 	?>
+	
+	
 	<div class='content'>
 	<?php
 		echo '<div class="barang table">';
-		echo '<div class="row"><img class="imgbarang" id="display" src="'.$IMAGE_BASE_URL.$barang["id"].'.jpg" /></div>';
+		echo '<div class="row"><img class="imgbarang" id="display" src="'.$IMAGE_BASE_URL.'default'.'.jpg" /></div>';
 		echo '<div class="row"><input type="file" id="imgfile" onchange="onfilechange()" /></div>';
-		echo '<div class="row"><div class="cell33">Nama barang</div><div class="cell66">: <input id="namabarang" type="text" value="'.$barang["nama"].'"/></div></div>';
-		echo '<div class="row harga"><div class="cell33">Harga</div><div class="cell66">: Rp. <input id="hargabarang" type="text" value="'.formatCurrency($barang["harga"]).'" /></div></div>';
-		echo '<div class="row"><div class="cell33">Stok</div><div class="cell66">: <input id="stokbarang" type="text" value="'.$barang["stok"].'" /></div></div>';
+		echo '<div class="row"><div class="cell33">Nama barang</div><div class="cell66">: <input id="namabarang" type="text"/></div></div>';
+		echo '<div class="row harga"><div class="cell33">Harga</div><div class="cell66">: Rp. <input id="hargabarang" type="text" /></div></div>';
+		echo '<div class="row"><div class="cell33">Stok</div><div class="cell66">: <input id="stokbarang" type="text" /></div></div>';
 		echo '<div class="row kategori"><div class="cell33">Kategori</div><div class="cell66">: ';
-		echo '<input id="kategoribarang"type="text" value="'.$barang["kategori"].'" /></div></div>';
+		echo '<input id="kategoribarang"type="text" /></div></div>';
 		echo '<div class="row"><div class="cell33">Deskripsi</div><div class="cell66">:</div></div>';
-		echo '<div class="row deskripsi"><textarea id="descbarang">'.$barang["deskripsi"].'</textarea></div>';
+		echo '<div class="row deskripsi"><textarea id="descbarang"></textarea></div>';
 		echo '</div>';
 		
-		echo '<input class="main-button" type="button" value="edit" onclick="edit('.$barang["id"].')"/>';
+		echo '<input class="main-button" type="button" value="Submit" onclick="addBarang()"/>';
 	?>
 	</div>
 </div>
