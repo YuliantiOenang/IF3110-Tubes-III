@@ -29,7 +29,7 @@ if ($barang == null) header("Location: index.php");
 		stok = document.getElementById("stokbarang").value;
 		cat = document.getElementById("kategoribarang").value;
 		desc = document.getElementById("descbarang").value;
-		img = changed ? document.getElementById("imgbarang").src : "";
+		img = changed ? document.getElementById("display").src : "";
 		
 		log = getLoginInfo();
 		
@@ -51,7 +51,7 @@ if ($barang == null) header("Location: index.php");
 	
 	function onfilechange(){
 		callback = function(result){
-			document.getElementById("imgbarang").src = result;
+			document.getElementById("display").src = result;
 			changed = true;
 		}
 	
@@ -69,7 +69,7 @@ if ($barang == null) header("Location: index.php");
 	<?php
 		echo '<div class="barang table">';
 		echo '<div class="row"><div class="cell33">Nama barang</div><div class="cell66">: <input id="namabarang" type="text" value="'.$barang["nama"].'"/></div></div>';
-		echo '<div class="row"><img class="imgbarang" src="'.$IMAGE_BASE_URL.$barang["id"].'.jpg" /></div>';
+		echo '<div class="row"><img class="imgbarang" id="display" src="'.$IMAGE_BASE_URL.$barang["id"].'.jpg" /></div>';
 		echo '<div class="row"><input type="file" id="imgfile" onchange="onfilechange()" /></div>';
 		echo '<div class="row harga"><div class="cell33">Harga</div><div class="cell66">: Rp. <input id="hargabarang" type="text" value="'.formatCurrency($barang["harga"]).'" /></div></div>';
 		echo '<div class="row"><div class="cell33">Stok</div><div class="cell66">: <input id="stokbarang" type="text" value="'.$barang["stok"].'" /></div></div>';
