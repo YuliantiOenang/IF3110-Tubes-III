@@ -8,7 +8,7 @@ public class Barang {
 	private int price;
 	private String description;
 	private int total_item;
-
+	public Barang(){}
 	public Barang(long id, long id_category, String name, String picture,
 			int price, String description, int total_item) {
 		super();
