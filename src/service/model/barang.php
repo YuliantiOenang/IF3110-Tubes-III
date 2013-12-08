@@ -80,6 +80,34 @@ function get_barang($id){
 	return $response;
 }
 
+function get_cart($ids){
+	$response["status"] = "error";
+	$response["desc"] = "request invalid";
+	
+	if ($ids == "") return response;
+	
+	$ids = json_decode($ids, true);
+	
+	$db = db_connect();
+	
+	$response["hasil"] = array();
+	$response["status"] = "ok";
+	unset($response["desc"]);
+	
+	foreach($ids as $id){
+		$query = "SELECT * FROM barang WHERE id_barang = $id";
+		if(($result = $db->query($query)) && ($result->num_rows > 0)){
+			$row = $result->fetch_assoc();
+			array_push($response["hasil"], model_barang($row));
+		}	
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
+
 function get_kategori($cat, $page, $sort, $order){
 	$response["status"] = "error";
 	$response["desc"] = "barang tidak ditemukan";
@@ -176,9 +204,9 @@ function edit_barang($id, $token, $barang, $imgdata){
 	
 		$nama_barang = $barang['nama']; $harga = $barang['harga'];
 		$stok = $barang['stok']; $kategori = $barang['kategori'];
-		$deskripsi = $barang['deskripsi']; $jumlah_beli = $barang['jumlah_beli'];
+		$deskripsi = $barang['deskripsi'];
 		
-		$query = "UPDATE barang SET nama_barang='$nama_barang', harga=$harga, stok=$stok, kategori='$kategori', deskripsi='$deskripsi', jumlah_beli=$jumlah_beli WHERE id_barang=$id";
+		$query = "UPDATE barang SET nama_barang='$nama_barang', harga=$harga, stok=$stok, kategori='$kategori', deskripsi='$deskripsi' WHERE id_barang=$id";
 
 		if ($db->query($query)){
 			$response["status"] = "ok";

@@ -14,7 +14,7 @@ return string berformat xml (atas):
 -	<token> berisi string token login, akan disimpan di cookie / local storage. Hanya ada jika status ok
 
 2.	createBarang(string token, string nama_barang, int harga, int stok, string kategori, string deskripsi, string imgdata)
-menambahkan user baru. Jika imgdata == "", akan digunakan gambar default
+menambahkan user baru. Jika imgdata == “”, akan digunakan gambar default
 return string berformat xml (atas):
 -	<status> berisi `ok` jika sukses, `error` jika gagal 
 -	<desc> berisi error message, hanya ada jika status = `error`
@@ -95,7 +95,18 @@ return string berformat json:
 -	status : `ok` jika sukses, `error` jika gagal
 -	desc : error message, hanya ada jika status = `error`
 
-7.	POST cart/<id_barang>
+7.	GET cart
+Mendapatkan detail barang pada cart
+
+GET data berformat JSON:
+-	ids : array of integer, id barang pada cart
+
+return string berformat json:
+-	status : `ok` jika sukses, `error` jika gagal
+-	desc : error message, hanya ada jika status = `error`
+-	hasil : array of json representasi barang, hanya ada jika status = `ok`
+
+8.	POST cart/<id_barang>
 mengecek apakah barang cukup jika dimasukkan ke cart. Error jika barang tidak cukup atau token invalid.
 
 POST data berformat JSON:
@@ -106,7 +117,7 @@ return string berformat json:
 -	status : `ok` jika sukses, `error` jika gagal
 -	desc : error message, hanya ada jika status = `error`
 
-8.	POST buy
+9.	POST buy
 membeli barang. Error jika barang tidak mencukupi atau token invalid.
 
 POST data berformat JSON:

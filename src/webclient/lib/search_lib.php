@@ -80,7 +80,7 @@
 		// mengambil data barang dengan id tertentu (spesifik)
 		// kembalian: Barang
 		
-		$array = sendRestRequest("GET","barang/".$id_barang);
+		$array = sendRestRequest("GET","barang/".$id_barang, array());
 		if ($array["status"] == "ok") {
 			return $array["barang"];
 		} else {
@@ -91,6 +91,18 @@
 	function searchIds($ids){
 		$hasil = array();
 		
+		foreach ($ids as $id) {
+				$array = sendRestRequest("GET","barang/".$id);
+				if ($array["status"] == "ok") {
+					array_push ($hasil, $array["barang"]);
+				} else {
+					return $array["desc"];
+				}
+
+		}
+		
+		return $hasil;
+		/*
 		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
 		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 	
@@ -112,7 +124,7 @@
 		
 		$conn->close();
 		
-		return $hasil;
+		return $hasil;*/
 	}
 	
 	function handleSearchAjax(){
@@ -146,7 +158,7 @@
 					
 					foreach($hasil as $barang){
 						if($barang!=null){
-							array_push($response["barang"], $barang->buildJSON());
+							array_push($response["barang"], $barang);
 						}else{
 							array_push($response["barang"], null);
 						}
@@ -162,7 +174,7 @@
 					
 					foreach($hasil as $barang){
 						if($barang!=null){
-							array_push($response["barang"], $barang->buildJSON());
+							array_push($response["barang"], $barang);
 						}else{
 							array_push($response["barang"], null);
 						}

@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `barang` (
   `id_barang` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_barang` varchar(20) COLLATE latin1_general_ci NOT NULL,
+  `nama_barang` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `harga` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
   `kategori` varchar(20) COLLATE latin1_general_ci NOT NULL,
@@ -116,11 +116,11 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `kategori`, `
 (81, 'Aika S Granzchesta E', 35000, 21, 'peralatan serbaguna', 'Kartu Aika S Granzchesta E!', 17),
 (82, 'Akira E Ferrari D', 25000, 25, 'peralatan serbaguna', 'Kartu Akira E Ferrari D!', 23),
 (83, 'Aika S Granzchesta F', 33500, 25, 'peralatan serbaguna', 'Kartu Aika S Granzchesta F!', 24),
-(84, 'Akira E Ferrari E', 45600, 89, 'Zeon Obsolete Suits', 'Kartu Akira E Ferrari F', 78),
-(85, 'Aika and Hime', 78500, 4, 'Zeon Obsolete Suits', 'Kartu Aika dan Hime-sachou!', 2),
-(86, 'Aika S Granzchesta G', 47650, 43, 'Zeon Obsolete Suits', 'Kartu Aika S Granzchesta G!', 13),
-(87, 'Akira E Ferrari G', 125000, 250, 'Zeon Obsolete Suits', 'Kartu Akira E Ferarri G!', 225),
-(88, 'Aika S Granzchesta H', 33850, 65, 'Zeon Obsolete Suits', 'Kartu Aika S Granzchesta H!', 60);
+(84, 'Akira E Ferrari E', 45600, 89, 'mainan', 'Kartu Akira E Ferrari F', 78),
+(85, 'Aika and Hime', 78500, 4, 'mainan', 'Kartu Aika dan Hime-sachou!', 2),
+(86, 'Aika S Granzchesta G', 47650, 43, 'mainan', 'Kartu Aika S Granzchesta G!', 13),
+(87, 'Akira E Ferrari G', 125000, 250, 'mainan', 'Kartu Akira E Ferarri G!', 225),
+(88, 'Aika S Granzchesta H', 33850, 65, 'mainan', 'Kartu Aika S Granzchesta H!', 60);
 -- --------------------------------------------------------
 
 --

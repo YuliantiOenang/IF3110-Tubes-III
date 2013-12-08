@@ -9,10 +9,11 @@ function login(){
 	
 	var callback = function(response){
 		if(response.status=="ok"){
-			var hasil = {"user": username, "id": response.id};
+			var hasil = {"user": username, "id": response.token, "a": response.a};
 			localStorage.setItem("logininfo", JSON.stringify(hasil));
 			location.reload(true)
 		}else{
+			//alert(response.raw);
 			alert("Username atau password salah!");
 		}	
 	}
@@ -23,6 +24,16 @@ function login(){
 function redirect_login(){
 	if(getLoginInfo() == null){
 		window.location = "registration.php";
+		return true;
+	}
+	
+	return false;
+}
+
+function redirect_admin(){
+	info = getLoginInfo();
+	if(info && (info.a != 1)){
+		window.location = "index.php";
 		return true;
 	}
 	

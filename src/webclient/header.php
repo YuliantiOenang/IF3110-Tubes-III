@@ -7,7 +7,7 @@
 		var loginfo = getLoginInfo();
 		var hfloat = document.getElementById("hfloat");
 		if(loginfo){
-			hfloat.innerHTML = "Hello, <a href='edit_profile.php'>"+loginfo.user+"</a> |<a href='javascript:logout();'>Logout</a>|<a href='cart.php'>Cart</a>";
+			hfloat.innerHTML = "Hello, <a href='profile.php?u="+loginfo.user+"&t="+loginfo.id+"'>"+loginfo.user+"</a> |<a href='javascript:logout();'>Logout</a>|<a href='cart.php'>Cart</a>";
 		}else{
 			hfloat.innerHTML = "<a href='javascript:login();'>Login</a>|<a href='registration.php'>Signup</a>";
 		}
