@@ -29,6 +29,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -286,34 +287,34 @@ public class InventoriAdmin extends HttpServlet {
 		return barang.getId_inven();
 	}
 	
-	private void edit(int id, Barang barang) throws SQLException{
-		
+	private void edit(int id, Barang barang) throws SQLException, ClientProtocolException, IOException{
+		System.out.println("Masuk sini lho");
 		
 		JSONObject jsonResponse = null;
 		
 		JSONObject data = new JSONObject();
 		data.put("action", "edit_barang");
-		data.put("barang", barang);
-		data.put("id", new Integer(id));
-
+		
+		data.put("id_kategori", new Integer(barang.getId_cat()));
+		data.put("nama_inventori", barang.getNama());
+		data.put("jumlah", new Integer(barang.getJumlah()));
+		data.put("description", barang.getDesc());
+		data.put("harga", new Integer(barang.getHarga()));
+		data.put("id_inventori", new Integer(id));
+		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost(Database.WebServiceURL + "Actions");
 		CloseableHttpResponse httpresp = null;
-		try {
-			httppost.setEntity(new StringEntity(data.toString()));
-			httpresp = httpclient.execute(httppost);
-			HttpEntity entity = httpresp.getEntity();
-		    if (entity != null) {
-		    	String jsonresp = EntityUtils.toString(entity);
-	            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
-		    }
-		    httpresp.close();
-		    httpclient.close();
-		} catch(Exception e){
-			e.printStackTrace();
-		} finally {
-		    
-		}
+		
+		httppost.setEntity(new StringEntity(data.toString()));
+		httpresp = httpclient.execute(httppost);
+		HttpEntity entity = httpresp.getEntity();
+	    if (entity != null) {
+	    	String jsonresp = EntityUtils.toString(entity);
+            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+	    }
+	    httpresp.close();
+	    httpclient.close();
 	}
 	
 	private void deleteFile(int id){
@@ -327,13 +328,27 @@ public class InventoriAdmin extends HttpServlet {
 		}		
 	}
 	
-	private void delete(Statement statement, int id) throws SQLException{
-		StringBuilder query = new StringBuilder();
+	private void delete(Statement statement, int id) throws SQLException, ClientProtocolException, IOException{
+		JSONObject jsonResponse = null;
 		
-		query.append("DELETE FROM inventori WHERE id_inventori = ").append(id);
-		//deleteFile(id);
+		JSONObject data = new JSONObject();
+		data.put("action", "delete_barang");
 		
-		statement.executeUpdate(query.toString());
+		data.put("id", new Integer(id));
+		
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost(Database.WebServiceURL + "Actions");
+		CloseableHttpResponse httpresp = null;
+		
+		httppost.setEntity(new StringEntity(data.toString()));
+		httpresp = httpclient.execute(httppost);
+		HttpEntity entity = httpresp.getEntity();
+	    if (entity != null) {
+	    	String jsonresp = EntityUtils.toString(entity);
+            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+	    }
+	    httpresp.close();
+	    httpclient.close();
 	}
 
 }
