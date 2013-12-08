@@ -207,14 +207,28 @@ public class BarangUserController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (requestType.equals("updateTransaction")) {
+			Long id = Long.parseLong(request.getParameter("id"));
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "UPDATE barang_user SET status=1 WHERE id_user="
+					+ id;
+
+			try {
+				connection.createStatement().executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (requestType.equals("delete")) {
 			Long id = Long.parseLong(request.getParameter("id"));
 
 			DbConnection dbConnection = new DbConnection();
 			Connection connection = dbConnection.mySqlConnection();
 
-			String query = "DELETE FROM barang_user WHERE id="
-					+ id; // delete
+			String query = "DELETE FROM barang_user WHERE id=" + id; // delete
 			// entry
 			try {
 				connection.createStatement().executeUpdate(query);

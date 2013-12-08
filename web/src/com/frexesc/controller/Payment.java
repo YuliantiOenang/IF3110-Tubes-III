@@ -1,9 +1,6 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.frexesc.Constants;
+import com.frexesc.model.UserBean;
+import com.frexesc.service.WebService;
 
 /**
  * 
@@ -43,38 +46,87 @@ public class Payment extends HttpServlet {
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");
 		} else {
-			DbConnection dbConnection = new DbConnection();
-			Connection connection = dbConnection.mySqlConnection();
+			String user_id = String.valueOf(session.getAttribute("user_id"));
 
-			String query = "SELECT * FROM user WHERE id="
-					+ session.getAttribute("user_id");
-
+			/** Set WebService (REST) for retrieving list of User */
+			WebService _user = new WebService(hostname + "user");
+			_user.addParam("action", "view_profile");
+			_user.addParam("user_id", user_id);
+			_user.addHeader("GData-Version", "2");
 			try {
-				ResultSet rs = connection.createStatement().executeQuery(query);
+				_user.execute(WebService.REQUEST_METHOD.GET);
+				String user = _user.getResponse();
+				JSONParser parser = new JSONParser();
+				JSONObject mainJSON = null;
+				try {
+					mainJSON = (JSONObject) parser.parse(user);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 
-				while (rs.next()) {
-					if (rs.getString("nomor_kartu") == null) {
+				if (mainJSON.get("status").equals("true")) {
+					JSONObject data = (JSONObject) mainJSON.get("data");
+					UserBean active_user = new UserBean(data.get("username")
+							.toString(), data.get("password").toString(), data
+							.get("email").toString(), data.get("name")
+							.toString(), data.get("telephone").toString(), data
+							.get("address").toString(), data.get("province")
+							.toString(), data.get("city").toString(), data.get(
+							"postal").toString(), Integer.parseInt(data.get(
+							"role").toString()), data.get("nocard").toString(),
+							data.get("nacard").toString(), data.get("excard")
+									.toString(), Integer.parseInt(data.get(
+									"transaction").toString()));
+
+					if (active_user.getNocard() == null
+							|| active_user.getNocard().equals("")) {
 						/** Redirect to Credit Card page */
 						response.sendRedirect("../card?from=payment");
 					} else {
 
 						// Update status
-						String query2 = "UPDATE barang_user SET status=1 WHERE id_user="
-								+ session.getAttribute("user_id");
-						connection.createStatement().executeUpdate(query2);
+						/**
+						 * Set WebService (REST) for update Transaction (Barang
+						 * User)
+						 */
+						WebService _updateBarang = new WebService(hostname
+								+ "baranguser");
+						_updateBarang.addParam("action", "updateTransaction");
+						_updateBarang.addParam("id", String.valueOf(request
+								.getSession(true).getAttribute("user_id")));
+						_updateBarang.addHeader("GData-Version", "2");
+
+						try {
+							_updateBarang
+									.execute(WebService.REQUEST_METHOD.POST);
+							// TODO : Unsafe Operation, Need to check result!
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						/**
+						 * End of WebService for update Transaction (Barang
+						 * User)
+						 */
 
 						// Update number of transaction
-						String query3 = "SELECT * FROM user WHERE id="
-								+ session.getAttribute("user_id");
-						ResultSet rs3 = connection.createStatement()
-								.executeQuery(query3);
-						rs3.next();
+						/** Set WebService (REST) for update Transaction */
+						WebService _update = new WebService(hostname + "user");
+						_update.addParam("action", "updateTransaction");
+						_update.addParam("id", String.valueOf(request
+								.getSession(true).getAttribute("user_id")));
+						_update.addParam("number_of_transaction", String
+								.valueOf((active_user.getTransaction() + 1)));
+						_update.addHeader("GData-Version", "2");
 
-						String query4 = "UPDATE user SET transaksi="
-								+ (Integer.parseInt(rs3.getString("transaksi")) + 1)
-								+ " WHERE id="
-								+ session.getAttribute("user_id");
-						connection.createStatement().executeUpdate(query4);
+						try {
+							_update.execute(WebService.REQUEST_METHOD.POST);
+							// TODO : Unsafe Operation, Need to check result!
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						/** End of WebService for update Transaction */
 
 						request.setAttribute("response", "Transaksi berhasil!");
 
@@ -88,10 +140,10 @@ public class Payment extends HttpServlet {
 					}
 				}
 
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			/** End WebService (REST) for retrieving list of User */
 
 		}
 

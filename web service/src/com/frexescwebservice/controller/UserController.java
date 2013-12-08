@@ -188,6 +188,25 @@ public class UserController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+
+		if (requestType.equals("updateTransaction")) {
+			Long id = Long.parseLong(request.getParameter("id"));
+			Integer number_of_transaction = Integer.parseInt(request
+					.getParameter("number_of_transaction"));
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "UPDATE user SET transaksi=" + number_of_transaction
+					+ " WHERE id=" + id;
+
+			try {
+				connection.createStatement().executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
