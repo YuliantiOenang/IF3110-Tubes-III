@@ -22,7 +22,7 @@ import org.json.*;
  * Servlet implementation class verifyRegister
  */
 @WebServlet(description = "To Verify the registration input", urlPatterns = { "/verifyRegister" })
-public class user extends HttpServlet {
+public class creditcard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	
@@ -30,7 +30,7 @@ public class user extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public user() {
+    public creditcard() {
         super();
         // TODO Auto-generated constructor stub
     }
