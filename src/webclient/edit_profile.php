@@ -16,7 +16,6 @@ var b=document.forms["form1"]["province"].value;
 var c=document.forms["form1"]["address"].value;
 var d=document.forms["form1"]["contact"].value;
 var e=document.forms["form1"]["email"].value;
-var f=document.forms["form1"]["username"].value;
 var g=document.forms["form1"]["password"].value;
 var h=document.forms["form1"]["cpassword"].value;
 var i=document.forms["form1"]["city"].value;
@@ -62,38 +61,17 @@ if (e==null || e=="")
   alert("Email address must be filled out");
   return false;
   }
-if (f==null || f=="")
-  {
-  alert("username must be filled out");
-  return false;
-  }
-if (g==null || g=="")
-  {
-  alert("Password must be filled out");
-  return false;
-  }
-if (h==null || h=="")
-  {
-  alert("Confirm password must be filled out");
-  return false;
-  }
 if (h!=g)
   {
-  alert("Password is not same with confirmed one!");
+  alert("Password is different with confirmed one!");
   return false;
   }
  
 if (e==g)
   {
-  alert("Password is same email address!");
+  alert("Password is same as email address!");
   return false;
   }
-  
-//var reg = /^[a-z][0-9a-z]*([._][0-9a-z])*[@][a-z0-9]+([.][a-z]{2,})+$/;
-/*if (!reg.test(e)){
-	alert("Email is not valid");
-	return false;
-}*/
 
 var reg = /^.+@.+\..{2,}$/;
 if (!reg.test(e)){
@@ -107,23 +85,17 @@ if (!reg.test(a)){
 	return false;
 }
 
-	var data = {"name" : a, "provinsi" :b, "address" : c, "contact" : d, "email" : e, "username" : f, "password" : g, "city" : i,"zipcode" : j};
+	var data = {"token" : getLoginInfo().id, "user" : {"nama_lengkap" : a, "provinsi" :b, "alamat" : c, "telepon" : d, "email" : e, "password" : g, "kota" : i,"kodepos" : j}};
 	var callback = function(response){	
 		if(response.status == "ok"){
 			alert("Anda berhasil edit profile");
-			
-			var hasil = {"user": f, "id": response.id};
-			localStorage.setItem("logininfo", JSON.stringify(hasil));
-			
-			window.location = "kredit.php";
 		}else{
-			alert(response.raw);
+			alert(JSON.stringify(response));
 		}
 	};
 	
 	sendAjax(data, "handle_edit_profile.php", callback);
 	
-	//action="handle_registration.php">
 }
 </script>
 
@@ -143,35 +115,31 @@ echo"<form id='form1' name='form1' method='post'>";
 echo"<div id='regtable' class='table'>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>Name:</div>";
-echo"		<div class='cell50'><input type='text' name='name' value=".$user["nama_lengkap"]."/></div>";
+echo"		<div class='cell50'><input type='text' name='name' value='".$user["nama_lengkap"]."' /></div>";
 echo"</div>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>Address:</div>";
-echo"		<div class='cell50'><input type='text' name='name' value=".$user["alamat"]."/></div>";
+echo"		<div class='cell50'><input type='text' name='address' value='".$user["alamat"]."' /></div>";
 echo"</div>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>Province:</div>";
-echo"		<div class='cell50'><input type='text' name='name' value=".$user["provinsi"]."/></div>";
+echo"		<div class='cell50'><input type='text' name='province' value='".$user["provinsi"]."' /></div>";
 echo"</div>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>City:</div>";
-echo"		<div class='cell50'><input type='text' name='name' value=".$user["kota"]."/></div>";
+echo"		<div class='cell50'><input type='text' name='city' value='".$user["kota"]."' /></div>";
 echo"</div>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>Zip Code:</div>";
-echo"		<div class='cell50'><input type='text' name='name' value=".$user["kodepos"]."/></div>";
+echo"		<div class='cell50'><input type='text' name='zipcode' value='".$user["kodepos"]."' /></div>";
 echo"</div>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>Contact No:</div>";
-echo"		<div class='cell50'><input type='text' name='name' value=".$user["telepon"]."/></div>";
+echo"		<div class='cell50'><input type='text' name='contact' value='".$user["telepon"]."' /></div>";
 echo"</div>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>Email:</div>";
-echo"		<div class='cell50'><input type='text' name='name' value=".$user["email"]."/></div>";
-echo"</div>";
-echo"<div class='row'>";
-echo"		<div class='cell50'>Username:</div>";
-echo"		<div class='cell50'><input type='text' name='name' value=".$user["username"]."/></div>";
+echo"		<div class='cell50'><input type='text' name='email' value='".$user["email"]."' /></div>";
 echo"</div>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>Password:</div>";
@@ -180,7 +148,11 @@ echo"</div>";
 echo"<div class='row'>";
 echo"		<div class='cell50'>Confirm Password:</div>";
 echo"		<div class='cell50'><input type='text' name='cpassword'/></div>";
+echo"<div class='row'>";
+echo"	<div class='cell50'></div>";
+echo"	<div class='cell50'><input name='submit' type='button' onclick='return ValidateForm()' value='Submit' /></div>";
 echo"</div>
+	</div>
 	</div>
 	</form>
 </div></div>

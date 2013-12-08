@@ -1,5 +1,6 @@
 <?php
 	include("config.php");
+	include("lib/rest_request.php");
 	
 	function updateUser($data){
 		// mengecek apakah masih bisa meng-add barang dengan id tertentu sejumlah tertentu
@@ -7,8 +8,8 @@
 		
 		global $WSDL_URL, $SOAP_URL;
 		
-		sendRestRequest("PUT","user/".$data["username"],$data);
-		
+		$result=sendRestRequest("PUT","user/".$data["user"]["username"],$data);
+		return $result;
 	}
 	
 	function handleEditProfileAjax(){
@@ -36,6 +37,6 @@
 	}
 	
 	if (isset($_POST["ajax"])){
-		echo handleRegistrationAjax();
+		echo handleEditProfileAjax();
 	}
 ?>
