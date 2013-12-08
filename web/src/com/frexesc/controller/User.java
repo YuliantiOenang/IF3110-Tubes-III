@@ -3,7 +3,6 @@ package com.frexesc.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,11 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.ant.SessionsTask;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.frexesc.Constants;
 import com.frexesc.model.UserBean;
 import com.frexesc.service.WebService;
 
@@ -29,8 +28,8 @@ import com.frexesc.service.WebService;
 @WebServlet("/User")
 public class User extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String hostname = "http://ruko.ap01.aws.af.cm/";
-	
+	private static String hostname = Constants.HOSTNAME;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -43,16 +42,17 @@ public class User extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		if (request.getSession(true).getAttribute("user_id") == null) {
 			response.sendRedirect("register");
 		} else {
 			if (request.getParameter("action") == null) {
-				//DbConnection dbConnection = new DbConnection();
-				//Connection connection = dbConnection.mySqlConnection();
+				// DbConnection dbConnection = new DbConnection();
+				// Connection connection = dbConnection.mySqlConnection();
 				String user_id = request.getParameter("id");
-				
+
 				/** Set WebService (REST) for retrieving list of User */
 				WebService _user = new WebService(hostname + "user");
 				_user.addParam("action", "view_profile");
@@ -60,7 +60,7 @@ public class User extends HttpServlet {
 				_user.addHeader("GData-Version", "2");
 				try {
 					_user.execute(WebService.REQUEST_METHOD.GET);
-					String user = _user.getResponse();					
+					String user = _user.getResponse();
 					JSONParser parser = new JSONParser();
 					JSONObject mainJSON = null;
 					try {
@@ -70,48 +70,53 @@ public class User extends HttpServlet {
 					}
 					JSONObject data = (JSONObject) mainJSON.get("data");
 					out.println(user);
-					UserBean active_user = new UserBean(
-							data.get("username").toString(), 
-							data.get("password").toString(), 
-							data.get("email").toString(), 
-							data.get("name").toString(), 
-							data.get("telephone").toString(), 
-							data.get("address").toString(), 
-							data.get("province").toString(), 
-							data.get("city").toString(), 
-							data.get("postal").toString(), 
-							Integer.parseInt(data.get("role").toString()), 
-							data.get("nocard").toString(),
-							data.get("nacard").toString(), 
-							data.get("excard").toString(), 
-							Integer.parseInt(data.get("transaction").toString()));
+					UserBean active_user = new UserBean(data.get("username")
+							.toString(), data.get("password").toString(), data
+							.get("email").toString(), data.get("name")
+							.toString(), data.get("telephone").toString(), data
+							.get("address").toString(), data.get("province")
+							.toString(), data.get("city").toString(), data.get(
+							"postal").toString(), Integer.parseInt(data.get(
+							"role").toString()), data.get("nocard").toString(),
+							data.get("nacard").toString(), data.get("excard")
+									.toString(), Integer.parseInt(data.get(
+									"transaction").toString()));
 					request.setAttribute("user", active_user);
 					request.setAttribute("id", user_id);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profile.jsp");
+					RequestDispatcher dispatcher = getServletContext()
+							.getRequestDispatcher("/profile.jsp");
 					dispatcher.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-				
-//				try {
-//					Statement statement = connection.createStatement();
-//					ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id='" + id + "' LIMIT 1");
-//					if (rs.next()) {
-//						UserBean user = new UserBean(rs.getString("username"), null, rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), Integer.parseInt(rs.getString("transaksi")));
-//						request.setAttribute("user", user);
-//						request.setAttribute("id", id);
-//					}
-//					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profile.jsp");
-//					dispatcher.forward(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-				
-			} 
-			else {
-				//DbConnection dbConnection = new DbConnection();
-				//Connection connection = dbConnection.mySqlConnection();
+
+				// try {
+				// Statement statement = connection.createStatement();
+				// ResultSet rs =
+				// statement.executeQuery("SELECT * FROM user WHERE id='" + id +
+				// "' LIMIT 1");
+				// if (rs.next()) {
+				// UserBean user = new UserBean(rs.getString("username"), null,
+				// rs.getString("email"), rs.getString("nama"),
+				// rs.getString("handphone"), rs.getString("alamat"),
+				// rs.getString("provinsi"), rs.getString("kota"),
+				// rs.getString("kodepos"), rs.getInt("role"),
+				// rs.getString("nomor_kartu"), rs.getString("nama_kartu"),
+				// rs.getString("expire_kartu"),
+				// Integer.parseInt(rs.getString("transaksi")));
+				// request.setAttribute("user", user);
+				// request.setAttribute("id", id);
+				// }
+				// RequestDispatcher dispatcher =
+				// getServletContext().getRequestDispatcher("/profile.jsp");
+				// dispatcher.forward(request, response);
+				// } catch (Exception e) {
+				// e.printStackTrace();
+				// }
+
+			} else {
+				// DbConnection dbConnection = new DbConnection();
+				// Connection connection = dbConnection.mySqlConnection();
 				String user_id = request.getParameter("id");
 				/** Set WebService (REST) for retrieving list of User */
 				WebService _user = new WebService(hostname + "user");
@@ -120,7 +125,7 @@ public class User extends HttpServlet {
 				_user.addHeader("GData-Version", "2");
 				try {
 					_user.execute(WebService.REQUEST_METHOD.GET);
-					String user = _user.getResponse();					
+					String user = _user.getResponse();
 					JSONParser parser = new JSONParser();
 					JSONObject mainJSON = null;
 					try {
@@ -130,40 +135,47 @@ public class User extends HttpServlet {
 					}
 					JSONObject data = (JSONObject) mainJSON.get("data");
 					out.println(user);
-					UserBean active_user = new UserBean(
-							data.get("username").toString(), 
-							data.get("password").toString(), 
-							data.get("email").toString(), 
-							data.get("name").toString(), 
-							data.get("telephone").toString(), 
-							data.get("address").toString(), 
-							data.get("province").toString(), 
-							data.get("city").toString(), 
-							data.get("postal").toString(), 
-							Integer.parseInt(data.get("role").toString()), 
-							data.get("nocard").toString(),
-							data.get("nacard").toString(), 
-							data.get("excard").toString(), 
-							Integer.parseInt(data.get("transaction").toString()));
+					UserBean active_user = new UserBean(data.get("username")
+							.toString(), data.get("password").toString(), data
+							.get("email").toString(), data.get("name")
+							.toString(), data.get("telephone").toString(), data
+							.get("address").toString(), data.get("province")
+							.toString(), data.get("city").toString(), data.get(
+							"postal").toString(), Integer.parseInt(data.get(
+							"role").toString()), data.get("nocard").toString(),
+							data.get("nacard").toString(), data.get("excard")
+									.toString(), Integer.parseInt(data.get(
+									"transaction").toString()));
 					request.setAttribute("user", active_user);
 					request.setAttribute("id", user_id);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editprofile.jsp");
+					RequestDispatcher dispatcher = getServletContext()
+							.getRequestDispatcher("/editprofile.jsp");
 					dispatcher.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-//				try {
-//					Statement statement = connection.createStatement();
-//					ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id='" + id + "' LIMIT 1");
-//					if (rs.next()) {
-//						UserBean user = new UserBean(rs.getString("username"), rs.getString("password"), rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), Integer.parseInt(rs.getString("transaksi")));
-//						request.setAttribute("user", user);
-//					}
-//					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editprofile.jsp");
-//					dispatcher.forward(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
+				// try {
+				// Statement statement = connection.createStatement();
+				// ResultSet rs =
+				// statement.executeQuery("SELECT * FROM user WHERE id='" + id +
+				// "' LIMIT 1");
+				// if (rs.next()) {
+				// UserBean user = new UserBean(rs.getString("username"),
+				// rs.getString("password"), rs.getString("email"),
+				// rs.getString("nama"), rs.getString("handphone"),
+				// rs.getString("alamat"), rs.getString("provinsi"),
+				// rs.getString("kota"), rs.getString("kodepos"),
+				// rs.getInt("role"), rs.getString("nomor_kartu"),
+				// rs.getString("nama_kartu"), rs.getString("expire_kartu"),
+				// Integer.parseInt(rs.getString("transaksi")));
+				// request.setAttribute("user", user);
+				// }
+				// RequestDispatcher dispatcher =
+				// getServletContext().getRequestDispatcher("/editprofile.jsp");
+				// dispatcher.forward(request, response);
+				// } catch (Exception e) {
+				// e.printStackTrace();
+				// }
 			}
 		}
 	}
@@ -172,7 +184,8 @@ public class User extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		HttpSession sessions = request.getSession(true);
@@ -180,7 +193,7 @@ public class User extends HttpServlet {
 
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
-		
+
 		String id = sessions.getAttribute("user_id").toString();
 		String password = request.getParameter("password1");
 		String email = request.getParameter("email");
@@ -190,11 +203,24 @@ public class User extends HttpServlet {
 		String province = request.getParameter("province");
 		String city = request.getParameter("city");
 		String postal = request.getParameter("postal");
-		
+
 		if (action.equals("register")) {
 			String username = request.getParameter("username");
 			// HttpSession session = request.getSession(true);
-			String insertQuery = "INSERT INTO user (nama, username, password, email, handphone, alamat, kota, provinsi, kodepos) VALUES ('" + name + "','" + username + "','" + password + "','" + email + "','" + telephone + "','" + address + "','" + city + "','" + province + "','" + postal + "')";
+			String insertQuery = "INSERT INTO user (nama, username, password, email, handphone, alamat, kota, provinsi, kodepos) VALUES ('"
+					+ name
+					+ "','"
+					+ username
+					+ "','"
+					+ password
+					+ "','"
+					+ email
+					+ "','"
+					+ telephone
+					+ "','"
+					+ address
+					+ "','"
+					+ city + "','" + province + "','" + postal + "')";
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(insertQuery);
@@ -204,7 +230,8 @@ public class User extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			getServletContext().getRequestDispatcher("/login").forward(request, response);
+			getServletContext().getRequestDispatcher("/login").forward(request,
+					response);
 		} else if (action.equals("edit_profile")) {
 			/** Set WebService (REST) for retrieving list of User */
 			WebService _user = new WebService(hostname + "user");
@@ -226,16 +253,22 @@ public class User extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-//			String updateQuery = "UPDATE user SET nama='" + name + "', password='" + password + "', email='" + email + "', handphone='" + telephone + "', alamat='" + address + "', kota='" + city + "', provinsi='" + province + "', kodepos='" + postal + "' WHERE id='" + request.getSession(true).getAttribute("user_id") + "'";
-//			System.out.println(updateQuery);
-//			try {
-//				Statement statement = connection.createStatement();
-//				statement.executeUpdate(updateQuery);
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-			//response.sendRedirect("user?id=" + request.getSession(true).getAttribute("user_id"));
+
+			// String updateQuery = "UPDATE user SET nama='" + name +
+			// "', password='" + password + "', email='" + email +
+			// "', handphone='" + telephone + "', alamat='" + address +
+			// "', kota='" + city + "', provinsi='" + province + "', kodepos='"
+			// + postal + "' WHERE id='" +
+			// request.getSession(true).getAttribute("user_id") + "'";
+			// System.out.println(updateQuery);
+			// try {
+			// Statement statement = connection.createStatement();
+			// statement.executeUpdate(updateQuery);
+			// } catch (SQLException e) {
+			// e.printStackTrace();
+			// }
+			// response.sendRedirect("user?id=" +
+			// request.getSession(true).getAttribute("user_id"));
 		}
 
 	}

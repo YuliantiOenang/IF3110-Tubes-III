@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.frexesc.Constants;
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
 
@@ -31,7 +32,7 @@ import com.frexesc.model.KategoriBean;
 @MultipartConfig
 public class AdminBarang extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String hostname = "http://ruko.ap01.aws.af.cm/";
+	private static String hostname = Constants.HOSTNAME;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

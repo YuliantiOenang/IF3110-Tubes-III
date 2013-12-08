@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.frexesc.Constants;
+
 /**
  * Servlet implementation class Validate
  */
 public class Validate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String hostname = "http://ruko.ap01.aws.af.cm/";
+	private static String hostname = Constants.HOSTNAME;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

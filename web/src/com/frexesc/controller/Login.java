@@ -18,6 +18,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.frexesc.Constants;
 import com.frexesc.model.KategoriBean;
 import com.frexesc.model.UserBean;
 import com.frexesc.service.WebService;
@@ -27,7 +28,7 @@ import com.frexesc.service.WebService;
  */
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String hostname = "http://ruko.ap01.aws.af.cm/";
+	private static String hostname = Constants.HOSTNAME;
        
     /**
      * @see HttpServlet#HttpServlet()

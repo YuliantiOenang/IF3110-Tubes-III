@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.frexesc.Constants;
 import com.frexesc.service.WebService;
 
 /**
@@ -14,7 +15,7 @@ import com.frexesc.service.WebService;
  */
 public class Card extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String hostname = "http://ruko.ap01.aws.af.cm/";
+	private static String hostname = Constants.HOSTNAME;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

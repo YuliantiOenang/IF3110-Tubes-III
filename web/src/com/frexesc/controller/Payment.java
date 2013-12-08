@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.frexesc.Constants;
+
 /**
  * 
  * Servlet implementation class Payment
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Payment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String hostname = "http://ruko.ap01.aws.af.cm/";
+	private static String hostname = Constants.HOSTNAME;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

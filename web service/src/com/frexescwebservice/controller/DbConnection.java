@@ -17,6 +17,8 @@ public class DbConnection {
 	public String password = " ";
 	public String test = "";
 	
+	// public DbConnection() {}
+	
 	public DbConnection() {
 
 		/** Get VCAP_SERVICES from Web Service */

@@ -1,8 +1,6 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,6 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.frexesc.Constants;
 import com.frexesc.model.BarangBean;
 import com.frexesc.service.WebService;
 
@@ -27,7 +26,7 @@ import com.frexesc.service.WebService;
  */
 public class AddCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String hostname = "http://ruko.ap01.aws.af.cm/";
+	private static String hostname = Constants.HOSTNAME;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -138,21 +137,18 @@ public class AddCart extends HttpServlet {
 						deskripsiTambahan = "";
 
 					// Add to Cart here
-			/**		String query2 = "INSERT INTO barang_user (id_barang,id_user,status,jumlah_barang,deskripsi_tambahan) VALUES ("
-							+ request.getParameter("id_barang")
-							+ ", "
-							+ session.getAttribute("user_id")
-							+ ", 0, "
-							+ request.getParameter("qty")
-							+ ", \""
-							+ deskripsiTambahan + "\")";
-
-					try {
-						connection.createStatement().executeUpdate(query2);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} */
+					/**
+					 * String query2 =
+					 * "INSERT INTO barang_user (id_barang,id_user,status,jumlah_barang,deskripsi_tambahan) VALUES ("
+					 * + request.getParameter("id_barang") + ", " +
+					 * session.getAttribute("user_id") + ", 0, " +
+					 * request.getParameter("qty") + ", \"" + deskripsiTambahan
+					 * + "\")";
+					 * 
+					 * try { connection.createStatement().executeUpdate(query2);
+					 * } catch (SQLException e) { // TODO Auto-generated catch
+					 * block e.printStackTrace(); }
+					 */
 
 					/** Set WebService (REST) for update Barang */
 					WebService _updateBarang = new WebService(hostname
