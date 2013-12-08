@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -159,7 +160,7 @@ public class InventoriAdmin extends HttpServlet {
 			if(action.equals("add")){
 				id = add(multiparts, statement, barang);
 			}else if(action.equals("edit")){
-				edit(multiparts, statement, id, barang);
+				edit(id, barang);
 			}else if(action.equals("delete")){
 				delete(statement, id);
 			}
@@ -267,22 +268,34 @@ public class InventoriAdmin extends HttpServlet {
 		return barang.getId_inven();
 	}
 	
-	private void edit(List<FileItem> multiparts, Statement statement, int id, Barang barang) throws SQLException{
-		StringBuilder query = new StringBuilder();
+	private void edit(int id, Barang barang) throws SQLException{
 		
-		query.append("UPDATE inventori SET ");
-		query.append("id_kategori = ").append(barang.getId_cat()).append(",");
-		query.append("nama_inventori = ").append(quote(barang.getNama())).append(",");
-		query.append("jumlah = ").append(barang.getJumlah()).append(",");
-		query.append("description = ").append(quote(barang.getDesc())).append(",");
-		query.append("harga = ").append(barang.getHarga());
-		query.append(" WHERE id_inventori = ").append(id);
 		
-		if(!barang.getFieldGambar().equals("")){
-			uploadImg(multiparts, id);
-		}
+		JSONObject jsonResponse = null;
+		
+		JSONObject data = new JSONObject();
+		data.put("action", "edit_barang");
+		data.put("barang", barang);
+		data.put("id", new Integer(id));
 
-		statement.executeUpdate(query.toString());
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost(Database.WebServiceURL + "Actions");
+		CloseableHttpResponse httpresp = null;
+		try {
+			httppost.setEntity(new StringEntity(data.toString()));
+			httpresp = httpclient.execute(httppost);
+			HttpEntity entity = httpresp.getEntity();
+		    if (entity != null) {
+		    	String jsonresp = EntityUtils.toString(entity);
+	            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+		    }
+		    httpresp.close();
+		    httpclient.close();
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
+		    
+		}
 	}
 	
 	private void deleteFile(int id){
@@ -300,7 +313,7 @@ public class InventoriAdmin extends HttpServlet {
 		StringBuilder query = new StringBuilder();
 		
 		query.append("DELETE FROM inventori WHERE id_inventori = ").append(id);
-		deleteFile(id);
+		//deleteFile(id);
 		
 		statement.executeUpdate(query.toString());
 	}
