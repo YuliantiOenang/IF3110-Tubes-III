@@ -1,22 +1,20 @@
 <?php
-	include(dirname(__FILE__)."/db.php");
+	include(dirname(__FILE__)."/rest_request.php");
 	
 	function checkPassword($user, $password){
-		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
-		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
-		$statement = $conn->prepare("SELECT mem_id FROM member WHERE username = ? AND password = ?");
 		
-		$statement->bind_param("ss", $user, $password);
-		$statement->execute();
+		$data["username"] = $user;
+		$data["password"] = $password;
 		
-		$statement->bind_result($result);
+		$res = sendRestRequest("POST", "login", $data);
 		
-		$fetch = $statement->fetch();
+		$response = simplexml_load_string($res);
 		
-		$statement->close();
-		$conn->close();
-		
-		return $fetch ? $result : -1;		
+		if ($response["status"] == "ok"){
+			return $response["token"];
+		}else{
+			return null;
+		}
 	}
 	
 	
@@ -29,10 +27,10 @@
 		
 		switch($request["action"]){
 			case "login":
-				$id = checkPassword($request["user"], $request["pass"]);
-				if ( $id!=-1){
+				$tok = checkPassword($request["user"], $request["pass"]);
+				if ( $tok!=null){
 					$response["status"] = "ok";
-					$response["id"] = $id;
+					$response["id"] = $tok;
 				}
 			
 			break;

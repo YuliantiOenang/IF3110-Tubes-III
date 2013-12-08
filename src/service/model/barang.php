@@ -80,6 +80,34 @@ function get_barang($id){
 	return $response;
 }
 
+function get_cart($ids){
+	$response["status"] = "error";
+	$response["desc"] = "request invalid";
+	
+	if ($ids == "") return response;
+	
+	$ids = json_decode($ids, true);
+	
+	$db = db_connect();
+	
+	$response["hasil"] = array();
+	$response["status"] = "ok";
+	unset($response["desc"]);
+	
+	foreach($ids as $id){
+		$query = "SELECT * FROM barang WHERE id_barang = $id";
+		if(($result = $db->query($query)) && ($result->num_rows > 0)){
+			$row = $result->fetch_assoc();
+			array_push($response["hasil"], model_barang($row));
+		}	
+	}
+	
+	$db->close();
+	
+	return $response;
+}
+
+
 function get_kategori($cat, $page, $sort, $order){
 	$response["status"] = "error";
 	$response["desc"] = "barang tidak ditemukan";

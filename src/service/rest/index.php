@@ -61,6 +61,9 @@ class ShopRestHandler extends RestHandler{
 		$response["desc"] = "unknown resource ".@$urlpart[0];
 		
 		switch(@$urlpart[0]){
+			case 'cart':
+				$response = get_cart(@$data["ids"]);
+			break;
 			case 'barang':
 				$response = get_barang(@$urlpart[1]);
 			break;
