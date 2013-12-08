@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import com.frexescwebservice.model.BarangBean;
 import com.frexescwebservice.model.UserBean;
 
 /**
@@ -38,6 +36,7 @@ public class UserController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -60,8 +59,7 @@ public class UserController extends HttpServlet {
 				ResultSet rs2 = connection.createStatement()
 						.executeQuery(query);
 				if (rs2.next()) {
-					UserBean user = new UserBean(
-							rs2.getString("username"),
+					UserBean user = new UserBean(rs2.getString("username"),
 							rs2.getString("password"), rs2.getString("email"),
 							rs2.getString("nama"), rs2.getString("handphone"),
 							rs2.getString("alamat"), rs2.getString("provinsi"),
@@ -69,9 +67,9 @@ public class UserController extends HttpServlet {
 							Integer.valueOf(rs2.getString("role")),
 							rs2.getString("nomor_kartu"),
 							rs2.getString("nama_kartu"),
-							rs2.getString("expire_kartu"), 
-							Integer.valueOf(rs2.getString("transaksi")));
-			
+							rs2.getString("expire_kartu"), Integer.valueOf(rs2
+									.getString("transaksi")));
+
 					JSONObject returnResult = new JSONObject();
 					returnResult = user.toJSON();
 					json.put("status", "true");
@@ -93,6 +91,7 @@ public class UserController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String requestType = request.getParameter("action");
@@ -119,7 +118,7 @@ public class UserController extends HttpServlet {
 					+ "', password='" + password + "', email='" + email
 					+ "', handphone='" + telephone + "', alamat='" + address
 					+ "', kota='" + city + "', provinsi='" + province
-					+ "', kodepos='" + postal + "' WHERE id='"+ id + "'";
+					+ "', kodepos='" + postal + "' WHERE id='" + id + "'";
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(updateQuery);
@@ -163,6 +162,27 @@ public class UserController extends HttpServlet {
 					json.put("status", "false");
 				}
 				out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		if (requestType.equals("updateCard")) {
+			Long id = Long.parseLong(request.getParameter("id"));
+			String num = request.getParameter("num");
+			String name = request.getParameter("name");
+			String expired_date = request.getParameter("expired_date");
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "UPDATE user SET nama_kartu='" + name
+					+ "', nomor_kartu='" + num + "', expire_kartu='"
+					+ expired_date + "' WHERE id='" + id + "'";
+
+			try {
+				connection.createStatement().executeUpdate(query);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

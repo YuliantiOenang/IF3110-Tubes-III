@@ -1,14 +1,13 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.frexesc.service.WebService;
 
 /**
  * Servlet implementation class Card
@@ -29,12 +28,14 @@ public class Card extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if (request.getSession(true).getAttribute("user_id") == null) {
 			response.sendRedirect("register");
 		} else {
-			getServletContext().getRequestDispatcher("/creditcard.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/creditcard.jsp")
+					.forward(request, response);
 		}
 	}
 
@@ -42,23 +43,34 @@ public class Card extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DbConnection dbConnection = new DbConnection();
-		Connection connection = dbConnection.mySqlConnection();
 
-		String num = request.getParameter("num");
-		String name = request.getParameter("name");
-		String date = request.getParameter("expired_date");
-		String updateQuery = "UPDATE user SET nama_kartu='" + name + "', nomor_kartu='" + num + "', expire_kartu='" + date + "' WHERE id='" + request.getSession(true).getAttribute("user_id") + "'";
+		/** Set WebService (REST) for update Card */
+		WebService _update = new WebService(hostname + "user");
+		_update.addParam("action", "updateCard");
+		_update.addParam("id", String.valueOf(request.getSession(true)
+				.getAttribute("user_id")));
+		_update.addParam("num", request.getParameter("num"));
+		_update.addParam("name", request.getParameter("name"));
+		_update.addParam("expired_date", request.getParameter("expired_date"));
+		_update.addHeader("GData-Version", "2");
+
 		try {
-			Statement statement = connection.createStatement();
-			statement.executeUpdate(updateQuery);
-		} catch (SQLException e) {
+			_update.execute(WebService.REQUEST_METHOD.POST);
+			// TODO : Unsafe Operation, Need to check result!
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (request.getParameter("from") == null || request.getParameter("from") == "") response.sendRedirect("index");
-		else response.sendRedirect("./barang/payment");
+		/** End of WebService for update Card */
+
+		if (request.getParameter("from") == null
+				|| request.getParameter("from") == "")
+			response.sendRedirect("index");
+		else
+			response.sendRedirect("./barang/payment");
 	}
 
 }
