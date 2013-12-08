@@ -1,0 +1,2 @@
+ - Perlu dilakukan denormalisasi, misal customer dan credit_card
+ - shopping_bag bisa tanpa disimpan di database. Punya Setyo pake session, Amazon.com disimpan di database.

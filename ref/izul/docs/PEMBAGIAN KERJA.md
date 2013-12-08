@@ -1,0 +1,3 @@
+- Home, halaman barang, search result. Isinya sebenernya sama aja, cuma beda muka, akses database yang sama juga.
+- Registrasi user, registrasi kartu kredit. Sekalian profile kalau mau.
+- Detail barang, shopping bag. Sama bagian header paling, header di semua halaman kan sama, tinggal pake include().
