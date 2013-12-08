@@ -42,7 +42,25 @@ public class Access
 		{
 			while(rs.next())
 			{
-				Category courseObj = new Category(rs.getInt("id"), rs.getString("name"));
+				Category courseObj = new Category(rs.getInt("id"), rs.getString("nama"));
+				categoryList.add(courseObj);
+			}
+		} catch (SQLException e)
+		{		
+			e.printStackTrace();
+		}
+		return categoryList;
+	}
+
+	public ArrayList<Category> getCategoriesById(Connection con, int id) throws SQLException {
+		ArrayList<Category> categoryList = new ArrayList<Category>();
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM kategori WHERE id="+id);
+		ResultSet rs = stmt.executeQuery();
+		try
+		{
+			while(rs.next())
+			{
+				Category courseObj = new Category(rs.getInt("id"), rs.getString("nama"));
 				categoryList.add(courseObj);
 			}
 		} catch (SQLException e)

@@ -29,4 +29,13 @@ public class AccessManager
 		categoryList = access.getCategories(con);
 		return categoryList;
 	}
+	
+	public ArrayList<Category> getCategoriesById(int id) throws Exception {
+		ArrayList<Category> categoryList = new ArrayList<Category>();
+		Database db = new Database();
+		Connection con = db.getConnection();
+		Access access = new Access();
+		categoryList = access.getCategoriesById(con,id);
+		return categoryList;
+	}
 }
