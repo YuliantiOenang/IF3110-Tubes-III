@@ -53,7 +53,7 @@ public class user extends HttpServlet {
 			// End OF DONT CHANGE
 			
 			
-			if(action.equals("register")){
+			if(action.equals("insert")){
 				// TODO customize for funtion 
 				// FORMAT INPUT : action = register & parameters = username , nama_lengkap , password, email ,handphone , address , province , state , postcode , n_pembelian
 				// FORMAT OUTPUT : {Status_operasi: Success/Failed}
@@ -61,114 +61,91 @@ public class user extends HttpServlet {
 				
 				Statement statement = con.createStatement();
 				
-				String username=parameter[0];
-				String nama_lengkap=parameter[1];
+				String username = parameter[0];
+				String fullname = parameter[1];
 				String password = parameter[2];
 				String email = parameter[3];
-				String handphone = parameter[4];
+				String hpnum = parameter[4];
+				String address = parameter[5];
+				String province = parameter[6];
+				String kecamatan = parameter[7];
+				String postcode = parameter[8];
+				
+				String query = "INSERT INTO `progin_13511059`.`user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`) VALUES ('"+username+"','"+fullname+"','"+password+"','"+email+"','"+hpnum+"','"+address+"','"+province+"','"+kecamatan+"','"+postcode+"')";
 				
 				int status;
-				status = statement.executeUpdate("INSERT INTO user ('username','nama_lengkap') VALUES ");
+				status = statement.executeUpdate(query);
 				
 				if(status==0){
-					out.print("{ \"Status_operasi\" : \"Berhasil\" }");
+					out.print("{ \"Status_operasi\" : \"berhasil\" }");
 				}else{
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
 				}
 				
 				
-			}else if(action.equals("login")){
-				//Create specific query for specific purpose
-				// In this section we want if the register function return an JSON object :
-				// Format contoh OUTPUT :{"Status_Login":"berhasil","username":"codename"}
-				// Base logic : Kalau kita nerima parameter 1 dan 2 berupa username dan password kemudian kita search ke database
-				// ditemukan username dan password yang bersesuaian dengan parameter2 nya (memiliki one row result) 
-				// jika empty set berarti invalid login.
+			}else if(action.equals("update")){
+			
+				Statement statement = con.createStatement();
 				
+				String username = parameter[0];
+				String fullname = parameter[1];
+				String password = parameter[2];
+				String email = parameter[3];
+				String hpnum = parameter[4];
+				String address = parameter[5];
+				String province = parameter[6];
+				String kecamatan = parameter[7];
+				String postcode = parameter[8];
 				
-				Statement statement=con.createStatement(); // persiapan untuk membuat query sql
+				String query = "UPDATE `progin_13511059`.`user` SET nama_lengkap='"+fullname+"', password='"+password+"', handphone="+hpnum+", address='"+address+"', province='"+province+"', state='"+kecamatan+"', postcode ="+postcode+" WHERE username= '"+ session.getAttribute("username")+"'";
 				
-				// Diasumsikan kita membuat "konvensi" dengan orang yang mengurus klien, misal dalam kasus ini 
-				// orang yang mengurus bagian "klien" akan mengirim isi variable berformat = action=login&parameters=username,password
-				// sehingga hasil split variable, parameter ke 0 akan berisi username, dan kedua berisi password
-				String username=parameter[0];
-				String password=parameter[1];
-				ResultSet rs = statement.executeQuery("SELECT username FROM user where username ='"+username+"' AND password = '"+password+"'"); 
+				int status;
+				status = statement.executeUpdate(query);
 				
-				ArrayList<String> HasilQuery_username= new ArrayList<>();
-				
-				while(rs.next()){
-					HasilQuery_username.add((String) rs.getObject(1)); 
-					// karena kita hanya menggunakan / mengambil username 'lihat kita bukan melakukan operasi SELECT *
-					// Maka sesuai urutan pada notasi di database, username ada pada kolom pertama dalam tabel user
-					// sehingga parameter get object bernilai 1
-				}
-				
-				
-				// LOGIKA PASCA Koneksi ke database
-				if(HasilQuery_username.isEmpty()){ // kalau kosong berarti tidak ditemukan username dan password yang bersesuaian
-					out.print("{ \"Status_login\" : \"Failed\" , \"username\" : \"\"}");
+				if(status==0){
+					out.print("{ \"Status_operasi\" : \"berhasil\" }");
 				}else{
-					out.print("{ \"Status_login\" : \"Success\" , \"username\" : \""+HasilQuery_username.get(0)+"\"}");
+					out.print("{ \"Status_operasi\" : \"gagal\" }");
 				}
-				/*
-				 * Cara nge "output.print" itu cara primitif, caranya pasti melelahkan, kalau mau cepet coba eksplorasi command-comand  
-				 * dibawah..ini ..
-				 *  - JSONArray ==> Googling ! ini kalau gak salah konversi dari array list terus konvert ke array versi json
-				 *  - JSONObject ==> Googling ! ini kalau gak salah konversi dari object java ke array 
-				 * 
-				 *  BErikut contoh penggunaan *kalau gak salah ya....
-				 * ArrayList<String> AL = new ArrayList<String>();
-				 *	try{
-				 * 		
-				 *	    Connection con = DriverManager.getConnection (GC.geturl(), GC.getuser(), GC.getpass());
-				 *	    Statement state1 = con.createStatement();
-				 *	    ResultSet uresult = state1.executeQuery("SELECT * FROM user");
-				 *	    while(uresult.next()){
-				 *				out.println(uresult.getObject(1)+"<br>");
-				 *				AL.add((String) uresult.getObject(1));
-				 *		}
-				 *
-				 *		JSONArray myjson = new JSONArray(AL);
-				 *		out.print(myjson.toString());
-				 *		out.print(myjson);
-				 *	}catch (Exception e){
-				 *		e.getMessage();
-				 *	}
-				 * 
-				 * 
-				*/
 				
-			}else if(action.equals("cek_pernah_daftar")){
-				// TODO customize for funtion 
-				// FORMAT INPUT :
-				// FORMAT OUTPUT :				
-			}else if(action.equals("update_profile")){
+			}else if(action.equals("login")){
+			
+				Statement statement = con.createStatement();
+				
+				String username = parameter[0];
+				String password = parameter[1];
+				boolean status = false;
+				
+				ResultSet rs = null;
+				
+				rs = executeQuery("SELECT * FROM user where username ='"+username+"' AND password = '"+password+"'");
+				status = rs.next();
+				
+				if (status)
+					out.print("{ \"Status_operasi\" : \"berhasil\" }");
+				else
+					out.print("{ \"Status_operasi\" : \"gagal\" }");
+					
+			}else if(action.equals("find")){
+				Statement statement = con.createStatement();
+				
+				String username = parameter[0];
+				
+				boolean status = false;
+				ResultSet rs = null;
+				
+				rs = executeQuery("SELECT * FROM user where username ='"+username+"'");
+				status = rs.next();
+				
+				if (status)
+					out.print("{ \"Status_operasi\" : \"berhasil\" }");
+				else
+					out.print("{ \"Status_operasi\" : \"gagal\" }");
 				
 			}
 		}catch(Exception e){
 			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		
-		
 	}
 
 	/**
