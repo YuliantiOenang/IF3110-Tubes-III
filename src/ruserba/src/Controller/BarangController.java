@@ -39,6 +39,7 @@ public class BarangController extends HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
         String action = request.getParameter("action");
+        if (action == null) action = "";
         try {
             if (action.equals("read")) {
                 Integer id = Integer.parseInt(request.getParameter("id"));
@@ -167,8 +168,41 @@ public class BarangController extends HttpServlet {
                 String id_barang = request.getParameter("id_barang");
                 Barang barang = Barang.findByPk(Integer.parseInt(id_barang));
                 if (barang != null) {
-                    out.write(barang.toJSON().toString());    
+                    out.write(barang.toJSON().toString());
                 }
+            } else if (action.equals("cekNama")) {
+                String nama_barang = request.getParameter("nama");
+                Barang barang = Barang.find("SELECT * FROM barang WHERE nama = '" + nama_barang + "'");
+                JSONObject json = new JSONObject();
+                if (barang != null) {
+                    json.put("content", "TIDAK UNIK");
+                } else {
+                    json.put("content", "UNIK");
+                }
+                out.write(json.toString());
+            } else if (action.equals("suggestion")) {
+                String name = request.getParameter("nama");
+                String str = "";
+                JSONObject json = new JSONObject();
+                if (!name.equals("")) {
+                    // String Query =
+                    // "select * from barang where nama LIKE '%"+name+"%'";
+                    // DBA.executeQuery(Query);
+                    // System.out.println(Query);
+                    ArrayList<Barang> barangs = Barang.findAll("SELECT * FROM barang WHERE nama LIKE '%" + name + "%'");
+
+                    str = str + "<ul>";
+                    for (Barang B : barangs) {
+                        str = str + "<li>";
+                        str = str + "<a href=\"#\" onclick=\"suggestions(this);\">";
+                        str = str + B.nama;
+                        str = str + "</a>";
+                        str = str + "</li>";
+                    }
+                    str = str + "</ul>";
+                }
+                json.put("content", str);
+                out.write(json.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -206,19 +240,19 @@ public class BarangController extends HttpServlet {
         try {
             if (barang != null) {
                 // parameter atribut account
-                if (map.get("id_kategori")!=null)
+                if (map.get("id_kategori") != null)
                     barang.id_kategori = Integer.parseInt(map.get("id_kategori"));
-                if (map.get("nama")!=null)
+                if (map.get("nama") != null)
                     barang.nama = map.get("nama");
-                if (map.get("harga")!=null)
+                if (map.get("harga") != null)
                     barang.harga = Integer.parseInt(map.get("harga"));
-                if (map.get("gambar")!=null)
+                if (map.get("gambar") != null)
                     barang.gambar = map.get("gambar");
-                if (map.get("stok")!=null)
+                if (map.get("stok") != null)
                     barang.stok = Integer.parseInt(map.get("stok"));
-                if (map.get("counter")!=null)
+                if (map.get("counter") != null)
                     barang.counter = Integer.parseInt(map.get("counter"));
-                if (map.get("keterangan")!=null)
+                if (map.get("keterangan") != null)
                     barang.keterangan = map.get("keterangan");
                 barang.save();
                 JSONObject json = new JSONObject();
@@ -238,7 +272,8 @@ public class BarangController extends HttpServlet {
         resp.setContentType("application/json");
         resp.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = resp.getWriter();
-        // BufferedReader in = new BufferedReader(new InputStreamReader(req.getInputStream()));
+        // BufferedReader in = new BufferedReader(new
+        // InputStreamReader(req.getInputStream()));
         // String[] tuple = in.readLine().split("=");
         int id = Integer.parseInt(req.getParameter("id"));
 

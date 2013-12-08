@@ -1,32 +1,26 @@
-package barangController;
+package soap;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javaModel.Barang;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import databaseLib.DatabaseAdapter;
-
 /**
- * Servlet implementation class DetailBarang
+ * Servlet implementation class KreditSoapClient
  */
-@WebServlet("/barang/detail")
-public class DetailBarang extends HttpServlet {
-	//Debug agar ridho punya library
+@WebServlet("/KreditSoapClient")
+public class KreditSoapClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private DatabaseAdapter DBA;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailBarang() {
+    public KreditSoapClient() {
         super();
-        DBA = new DatabaseAdapter();
         // TODO Auto-generated constructor stub
     }
 
@@ -35,28 +29,33 @@ public class DetailBarang extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String detail = request.getParameter("id");
-		if (detail == null)
-		{
-			PrintWriter out = response.getWriter();
-			out.println("<h1>Perintah aneh. . .</h1>");
-		}
-		else
-		{
-			Barang B = new Barang(DBA);
-//			B.executeQuery("select * from barang where id="+detail);
-			B.findByPkRest(Integer.parseInt(detail));
-			request.setAttribute("barang", B);
-			request.setAttribute("includeJspContent", "/view/detailBarang.jsp");
-			request.getRequestDispatcher("/view/layout.jsp").forward(request, response);
-		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	private String username;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Cookie[] cookies = request.getCookies();
+		for (int i=0;i<cookies.length;i++){
+			Cookie cookie = cookies[i];
+			if (cookie.getName().equals("isLogin")){
+				username = cookie.getValue();
+			}
+		}
+		/*if (username!=null){
+			Profile p = new Profile();
+			p.executeQuery("SELECT id WHERE username = " + username);
+		}
+		*/
+		KreditSoapProxy kss = new KreditSoapProxy();
+		Integer id_account = Integer.parseInt("");
+		String card_number = request.getParameter("card_number");
+		String name_of_card = request.getParameter("name_of_card"); 
+		String expired_date = request.getParameter("expired_date");
+		kss.createKredit(id_account, card_number, name_of_card, expired_date);
 	}
 
 }

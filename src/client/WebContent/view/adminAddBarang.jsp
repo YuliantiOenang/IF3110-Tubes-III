@@ -1,3 +1,5 @@
+<%@page import="javaModel.Kategori" %>
+<%@page import="javaModel.Helper" %>
 <script src="/ruserba/js/cekUnik.js" type="text/javascript"></script>
 
 <form action="/ruserba/admin/addbarang" method="POST" enctype="multipart/form-data">
@@ -13,13 +15,15 @@
 		<select name="kategori">
 			<option value="">--Pilih Kategori--</option>
 			<%
-			java.sql.ResultSet RS = (java.sql.ResultSet) request.getAttribute("listK");
-			while (RS.next())
-			{
+			//java.sql.ResultSet RS = (java.sql.ResultSet) request.getAttribute("listK");
+			//while (RS.next())
+			//{
+			    Kategori K = Helper.findAllKategori();
+			    for (int i = 0; i < K.id.size(); i++) {
 			%>
-				<option value="<%=RS.getObject(1)%>"> <%=RS.getObject(2)%></option>
+				<option value="<%=K.id.get(i)%>"> <%=K.nama_kategori.get(i)%></option>
 			<%
-			}
+				}
 			%>
 			
 		</select>

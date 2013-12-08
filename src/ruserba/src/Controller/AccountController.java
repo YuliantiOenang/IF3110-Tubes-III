@@ -40,16 +40,40 @@ public class AccountController extends HttpServlet {
         response.setContentType("application/json");
         response.setHeader("Access-Control-Allow-Origin", "*");
         PrintWriter out = response.getWriter();
+        String action = request.getParameter("action");
+        if (action == null) action = "";
         try {
-            Integer id = Integer.parseInt(request.getParameter("id"));
-            Account user = Account.findByPk(id);
-            if (user != null) {
+            if (action.equals("cekUsername")) {
+                String username = request.getParameter("username");
+                Account user = Account.find("SELECT * FROM account WHERE username = '"+username+"'");
                 JSONObject json = new JSONObject();
-                json.put("status", "true");
-                json.put("data", user.toJSON());
-                out.println(json.toString());
+                if (user != null) {
+                    json.put("status", false);
+                } else {
+                    json.put("status", true);
+                }
+                out.write(json.toString());
+            } else if (action.equals("cekEmail")){
+                String email= request.getParameter("email");
+                Account user = Account.find("SELECT * FROM account WHERE email = '"+email+"'");
+                JSONObject json = new JSONObject();
+                if (user != null) {
+                    json.put("status", false);
+                } else {
+                    json.put("status", true);
+                }
+                out.write(json.toString());
             } else {
-                out.println("{\"status\":\"false\"}");
+                Integer id = Integer.parseInt(request.getParameter("id"));
+                Account user = Account.findByPk(id);
+                if (user != null) {
+                    JSONObject json = new JSONObject();
+                    json.put("status", "true");
+                    json.put("data", user.toJSON());
+                    out.println(json.toString());
+                } else {
+                    out.println("{\"status\":\"false\"}");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,7 +154,7 @@ public class AccountController extends HttpServlet {
                     user.telepon = map.get("telepon");
                 // user.role = Integer.parseInt(map.get("role"));
                 if (map.get("transaksi")!=null)
-                    user.transaksi = Integer.parseInt(map.get("transaksi"));
+                    user.transaksi++;
                 System.out.println(user.kota);
                 user.save();
                 JSONObject json = new JSONObject();

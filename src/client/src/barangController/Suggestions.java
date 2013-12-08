@@ -2,13 +2,16 @@ package barangController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javaModel.Barang;
+import javaModel.RestClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import databaseLib.DatabaseAdapter;
 
 import org.json.JSONException;
@@ -48,29 +51,31 @@ public class Suggestions extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
 			
-			JSONObject json = new JSONObject();
+//			JSONObject json = new JSONObject();
 			
-			String str="";
+//			String str="";
 			
-			if (!name.equals("")) 
-			{
-				String Query = "select * from barang where nama LIKE '%"+name+"%'";
-				DBA.executeQuery(Query);
-				System.out.println(Query);
-				str = str + "<ul>";
-				while (DBA.getQueryResult().next())
-				{
-					str = str + "<li>";
-					str = str + "<a href=\"#\" onclick=\"suggestions(this);\">";
-					str = str + DBA.getQueryResult().getObject(3);
-					str = str + "</a>";
-					str = str + "</li>";
-				}
-				str = str + "</ul>";
-			}
-			
-			json.put("content",str);
-			out.write(json.toString());
+//			if (!name.equals("")) 
+//			{
+//				String Query = "select * from barang where nama LIKE '%"+name+"%'";
+//				DBA.executeQuery(Query);
+//				System.out.println(Query);
+//				str = str + "<ul>";
+//				while (DBA.getQueryResult().next())
+//				{
+//					str = str + "<li>";
+//					str = str + "<a href=\"#\" onclick=\"suggestions(this);\">";
+//					str = str + DBA.getQueryResult().getObject(3);
+//					str = str + "</a>";
+//					str = str + "</li>";
+//				}
+//				str = str + "</ul>";
+//			}
+//			
+//			json.put("content",str);
+//			out.write(json.toString());
+			String output = RestClient.doGet("barang?action=suggestion&nama="+name);
+			out.write(output);
 			out.close();
 		}catch (Exception e){}
 	}

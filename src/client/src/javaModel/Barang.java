@@ -47,6 +47,31 @@ public class Barang {
 			}
 		}catch (Exception e){}
 	}
+	public void findByPkRest(Integer id_barang) {
+	    String output = "";
+        try {
+            output = RestClient.doGet("barang?action=read&id="+id_barang);
+        } catch (HttpException | IOException | URISyntaxException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        try {
+            JSONObject json = new JSONObject(output);
+            if (json.getBoolean("status")) {
+                JSONObject brg = (JSONObject) json.get("data");
+                id.add(brg.get("id").toString());
+                nama.add(brg.get("nama").toString());
+                harga.add(brg.get("harga").toString());
+                gambar.add(brg.get("gambar").toString());
+                stok.add(brg.get("stok").toString());
+                counter.add(brg.get("counter").toString());
+                keterangan.add(brg.get("keterangan").toString());
+                id_kat.add(brg.get("id_kategori").toString());
+            }   
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+	}
 	public void findTopThreeRest() {
         String output = "";
         try {

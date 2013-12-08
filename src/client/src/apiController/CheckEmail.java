@@ -2,8 +2,9 @@ package apiController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.net.URISyntaxException;
+
+import javaModel.RestClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,10 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONException;
+import org.apache.http.HttpException;
 import org.json.JSONObject;
-
-import databaseLib.DatabaseAdapter;
 
 /**
  * Servlet implementation class CheckEmail
@@ -39,24 +38,31 @@ public class CheckEmail extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		String email = request.getParameter("email");
-		DatabaseAdapter DBA = new DatabaseAdapter();
-		String query = "select * from account where email = '" + email + "' limit 1";
-		DBA.executeQuery(query);
-		System.out.println(query);
-		ResultSet RS = DBA.getQueryResult();
-		try {
-			if (!RS.isBeforeFirst()) {
-				JSONObject json = new JSONObject();
-				json.put("status", true);
-				out.write(json.toString());
-			} else {
-				JSONObject json = new JSONObject();
-				json.put("status", false);
-				out.write(json.toString());
-			}
-		} catch (SQLException | JSONException e) {
-			e.printStackTrace();
-		}
+		String output = "";
+        try {
+            output = RestClient.doGet("account?action=cekEmail&email="+email);
+        } catch (HttpException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+		out.write(output);
+//		DatabaseAdapter DBA = new DatabaseAdapter();
+//		String query = "select * from account where email = '" + email + "' limit 1";
+//		DBA.executeQuery(query);
+//		System.out.println(query);
+//		ResultSet RS = DBA.getQueryResult();
+//		try {
+//			if (!RS.isBeforeFirst()) {
+//				JSONObject json = new JSONObject();
+//				json.put("status", true);
+//				out.write(json.toString());
+//			} else {
+//				JSONObject json = new JSONObject();
+//				json.put("status", false);
+//				out.write(json.toString());
+//			}
+//		} catch (SQLException | JSONException e) {
+//			e.printStackTrace();
+//		}
 		out.close();
 	}
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import soap.BarangSoapProxy;
 import databaseLib.DatabaseAdapter;
 
 /**
@@ -49,8 +50,8 @@ public class TambahBarang extends HttpServlet {
 		
 		if (isLogin)
 		{
-			DBA.executeQuery("select * from kategori");
-			request.setAttribute("listK", DBA.getQueryResult());
+//			DBA.executeQuery("select * from kategori");
+//			request.setAttribute("listK", DBA.getQueryResult());
 			request.setAttribute("includeJspContent", "/view/adminAddBarang.jsp");
 			request.getRequestDispatcher("/view/layout.jsp").forward(request, response);
 		}else response.sendRedirect("/ruserba/admin");
@@ -119,11 +120,13 @@ public class TambahBarang extends HttpServlet {
 			        if (filecontent != null) {
 			            filecontent.close();
 			        }
-			        String Query = "insert into barang (id_kategori,gambar," +
-			        		"nama,harga,keterangan," +
-			        		"stok) values ("+kategori+",\""+fileName+"\",\""+nama_barang+"\",\""+
-			        		harga_barang+"\",\""+keterangan+"\",\""+stok+"\")";
-			        DBA.insertQuery(Query);
+//			        String Query = "insert into barang (id_kategori,gambar," +
+//			        		"nama,harga,keterangan," +
+//			        		"stok) values ("+kategori+",\""+fileName+"\",\""+nama_barang+"\",\""+
+//			        		harga_barang+"\",\""+keterangan+"\",\""+stok+"\")";
+//			        DBA.insertQuery(Query);
+			        BarangSoapProxy bsp = new BarangSoapProxy();
+			        bsp.createBarang(Integer.parseInt(kategori), nama_barang, Integer.parseInt(harga_barang), fileName, Integer.parseInt(stok), 0, keterangan);
 			    }
 		    }
 		    else System.out.println("filename null");

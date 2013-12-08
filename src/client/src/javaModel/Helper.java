@@ -13,9 +13,10 @@ public class Helper {
 		
 	}
 	public static Kategori findAllKategori() {
-		String Query = "select * from kategori";
+//		String Query = "select * from kategori";
 		Kategori K = new Kategori(DBA);
-		K.executeQuery(Query);
+//		K.executeQuery(Query);
+		K.findAllRest();
 		return K;
 	}
 	public static String getUserLogged(HttpSession session) {

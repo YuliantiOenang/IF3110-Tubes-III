@@ -1,7 +1,13 @@
 package javaModel;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import org.apache.http.HttpException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import databaseLib.DatabaseAdapter;
 
@@ -17,7 +23,28 @@ public class Credit {
 	{
 		DBA = _DBA;
 	}
-	
+	public void findByAccountRest(Integer id_acc) {
+        String output = "";
+        try {
+            output = RestClient.doGet("kredit?id_account="+id_acc);
+        } catch (HttpException | IOException | URISyntaxException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        try {
+            JSONObject json = new JSONObject(output);
+            if (json.getBoolean("status")) {
+                JSONObject crd = (JSONObject) json.get("data");
+                id.add(crd.get("id").toString());
+                id_account.add(crd.get("id_account").toString());
+                card_number.add(crd.get("card_number").toString());
+                name_of_card.add(crd.get("name_of_card").toString());
+                expired_date.add(crd.get("expired_date").toString());
+            }   
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 	public void executeQuery(String query)
 	{
 		DBA.executeQuery(query);

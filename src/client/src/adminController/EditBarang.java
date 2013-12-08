@@ -52,7 +52,7 @@ public class EditBarang extends HttpServlet {
 			isLogin = false;
 		if (isLogin)
 		{
-			DBA.executeQuery("select * from barang where id="+request.getParameter("id"));
+//			DBA.executeQuery("select * from barang where id="+request.getParameter("id"));
 			Integer id_barang = Integer.parseInt(request.getParameter("id"));
 			Barang B = new Barang(DBA);
 			B.adminEdit(id_barang);

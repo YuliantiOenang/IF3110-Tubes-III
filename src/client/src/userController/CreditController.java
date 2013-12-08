@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import soap.KreditSoapProxy;
 import databaseLib.DatabaseAdapter;
 
 /**
@@ -41,9 +42,11 @@ public class CreditController extends HttpServlet {
 			return;
 		}
 		Integer userId = Helper.getUserId(request.getSession());
-		String q2 = "select * from kredit where id_account = "+userId;
+//		String q2 = "select * from kredit where id_account = "+userId;
+		
 		Credit C = new Credit(DBA);
-		C.executeQuery(q2);
+//		C.executeQuery(q2);
+		C.findByAccountRest(userId);
 		if (C.id.size() == 0) {
 			C.id.add("");
 			C.id_account.add(userId.toString());
@@ -70,8 +73,10 @@ public class CreditController extends HttpServlet {
 		String expired_date = request.getParameter("expired_date");
 		String returnUrl = request.getParameter("returnUrl");
 
-		String q2 = "insert into kredit (id_account, card_number, name_of_card, expired_date) values (\""+userId+"\",\""+card_number+"\",\""+name_of_card+"\",\""+expired_date+"\")";
-        DBA.insertQuery(q2);
+//		String q2 = "insert into kredit (id_account, card_number, name_of_card, expired_date) values (\""+userId+"\",\""+card_number+"\",\""+name_of_card+"\",\""+expired_date+"\")";
+//        DBA.insertQuery(q2);
+		KreditSoapProxy kss = new KreditSoapProxy();
+        kss.createKredit(userId, card_number, name_of_card, expired_date);
         if (returnUrl != null)
         	response.sendRedirect(returnUrl);
         else

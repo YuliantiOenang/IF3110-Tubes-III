@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import soap.AccountSoapClient;
+import soap.AccountSoapProxy;
 import databaseLib.DatabaseAdapter;
 
 /**
@@ -42,18 +44,32 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String reg_nama = request.getParameter("reg_nama");
-		String reg_email = request.getParameter("reg_email");
-		String reg_username = request.getParameter("reg_username");
-		String reg_password = request.getParameter("reg_password");
-		String reg_alamat = request.getParameter("reg_alamat");
-		String reg_provinsi = request.getParameter("reg_provinsi");
-		String reg_kota = request.getParameter("reg_kota");
-		String reg_kodepos = request.getParameter("reg_kodepos");
-		String reg_telepon = request.getParameter("reg_telepon");
+//		String reg_nama = request.getParameter("reg_nama");
+//		String reg_email = request.getParameter("reg_email");
+//		String reg_username = request.getParameter("reg_username");
+//		String reg_password = request.getParameter("reg_password");
+//		String reg_alamat = request.getParameter("reg_alamat");
+//		String reg_provinsi = request.getParameter("reg_provinsi");
+//		String reg_kota = request.getParameter("reg_kota");
+//		String reg_kodepos = request.getParameter("reg_kodepos");
+//		String reg_telepon = request.getParameter("reg_telepon");
 
-		String Query = "insert into account (username,password,nama,email,alamat,provinsi,kota,kodepos,telepon,role,transaksi) values (\""+reg_username+"\",\""+reg_password+"\",\""+reg_nama+"\",\""+reg_email+"\",\""+reg_alamat+"\",\""+reg_provinsi+"\",\""+reg_kota+"\",\""+reg_kodepos+"\",\""+reg_telepon+"\",\"1\",\"0\")";
-        DBA.insertQuery(Query);
+//		String Query = "insert into account (username,password,nama,email,alamat,provinsi,kota,kodepos,telepon,role,transaksi) values (\""+reg_username+"\",\""+reg_password+"\",\""+reg_nama+"\",\""+reg_email+"\",\""+reg_alamat+"\",\""+reg_provinsi+"\",\""+reg_kota+"\",\""+reg_kodepos+"\",\""+reg_telepon+"\",\"1\",\"0\")";
+//        DBA.insertQuery(Query);
+//		AccountSoap ac = new AccountSoapClient();
+	    AccountSoapProxy asp = new AccountSoapProxy();
+        String username = request.getParameter("reg_username");
+        String password = request.getParameter("reg_password");
+        String nama = request.getParameter("reg_nama");
+        String email = request.getParameter("reg_email");
+        String alamat = request.getParameter("reg_alamat");
+        String provinsi = request.getParameter("reg_provinsi"); 
+        String kota = request.getParameter("reg_kota"); 
+        String kodepos = request.getParameter("reg_kodepos"); 
+        String telepon = request.getParameter("reg_telepon"); 
+        Integer role = 1;
+        Integer transaksi = 0;
+        asp.createAcc(username, password, nama, email, alamat, provinsi, kota, kodepos, telepon, role, transaksi);
         response.sendRedirect("home");
 	}
 

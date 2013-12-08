@@ -2,6 +2,10 @@ package adminController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
+import javaModel.RestClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,12 +44,15 @@ public class CekBarang extends HttpServlet {
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
-			JSONObject json = new JSONObject();
-			DBA.executeQuery("select * from barang where nama='"+name+"'");
-			if (!DBA.getQueryResult().next()) json.put("content", "UNIK");
-			else json.put("content", "TIDAK UNIK"); 
+			name = URLEncoder.encode(name);
+			String output = RestClient.doGet("barang?action=cekNama&nama="+name);
+			out.write(output);
+//			JSONObject json = new JSONObject();
+//			DBA.executeQuery("select * from barang where nama='"+name+"'");
+//			if (!DBA.getQueryResult().next()) json.put("content", "UNIK");
+//			else json.put("content", "TIDAK UNIK"); 
 			//System.out.println(DBA.getQueryResult().getObject(0));
-			out.write(json.toString());
+//			out.write(json.toString());
 			out.close();
 		}catch (Exception e){System.out.println("ERROR"+e.getMessage());}
 	}

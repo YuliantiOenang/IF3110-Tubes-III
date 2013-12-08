@@ -36,6 +36,7 @@ public class KategoriController extends HttpServlet {
 		response.setHeader("Access-Control-Allow-Origin","*");
         PrintWriter out = response.getWriter();
 	    String action = request.getParameter("action");
+	    if (action == null) action = "";
 	    try {
     	    if (action.equals("read")) {
     	        Integer id = Integer.parseInt(request.getParameter("id"));

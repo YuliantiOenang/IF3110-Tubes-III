@@ -22,11 +22,29 @@
  <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
- <ns1:service name="HelloVe" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="sayHelloVe" qname="ns1:sayHelloVe" returnQName="ns1:sayHelloVeReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:name" type="xsd:string"/>
-   <ns2:parameter qname="ns1:id" type="xsd:int"/>
+ <ns1:service name="KreditSoap" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="createKredit" qname="ns1:createKredit" soapAction="" xmlns:ns1="http://soap" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:id_account" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns2:parameter qname="ns1:card_number" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns2:parameter qname="ns1:name_of_card" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns2:parameter qname="ns1:expired_date" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns2:operation>
+  <ns1:parameter name="sendMultiRefs" value="false"/>
+  <ns1:parameter name="wsdlServicePort" value="KreditSoap"/>
+  <ns1:parameter name="schemaQualified" value="http://soap"/>
+  <ns1:parameter name="className" value="soap.KreditSoap"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="allowedMethods" value="createKredit"/>
+  <ns1:parameter name="wsdlServiceElement" value="KreditSoapService"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://soap"/>
+  <ns1:parameter name="wsdlPortType" value="KreditSoap"/>
+  <ns1:parameter name="sendXsiTypes" value="false"/>
+ </ns1:service>
+ <ns1:service name="HelloVe" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="sayHelloVe" qname="ns2:sayHelloVe" returnQName="ns2:sayHelloVeReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:name" type="xsd:string"/>
+   <ns1:parameter qname="ns2:id" type="xsd:int"/>
+  </ns1:operation>
   <ns1:parameter name="allowedMethods" value="sayHelloVe"/>
   <ns1:parameter name="wsdlPortType" value="HelloVe"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
@@ -43,18 +61,18 @@
   <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
  </ns1:service>
  <ns1:service name="AccountSoap" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="createAcc" qname="ns2:createAcc" soapAction="" xmlns:ns2="http://soap">
-   <ns1:parameter qname="ns2:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:nama" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:email" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:alamat" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:provinsi" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:kota" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:kodepos" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:telepon" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:role" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:transaksi" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="createAcc" qname="ns3:createAcc" soapAction="" xmlns:ns3="http://soap">
+   <ns1:parameter qname="ns3:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:nama" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:email" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:alamat" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:provinsi" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:kota" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:kodepos" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:telepon" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:role" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:transaksi" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="createAcc"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
@@ -69,9 +87,28 @@
   <ns1:parameter name="allowedMethods" value="getVersion"/>
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
+ <ns1:service name="BarangSoap" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="createBarang" qname="ns4:createBarang" soapAction="" xmlns:ns4="http://soap">
+   <ns1:parameter qname="ns4:id_kategori" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:nama" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:harga" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:gbr" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:stock" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:ctr" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:ket" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="createBarang"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="BarangSoap"/>
+  <ns1:parameter name="className" value="soap.BarangSoap"/>
+  <ns1:parameter name="wsdlServicePort" value="BarangSoap"/>
+  <ns1:parameter name="schemaQualified" value="http://soap"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://soap"/>
+  <ns1:parameter name="wsdlServiceElement" value="BarangSoapService"/>
+ </ns1:service>
  <ns1:service name="HelloWorld" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="sayHelloWorld" qname="ns3:sayHelloWorld" returnQName="ns3:sayHelloWorldReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns3:name" type="xsd:string"/>
+  <ns1:operation name="sayHelloWorld" qname="ns5:sayHelloWorld" returnQName="ns5:sayHelloWorldReturn" returnType="xsd:string" soapAction="" xmlns:ns5="http://soap" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:name" type="xsd:string"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="sayHelloWorld"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>

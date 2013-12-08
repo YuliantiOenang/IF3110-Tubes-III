@@ -1,0 +1,32 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from KreditSoapService WSDL service -->
+
+  <service name="KreditSoap" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soap"/>
+      <parameter name="wsdlServiceElement" value="KreditSoapService"/>
+      <parameter name="schemaQualified" value="http://soap"/>
+      <parameter name="wsdlServicePort" value="KreditSoap"/>
+      <parameter name="className" value="soap.KreditSoapSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="KreditSoap"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="createKredit" qname="operNS:createKredit" xmlns:operNS="http://soap" soapAction="" >
+        <parameter qname="pns:id_account" xmlns:pns="http://soap" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:card_number" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:name_of_card" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:expired_date" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="createKredit"/>
+
+  </service>
+</deployment>
