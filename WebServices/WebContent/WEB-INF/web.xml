@@ -39,4 +39,13 @@
   <url-pattern>/UserService/*</url-pattern>
   </servlet-mapping>
   
+  <servlet>  
+  <servlet-name>Barang Service</servlet-name>
+  <servlet-class>com.sun.jersey.server.impl.container.servlet.ServletAdaptor</servlet-class>
+      <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Barang Service</servlet-name>
+  <url-pattern>/BS/*</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -59,6 +59,75 @@ public class BarangService {
 	}
 
 	@GET
+	@Path("/select2")
+	@Produces("application/json")
+	public String selectSelection(@QueryParam("p1") String p1,
+			@QueryParam("p2") String p2, @QueryParam("p3") String p3,
+			@QueryParam("p4") String p4, @QueryParam("p5") String p5,
+			@QueryParam("page") int page) {
+		String selectResult = null;
+		query = "SELECT kategori.nama, barang.gambar, barang.id, barang.id_kategori, barang.nama_barang, barang.harga_barang, barang.jumlah_barang, barang.keterangan FROM barang JOIN kategori ON barang.id_kategori=kategori.id "
+				+ p3 + p4 + p5 + p1 + p2 + "LIMIT " + page + ",10";
+		try {
+			PreparedStatement stmt = con.prepareStatement(query);
+			ResultSet rs;
+			rs = stmt.executeQuery();
+			ArrayList<Barang> barangList = new ArrayList<Barang>();
+			while (rs.next()) {
+				Barang barang = new Barang();
+				barang.setId(rs.getInt("id"));
+				barang.setId_category(rs.getInt("id_kategori"));
+				barang.setName(rs.getString("nama_barang"));
+				barang.setPicture(rs.getString("gambar"));
+				barang.setPrice(rs.getInt("harga_barang"));
+				barang.setDescription(rs.getString("keterangan"));
+				barang.setName(rs.getString("jumlah_barang"));
+				barang.setnKat(rs.getString("kategori.nama"));
+				barangList.add(barang);
+			}
+			gson = new Gson();
+			selectResult = gson.toJson(barangList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return selectResult;
+	}
+
+	@GET
+	@Path("/select3")
+	@Produces("application/json")
+	public String select3(@QueryParam("p3") String p3,
+			@QueryParam("p4") String p4, @QueryParam("p5") String p5,
+			@QueryParam("page") int page) {
+		String selectResult = null;
+		query = "SELECT COUNT(id) AS JmlBarang FROM barang WHERE id=id " + p3 + p4 + p5;
+		try {
+			PreparedStatement stmt = con.prepareStatement(query);
+			ResultSet rs;
+			rs = stmt.executeQuery();
+			ArrayList<Barang> barangList = new ArrayList<Barang>();
+			while (rs.next()) {
+				Barang barang = new Barang();
+				barang.setId(rs.getInt("id"));
+				barang.setId_category(rs.getInt("id_kategori"));
+				barang.setName(rs.getString("nama_barang"));
+				barang.setPicture(rs.getString("gambar"));
+				barang.setPrice(rs.getInt("harga_barang"));
+				barang.setDescription(rs.getString("keterangan"));
+				barang.setName(rs.getString("jumlah_barang"));
+				barangList.add(barang);
+			}
+			gson = new Gson();
+			selectResult = gson.toJson(barangList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return selectResult;
+	}
+	
+	@GET
 	@Path("/select")
 	@Produces("application/json")
 	public String selectBarang(@DefaultValue("-1") @QueryParam("id") int id,
@@ -73,7 +142,7 @@ public class BarangService {
 			if (idKat != -1)
 				query += (" && id_kategori=" + idKat);
 			if (!nama.equals("-1"))
-				query += (" && nama_barang=\"" + nama+"\"");
+				query += (" && nama_barang=\"" + nama + "\"");
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -82,7 +151,7 @@ public class BarangService {
 				barang.setId_category(rs.getInt("id_kategori"));
 				barang.setName(rs.getString("nama_barang"));
 				barang.setPicture(rs.getString("gambar"));
-				barang.setPrice(rs.getInt("harga_barang"));				
+				barang.setPrice(rs.getInt("harga_barang"));
 				barang.setDescription(rs.getString("keterangan"));
 				barang.setName(rs.getString("jumlah_barang"));
 				barangList.add(barang);
@@ -111,11 +180,11 @@ public class BarangService {
 			if (idKat != -1)
 				query += (", id_kategori=" + idKat);
 			if (!nama.equals("-1"))
-				query += (", nama_barang=\"" + nama+"\"");
+				query += (", nama_barang=\"" + nama + "\"");
 			if (!gambar.equals("-1"))
-				query += (", gambar=\"" + gambar+"\"");
+				query += (", gambar=\"" + gambar + "\"");
 			if (!keterangan.equals("-1"))
-				query += (", keterangan=\"" + keterangan+"\"");
+				query += (", keterangan=\"" + keterangan + "\"");
 			if (harga != -1)
 				query += (", harga_barang=" + harga);
 			if (jumlah != -1)
@@ -126,7 +195,8 @@ public class BarangService {
 			temp = stmt.executeUpdate();
 			gson = new Gson();
 			updateResult = gson.toJson(temp);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		return updateResult;
 	}
 
@@ -143,7 +213,8 @@ public class BarangService {
 			temp = stmt.executeUpdate();
 			gson = new Gson();
 			deleteResult = gson.toJson(temp);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		return deleteResult;
 	}
 }

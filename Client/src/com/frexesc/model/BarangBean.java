@@ -7,6 +7,7 @@ public class BarangBean {
 	private String picture;
 	private int price;
 	private String description;
+	private String nKat;
 	private int total_item;
 
 	public BarangBean(long id, long id_category, String name, String picture,
