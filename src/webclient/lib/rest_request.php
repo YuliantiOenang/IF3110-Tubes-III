@@ -49,7 +49,13 @@ function sendRestRequest($method, $resource, $data){
 function arrayToUriEncoded($arr){
 	$parts = array();
 	foreach ($arr as $key => $value){
-		array_push($parts, $key.'='.$value);
+		
+		
+		if (is_array($value)){
+			array_push($parts, $key.'='.json_encode($value));
+		}else{
+			array_push($parts, $key.'='.$value);
+		}
 	}
 	
 	return "?".join("&", $parts);

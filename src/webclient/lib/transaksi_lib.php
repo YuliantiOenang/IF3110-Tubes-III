@@ -14,21 +14,12 @@
 		return $response;
 	}
 	
-	function checkCreditCart($id){
-		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
-		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
-		$statement = $conn->prepare("SELECT no_credit FROM member WHERE mem_id = ?");
+	function checkCreditCart($id, $user){
+		$data["token"] = $id;
 		
-		$statement->bind_param("i", $id);
-		$statement->execute();
+		$response = sendRestRequest("GET", "user/$user/card", $data);
 		
-		$statement->bind_result($result);
-		$statement->fetch();
-		
-		$statement->close();
-		$conn->close();
-		
-		return ($result != null);	
+		return @$response["has_card"];
 	}
 	
 	function updateTransactionUser($id){
@@ -44,50 +35,33 @@
 		$conn->close();
 	}
 	
-	function buy($list, $id){
+	function buy($list, $id, $user){
 		/* list adalah array barang yang akan dibeli. tiap elemennya adalah:
 		 * 		{"id" => id barang tsb, "jumlah" => jumlah barang yg dibeli}
 		 * 
 		 * buy() mengembalikan true jika pembelian berhasil, false jika gagal (ada barang yg tidak mencukupi).
 		 * jika ada satu jenis barang yg tidak mencukupi, maka seluruh transaksi digagalkan
 		 */
-		
-		if(!checkCreditCart($id)){
-			return -1;
-		}		 
 		 
-		global $DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME;
-		$conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 		
-		$conn->autocommit(false);
+		if(!checkCreditCart($id, $user)){
+			$response["status"] = "error";
+			$response["code"] = -1;
+			return $response;
+		}		 
 		
-		$success = 1;	
-		$sql = "UPDATE barang SET stok = stok - ?, jumlah_terbeli = jumlah_terbeli + ? WHERE id_barang = ? AND stok >= ?";
+		$data["cart"] = $list; $data["token"] = $id;
 		
-		foreach ($list as $item){
-			$statement = $conn->prepare($sql);
-			$statement->bind_param("iiii", $item["jumlah"], $item["jumlah"], $item["id"], $item["jumlah"]);
-			$statement->execute();
-			
-			$success = ($statement->affected_rows == 1) ? 1 : 0; // sukses jika affected row tepat 1
-			
-			$statement->close();
-			
-			if (!$success){
-				break;
-			}
+		$response = sendRestRequest("POST", "buy", $data);
+		
+		//print_r($response);
+		
+		if ($response["status"] != "ok"){
+			$response["r"] = print_r($response);
+			$response["code"] = 0;
 		}
 		
-		if ($success){ // jika semua sukses, commit
-			$conn->commit();
-			updateTransactionUser($id);
-		}else{ // ada 1 aja yg gagal, rollback
-			$conn->rollback();
-		}	
-		
-		
-		$conn->close();
-		return $success;
+		return $response;
 	}
 	
 	function handleTransactionAjax(){
@@ -102,12 +76,12 @@
 				$response = addToCart($request["id_barang"], $request["jumlah"], $request["token"]);
 			break;
 			case "buy":
-				$result = buy($request["list"], $request["id"]);
-				if($result == 1){
+				$response = buy($request["list"], $request["id"],  $request["user"]);
+				/*if($result == 1){
 					$response["status"] = "ok";
 				}else{
 					$response["code"] = $result;
-				}
+				}*/
 			break;
 			default:
 				return null;

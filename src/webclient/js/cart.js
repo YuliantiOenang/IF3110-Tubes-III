@@ -100,14 +100,27 @@ function deleteItem(id){
 	}
 }
 
-function commit_buy(cb){
-	// cek kartu kredit
+function check_credit(cb){
 	
-	var list = [];
-	var bag = JSON.parse(localStorage.shoppingbag);
-	for (barang in bag){
-		list.push({"id" : parseInt(barang), "jumlah" : bag[barang]});
+	var info = getLoginInfo();
+	
+	data = {"token" : info.id};
+	
+	callback = function(response){
+		buy(response, cb);
 	}
+	
+	sendRestAjax("GET", "user/"+info.user+"/card", data, callback);
+}
+
+function buy(response, cb){
+	
+	if ((response.status != "ok") || (!response.has_card)){
+		window.location = "kredit.php?buy=1";
+		return;
+	}
+
+	var list = JSON.parse(localStorage.shoppingbag);	
 	
 	var callback = function(response){
 		if(response.status == "ok"){
@@ -115,11 +128,7 @@ function commit_buy(cb){
 			localStorage.removeItem("shoppingbag");
 			refreshCart();
 		}else{
-			if(response.code == 0){
-				alert("Barang tidak mencukupi");
-			}else{
-				window.location = "kredit.php?buy=1";
-			}
+			alert(JSON.stringify(response));
 		}
 	}
 	
@@ -127,7 +136,12 @@ function commit_buy(cb){
 	
 	var loginfo = getLoginInfo();
 	
-	sendAjax({"action" : "buy", "list": list, "id" : loginfo.id}, "cart.php", callback);
+	sendRestAjax("POST", "buy", {"cart": list, "token" : loginfo.id}, callback);
+}
+
+function commit_buy(cb){
+	// cek kartu kredit
+	check_credit(cb);
 }
 
 function editItem(id){

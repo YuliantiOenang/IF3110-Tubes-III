@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="css/cart.css" />
 
 <script src="js/ajax.js"></script>
+<script src="js/rest_ajax.js"></script>
 <script src="js/login.js"></script>
 <script src="js/transaction.js"></script>
 <script src="js/cart.js"></script>
