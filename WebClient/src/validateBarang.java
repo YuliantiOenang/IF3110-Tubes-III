@@ -12,6 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 import kelas.Barang;
 import kelas.Database;
 
@@ -40,26 +50,33 @@ public class validateBarang extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		JSONObject jsonResponse = null;
 		
-		String db = "toko_imba";
-		java.sql.Connection con = null;
 		int id = Integer.parseInt(request.getParameter("id"));
-
+		
+		JSONObject data = new JSONObject();
+		
+		data.put("action", "get_jumlah");
+		data.put("id", new Integer(id));
+		
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("http://localhost:8080/KLK-WebService/Actions");
+		
+		httppost.setEntity(new StringEntity(data.toString()));
+		CloseableHttpResponse httpresp = httpclient.execute(httppost);
 		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, Database.getUser(), Database.getPass());
-			System.out.println (db+ "database successfully opened.");
-			
-			Statement state = con.createStatement();
-			ResultSet rs = state.executeQuery("SELECT * FROM inventori WHERE id_inventori = " + id);
-			int jumlahBarang = 0;
-			while(rs.next()){
-				jumlahBarang = rs.getInt("jumlah");
-			}
-			response.getWriter().write(String.valueOf(jumlahBarang));
+			HttpEntity entity = httpresp.getEntity();
+		    if (entity != null) {
+		    	String jsonresp = EntityUtils.toString(entity);
+	            jsonResponse = (JSONObject) JSONValue.parse(jsonresp);
+		    }
+		} finally {
+		    httpresp.close();
+		    httpclient.close();
 		}
-		catch(SQLException | ClassNotFoundException e) {
-			System.out.println("SQLException caught: " +e.getMessage());
-		}		
+		
+		System.out.println("Jumlah barang dengan id: " + id + " adalah: " + ((Long) jsonResponse.get("jumlah")).intValue());
+		
+		response.getWriter().write(((Long) jsonResponse.get("jumlah")).toString());
 	}
 }
