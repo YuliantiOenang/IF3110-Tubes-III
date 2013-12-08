@@ -1,27 +1,24 @@
 <?php
 	include("config.php");
 	
-	function addToUser($data){
+	function updateUser($data){
 		// mengecek apakah masih bisa meng-add barang dengan id tertentu sejumlah tertentu
 		// return -1 jika sukses, dan sisa barang jika gagal
 		
 		global $WSDL_URL, $SOAP_URL;
 		
-		ini_set("soap.wsdl_cache_enabled", "0"); // disabling WSDL cache
-		$client = new SoapClient($WSDL_URL, array("location" => $SOAP_URL));
-		$return = $client-> createUser($data["username"], $data["password"], $data["email"], $data["name"], $data["address"], $data["provinsi"], $data["city"], $data["zipcode"], $data["contact"]);
-		$array = simplexml_load_string($return);
-		return $array;
+		sendRestRequest("PUT","user/".$data["username"],$data);
+		
 	}
 	
-	function handleRegistrationAjax(){
+	function handleEditProfileAjax(){
 		// handle ajax untuk aksi2 transaksi
 		// syarat: $_POST["ajax"] terdefinisi
 		
 		$request = json_decode($_POST["ajax"], true);
 		$response = array("status" => "error");
 		
-		$response = addToUser($request);
+		$response = updateUser($request);
 		/*if ($sisa >= 0){
 			$response["status"] = "ok";
 			$response["id"] = $sisa;

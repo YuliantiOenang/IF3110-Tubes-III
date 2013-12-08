@@ -12,15 +12,34 @@ function ValidateForm(form)
 {
 
 var a=document.forms["form1"]["name"].value;
+var b=document.forms["form1"]["province"].value;
 var c=document.forms["form1"]["address"].value;
 var d=document.forms["form1"]["contact"].value;
 var e=document.forms["form1"]["email"].value;
 var f=document.forms["form1"]["username"].value;
 var g=document.forms["form1"]["password"].value;
 var h=document.forms["form1"]["cpassword"].value;
+var i=document.forms["form1"]["city"].value;
+var j=document.forms["form1"]["zipcode"].value;
+
 if (a==null || a=="")
   {
   alert("Name must be filled out");
+  return false;
+  }
+if (b==null)
+  {
+  alert("Province must be filled out");
+  return false;
+  }
+if (i==null)
+  {
+  alert("City must be filled out");
+  return false;
+  }
+if (j==null || a=="")
+  {
+  alert("Zip Code must be filled out");
   return false;
   }
 if (f.length<5)
@@ -88,7 +107,7 @@ if (!reg.test(a)){
 	return false;
 }
 
-	var data = {"name" : a, "address" : c, "contact" : d, "email" : e, "username" : f, "password" : g};
+	var data = {"name" : a, "provinsi" :b, "address" : c, "contact" : d, "email" : e, "username" : f, "password" : g, "city" : i,"zipcode" : j};
 	var callback = function(response){	
 		if(response.status == "ok"){
 			alert("Anda berhasil sign up");
@@ -103,6 +122,8 @@ if (!reg.test(a)){
 	};
 	
 	sendAjax(data, "handle_registration.php", callback);
+	
+	//action="handle_registration.php">
 }
 </script>
 
@@ -116,7 +137,7 @@ if (!reg.test(a)){
 
 <div class='content'>
 	<h3>Registration</h3>
-	<form id="form1" name="form1" method="post">
+	<form id="form1" name="form1" method="post"> 
 	<div id="regtable" class="table">
 	  <div class="row">
 		<div class="cell50">Name:</div>
@@ -125,6 +146,18 @@ if (!reg.test(a)){
 	  <div class="row">
 		<div class="cell50">Address:</div>
 		<div class="cell50"><input type="text" name="address" /></div>
+	  </div>
+	  <div class="row">
+		<div class="cell50">Province:</div>
+		<div class="cell50"><input type="text" name="province" /></div>
+	  </div>
+	  <div class="row">
+		<div class="cell50">City:</div>
+		<div class="cell50"><input type="text" name="city" /></div>
+	  </div>
+	  <div class="row">
+		<div class="cell50">Zip Code:</div>
+		<div class="cell50"><input type="text" name="zipcode" /></div>
 	  </div>
 	  <div class="row">
 		<div class="cell50">Contact No.:</div>
