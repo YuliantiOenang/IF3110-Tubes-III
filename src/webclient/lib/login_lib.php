@@ -9,7 +9,14 @@
 		$response = sendRestRequest("POST", "login", $data);
 		
 		if ($response["status"] == "ok"){
-			return $response["token"];
+			
+			$data = array("token"=>$response["token"]);
+			
+			$r = sendRestRequest("GET", "user/$user", $data);
+			
+			$response["a"] = ($r["user"]["role"] == "admin");
+		
+			return $response;
 		}else{
 			return null;
 		}
@@ -27,8 +34,7 @@
 			case "login":
 				$tok = checkPassword($request["user"], $request["pass"]);
 				if ( $tok!=null){
-					$response["status"] = "ok";
-					$response["id"] = $tok;
+					$response = $tok;
 				}
 			
 			break;

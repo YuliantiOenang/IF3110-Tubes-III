@@ -204,9 +204,9 @@ function edit_barang($id, $token, $barang, $imgdata){
 	
 		$nama_barang = $barang['nama']; $harga = $barang['harga'];
 		$stok = $barang['stok']; $kategori = $barang['kategori'];
-		$deskripsi = $barang['deskripsi']; $jumlah_beli = $barang['jumlah_beli'];
+		$deskripsi = $barang['deskripsi'];
 		
-		$query = "UPDATE barang SET nama_barang='$nama_barang', harga=$harga, stok=$stok, kategori='$kategori', deskripsi='$deskripsi', jumlah_beli=$jumlah_beli WHERE id_barang=$id";
+		$query = "UPDATE barang SET nama_barang='$nama_barang', harga=$harga, stok=$stok, kategori='$kategori', deskripsi='$deskripsi' WHERE id_barang=$id";
 
 		if ($db->query($query)){
 			$response["status"] = "ok";

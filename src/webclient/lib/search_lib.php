@@ -80,7 +80,7 @@
 		// mengambil data barang dengan id tertentu (spesifik)
 		// kembalian: Barang
 		
-		$array = sendRestRequest("GET","barang/".$id_barang);
+		$array = sendRestRequest("GET","barang/".$id_barang, array());
 		if ($array["status"] == "ok") {
 			return $array["barang"];
 		} else {
