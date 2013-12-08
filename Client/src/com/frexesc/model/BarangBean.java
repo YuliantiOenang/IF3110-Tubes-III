@@ -21,7 +21,9 @@ public class BarangBean {
 		this.description = description;
 		this.total_item = total_item;
 	}
-
+	public String getnKat() {
+		return nKat;
+	}
 	public long getId() {
 		return id;
 	}

@@ -75,14 +75,14 @@ public class BarangService {
 			ArrayList<Barang> barangList = new ArrayList<Barang>();
 			while (rs.next()) {
 				Barang barang = new Barang();
-				barang.setId(rs.getInt("id"));
-				barang.setId_category(rs.getInt("id_kategori"));
-				barang.setName(rs.getString("nama_barang"));
-				barang.setPicture(rs.getString("gambar"));
-				barang.setPrice(rs.getInt("harga_barang"));
-				barang.setDescription(rs.getString("keterangan"));
-				barang.setName(rs.getString("jumlah_barang"));
-				barang.setnKat(rs.getString("kategori.nama"));
+				barang.setId(rs.getInt(3));
+				barang.setId_category(rs.getInt(4));
+				barang.setName(rs.getString(5));
+				barang.setPicture(rs.getString(2));
+				barang.setPrice(rs.getInt(6));
+				barang.setDescription(rs.getString(8));
+				barang.setName(rs.getString(7));
+				barang.setnKat(rs.getString(1));
 				barangList.add(barang);
 			}
 			gson = new Gson();
@@ -106,20 +106,9 @@ public class BarangService {
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs;
 			rs = stmt.executeQuery();
-			ArrayList<Barang> barangList = new ArrayList<Barang>();
-			while (rs.next()) {
-				Barang barang = new Barang();
-				barang.setId(rs.getInt("id"));
-				barang.setId_category(rs.getInt("id_kategori"));
-				barang.setName(rs.getString("nama_barang"));
-				barang.setPicture(rs.getString("gambar"));
-				barang.setPrice(rs.getInt("harga_barang"));
-				barang.setDescription(rs.getString("keterangan"));
-				barang.setName(rs.getString("jumlah_barang"));
-				barangList.add(barang);
-			}
+			int cID=(rs.getInt(1));
 			gson = new Gson();
-			selectResult = gson.toJson(barangList);
+			selectResult = gson.toJson(cID);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,17 +121,24 @@ public class BarangService {
 	@Produces("application/json")
 	public String selectBarang(@DefaultValue("-1") @QueryParam("id") int id,
 			@DefaultValue("-1") @QueryParam("idKat") int idKat,
-			@DefaultValue("-1") @QueryParam("nama") String nama) {
+			@DefaultValue("-1") @QueryParam("nama") String nama,
+			@DefaultValue("0") @QueryParam("join") int join) {
 		String selectResult = null;
 		try {
 			ArrayList<Barang> barangList = new ArrayList<Barang>();
-			query = "SELECT * FROM barang WHERE 1";
-			if (id != -1)
-				query += (" && id=" + id);
-			if (idKat != -1)
-				query += (" && id_kategori=" + idKat);
-			if (!nama.equals("-1"))
-				query += (" && nama_barang=\"" + nama + "\"");
+			if (join==1)
+				query="SELECT * FROM barang JOIN kategori ON barang.id_kategori=kategori.id AND barang.id="+ id;
+			else if (join==2)
+				query="SELECT * FROM barang JOIN barang_user ON barang.id=barang_user.id_barang AND barang.id_kategori="+ idKat + " GROUP BY barang.id ORDER BY COUNT(barang.id) DESC LIMIT 0,4";
+			else	{
+				query = "SELECT * FROM barang WHERE 1";
+				if (id != -1)
+					query += (" && id=" + id);
+				if (idKat != -1)
+					query += (" && id_kategori=" + idKat);
+				if (!nama.equals("-1"))
+					query += (" && nama_barang=\"" + nama + "\"");
+			}
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
