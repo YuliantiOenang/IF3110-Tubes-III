@@ -1,0 +1,87 @@
+.shoppedItem{
+	display:inline-block;
+	width:600px;
+	font-family: "Hobo Std";
+	color: #ffcc00;
+	font-size: 1em;
+	transition:color 0.2s,background 0.2s;
+}
+.shoppedItem:hover{
+	background:#ffcc00;
+	color: #bb0000;
+}
+
+.shoppedItemName{
+	text-align:left;
+	display:block;
+	float:left;
+	width:200px;
+}
+
+.shoppedItemNumber{
+	text-align:right;
+	display:block;
+	float:left;
+	width:70px;
+}
+
+.shoppedItemPrice{
+	text-align:right;
+	display:block;
+	float:left;
+	width:165px;
+}
+
+#titleLine{
+	display:inline-block;
+	width:600px;
+	font-family: "Arial";
+	color: #ffffff;
+	font-size: 1.2em;
+	background: #bb0000;
+}
+
+#bottomLine{
+	display:inline-block;
+	width:600px;
+	font-family: "Arial";
+	color: #ffffff;
+	font-size: 1.4em;
+	background: #bb0000;
+}
+
+#payButton{
+	font-size: 1em;
+	font-family: "Arial";
+	text_align:center;
+	padding:0;
+	border:0;
+	margin-left: 20px;
+	display:inline-block;
+	width:100px;
+	height:40px;
+	background: #55cc88;
+	transition:background 0.2s;
+}
+#payButton:hover{
+	background: #99ffbb;
+	cursor:pointer;
+}
+
+.eraseItem{
+	font-family: "Arial";
+	margin-left: 20px;
+	color: #c7f200;
+	display:inline-block;
+	width:100px;
+}
+.eraseItem:hover{
+	color: #ff0000;
+	cursor:pointer;
+}
+
+#contentArea{
+	display:inline-block;
+	width:800px;
+	margin:auto;
+}

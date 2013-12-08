@@ -1,0 +1,21 @@
+
+[OS_VERSION]
+Os=Home Edition Service Pack 1 (Build 7601)
+
+[DRIVE_NAME]
+DriveCount=2
+0=hp      DVD RW AD-7586H KH04
+1=ELBY    CLONEDRIVE      1.4 
+CurrentId=1
+CurrentName=ELBY    CLONEDRIVE      1.4 
+
+[ERROR_CODE]
+Code=1503
+
+[USER_ACCOUNT]
+Account=Admin
+
+[CODE]
+Code01=827885235
+Code02=DCOBG0773E550846TFHD
+¡Þ

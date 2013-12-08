@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<web-app id="WebApp_ID" version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"> 
+	<servlet> 
+		<servlet-name>hello</servlet-name> 
+		<servlet-class>javafiles.HelloWorld</servlet-class>
+	</servlet>
+	
+	<servlet> 
+		<servlet-name>barangmanager</servlet-name> 
+		<servlet-class>javafiles.BarangManager</servlet-class>
+	</servlet>
+	
+	<servlet> 
+		<servlet-name>check</servlet-name> 
+		<servlet-class>javafiles.check</servlet-class>
+	</servlet>
+	
+	<servlet-mapping> 
+		<servlet-name>hello</servlet-name> 
+		<url-pattern>/indexcontent</url-pattern> 
+	</servlet-mapping>
+	
+	<servlet-mapping> 
+		<servlet-name>check</servlet-name> 
+		<url-pattern>/checkLogin</url-pattern> 
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>barangmanager</servlet-name> 
+		<url-pattern>/barangaction</url-pattern> 
+	</servlet-mapping>
+	
+	<servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>javafiles.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/uploadfile</url-pattern>
+    </servlet-mapping>
+  
+  	<servlet>
+        <servlet-name>UploadServletUbah</servlet-name>
+        <servlet-class>javafiles.UploadServletUbah</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadServletUbah</servlet-name>
+        <url-pattern>/uploadfileubah</url-pattern>
+    </servlet-mapping>
+  
+  
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+	
+	
+	<welcome-file-list> 
+		<welcome-file>index.jsp</welcome-file> 
+	</welcome-file-list>
+</web-app>
