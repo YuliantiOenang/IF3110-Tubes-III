@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 
 import dto.Barang;
 
-@Path("/Service")
+@Path("/barang")
 // GantiNama
 public class BarangService {
 	String query;
@@ -72,8 +72,8 @@ public class BarangService {
 				query += (" && id=" + id);
 			if (idKat != -1)
 				query += (" && id_kategori=" + idKat);
-			if (nama != "-1")
-				query += (" && nama_barang=" + nama);
+			if (!nama.equals("-1"))
+				query += (" && nama_barang=\"" + nama+"\"");
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -82,8 +82,7 @@ public class BarangService {
 				barang.setId_category(rs.getInt("id_kategori"));
 				barang.setName(rs.getString("nama_barang"));
 				barang.setPicture(rs.getString("gambar"));
-				barang.setPrice(rs.getInt("harga_barang"));
-				;
+				barang.setPrice(rs.getInt("harga_barang"));				
 				barang.setDescription(rs.getString("keterangan"));
 				barang.setName(rs.getString("jumlah_barang"));
 				barangList.add(barang);
@@ -108,15 +107,15 @@ public class BarangService {
 		String updateResult = null;
 		int temp;
 		try {
-			query = "UPDATE barang SET id=barang.id,";
+			query = "UPDATE barang SET id=barang.id";
 			if (idKat != -1)
 				query += (", id_kategori=" + idKat);
-			if (nama != "-1")
-				query += (", nama_barang=" + nama);
-			if (gambar != "-1")
-				query += (", gambar=" + gambar);
-			if (keterangan != "-1")
-				query += (", keterangan=" + keterangan);
+			if (!nama.equals("-1"))
+				query += (", nama_barang=\"" + nama+"\"");
+			if (!gambar.equals("-1"))
+				query += (", gambar=\"" + gambar+"\"");
+			if (!keterangan.equals("-1"))
+				query += (", keterangan=\"" + keterangan+"\"");
 			if (harga != -1)
 				query += (", harga_barang=" + harga);
 			if (jumlah != -1)
