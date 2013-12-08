@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.jws.WebService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -14,8 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
+import com.frexesc.model.UserBean;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * 
@@ -65,13 +73,38 @@ public class Index extends HttpServlet {
 		}
 		if (isLogin && sessions.getAttribute("user_id") == null) {
 			try {
-//				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");
+				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");
+
+//				WebServicesKit webkit = new WebServicesKit();
+//				String json = webkit.readUrl ("http://localhost:8080/web-services/UserService/userservice/user/"+userid);
+//				
+//				Gson gson = new Gson();
+//				JsonParser jsonParser = new JsonParser();
+//				JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
+//				List<UserBean> categoriesList = new ArrayList<UserBean>();
+//				for (JsonElement category : categoryArray)
+//				{
+//					UserBean courseObj = gson.fromJson(category, UserBean.class);
+//					categoriesList.add(courseObj);
+//				}
+//				
+//				categoriesList.get(0)
+//				
+////				for (UserBean courseObj : categoriesList)
+////				{
+////					System.out.println("ADDRESS : " + courseObj.getAddress());
+////					System.out.println("USERNAME : " + courseObj.getUsername());
+////				}
+//				
 //				rs.next();
-				
+//				
 				sessions.setAttribute("role", rs.getString("role"));
 				sessions.setAttribute("user_id", userid);
 				sessions.setAttribute("username", username);
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
