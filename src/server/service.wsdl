@@ -34,6 +34,17 @@
         <part name='jumlah' type='xsd:integer'/>
         <part name='deskripsi' type='xsd:string'/>
         </message>
+		<message name='bestbuyRequest'>
+		 <part name='tes' type='xsd:integer'/>
+        </message>
+		<message name='createTransactionRequest'>
+        <part name='namabarang' type='xsd:string'/>
+        <part name='harga' type='xsd:integer'/>		
+		<part name='jumlah' type='xsd:integer'/>
+		<part name='username' type='xsd:string'/>
+        <part name='kategori' type='xsd:string'/>
+        <part name='detailpesanan' type='xsd:string'/>
+        </message>
 		
         <portType name='WBDporttype'>
                 <operation name='createUser'>
@@ -42,6 +53,10 @@
                 </operation>
                 <operation name='createBarang'>
                 <input message='tns:createBarangRequest'/>
+                <output message='tns:response'/>
+                </operation>
+				<operation name='createTransaction'>
+                <input message='tns:createTransactionRequest'/>
                 <output message='tns:response'/>
                 </operation>
         </portType>
@@ -55,6 +70,11 @@
                 </operation>
                 <operation name='createBarang'>
                 <soap:operation soapAction='urn:xmethods-delayed-quotes#createBarang'/>
+                <input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+                <output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+                </operation>
+				<operation name='createTransaction'>
+                <soap:operation soapAction='urn:xmethods-delayed-quotes#createTransaction'/>
                 <input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
                 <output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
                 </operation>

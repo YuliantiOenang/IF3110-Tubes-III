@@ -64,8 +64,6 @@ try
 	        
      else 
          response.getWriter().print(1);//error page 
-
-
 } 
 		
 		
