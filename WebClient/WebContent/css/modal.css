@@ -1,9 +1,21 @@
-.panel {
-    background-color: black;
-    padding: 5px;
-    text-align: right;
-    max-height:30px;
-    width: 900px;
+@media all and (max-width:801px) and (min-width:0px){
+	.panel {
+	    background-color: purple;
+	    padding: 5px;
+	    text-align: right;
+	    max-height:30px;
+	    width: 900px;
+	}
+}
+
+@media all and (max-width:1920px) and (min-width:802px){
+	.panel {
+	    background-color: black;
+	    padding: 5px;
+	    text-align: right;
+	    max-height:30px;
+	    width: 900px;
+	}
 }
 
 .panel #viewcart{
