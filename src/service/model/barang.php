@@ -29,8 +29,8 @@ function add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi, 
 	$query = "SELECT role FROM token NATURAL JOIN user WHERE token_id = '$token'";
 	
 	if (($result = $db->query($query)) && ($result->num_rows > 0)){
-		
-		if ($result->fetch_assoc()["role"] != "admin"){
+			$row = $result->fetch_assoc();
+		if ($row["role"] != "admin"){
 			$db->close();
 			return $desc;
 		}
@@ -42,7 +42,8 @@ function add_barang($token, $nama_barang, $harga, $stok, $kategori, $deskripsi, 
 			
 			$query = "SELECT * FROM barang ORDER BY id_barang DESC LIMIT 0, 1"; $result = $db->query($query);
 			
-			$id = $result->fetch_assoc()["id_barang"];
+			$row = $result->fetch_assoc();
+			$id = $row["id_barang"];
 			
 			save_img_barang($id, $imgdata);
 		}
@@ -161,8 +162,10 @@ function edit_barang($id, $token, $barang, $imgdata){
 	$query = "SELECT role FROM token NATURAL JOIN user WHERE token_id = '$token'";
 	
 	if (($result = $db->query($query)) && ($result->num_rows > 0)){
-	
-		if ($result->fetch_assoc()["role"] != "admin"){
+		
+		$row = $result->fetch_assoc();
+		
+		if ($row["role"] != "admin"){
 			$db->close();
 			return $response;
 		}
@@ -197,8 +200,8 @@ function del_barang($ids, $token){
 	$query = "SELECT role FROM token NATURAL JOIN user WHERE token_id = '$token'";
 	
 	if (($result = $db->query($query)) && ($result->num_rows > 0)){
-	
-		if ($result->fetch_assoc()["role"] != "admin") return $response;
+		$row = $result->fetch_assoc();
+		if ($row["role"] != "admin") return $response;
 		
 		$response["status"] = "ok";
 		unset($response["desc"]);
@@ -228,7 +231,8 @@ function add_cart($id, $jumlah, $token){
 		
 		$query = "SELECT stok FROM barang WHERE id_barang=$id";
 		$result = $db->query($query);
-		$stok = intval($result->fetch_assoc()["stok"]);
+		$row = $result->fetch_assoc();
+		$stok = intval($row["stok"]);
 		
 		if ($stok >= $jumlah){		
 			$response["status"] = "ok";
@@ -252,7 +256,8 @@ function buy($cart, $token){
 	$query = "SELECT * FROM token WHERE token_id = '$token'";
 	
 	if (($result = $db->query($query)) && ($result->num_rows > 0)){
-		$username = $result->fetch_assoc()["username"];
+		$row = $result->fetch_assoc();
+		$username = $row["username"];
 		
 		$db->autocommit(false);
 	
@@ -290,7 +295,8 @@ function save_img_barang($id, $rawdata){
 	$fullpath = "../image/$id.jpg";
 	
 	if($rawdata){
-		$imgdata = explode(',', $rawdata)[1];	
+		$dat = explode(',', $rawdata);
+		$imgdata = $dat[1];	
 		file_put_contents($fullpath, base64_decode($imgdata));
 	}else{
 		copy("../image/default.jpg", $fullpath);
