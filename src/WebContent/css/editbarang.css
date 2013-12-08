@@ -1,0 +1,65 @@
+/***** View Halaman Admin Barang *****/
+
+.index {
+	width:1100px; 
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+.index #featured{
+	height : 525px;
+}
+
+.index #sort{
+	text-align:right;
+}
+
+.view {
+	width: 350px;
+	height: 400px;
+	margin: 20px;
+	float: left;
+	border: 5px solid #fff;
+	overflow: hidden;
+	position: relative;
+	box-shadow: 0px 2px 3px #e6e6e6;
+	cursor: default;
+	background: #fff;
+}
+
+.view p {
+	font-family: 'Tahoma';
+	font-style: italic;
+	font-size: 14px;
+	position: relative;
+	color: #000;
+	padding: 10px 20px 20px;
+	text-align: center;
+	opacity: 1;
+	transition: all 0.2s linear;
+}
+
+.view a.info {
+	display: inline-block;
+    text-decoration: none;
+    padding: 7px 14px;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 0 1px #000;
+}
+
+.view .img {
+	display: inline;
+	float:left;
+}
+
+.view .attribute{
+	z-index: 9999;
+	position : absolute;
+	left : 500px;
+	bottom : 325px;
+}
+
+
+

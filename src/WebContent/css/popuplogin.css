@@ -1,0 +1,51 @@
+/***** Popup login *****/
+#mbox {
+	position:fixed;_position:absolute;
+	background:#111;
+	border:2px #ccc solid;
+	width:300px;
+	height:200px;
+	top:100px;
+	clip:inherit;
+	_top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight-80);
+	text-align:left;
+	z-index:998;
+	color:#fff;
+	padding:10px;
+}
+
+#mbox_header {
+	background:#111;
+	padding:5px;
+	border-bottom:3px solid #333;
+	color:#fff;
+	height:20px;
+}
+
+#fade_mbox {
+	background:#fff;
+	width:10px;
+	height:10px;
+	position:fixed;_position:absolute;
+	clip:inherit;
+	_top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight-80);
+	z-index:999;
+	padding:10px;
+}
+
+#back_mbox {
+	background:#000;
+	filter:alpha(opacity=80);
+	opacity:0.8;
+	position:fixed;_position:absolute;top:0px;left:0px;
+	clip:inherit;
+	_top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight);
+	width: 100%;_width:expression(screen.availWidth-18);
+	height: 100%;_height:expression(document.documentElement.clientHeight);
+	z-index:997;
+	padding:10px;
+}
+
+#userlogin {
+	display : none;
+}

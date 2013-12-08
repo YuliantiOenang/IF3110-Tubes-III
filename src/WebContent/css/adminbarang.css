@@ -1,0 +1,115 @@
+/***** View Halaman Admin Barang *****/
+
+.index {
+	width:1100px; 
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+.index #sort{
+	text-align:right;
+}
+
+.index .headertools #add{
+	position:absolute;
+	left:1145px;
+	bottom:320px;
+	width:20px;
+	height:20px;
+}
+
+.index .headertools #edit{
+	position:absolute;
+	left: 1145px;
+	bottom: 320px;
+	width:20px;
+	height:20px;
+}
+
+.index .headertools #delete{
+	position:absolute;
+	left: 1175px;
+	bottom: 320px;
+	width:20px;
+	height:20px;
+}
+
+
+.view {
+	width: 300px;
+	height: 150px;
+	margin: 20px;
+	float: left;
+	border: 5px solid #fff;
+	overflow: hidden;
+	position: relative;
+	box-shadow: 0px 2px 3px #e6e6e6;
+	cursor: default;
+	background: #fff;
+}
+
+.view p {
+	font-family: 'Tahoma';
+	font-style: italic;
+	font-size: 14px;
+	position: relative;
+	color: #000;
+	padding: 10px 20px 20px;
+	text-align: center;
+	opacity: 1;
+	transition: all 0.2s linear;
+}
+
+.view a.info {
+	display: inline-block;
+    text-decoration: none;
+    padding: 7px 14px;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 0 1px #000;
+}
+
+.view img {
+	display: inline;
+	float:left;
+}
+
+.view .tools{
+	position:absolute;
+	left:275px;
+}
+
+.view .tools #edit{
+	position : absolute;
+	border: none;
+	left : 275 px;
+	width : 20px;
+	height : 20px;
+}
+
+.view .tools #delete{
+	position : absolute;
+	border: none;
+	left : 275 px;
+	width : 20px;
+	height : 20px;
+}
+
+
+.view .imgattr{
+	display:inline;
+	height:100px;
+}
+
+.view .attribute{
+	display:inline;
+	float:left;
+	padding-left:5px;
+}
+
+.view .description{
+	display:-webkit-inline-flex;
+}
+
+

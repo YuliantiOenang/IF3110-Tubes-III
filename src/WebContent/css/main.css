@@ -1,0 +1,192 @@
+/***** Global *****/
+/* Body */
+body {
+	background: #F5F4EF;
+	color: #000305;
+	font-size: 14px;
+	font-family: 'Tahoma';
+	line-height: 1.429;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+ 
+/* Headings */
+h2 {font-size: 22px}
+h3 {font-size: 20px}	
+h4 {font-size: 18px}	
+h5 {font-size: 16px}	
+h6 {font-size: 14px}	
+ 
+h2, h3, h4, h5, h6 {
+	font-weight: 400;
+	line-height: 1.1;
+	margin-bottom: .8em;
+}
+ 
+/* Anchors */
+a {outline: 0;}
+a img {border: 0px; text-decoration: none;}
+a:link, a:visited {
+	color: #C74350;
+	padding: 0 1px;
+	text-decoration: underline;
+}
+nav a:hover {
+	background-color: #C74350;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #333;
+}
+ 
+/* Paragraphs */
+p {margin-bottom: 1.143em;}
+* p:last-child {margin-bottom: 0;}
+ 
+strong, b {font-weight: bold;}
+em, i {font-style: italic;}
+ 
+/* Lists */
+ul {
+	list-style: outside disc;
+	margin: 1em 0 1.5em 1.5em;
+}
+ 
+ol {
+	list-style: outside decimal;
+	margin: 1em 0 1.5em 1.5em;
+}
+ 
+dl {margin: 0 0 1.5em 0;}
+dt {font-weight: bold;}
+dd {margin-left: 1.5em;}
+ 
+/* Quotes */
+blockquote {font-style: italic;}
+cite {}
+ 
+q {}
+ 
+/* HTML5 tags */
+header, section, footer,
+aside, nav, article, figure, pre {
+	display: block;
+}
+
+/* pre tags */
+pre {
+	font-family: 'Tahoma';
+}
+/***** Featured *****/
+#featured {
+	background: #fff;
+	margin-bottom: 2em;
+	overflow: hidden;
+	padding: 20px;
+	width: 700px;
+ 	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+ 
+#featured img {
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+}
+
+#featured .view img {
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+}
+
+#featured #slideshow #slideshow-inner #myslide img{
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+}
+
+#featured h2 {color: #C74451; font-size: 1.714em; margin-bottom: 0.333em;}
+#featured h3 {font-size: 1.429em; margin-bottom: .5em;}
+ 
+#featured h3 a:link, #featured h3 a:visited {color: #000305; text-decoration: none;}
+#featured h3 a:hover, #featured h3 a:active {color: #fff;}
+
+/***** Sidebar *****/
+#sidebar {
+	background: #fff;
+	font-style: normal;
+	margin-bottom: 2em;
+	overflow: hidden;
+	padding: 20px;
+	text-align: left;
+	float: right;
+    width: 300px;
+ 
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+/*** Popup login ***/
+#mbox {
+	position:fixed;_position:absolute;
+	background:#111;
+	border:2px #ccc solid;
+	width:300px;
+	height:200px;
+	top:100px;
+	clip:inherit;
+	_top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight-80);
+	text-align:left;
+	z-index:998;
+	color:#fff;
+	padding:10px;
+}
+#mbox_header {
+	background:#111;
+	padding:5px;
+	border-bottom:3px solid #333;
+	color:#fff;
+	height:20px;
+}
+#fade_mbox {
+	background:#fff;
+	width:10px;
+	height:10px;
+	position:fixed;_position:absolute;
+	clip:inherit;
+	_top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight-80);
+	z-index:999;
+	padding:10px;
+}
+#back_mbox {
+	background:#000;
+	filter:alpha(opacity=80);
+	opacity:0.8;
+	position:fixed;_position:absolute;top:0px;left:0px;
+	clip:inherit;
+	_top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight);
+	width: 100%;_width:expression(screen.availWidth-18);
+	height: 100%;_height:expression(document.documentElement.clientHeight);
+	z-index:997;
+	padding:10px;
+}
+#userlogin {
+	display : none;
+}
+#foto {
+	float:left;
+}
+#foto img {
+	width:160px;
+	height:160px;
+}
+#indikator {
+}
+#indikator img {
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+}
