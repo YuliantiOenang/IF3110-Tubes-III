@@ -1,0 +1,39 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AccountSoapService WSDL service -->
+
+  <service name="AccountSoap" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soap"/>
+      <parameter name="wsdlServiceElement" value="AccountSoapService"/>
+      <parameter name="schemaQualified" value="http://soap"/>
+      <parameter name="wsdlServicePort" value="AccountSoap"/>
+      <parameter name="className" value="soap.AccountSoapSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="AccountSoap"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="createAcc" qname="operNS:createAcc" xmlns:operNS="http://soap" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nama" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:email" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:alamat" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:provinsi" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:kota" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:kodepos" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:telepon" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:role" xmlns:pns="http://soap" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:transaksi" xmlns:pns="http://soap" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="createAcc"/>
+
+  </service>
+</deployment>

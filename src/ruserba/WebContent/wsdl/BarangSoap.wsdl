@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://soap" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap" xmlns:intf="http://soap" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="createBarang">
+    <complexType>
+     <sequence>
+      <element name="id_kategori" type="xsd:int"/>
+      <element name="nama" type="xsd:string"/>
+      <element name="harga" type="xsd:int"/>
+      <element name="gbr" type="xsd:string"/>
+      <element name="stock" type="xsd:int"/>
+      <element name="ctr" type="xsd:int"/>
+      <element name="ket" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createBarangResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="createBarangRequest">
+
+      <wsdl:part element="impl:createBarang" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createBarangResponse">
+
+      <wsdl:part element="impl:createBarangResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="BarangSoap">
+
+      <wsdl:operation name="createBarang">
+
+         <wsdl:input message="impl:createBarangRequest" name="createBarangRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createBarangResponse" name="createBarangResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="BarangSoapSoapBinding" type="impl:BarangSoap">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="createBarang">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createBarangRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createBarangResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="BarangSoapService">
+
+      <wsdl:port binding="impl:BarangSoapSoapBinding" name="BarangSoap">
+
+         <wsdlsoap:address location="http://localhost:8080/CalvinSalvyWebservice/services/BarangSoap"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

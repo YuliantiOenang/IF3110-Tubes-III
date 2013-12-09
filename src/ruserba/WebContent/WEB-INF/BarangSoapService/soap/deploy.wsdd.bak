@@ -1,0 +1,35 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from BarangSoapService WSDL service -->
+
+  <service name="BarangSoap" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soap"/>
+      <parameter name="wsdlServiceElement" value="BarangSoapService"/>
+      <parameter name="schemaQualified" value="http://soap"/>
+      <parameter name="wsdlServicePort" value="BarangSoap"/>
+      <parameter name="className" value="soap.BarangSoapSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="BarangSoap"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="createBarang" qname="operNS:createBarang" xmlns:operNS="http://soap" soapAction="" >
+        <parameter qname="pns:id_kategori" xmlns:pns="http://soap" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nama" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:harga" xmlns:pns="http://soap" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:gbr" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:stock" xmlns:pns="http://soap" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:ctr" xmlns:pns="http://soap" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:ket" xmlns:pns="http://soap" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="createBarang"/>
+
+  </service>
+</deployment>
