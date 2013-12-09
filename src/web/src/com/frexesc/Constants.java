@@ -6,6 +6,6 @@ public class Constants {
 	public static String PROXY_NAME = "cache.itb.ac.id";
 	public static int PROXY_PORT = 8080;
 	public static String USERNAME = "iskandarsetiadi";
-	public static String PASSWORD = "";
+	public static String PASSWORD = "zgmf10a";
 	
 }
