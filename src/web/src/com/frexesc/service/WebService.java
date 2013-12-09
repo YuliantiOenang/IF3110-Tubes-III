@@ -8,21 +8,28 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.auth.AuthScope;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
+import com.frexesc.Constants;
+
 /**
  * This WebService Class is Copyrighted to @freedomofkeima 2013
- *
+ * 
  */
 
 @SuppressWarnings("deprecation")
@@ -56,6 +63,7 @@ public class WebService {
 		this.mUrl = url;
 		mParams = new ArrayList<NameValuePair>();
 		mHeaders = new ArrayList<NameValuePair>();
+
 	}
 
 	public void addParam(String name, String value) {
@@ -121,6 +129,18 @@ public class WebService {
 
 		HttpClient client = new DefaultHttpClient();
 
+		if (Constants.IS_PROXY) {
+			org.apache.http.auth.Credentials credentials_new = new org.apache.http.auth.UsernamePasswordCredentials(
+					Constants.USERNAME, Constants.PASSWORD);
+			CredentialsProvider cp = ((AbstractHttpClient) client)
+					.getCredentialsProvider();
+			cp.setCredentials(new AuthScope(Constants.PROXY_NAME, Constants.PROXY_PORT),
+					credentials_new);
+			HttpHost proxy = new HttpHost(Constants.PROXY_NAME, Constants.PROXY_PORT);
+			client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
+					proxy);
+		}
+
 		HttpResponse httpResponse;
 		HttpEntity entity = null;
 
@@ -168,6 +188,18 @@ public class WebService {
 	public void executeRequest(HttpPost request) {
 
 		HttpClient client = new DefaultHttpClient();
+		
+		if (Constants.IS_PROXY) {
+			org.apache.http.auth.Credentials credentials_new = new org.apache.http.auth.UsernamePasswordCredentials(
+					Constants.USERNAME, Constants.PASSWORD);
+			CredentialsProvider cp = ((AbstractHttpClient) client)
+					.getCredentialsProvider();
+			cp.setCredentials(new AuthScope(Constants.PROXY_NAME, Constants.PROXY_PORT),
+					credentials_new);
+			HttpHost proxy = new HttpHost(Constants.PROXY_NAME, Constants.PROXY_PORT);
+			client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
+					proxy);
+		}
 
 		HttpResponse httpResponse;
 		HttpEntity entity = null;
