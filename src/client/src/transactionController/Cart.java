@@ -66,10 +66,11 @@ public class Cart extends HttpServlet {
 						for (int j = 0; j < sjml.length(); j ++) {
 							jml = jml * 10 + (int) (sjml.charAt(j) - '0');
 						}
-						String q = "select * from barang where id = "+array.get(i);
+//						String q = "select * from barang where id = "+array.get(i);
 						String k = "";
 						Barang B = new Barang(DBA);
-						B.executeQuery(q);
+						B.findByPkRest(Integer.parseInt(array.get(i)));
+//						B.executeQuery(q);
 						for (int i1 = 0; i1 < K.id.size(); i1++)
 							if (K.id.get(i1).equals(B.id_kat.get(0))) {
 								k = K.nama_kategori.get(i1);

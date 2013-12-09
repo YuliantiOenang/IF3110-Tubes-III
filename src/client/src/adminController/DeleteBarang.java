@@ -2,6 +2,7 @@ package adminController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javaModel.Barang;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,7 +53,8 @@ public class DeleteBarang extends HttpServlet {
 			
 			if (isLogin)
 			{
-				DBA.deleteQuery("delete from barang where id="+request.getParameter("id"));
+//				DBA.deleteQuery("delete from barang where id="+request.getParameter("id"));
+			    Barang.deleteRest(Integer.parseInt(request.getParameter("id")));
 				json.put("content", "OK");
 			}
 			else

@@ -34,7 +34,7 @@ public class Credit {
         try {
             JSONObject json = new JSONObject(output);
             if (json.getBoolean("status")) {
-                JSONObject crd = (JSONObject) json.get("data");
+                JSONObject crd = json.getJSONObject("data");
                 id.add(crd.get("id").toString());
                 id_account.add(crd.get("id_account").toString());
                 card_number.add(crd.get("card_number").toString());

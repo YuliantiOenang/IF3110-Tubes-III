@@ -1,6 +1,6 @@
 package Config;
 
-import java.sql.ResultSet;
+import javaModel.Profile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ public class GlobalConfig {
 	public static String URLSQL = "jdbc:mysql://localhost:3306/ruserba";
 	public static String SQLUser = "root";
 	public static String SQLPass = "";
-	public static String Path = "/home/habibie/IF3110-Tubes-II/src/ruserba/";
+	public static String Path = "D:/if/sem 5/WEB/webservice/src/client";
 	private static DatabaseAdapter DBA = new DatabaseAdapter();
 	
 	public GlobalConfig() {
@@ -49,27 +49,35 @@ public class GlobalConfig {
 				System.out.println("Memang belum login");
 			}
 			else{
-				automatedLogin(Value,request,response);
+				automatedLogin(Integer.parseInt(Value),request,response);
 			}
 		}
 	}
 	
-	private static void automatedLogin(String username,HttpServletRequest request,HttpServletResponse response)
+	private static void automatedLogin(Integer id_account,HttpServletRequest request,HttpServletResponse response)
     {
     	try
     	{
-	    	String Query = "select * from account where username='"+username+"'";
-	    	DBA.executeQuery(Query);
-	    	System.out.println(Query);
-			ResultSet RS = DBA.getQueryResult();
-			while (RS.next())
-			{
-				HttpSession session = request.getSession();
-				session.setAttribute("isLogin", true);
-				session.setAttribute("username", username);
-				session.setAttribute("role",Integer.parseInt(RS.getObject(12).toString()));
-				session.setMaxInactiveInterval(0);
-			}
+//	    	String Query = "select * from account where username='"+username+"'";
+//	    	DBA.executeQuery(Query);
+//	    	System.out.println(Query);
+//			ResultSet RS = DBA.getQueryResult();
+//			while (RS.next())
+//			{
+//				HttpSession session = request.getSession();
+//				session.setAttribute("isLogin", true);
+//				session.setAttribute("username", username);
+//				session.setAttribute("role",Integer.parseInt(RS.getObject(12).toString()));
+//				session.setMaxInactiveInterval(0);
+//			}
+    	    Profile user = new Profile(DBA);
+    	    user.fromRest(id_account);
+    	    HttpSession session = request.getSession();
+            session.setAttribute("isLogin", true);
+            session.setAttribute("username", user.username.get(0));
+            session.setAttribute("id", Integer.parseInt(user.id.get(0)));
+            session.setAttribute("role", Integer.parseInt(user.role.get(0)));
+            session.setMaxInactiveInterval(0);
     	}catch (Exception e){}
     }
 	
@@ -78,7 +86,7 @@ public class GlobalConfig {
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-            	System.out.println("Nama : "+cookie.getName());
+            	System.out.println("ID  : "+cookie.getName());
                 if (cookie.getName().equals(nama))
                 {
                 	return cookie.getValue();

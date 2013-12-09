@@ -58,7 +58,7 @@ public class Barang {
         try {
             JSONObject json = new JSONObject(output);
             if (json.getBoolean("status")) {
-                JSONObject brg = (JSONObject) json.get("data");
+                JSONObject brg = json.getJSONObject("data");
                 id.add(brg.get("id").toString());
                 nama.add(brg.get("nama").toString());
                 harga.add(brg.get("harga").toString());
@@ -84,9 +84,9 @@ public class Barang {
         try {
             json = new JSONObject(output);
             if (json.getBoolean("status")) {
-                JSONArray data = (JSONArray) json.get("data");
+                JSONArray data = json.getJSONArray("data");
                 for (int i = 0; i < data.length(); i++) {
-                    JSONObject brg = (JSONObject) data.get(i);
+                    JSONObject brg = data.getJSONObject(i);
                     id.add(brg.get("id").toString());
                     nama.add(brg.get("nama").toString());
                     harga.add(brg.get("harga").toString());
@@ -113,7 +113,7 @@ public class Barang {
         try {
             data = new JSONArray(output);
             for (int i = 0; i < data.length(); i++) {
-                JSONObject brg = (JSONObject) data.get(i);
+                JSONObject brg = data.getJSONObject(i);
                 id.add(brg.get("id").toString());
                 nama.add(brg.get("nama").toString());
                 harga.add(brg.get("harga").toString());

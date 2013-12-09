@@ -51,9 +51,9 @@ public class Kategori {
         try {
             json = new JSONObject(output);
             if (json.getBoolean("status")) {
-                JSONArray jsarr = (JSONArray) json.get("data");
+                JSONArray jsarr = json.getJSONArray("data");
                 for (int i = 0; i < jsarr.length(); i++) {
-                    JSONObject kat = (JSONObject) jsarr.get(i);
+                    JSONObject kat = jsarr.getJSONObject(i);
                     id.add(kat.get("id").toString());
                     nama_kategori.add(kat.get("nama_kategori").toString());
                     gambar.add(kat.get("gambar").toString());

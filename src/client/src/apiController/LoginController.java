@@ -60,7 +60,7 @@ public class LoginController extends HttpServlet {
             System.out.println(output);
             JSONObject json = new JSONObject(output);
             if (Boolean.parseBoolean(json.get("status").toString())) {
-                JSONObject user = (JSONObject) json.get("data");
+                JSONObject user = json.getJSONObject("data");
 
                 // login berhasil
                 HttpSession session = request.getSession();
@@ -70,7 +70,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("role", Integer.parseInt(user.get("role").toString()));
                 session.setMaxInactiveInterval(0);
 
-                Cookie C = new Cookie("isLogin", username);
+                Cookie C = new Cookie("isLogin", user.get("id").toString());
                 C.setMaxAge(60 * 60 * 24 * 30); // 30 Hari
                 C.setPath("/");
                 response.addCookie(C);

@@ -13,7 +13,7 @@
 		<label>Kategori</label>
 		 
 		<select name="kategori">
-			<option value="">--Pilih Kategori--</option>
+			<option value="1">--Pilih Kategori--</option>
 			<%
 			//java.sql.ResultSet RS = (java.sql.ResultSet) request.getAttribute("listK");
 			//while (RS.next())

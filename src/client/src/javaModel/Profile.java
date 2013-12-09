@@ -45,7 +45,7 @@ public class Profile {
         try {
             json = new JSONObject(output);
             if (json.getBoolean("status")) {
-                JSONObject data = (JSONObject) json.get("data");
+                JSONObject data = json.getJSONObject("data");
                 id.add(data.get("id").toString());
                 username.add(data.get("username").toString());
                 password.add(data.get("password").toString());

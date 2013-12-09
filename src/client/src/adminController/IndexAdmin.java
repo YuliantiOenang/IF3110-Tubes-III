@@ -57,10 +57,10 @@ public class IndexAdmin extends HttpServlet {
 				request.setAttribute("barang", B);
 			}
 			
-			DBA.executeQuery("select * from kategori");
-			ResultSet RS = DBA.getQueryResult();
+//			DBA.executeQuery("select * from kategori");
+//			ResultSet RS = DBA.getQueryResult();
 			
-			request.setAttribute("listKategori",RS);
+//			request.setAttribute("listKategori",RS);
 
 			request.setAttribute("includeJspContent", "/view/adminIndex.jsp");
 			request.getRequestDispatcher("/view/layout.jsp").forward(request, response);

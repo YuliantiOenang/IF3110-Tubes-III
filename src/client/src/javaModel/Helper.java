@@ -1,9 +1,13 @@
 package javaModel;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
+
+import org.apache.http.HttpException;
 
 import databaseLib.DatabaseAdapter;
 
@@ -49,18 +53,14 @@ public class Helper {
 			return true;
 		} else {
 			DatabaseAdapter DBA = new DatabaseAdapter();
-			String query = "select * from kredit where id_account = '" + userId + "' limit 1";
-			DBA.executeQuery(query);
-			ResultSet RS = DBA.getQueryResult();
-			try {
-				if (!RS.isBeforeFirst()) {
-					return false;
-				} else {
-					return true;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return false;
+//			String query = "select * from kredit where id_account = '" + userId + "' limit 1";
+//			DBA.executeQuery(query);
+		    Credit C = new Credit(DBA); 
+		    C.findByAccountRest(userId);
+			if(C.id.size() > 0) {
+				return true;
+			} else {
+			    return false;
 			}
 		}
 	}

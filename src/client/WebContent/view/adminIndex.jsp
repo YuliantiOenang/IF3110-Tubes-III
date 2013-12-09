@@ -1,14 +1,18 @@
 <%@ page import="javaModel.Barang" %>
+<%@ page import="javaModel.Helper" %>
+<%@ page import="javaModel.Kategori" %>
 <script src="/ruserba/js/deleteBarang.js" type="text/javascript"></script>
 <h1 class="header">Administrator</h1><br>
 <a href="/ruserba/admin/addbarang" class="btn">+ Tambah Barang</a> 
 Kategori : 
 <%
-	java.sql.ResultSet RS = (java.sql.ResultSet) request.getAttribute("listKategori");
-	while (RS.next())
-	{
+	Kategori K = Helper.findAllKategori();
+	for (int i = 0; i < K.id.size(); i++) {
+	//java.sql.ResultSet RS = (java.sql.ResultSet) request.getAttribute("listKategori");
+	//while (RS.next())
+	//{
 %>
-	<a href = "/ruserba/admin/index?kateg=<%=RS.getObject(1)%>" class="btn small"> <%=RS.getObject(2)%></a>
+	<a href = "/ruserba/admin/index?kateg=<%=K.id.get(i)%>" class="btn small"> <%=K.nama_kategori.get(i) %></a>
 <%
 	}
 	

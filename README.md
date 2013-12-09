@@ -3,13 +3,13 @@ IF3110-Tubes-II
 Repositori ini adalah repositori dasar yang akan dijadikan basis oleh setiap kelompok peserta kuliah IF3110.
 
 Pengumpulan Tugas:
-	URL : https://github.com/habibiefaried/IF3110-Tubes-II
+	URL : https://github.com/sonnylazuardi/IF3110-Tubes-III
 
-Kelompok WBD Ahay:
+Kelompok KEC (K*l**n English Club):
 	Nama						NIM				Mail									GithubID
-	Habibie Faried			13511069			habibiefaried@gmail.com			habibiefaried
-	Sonny Lazuardi			13511029			sonnylazuardi@gmail.com			sonnylazuardi
-	Ridho Akbarisanto		13511005													convyusboy
+	Kelvin Valensius			13511009		darkstallion@windowslive.com			darkstallion
+	Sonny Lazuardi				13511029		sonnylazuardi@gmail.com					sonnylazuardi
+	Michael Ingga Gunawan		13511053		13511053@std.stei.itb.ac.id				michinggun
 
 Rule dan Konvensi:
 =======
@@ -34,6 +34,6 @@ Rule dan Konvensi:
 - db/ - berisi file sql hasil dump
 
 Kelompok :
-1. Habibie Faried
-2. Sonny Lazuardi Hermawan
-3. Ridho Akbarisanto
+1. Kelvin Valensius
+2. Sonny Lazuardi
+3. Michael Ingga Gunawan

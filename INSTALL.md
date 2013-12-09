@@ -1,6 +1,6 @@
 Cara memasukkan SQL :
 1) Buat tabel "ruserba"
-2) Import progin_13511069.sql
+2) Import progin_13511029.sql
 3) Selesai
 
 Cara menjalankan via eclipse:
