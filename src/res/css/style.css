@@ -1,0 +1,474 @@
+@import url("grid.css");
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+	background-color: #fff;
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+}
+
+.debug {
+	background-color: #000;
+}
+
+.btn {
+	-moz-box-shadow:inset 0px 1px 0px 0px #2fc2a5;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #2fc2a5;
+	box-shadow:inset 0px 1px 0px 0px #2fc2a5;
+	background-color:#2fc2a5;
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-topleft:5px;
+	border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	-moz-border-radius-topright:5px;
+	border-top-right-radius:5px;
+	-webkit-border-bottom-right-radius:5px;
+	-moz-border-radius-bottomright:5px;
+	border-bottom-right-radius:5px;
+	-webkit-border-bottom-left-radius:5px;
+	-moz-border-radius-bottomleft:5px;
+	border-bottom-left-radius:5px;
+	text-indent:0px;
+	display:inline-block;
+	color:#fff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bolder;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	width:152px;
+	text-decoration:none;
+	text-align:center;
+}.btn:hover {
+	background-color:#2fc2a5;
+}.btn:active {
+	position:relative;
+	top:1px;
+}
+
+#user-control {
+	padding-bottom: 10px;
+}
+
+#container {
+	width: 960px;
+	display: block;
+	margin: 0 auto;
+}
+
+#user-panel {
+	background-color: #98b1bf;
+	margin-top:-10px;
+}
+
+#user-text {
+	font-size: 0.93em;
+	color: #fff;
+	opacity: 0.9;
+}
+
+#user-text {
+	font-size: 0.7em;
+}
+
+#user-text > h3 {
+	font-size: 1.3em;
+}
+
+#user {
+	border-bottom-style: solid;
+	border-width: 5px;
+	border-color: #8998A0;
+}
+
+#search-bar  {
+	padding: 15px 25px;
+}
+
+.edit-logout > a:link, 
+.edit-logout > a:visited, 
+.btn-right:link, 
+.btn-right:visited, 
+.btn-left:link, 
+.btn-left:visited 
+{
+	color: #fff;
+}
+
+#search-box {
+	width: 200px;
+	height: 30px;
+	color: #bebebe;
+	font-size: 12px;
+	padding-left: 7px;
+}
+
+#search-button {
+	background-image: url('../img/btn_src.png');
+	background-color: #98B1BF;
+	width: 28px;
+	height: 28px;
+	border: none;
+	margin-left: 9px;
+}
+
+#navbar {
+	font-size: 1.3em;
+	color: #868789;
+	margin-top: 20px;
+}
+
+#navbar > ul {
+	list-style-type:none;
+	margin:0;
+	padding: 0;
+}
+
+#navbar > ul > li {
+	display: inline;
+	padding: 0 15px;
+}
+
+#navbar > ul > li > a:link, #navbar > ul > li > a:visited , .btn-right, .btn-left{
+	color: #868789;
+	text-decoration: none;
+}
+
+#slideshow {
+	position:relative;
+	margin: 25px 0;
+	background-color: #3498DB;
+	margin-bottom: -70px;
+}
+
+#slideshow > .item {
+	position: relative;
+	padding: 40px 0;
+}
+
+.caption {
+	
+}
+
+.caption > .text {
+	position: absolute;
+	left: 61px;
+	bottom: 45px;
+	right: 61px;
+	background-color: #333;
+	opacity: 0.8;
+	color: #fff;
+	height: 42px;
+	padding-top: 10px;
+	font-size: 14px;
+}
+
+.btn-left, .btn-right {
+	position: absolute;
+	top: 200px;
+	font-size: 5em;
+	opacity: 0.8;
+}
+
+.btn-left {
+	left: 20px;
+}
+
+.btn-right {
+	right: 20px;
+}
+
+#bbuy-text {
+	margin-top: 50px;
+}
+
+#bbuy-a, #bbuy-b {
+	color: #96bf0d;
+}
+
+#bbuy-a {
+	font-size: 36px;
+}
+
+#bbuy-b {
+	font-size: 24px;
+}
+
+.product {
+	color: #333;
+}
+
+.Cart {
+	color : #000000}
+
+.product a:link, 
+.product a:visited {
+	color: #333;
+	text-decoration: none;
+}
+
+.product .gambar {
+	border-style: solid;
+	border-color: #D6D6D7;
+	border-width: 2px;
+	padding: 20px 0;
+	max-height: 176px;
+	min-width: 186px;
+}
+.Cart{
+	border-style: solid;
+	border-color: #000000;
+	border-width: 2px;
+	padding: 20px 0;
+	max-height: 176px;
+	min-width: 186px;
+}
+
+.nama-produk {
+	font-size: 18px;
+}
+
+.asal-produk {
+	font-size: 11px;
+}
+
+.nama-produk-b, .harga, .buy-bar {
+	text-align: left;
+	padding-bottom: 10px;
+}
+
+.nama-produk-b {
+	font-size: 24px;
+	color: #96bf0d;
+}
+
+.nama-produk-b a:link, .nama-produk-b a:visited {
+	text-decoration: none;
+	color: #96bf0d;
+}
+
+.harga {
+	font-size: 14px;
+}
+
+#best-buy-btn {
+	position: absolute;
+	top: 130px;
+	right: 56%;
+
+	position:relative;
+	animation:myfirst 1s linear 1s infinite alternate;
+	/* Safari and Chrome: */
+	-webkit-animation:myfirst 1s linear 1s infinite alternate;
+}
+
+@keyframes myfirst
+{
+	0%   {left:0px; top:0px;}
+	100% {left:50px; top:0px;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+	0%   {left:0px; top:0px;}
+	100% {left:50px; top:0px;}
+}
+
+#dagangan {
+	margin-top: 30px;
+}
+
+.buy-box {
+	color: #bebebe;
+}
+
+.buy-button {
+	position: relative;
+	background-color: transparent;
+	border: none;
+	background-image: url('../img/btn_cart.png');
+	background-repeat: no-repeat;
+	width: 35px;
+	left: 8px;
+	top: 4px;
+}
+
+#src-title {
+	padding: 20px;
+	font-size: 24px;
+	color: #868789;
+}
+
+.src-param {
+	font-weight: bolder;
+}
+
+#pagination {
+	font-size: 16px;
+	padding-bottom: 55px;
+}
+
+#pagination a:link, #pagination a:visited {
+	color: #868789;
+}
+
+#pagination > ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#pagination > ul > li {
+	display: inline;
+	padding: 0 15px;
+}
+
+#form-registrasi {
+	background-color: #3498DB;
+	color: #fff;
+	text-align: left;
+}
+
+#registration-title, #product-title {
+	font-size: 36px;
+}
+
+#form-registrasi {
+	margin:  20px 0;
+	padding: 40px 50px;
+	margin-bottom: 40px;
+}
+
+.form-field {
+	padding: 10px 0;
+	margin-bottom: 20px;
+}
+
+.label {
+	padding: 5px 0;
+}
+
+.field-box {
+	min-height: 35px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: none;
+	color: #333;
+}
+
+.field-area {
+	height: 100px;
+	font-family: inherit;
+	margin-bottom: 10px;
+}
+
+#btn-register {
+	display: block;
+	border: none;
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 250px;
+	height: 50px;
+	font-size: 24px;
+	font-weight: normal;
+}
+
+#data-diri p {
+	margin: 2px 0;
+}
+
+#data-diri {
+	padding: 10px 0;
+}
+
+.bolder {
+	font-weight: bolder;
+}
+
+#data-diri .teks {
+	margin-left: 17px;
+}
+
+#btn-profile {
+	margin: 15px 0;
+	width: 70%;
+}
+
+#table-shopping {
+	text-align: center;
+	border-color: #fff;
+	text-shadow: none;
+	border-style: solid;
+}
+
+#total-harga {
+	text-align: right;
+	font-size: 1.1em;
+	font-weight: bolder;
+}
+
+#btn-order {
+	margin-top: 10px;
+	float: right;
+}
+
+#btn-order:after {
+	clear: both;
+	content: '';
+}
+
+#btn-register-cc {
+	width: 200px;
+}
+
+#sort-bar {
+	padding-top: 25px;
+}
+
+#sort-box {
+	background-color: #3AC0A8;
+	border: none;
+	color: #fff;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+}
+
+.buy-text {
+	font-family: inherit;
+	margin: 10px 0;
+	color: #bebebe;
+}
+
+.harga-detail {
+	font-size: 18px;
+	text-align: left;
+}
+
+#gambar-detail {
+	margin-top: 15px;
+}
+
+#admintools
+{
+	display:none;
+}
+
+
+ #popupbox{
+  margin: 0; 
+  margin-left: 42%; 
+  margin-top: -150px; 
+  padding-top: 10px; 
+  width: 20%; 
+  height: 150px; 
+  position: absolute; 
+  background: #FFFFFF; 
+  border: solid #000000 2px; 
+  z-index: 9; 
+  font-family: arial; 
+  visibility: hidden; 
+  }
