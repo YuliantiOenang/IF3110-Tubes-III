@@ -7,8 +7,13 @@
 
 package com.frexesc.soap;
 
+import com.frexesc.Constants;
+
 public class BarangSoapServiceLocator extends org.apache.axis.client.Service
 		implements com.frexesc.soap.BarangSoapService {
+	
+	// Use to get a proxy class for BarangSoap
+	private java.lang.String BarangSoap_address = Constants.HOSTNAME + "services/BarangSoap";
 
 	public BarangSoapServiceLocator() {
 	}
@@ -22,9 +27,6 @@ public class BarangSoapServiceLocator extends org.apache.axis.client.Service
 			throws javax.xml.rpc.ServiceException {
 		super(wsdlLoc, sName);
 	}
-
-	// Use to get a proxy class for BarangSoap
-	private java.lang.String BarangSoap_address = "http://localhost:8080/FrexescWebService/services/BarangSoap";
 
 	public java.lang.String getBarangSoapAddress() {
 		return BarangSoap_address;
