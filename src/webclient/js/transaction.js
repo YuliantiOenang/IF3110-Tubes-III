@@ -66,9 +66,10 @@ function addCart(id_barang){
 		return;
 	}
 	
-	/*if (localStorage.getItem("shoppingbag") !== null){
-	
-	}*/
+	if (localStorage.getItem("shoppingbag") !== null){
+		b = JSON.parse(localStorage.shoppingbag);
+		if (b[id_barang] !== undefined) jumlah += b[id_barang];
+	}
 	
 	var data = {"action" : "add", "id_barang" : id_barang, "jumlah" : jumlah, "token": getLoginInfo().id};
 	
@@ -81,17 +82,13 @@ function addCart(id_barang){
 				bag = JSON.parse(localStorage.shoppingbag);
 			}
 			
-			if (bag[id_barang] === undefined){
-				bag[id_barang] = jumlah;
-			}else{
-				bag[id_barang] += jumlah;
-			}
+			bag[id_barang] = jumlah;
 			
 			localStorage.shoppingbag = JSON.stringify(bag);
 		
 			alert("Barang sudah ditambahkan ke keranja belanja");
 		}else{
-			alert("Jumlah barang tidak mencukupi! Barang yang tersisa tinggal " + response.sisa);
+			alert(response.desc);
 		}
 	};
 	
