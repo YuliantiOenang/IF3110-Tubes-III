@@ -38,7 +38,6 @@ public class UpdateCart extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 
-		System.out.println("Update");
 		
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");

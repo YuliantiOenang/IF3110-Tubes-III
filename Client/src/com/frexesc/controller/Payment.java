@@ -3,8 +3,6 @@ package com.frexesc.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +35,8 @@ public class Payment extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 
+		System.out.println("payment");
+		
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");
 		} else {
@@ -56,10 +56,16 @@ public class Payment extends HttpServlet {
 					} else {
 
 						// Update status
-						String query2 = "UPDATE barang_user SET status=1 WHERE id_user="
-								+ session.getAttribute("user_id");
-						connection.createStatement().executeUpdate(query2);
+//						String query2 = "UPDATE barang_user SET status=1 WHERE id_user="
+//								+ session.getAttribute("user_id");
+//						connection.createStatement().executeUpdate(query2);
 
+						//POST
+						String[] param = {"id"};
+						String[] val= {"" + session.getAttribute("user_id")};
+						ServiceParser.postUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/statusbaranguser",param, val);
+						
+						
 						// Update number of transaction
 						String query3 = "SELECT * FROM user WHERE id="
 								+ session.getAttribute("user_id");
@@ -85,7 +91,7 @@ public class Payment extends HttpServlet {
 					}
 				}
 
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
