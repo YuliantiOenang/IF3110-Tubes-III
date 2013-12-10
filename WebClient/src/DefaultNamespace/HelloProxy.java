@@ -1,8 +1,8 @@
-package insertBarang;
+package DefaultNamespace;
 
-public class HelloProxy implements insertBarang.Hello {
+public class HelloProxy implements DefaultNamespace.Hello {
   private String _endpoint = null;
-  private insertBarang.Hello hello = null;
+  private DefaultNamespace.Hello hello = null;
   
   public HelloProxy() {
     _initHelloProxy();
@@ -15,7 +15,7 @@ public class HelloProxy implements insertBarang.Hello {
   
   private void _initHelloProxy() {
     try {
-      hello = (new insertBarang.HelloServiceLocator()).getHello();
+      hello = (new DefaultNamespace.HelloServiceLocator()).getHello();
       if (hello != null) {
         if (_endpoint != null)
           ((javax.xml.rpc.Stub)hello)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
@@ -38,10 +38,22 @@ public class HelloProxy implements insertBarang.Hello {
     
   }
   
-  public insertBarang.Hello getHello() {
+  public DefaultNamespace.Hello getHello() {
     if (hello == null)
       _initHelloProxy();
     return hello;
+  }
+  
+  public void addUser(java.lang.String id, java.lang.String email, java.lang.String password, java.lang.String fullname, java.lang.String alamat, java.lang.String provinsi, java.lang.String kota, int kodepos, int hp) throws java.rmi.RemoteException{
+    if (hello == null)
+      _initHelloProxy();
+    hello.addUser(id, email, password, fullname, alamat, provinsi, kota, kodepos, hp);
+  }
+  
+  public java.lang.String sayHello(java.lang.String name) throws java.rmi.RemoteException{
+    if (hello == null)
+      _initHelloProxy();
+    return hello.sayHello(name);
   }
   
   public void insertBarang(java.lang.String query) throws java.rmi.RemoteException{

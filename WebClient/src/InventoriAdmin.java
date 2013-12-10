@@ -1,7 +1,4 @@
 
-
-import insertBarang.HelloProxy;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,13 +38,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.postgresql.Driver;
 
+import DefaultNamespace.HelloProxy;
+
 /**
  * Servlet implementation class DetailBarang
  */
 public class InventoriAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String DB_NAME = "toko_imba";
-	static final String helloService = "http://heroku-postgres-8655a651.herokuapp.com/services/Hello";
+	static final String helloService = "http://afternoon-river-3681.herokuapp.com/services/Hello";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -257,7 +256,7 @@ public class InventoriAdmin extends HttpServlet {
 		
 		//statement.executeUpdate(query.toString());
 		//PENGGANTI ATAS
-		insertBarang.HelloProxy HePro = new HelloProxy(helloService);
+		HelloProxy HePro = new HelloProxy(helloService);
 		
 		try{
 			HePro.insertBarang(query.toString());

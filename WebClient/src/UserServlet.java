@@ -26,7 +26,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.postgresql.Driver;
 
-import RegisterSoap.HelloProxy;
+import DefaultNamespace.HelloProxy;
 import kelas.Database;
 
 
@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
 	
 	static final String JDBCDRIVER = "com.mysql.jdbc.DRIVER";
 	static final String DBURL = "jdbc:mysql://localhost/toko_imba";
-	static final String helloService = "http://heroku-postgres-8655a651.herokuapp.com/services/Hello";
+	static final String helloService = "http://afternoon-river-3681.herokuapp.com/services/Hello";
 	
 	
 	static final String USER = Database.getUser();
@@ -100,7 +100,7 @@ public class UserServlet extends HttpServlet {
 						kp = 0;
 				
 				if(!hp.equals(""))
-					hape = Integer.parseInt(kodepos);
+					hape = Integer.parseInt(hp);
 				else
 					hape = 0;
 				

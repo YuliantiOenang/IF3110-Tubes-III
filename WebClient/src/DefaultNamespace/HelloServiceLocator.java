@@ -5,9 +5,9 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package RegisterSoap;
+package DefaultNamespace;
 
-public class HelloServiceLocator extends org.apache.axis.client.Service implements RegisterSoap.HelloService {
+public class HelloServiceLocator extends org.apache.axis.client.Service implements DefaultNamespace.HelloService {
 
     public HelloServiceLocator() {
     }
@@ -22,7 +22,7 @@ public class HelloServiceLocator extends org.apache.axis.client.Service implemen
     }
 
     // Use to get a proxy class for Hello
-    private java.lang.String Hello_address = "http://localhost:8080/KLK-WebService/services/Hello";
+    private java.lang.String Hello_address = "http://localhost:11767/KLK-WebService/services/Hello";
 
     public java.lang.String getHelloAddress() {
         return Hello_address;
@@ -39,7 +39,7 @@ public class HelloServiceLocator extends org.apache.axis.client.Service implemen
         HelloWSDDServiceName = name;
     }
 
-    public RegisterSoap.Hello getHello() throws javax.xml.rpc.ServiceException {
+    public DefaultNamespace.Hello getHello() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(Hello_address);
@@ -50,9 +50,9 @@ public class HelloServiceLocator extends org.apache.axis.client.Service implemen
         return getHello(endpoint);
     }
 
-    public RegisterSoap.Hello getHello(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public DefaultNamespace.Hello getHello(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            RegisterSoap.HelloSoapBindingStub _stub = new RegisterSoap.HelloSoapBindingStub(portAddress, this);
+            DefaultNamespace.HelloSoapBindingStub _stub = new DefaultNamespace.HelloSoapBindingStub(portAddress, this);
             _stub.setPortName(getHelloWSDDServiceName());
             return _stub;
         }
@@ -72,8 +72,8 @@ public class HelloServiceLocator extends org.apache.axis.client.Service implemen
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (RegisterSoap.Hello.class.isAssignableFrom(serviceEndpointInterface)) {
-                RegisterSoap.HelloSoapBindingStub _stub = new RegisterSoap.HelloSoapBindingStub(new java.net.URL(Hello_address), this);
+            if (DefaultNamespace.Hello.class.isAssignableFrom(serviceEndpointInterface)) {
+                DefaultNamespace.HelloSoapBindingStub _stub = new DefaultNamespace.HelloSoapBindingStub(new java.net.URL(Hello_address), this);
                 _stub.setPortName(getHelloWSDDServiceName());
                 return _stub;
             }
@@ -105,7 +105,7 @@ public class HelloServiceLocator extends org.apache.axis.client.Service implemen
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("http://RegisterSoap", "HelloService");
+        return new javax.xml.namespace.QName("http://DefaultNamespace", "HelloService");
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +113,7 @@ public class HelloServiceLocator extends org.apache.axis.client.Service implemen
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("http://RegisterSoap", "Hello"));
+            ports.add(new javax.xml.namespace.QName("http://DefaultNamespace", "Hello"));
         }
         return ports.iterator();
     }

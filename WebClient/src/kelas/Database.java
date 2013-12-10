@@ -4,7 +4,7 @@ public class Database {
 	static String user = "root";
 	static String pass = "";
 	public static final String uploadDir = "C:/Users/harits/workspace/IF3110-Tubes-III/WebClient/WebContent/res/barang/";//"F:/git/IF3110-Tubes-II/uploaded/";
-	public static final String WebServiceURL = /*"http://localhost:8080/KLK-WebService/";*/ "http://heroku-postgres-8655a651.herokuapp.com/";
+	public static final String WebServiceURL = /*"http://localhost:8080/KLK-WebService/";*/ "http://afternoon-river-3681.herokuapp.com/";
 	
 	public static String getUser() {
 		return Database.user;

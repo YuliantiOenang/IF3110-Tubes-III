@@ -63,7 +63,7 @@ public class addToCart extends HttpServlet {
 		data.put("id", new Integer(id));
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httppost = new HttpPost("http://heroku-postgres-8655a651.herokuapp.com/Actions");
+		HttpPost httppost = new HttpPost(Database.WebServiceURL + "Actions");
 		
 		httppost.setEntity(new StringEntity(data.toString()));
 		CloseableHttpResponse httpresp = httpclient.execute(httppost);
