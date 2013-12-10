@@ -9,7 +9,7 @@
 		
 		ini_set("soap.wsdl_cache_enabled", "0"); // disabling WSDL cache
 		$client = new SoapClient($WSDL_URL, array("location" => $SOAP_URL));
-		$return = $client-> createUser($data["username"], $data["password"], $data["email"], $data["name"], $data["address"], $data["provinsi"], $data["city"], $data["zipcode"], $data["contact"]);
+		$return = $client->createUser($data["username"], $data["password"], $data["email"], $data["name"], $data["address"], $data["provinsi"], $data["city"], $data["zipcode"], $data["contact"]);
 		$array = simplexml_load_string($return);
 		return $array;
 	}

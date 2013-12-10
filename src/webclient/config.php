@@ -12,6 +12,6 @@ $SOAP_URL = $SERVICE_URL."soap/";
 $REST_URL = $SERVICE_URL."rest/";
 $IMAGE_BASE_URL = $SERVICE_URL."image/";
 
-$CURL_USE_PROXY = true;
+$USE_PROXY = false;
 
 ?>
