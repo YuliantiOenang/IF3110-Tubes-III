@@ -23,6 +23,20 @@ function sendGet(url,cfunc)
 	xmlhttp.send();
 }
 
+function sendQuery(url,cfunc)
+{
+	var newUrl = "Receiver?url=http://tubeswbd.ap01.aws.af.cm/test?query=" + url;
+	initAjax();
+	xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				cfunc();
+			}
+		};
+	xmlhttp.open("GET",newUrl,false);
+	xmlhttp.send();
+}
+
 function sendForm(url,cfunc,form) {
 	var formdata='?';
 	var len = form.length;

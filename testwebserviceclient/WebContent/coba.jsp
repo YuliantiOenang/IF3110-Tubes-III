@@ -9,23 +9,20 @@
 <script src='${pageContext.request.contextPath}/ajax.js'></script>
 <script>
 	function getquery() {
-		var query = document.forms['form']['text'].value;
-		sendGet("Receiver?url=http://tubeswbd.ap01.aws.af.cm/test?query="
-				+ query, function() {
+		var query = "select * from user";
+		sendQuery(query, function() {
 			var jsonArray = JSON.parse(xmlhttp.responseText);
-			var b = jsonArray.result[0];
+			var b = jsonArray.result[0][1];
 			document.getElementById('test').innerHTML = b;
 		});
 	}
+	
 </script>
 
 </head>
 
-<body>
-	<form id='form' method="GET" action="javascript:getquery();">
-		<input type="text" id="text"> <input type="submit"
-			value="submit">
-	</form>
-	<div id='test'></div>
+<body onload='getquery();alert("test")'>
+	<div id='test'>
+	</div>
 </body>
 </html>

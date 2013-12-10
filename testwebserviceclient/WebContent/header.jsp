@@ -12,83 +12,44 @@
 <link href="css/modal.css" rel="stylesheet" type="text/css" />
 <script src="${pageContext.request.contextPath}/verify.js"></script>
 <script type="text/javascript" src="login.js"></script>
+<script src='${pageContext.request.contextPath}/ajax.js'></script>
 <script type="text/javascript">
+var kategori=new Array("Pangan", "Pakaian", "Elektronik", "Rangga", "Olahraga");
 function getKategori(){
+	var query = "SELECT DISTINCT kategori_barang FROM barang";
 	var kategorilist = document.getElementById("kategorilist");
-	if(window.XMLHttpRequest){
-		xmlhttp = new XMLHttpRequest();
-	}
-	else{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange=function(){
-		if(xmlhttp.readyState==4&&xmlhttp.status==200){
-			kategorilist.innerHTML = xmlhttp.responseText;
-
-			if(err_login.innerHTML==""){
-				//Handle SESSION & LOCAL STORAGE
-				window.location="index.jsp";
-			}
+	sendQuery(query, function() {
+		var jsonArray = JSON.parse(xmlhttp.responseText);
+		var result="";
+		for (var i = 0; i < jsonArray.result.length; i++) {
+			result += kategori[jsonArray.result[i]-1] + "</br>"; 
 		}
-	};
-	xmlhttp.open("GET","kategoriOption",true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send();
+		kategorilist.innerHTML = result;
+	});
 }
-function getWelcome(){
-	var AJS_header = document.getElementById("AJS_header");
-	if(window.XMLHttpRequest){
-		xmlhttp = new XMLHttpRequest();
-	}
-	else{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange=function(){
-		if(xmlhttp.readyState==4&&xmlhttp.status==200){
-			AJS_header.innerHTML = xmlhttp.responseText;
 
-			if(err_login.innerHTML==""){
-				//Handle SESSION & LOCAL STORAGE
-				window.location="index.jsp";
-			}
+function getWelcome(){
+	/*var query = "SELECT DISTINCT kategori_barang FROM barang";
+	var DIV = document.getElementById("AJS_header");
+	sendQuery(query, function() {
+		var jsonArray = JSON.parse(xmlhttp.responseText);
+		var result="";
+		for (var i = 0; i < jsonArray.result.length; i++) {
+			result += kategori[jsonArray.result[i]-1] + "</br>"; 
 		}
-	};
-	xmlhttp.open("GET","welcomeHeader",true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send();
+		DIV.innerHTML = "ASDASDAS";
+	});*/
 }
 function getNavbar(){
-	var customnavbar = document.getElementById("customnavbar");
-	if(window.XMLHttpRequest){
-		xmlhttp = new XMLHttpRequest();
-	}
-	else{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange=function(){
-		if(xmlhttp.readyState==4&&xmlhttp.status==200){
-			customnavbar.innerHTML = xmlhttp.responseText;
-
-			if(err_login.innerHTML==""){
-				//Handle SESSION & LOCAL STORAGE
-				window.location="index.jsp";
-			}
-		}
-	};
-	xmlhttp.open("GET","getNavbar",true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send();
+	
 }
 </script>
 <title>RuserBa</title>
 </head>
-<body>
+<body onload='getKategori();getWelcome();getNavbar()'>
 <div id="AJS_body_wrapper">
 	<div id="AJS_wrapper">
 		<div id="AJS_header">
-			<script>
-				getWelcome();
-			</script>
 		</div>
 		<div id="AJS_menubar">
 			<div id="top_nav" class="ddsmoothmenu">
@@ -137,10 +98,7 @@ function getNavbar(){
 	            	<h3>Kategori</h3>   
 	                	<div class="content"> 
 	                	<ul id="kategorilist" class="sidebar_list">
-	                	<script>
-	                		getKategori();
-	                	</script>
-							</ul>
+						</ul>
 						</div>
 		</div>
 	</div>

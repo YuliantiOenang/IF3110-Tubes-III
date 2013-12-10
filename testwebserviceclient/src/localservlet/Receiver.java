@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Receiver")
 public class Receiver extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,48 +30,57 @@ public class Receiver extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String USER_AGENT = "Mozilla/5.0";
-		String url = request.getParameter("url");
-		
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
- 
-		// optional default is GET
-		con.setRequestMethod("GET");
- 
-		//add request header
-		con.setRequestProperty("User-Agent", USER_AGENT);
- 
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
- 
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer resp = new StringBuffer();
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                String USER_AGENT = "Mozilla/5.0";
+                String url = request.getParameter("url");
+                
+                String[] tokens = url.split(" ");
+                String newUrl = "";
+                for (int i = 0; i < tokens.length; i++) {
+                        newUrl += tokens[i]+"+";
+                }
+                url = newUrl;
 
-		do {
-			inputLine = in.readLine();
-			resp.append(inputLine);
-		} while (in.readLine() != null);
-		
-		// Send data to jsp
-		PrintWriter out = response.getWriter();
-		out.print(inputLine);
-		in.close();
-	}
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+ 
+                // optional default is GET
+                con.setRequestMethod("GET");
+ 
+                //add request header
+                con.setRequestProperty("User-Agent", USER_AGENT);
+ 
+                int responseCode = con.getResponseCode();
+                System.out.println("\nSending 'GET' request to URL : " + url);
+                System.out.println("Response Code : " + responseCode);
+ 
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine = null;
+                StringBuffer resp = new StringBuffer();
+                String temp = null;
+                
+                while ((temp = in.readLine()) != null) {
+                        inputLine = temp;
+                        resp.append(inputLine);
+                }
+                System.out.println(inputLine);
+                
+                // Send data to jsp
+                PrintWriter out = response.getWriter();
+                out.write(inputLine);
+                in.close();
+        }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+        }
 
 }
