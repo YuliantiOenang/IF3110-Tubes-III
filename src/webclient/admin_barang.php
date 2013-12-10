@@ -54,58 +54,6 @@
 
 <script>
 
-	var listcheck = [];
-	
-	function checkedToList(id){
-		if (document.getElementById(id).checked==true) {
-			listcheck.push(id);
-		} else {
-			var index = listcheck.indexOf(id);
-			if (index > -1) {
-				array.splice(index, 1);
-			}
-		}
-	}
-	
-	function deleteBarang(id){
-		if (!confirm("Anda yakin ingin melakukan penghapusan?"))
-			return;
-		data = { "ids" : [id], "token" : getLoginInfo().id};
-		
-		callback = function (response) {
-			if (response.status=="ok"){
-				alert ("Barang (barang-barang) berhasil dihapus)!");
-				window.location.reload();
-			} else {
-				alert (response.desc);
-			}
-		}
-
-		sendRestAjax("DELETE", "barang", data , callback);
-		
-	}
-	
-	function deleteBulkBarang(){
-		if (!confirm("Anda yakin ingin melakukan penghapusan?"))
-				return;
-		data = { "ids" : listcheck, "token" : getLoginInfo().id};
-		
-		callback = function (response) {
-			if (response.status=="ok"){
-				alert ("Barang (barang-barang) berhasil dihapus)!");
-				window.location.reload();
-			} else {
-				alert (response.desc);
-			}
-		}
-		
-		sendRestAjax("DELETE", "barang", data , callback);
-		
-	}
-	
-	
-
-
 <?php
 	echo "var category = '".$cat."';";
 	echo "var sortby = '".$sort."';";
