@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Masukkan Judul Dokumen</title>
+	<link rel="stylesheet" type="text/css" href="res/css/style.css" media="all"/>
+</head>
+<body>
+	
+	<div id="container">
+		
+		<!-- Header Section -->
+		<div id="header" class="frame">
+			<div class="kolom-7">
+				<img src="res/img/logo.png" alt="" id="logo"/>
+			</div>
+			<div class="kolom-4">
+				<div id="user-panel">
+					
+					<div id="user" class="frame">
+						<img id="user-pict" class="kolom-5" src="res/img/userpict_h.png" alt=""/>
+						<div id="user-text" class="kolom-7">
+							<h3>Welcome, <span class="user-name">Riandy</span>!</h3>
+							<p id="user-control">
+								<span class="edit-logout"><a href="">Edit Profile</a></span>
+								&nbsp;or&nbsp;
+								<span class="edit-logout"><a href="">Logout</a></span>
+							</p>
+							
+							<a href="#" class="btn">Check Your Cart</a>
+						</div>
+					</div>
+					
+					<div id="search-bar" class="frame">
+						<form name="search-form" action="search.php">
+							<input id="search-box" class="kolom-9" type="text" name="src" value="Ketikkan barang yang dicari..." onfocus="checkclear(this)" onblur="checkempty(this, 'Ketikkan barang yang dicari...')">
+							<input id="search-button" class="kolom-1" type="submit" value="">
+						</form>					
+					</div>
+				</div>
+			</div>			
+		</div>
+		<!-- End of Header -->
+		
+		<!-- Navbar Section -->
+		<div id="navbar" class="frame">
+			<ul>
+				<li><a href="#">Beras</a></li>
+				<li><a href="#">Daging</a></li>
+				<li><a href="#">Sayuran</a></li>
+				<li><a href="#">Frozen Food</a></li>
+				<li><a href="#">Snack</a></li>
+			</ul>
+		</div>
+		<!-- End of Navbar -->
+		
+		<div id="dagangan">
+			
+			<!-- Dagangan Baris 1 -->
+			<div class="frame">
+			
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<!--End of Dagangan-->	
+
+			<!-- Dagangan Baris 1 -->
+			<div class="frame">
+			
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<!--End of Dagangan-->	
+
+			<!-- Dagangan Baris 1 -->
+			<div class="frame">
+			
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<!--End of Dagangan-->	
+
+			<!-- Dagangan Baris 1 -->
+			<div class="frame">
+			
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<!--End of Dagangan-->	
+
+			<!-- Dagangan Baris 1 -->
+			<div class="frame">
+			
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<!--End of Dagangan-->	
+
+			<!-- Dagangan Baris 1 -->
+			<div class="frame">
+			
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/prdct-daging-sapi.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="#">Daging Sapi</a></p>
+							<p class="harga">Harga: Rp75.000,00 /kg</p>
+							<div class="frame buy-bar">
+								<form name="buy-form" action="buy.php" onsubmit="return validateForm('buy-form', 'buy', 'Banyaknya barang..')">
+									<input class="kolom-9 buy-box" type="text" name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+									<input class="kolom-1 buy-button" type="submit" value="">
+									<input type="hidden" name="jenis-dagangan" value="Daging Sapi">
+								</form>					
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<!--End of Dagangan-->	
+			
+		</div>
+		
+	</div>
+	
+	<!-- Javascript -->
+	<script src="res/js/common.js" type="text/javascript"></script>
+	
+</body>
+</html>

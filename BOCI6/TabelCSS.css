@@ -1,0 +1,14 @@
+.Judul{width:900px;border:1px solid blue;display:table}
+.Menu{width:900px;border:1px solid blue;display:table}
+.rowMenu{height:20px;display:table-row}
+.cellMenu{width:300px;border:1px solid black;display:table-cell}
+.TampilanWeb {width:900px;border:1px solid blue;display:table}
+.rowTampilanBarang {height:320px;display:table-row}
+.cellTampilanBarang {width:320px;border:1px solid black;display:table-cell}
+.cellLogin{height:320px;width:260px;border:1px solid black;display:table-cell}
+.cellSearch{height:320px;width:260px;border:1px solid black;display:table-cell}
+.ShoppingBag{width:500;border:1px solid blue;display:table}
+.ShoppingBagRow{height:20px;border:1px solid black;display:table-row}
+.ShoppingBagCellNama{Width:340px;border:1px solid black;display:table-cell}
+.ShoppingBagCellJumlah{Width:160px;border:1px solid black;display:table-cell}
+
