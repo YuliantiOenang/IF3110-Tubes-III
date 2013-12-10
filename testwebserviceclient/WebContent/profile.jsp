@@ -1,50 +1,38 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
+<script type="text/javascript">
+function getProfileContent() {
+	//KALO UDAH BISA LOGIN, GANTI ADMIN JADI USERNAME DARI SESSIONNYA
+	var query = "SELECT * FROM user WHERE username ='admin'";
+	var container = document.getElementById("profileContent");
+	sendQuery(query, function() {
+		var jsonArray = JSON.parse(xmlhttp.responseText);
+		var result="";
+		for (var i = 0; i < jsonArray.result.length; i++) {
+			 result+="<h3> "+jsonArray.result[i][1]+"</h3><br>";
+			 result+="<p>username : "+jsonArray.result[i][0]+"</p><br>";
+			 result+="<p>email : "+ jsonArray.result[i][3]+"</p><br>";
+			 result+="<p>Mobile : "+ jsonArray.result[i][4]+"</p><br>";
+			 result+="<p>Address : "+ jsonArray.result[i][5]+"</p><br>";
+			 result+="<p>Province : "+ jsonArray.result[i][6]+"</p><br>";
+			 result+="<p>State : "+ jsonArray.result[i][7]+"</p><br>";
+			 result+="<p>Postal Code : "+ jsonArray.result[i][8]+"</p><br>";
+			 result+="<p>Jumlah Transaksi : "+ jsonArray.result[i][9]+"</p><br>";
+			 result+="<a href='editprofile.jsp'> Edit Profile </a>"; 
+		}
+		container.innerHTML = result;
+	});
+}
+</script>
+<div id="profileContent">
+<script>
+window.onload= getProfileContent();
+</script>
+</div>
 <%
-if((sesi== null)|| (sesi.getAttribute("username")==null))
-	out.print("<script>window.location='register.jsp';</script>");
-try {
-	  //Load the JDBC driver
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
-			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-	        Connection con = DriverManager.getConnection (url, uname, pass);
-		
-		  
-	  //Create a Statement object and call its executeUpdate 
-	  //method to insert a record
-	  Statement s = con.createStatement();
-	  String sql = "SELECT * FROM user WHERE username ='"+session.getAttribute("username")+"'";
-	  ResultSet rs = s.executeQuery(sql);
-	  while (rs.next()) {
-	    out.println("<h3> "+rs.getString(2)+"</h3><br>");
-	    out.println("<p>username : "+rs.getString(1)+"</p><br>");
-		out.println("<p>email : "+ rs.getString(4)+"</p><br>");
-		out.println("<p>Mobile : "+ rs.getString(5)+"</p><br>");
-		out.println("<p>Address : "+ rs.getString(6)+"</p><br>");
-		out.println("<p>Province : "+ rs.getString(7)+"</p><br>");
-		out.println("<p>State : "+ rs.getString(8)+"</p><br>");
-		out.println("<p>Postal Code : "+ rs.getString(9)+"</p><br>");
-		out.println("<p>Jumlah Transaksi : "+ rs.getString(10)+"</p><br>");
-		out.println("<a href='editprofile.jsp'> Edit Profile </a>");
-	  }
-	  rs.close();
-	  s.close();
-	  con.close();
-	}
-	catch (ClassNotFoundException e1) {
-	  // JDBC driver class not found, print error message to the console
-	  System.out.println(e1.toString());
-	}
-	catch (SQLException e2) {
-	  // Exception when executing java.sql related commands, print error message to the console
-	  System.out.println(e2.toString());
-	}
-	catch (Exception e3) {
-	  // other unexpected exception, print error message to the console
-	  System.out.println(e3.toString());
-	}
+//KALO UDAH BISA LOGIN INI DIBUKA
+//if((sesi== null)|| (sesi.getAttribute("username")==null))
+//	out.print("<script>window.location='register.jsp';</script>");
 %>
 <%@ include file= "./footer.jsp" %>
