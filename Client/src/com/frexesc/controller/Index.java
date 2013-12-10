@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-import com.frexesc.model.BarangBean;
+import com.frexesc.model.Barang;
 import com.frexesc.model.KategoriBean;
 import com.frexesc.model.UserBean;
 import com.frexesc.model.UserBean2;
@@ -126,10 +126,10 @@ public class Index extends HttpServlet {
 
 		try {
 			ResultSet rs2 = connection.createStatement().executeQuery(query2);
-			ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+			ArrayList<Barang> allResults2 = new ArrayList<Barang>();
 
 			while (rs2.next()) {
-				BarangBean barang = new BarangBean(Integer.valueOf(rs2
+				Barang barang = new Barang(Integer.valueOf(rs2
 						.getString("id")), Integer.valueOf(rs2
 						.getString("id_kategori")),
 						rs2.getString("nama_barang"), rs2.getString("gambar"),

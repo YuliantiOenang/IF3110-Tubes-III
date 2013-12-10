@@ -28,6 +28,9 @@ public class Barang {
 	public void setnKat(String nKat) {
 		this.nKat = nKat;
 	}
+	public String getnKat() {
+		return nKat;
+	}
 
 	public long getId() {
 		return id;

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.frexesc.model.BarangBean"%>
+<%@ page import="com.frexesc.model.Barang"%>
 <%@ page import="com.frexesc.model.KategoriBean"%>
 
 <!DOCTYPE HTML>
@@ -21,19 +21,19 @@
 	<!-- content di sini -->
 	<%
 		@SuppressWarnings("unchecked")
-			ArrayList<KategoriBean> kategoriBean = (ArrayList<KategoriBean>) request
-			.getAttribute("items");
+		ArrayList<KategoriBean> kategoriBean = (ArrayList<KategoriBean>) request
+		.getAttribute("items");
 	%>
 	<%
 		if (kategoriBean == null)
-		kategoriBean = new ArrayList<KategoriBean>();
+			kategoriBean = new ArrayList<KategoriBean>();
 	%>
 	<div id='content_frame' name='page' onLoad="RefreshCartandShow()">
 
 		<!-- Added by @freedomofkeima -->
 		<%
 			for (int i = 0; i < kategoriBean.size(); i++) {
-				ArrayList<BarangBean> barangBean = kategoriBean.get(i).getItemList();
+				ArrayList<Barang> barangBean = kategoriBean.get(i).getItemList();
 				if (i == 0) {
 		%>
 		<div onmouseover='setRun(false, <%=kategoriBean.get(i).getId()%>)'

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frexesc.model.BarangBean;
+import com.frexesc.model.Barang;
 
 /**
  * 
@@ -113,10 +113,10 @@ public class Gallery extends HttpServlet {
 																			// selection
 				ResultSet rs = connection.createStatement().executeQuery(query);
 
-				ArrayList<BarangBean> allResults = new ArrayList<BarangBean>();
+				ArrayList<Barang> allResults = new ArrayList<Barang>();
 
 				while (rs.next()) {
-					BarangBean barang = new BarangBean(Integer.valueOf(rs
+					Barang barang = new Barang(Integer.valueOf(rs
 							.getString("id")), Integer.valueOf(rs
 							.getString("id_kategori")),
 							rs.getString("nama_barang"), rs.getString("gambar"),
