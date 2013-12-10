@@ -11,13 +11,21 @@ function getDetail(id){
 		document.getElementById("nama").innerHTML = jsonArray.result[0][1];
 		document.getElementById("detail").innerHTML = jsonArray.result[0][6];
 		document.getElementById("id_barang").innerHTML = jsonArray.result[0][1];
-		document.getElementById("img").innerHTML = jsonArray.result[0][3];
+	});
+}
+function getImgSrc(id){
+	var query = "SELECT * FROM barang where id_barang='"+id+"'";
+	sendQuery(query, function() {
+		var jsonArray = JSON.parse(xmlhttp.responseText);
+		document.write("<img src='"+jsonArray.result[0][2]+"' width='300px' height='300px'/><br>");
 	});
 }
 </script>
 <body>
 	<h1 id="nama"></h1>
-	<img id="img" width='300px' height='300px'/><br>
+	<script>
+		getImgSrc(<%= request.getParameter("id") %>);
+	</script>
 	<br><h2>Deskripsi :</h2>
 	<p id="detail"></p><br>
 	Request tambahan 	: <br>
