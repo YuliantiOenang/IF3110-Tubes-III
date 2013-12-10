@@ -2,9 +2,6 @@ package com.frexesc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +18,7 @@ import org.json.simple.parser.ParseException;
 import com.frexesc.Constants;
 import com.frexesc.model.UserBean;
 import com.frexesc.service.WebService;
+import com.frexesc.soap.UserSoapProxy;
 
 /**
  * Servlet implementation class User
@@ -49,8 +47,6 @@ public class User extends HttpServlet {
 			response.sendRedirect("register");
 		} else {
 			if (request.getParameter("action") == null) {
-				// DbConnection dbConnection = new DbConnection();
-				// Connection connection = dbConnection.mySqlConnection();
 				String user_id = request.getParameter("id");
 
 				/** Set WebService (REST) for retrieving list of User */
@@ -115,8 +111,6 @@ public class User extends HttpServlet {
 				// }
 
 			} else {
-				// DbConnection dbConnection = new DbConnection();
-				// Connection connection = dbConnection.mySqlConnection();
 				String user_id = request.getParameter("id");
 				/** Set WebService (REST) for retrieving list of User */
 				WebService _user = new WebService(hostname + "user");
@@ -191,10 +185,6 @@ public class User extends HttpServlet {
 		HttpSession sessions = request.getSession(true);
 		String action = request.getParameter("action");
 
-		DbConnection dbConnection = new DbConnection();
-		Connection connection = dbConnection.mySqlConnection();
-
-		String id = sessions.getAttribute("user_id").toString();
 		String password = request.getParameter("password1");
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
@@ -206,33 +196,21 @@ public class User extends HttpServlet {
 
 		if (action.equals("register")) {
 			String username = request.getParameter("username");
-			// HttpSession session = request.getSession(true);
-			String insertQuery = "INSERT INTO user (nama, username, password, email, handphone, alamat, kota, provinsi, kodepos) VALUES ('"
-					+ name
-					+ "','"
-					+ username
-					+ "','"
-					+ password
-					+ "','"
-					+ email
-					+ "','"
-					+ telephone
-					+ "','"
-					+ address
-					+ "','"
-					+ city + "','" + province + "','" + postal + "')";
-			try {
-				Statement statement = connection.createStatement();
-				statement.executeUpdate(insertQuery);
-				request.setAttribute("username", username);
-				request.setAttribute("password", password);
-				request.setAttribute("register", "y");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+
+			/** SOAP Invocation */
+			UserSoapProxy _userSoap = new UserSoapProxy();
+			_userSoap.register(username, password, email, username, telephone,
+					address, province, city, postal);
+
+			request.setAttribute("username", username);
+			request.setAttribute("password", password);
+			request.setAttribute("register", "y");
+
 			getServletContext().getRequestDispatcher("/login").forward(request,
 					response);
 		} else if (action.equals("edit_profile")) {
+			String id = sessions.getAttribute("user_id").toString();
+			
 			/** Set WebService (REST) for retrieving list of User */
 			WebService _user = new WebService(hostname + "user");
 			_user.addParam("action", "edit_profile");

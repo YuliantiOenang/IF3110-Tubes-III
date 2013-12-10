@@ -18,6 +18,7 @@ import org.json.simple.parser.ParseException;
 import com.frexesc.Constants;
 import com.frexesc.model.BarangBean;
 import com.frexesc.service.WebService;
+import com.frexesc.soap.BarangUserSoapProxy;
 
 /**
  * 
@@ -137,18 +138,13 @@ public class AddCart extends HttpServlet {
 						deskripsiTambahan = "";
 
 					// Add to Cart here
-					/**
-					 * String query2 =
-					 * "INSERT INTO barang_user (id_barang,id_user,status,jumlah_barang,deskripsi_tambahan) VALUES ("
-					 * + request.getParameter("id_barang") + ", " +
-					 * session.getAttribute("user_id") + ", 0, " +
-					 * request.getParameter("qty") + ", \"" + deskripsiTambahan
-					 * + "\")";
-					 * 
-					 * try { connection.createStatement().executeUpdate(query2);
-					 * } catch (SQLException e) { // TODO Auto-generated catch
-					 * block e.printStackTrace(); }
-					 */
+					/** SOAP Invocation */
+					BarangUserSoapProxy _barangUser = new BarangUserSoapProxy();
+					_barangUser.addCart(
+							Long.parseLong(request.getParameter("id_barang")),
+							(Long) session.getAttribute("user_id"),
+							Integer.parseInt(request.getParameter("qty")),
+							deskripsiTambahan);
 
 					/** Set WebService (REST) for update Barang */
 					WebService _updateBarang = new WebService(hostname

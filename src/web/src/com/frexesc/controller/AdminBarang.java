@@ -25,6 +25,7 @@ import javax.servlet.http.Part;
 import com.frexesc.Constants;
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
+import com.frexesc.soap.BarangSoapProxy;
 
 /**
  * Servlet implementation class AdminBarang
@@ -37,7 +38,8 @@ public class AdminBarang extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	//final String UPLOAD_DIRECTORY = "C:/Users/James Jaya/workspace/Frexesc/WebContent/img/barang/";
+	// final String UPLOAD_DIRECTORY =
+	// "C:/Users/James Jaya/workspace/Frexesc/WebContent/img/barang/";
 
 	public AdminBarang() {
 		super();
@@ -48,7 +50,8 @@ public class AdminBarang extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		RequestDispatcher dispatcher = null;
@@ -59,34 +62,46 @@ public class AdminBarang extends HttpServlet {
 			Connection connection = dbConnection.mySqlConnection();
 			if (request.getParameter("action").equals("edit")) {
 				String category = request.getParameter("category");
-				String selectQuery = "SELECT * FROM barang WHERE id_kategori='" + category + "'";
+				String selectQuery = "SELECT * FROM barang WHERE id_kategori='"
+						+ category + "'";
 				String selectCQuery = "SELECT * FROM kategori";
 				try {
 					Statement cstmt = connection.createStatement();
 					ResultSet rsc = cstmt.executeQuery(selectCQuery);
 					ArrayList<KategoriBean> kategoris = new ArrayList<KategoriBean>();
 					while (rsc.next()) {
-						kategoris.add(new KategoriBean(rsc.getInt("id"), rsc.getString("nama")));
+						kategoris.add(new KategoriBean(rsc.getInt("id"), rsc
+								.getString("nama")));
 					}
 					Statement statement = connection.createStatement();
 					ResultSet rs = statement.executeQuery(selectQuery);
 					ArrayList<BarangBean> barangs = new ArrayList<BarangBean>();
 					while (rs.next()) {
-						barangs.add(new BarangBean(rs.getLong("id"), rs.getLong("id_kategori"), rs.getString("nama_barang"), rs.getString("gambar"), rs.getInt("harga_barang"), rs.getString("keterangan"), rs.getInt("jumlah_barang")));
+						barangs.add(new BarangBean(rs.getLong("id"), rs
+								.getLong("id_kategori"), rs
+								.getString("nama_barang"), rs
+								.getString("gambar"),
+								rs.getInt("harga_barang"), rs
+										.getString("keterangan"), rs
+										.getInt("jumlah_barang")));
 					}
 					request.setAttribute("kategoris", kategoris);
 					request.setAttribute("barangs", barangs);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				dispatcher = getServletContext().getRequestDispatcher("/adminedit.jsp");
+				dispatcher = getServletContext().getRequestDispatcher(
+						"/adminedit.jsp");
 			} else if (request.getParameter("action").equals("add")) {
-				dispatcher = getServletContext().getRequestDispatcher("/adminadd.jsp");
+				dispatcher = getServletContext().getRequestDispatcher(
+						"/adminadd.jsp");
 			} else if (request.getParameter("action").equals("main")) {
-				dispatcher = getServletContext().getRequestDispatcher("/adminmain.jsp");
+				dispatcher = getServletContext().getRequestDispatcher(
+						"/adminmain.jsp");
 			} else if (request.getParameter("action").equals("pic")) {
 				request.setAttribute("id", request.getParameter("id"));
-				dispatcher = getServletContext().getRequestDispatcher("/adminpic.jsp");
+				dispatcher = getServletContext().getRequestDispatcher(
+						"/adminpic.jsp");
 			}
 			dispatcher.forward(request, response);
 		} else if (session.getAttribute("role").equals("0")) {
@@ -102,31 +117,50 @@ public class AdminBarang extends HttpServlet {
 	private String getFileName(Part part) {
 		for (String content : part.getHeader("content-disposition").split(";")) {
 			if (content.trim().startsWith("filename")) {
-				return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+				return content.substring(content.indexOf('=') + 1).trim()
+						.replace("\"", "");
 			}
 		}
 		return null;
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@SuppressWarnings("deprecation")
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
 		if (request.getParameter("action").equals("add")) {
-			BarangBean barang = new BarangBean(0, Integer.parseInt(request.getParameter("category")), request.getParameter("name"), null, Integer.parseInt(request.getParameter("price")), request.getParameter("description"), Integer.parseInt(request.getParameter("amount")));
-			String insertQuery = "INSERT INTO barang (id_kategori, nama_barang, gambar, harga_barang, keterangan, jumlah_barang) VALUES ('" + barang.getId_category() + "','" + barang.getName() + "','" + barang.getPicture() + "','" + barang.getPrice() + "','" + barang.getDescription() + "','" + barang.getTotal_item() + "')";
+			BarangBean barang = new BarangBean(0, Integer.parseInt(request
+					.getParameter("category")), request.getParameter("name"),
+					null, Integer.parseInt(request.getParameter("price")),
+					request.getParameter("description"),
+					Integer.parseInt(request.getParameter("amount")));
+			// String insertQuery =
+			// "INSERT INTO barang (id_kategori, nama_barang, gambar, harga_barang, keterangan, jumlah_barang) VALUES ('"
+			// + barang.getId_category() + "','" + barang.getName() + "','" +
+			// barang.getPicture() + "','" + barang.getPrice() + "','" +
+			// barang.getDescription() + "','" + barang.getTotal_item() + "')";
 			int id = 0;
 			URL filename = null;
+			/** SOAP Invocation */
+			BarangSoapProxy _barangSoap = new BarangSoapProxy();
+			_barangSoap.addBarang(barang.getId_category(), barang.getName(),
+					barang.getPicture(), barang.getPrice(),
+					barang.getDescription(), barang.getTotal_item());
+			
 			try {
-				Statement statement = connection.createStatement();
-				statement.executeUpdate(insertQuery);
-				String selectQuery = "SELECT * FROM barang WHERE nama_barang='" + barang.getName() + "'";
+				// Statement statement = connection.createStatement();
+				// statement.executeUpdate(insertQuery);
+				String selectQuery = "SELECT * FROM barang WHERE nama_barang='"
+						+ barang.getName() + "'";
 				Statement stmt2 = connection.createStatement();
 				ResultSet rs = stmt2.executeQuery(selectQuery);
 				if (rs.next()) {
 					id = rs.getInt("id");
-					filename = getServletContext().getResource("/img/barang/1.jpg");
+					filename = getServletContext().getResource(
+							"/img/barang/1.jpg");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -138,7 +172,9 @@ public class AdminBarang extends HttpServlet {
 
 			String[] sp = fileName.toString().split("\\.");
 			sp[1] = sp[1].toLowerCase();
-			OutputStream out = new FileOutputStream(new File(request.getRealPath("") + "\\img\\barang\\" + id + "." + sp[1]));
+			OutputStream out = new FileOutputStream(new File(
+					request.getRealPath("") + "\\img\\barang\\" + id + "."
+							+ sp[1]));
 			InputStream filecontent = filePart.getInputStream();
 
 			int read = 0;
@@ -157,7 +193,8 @@ public class AdminBarang extends HttpServlet {
 			boolean success = true;
 			try {
 				Statement s = connection.createStatement();
-				String updateQuery = "UPDATE barang SET gambar='" + id + "." + sp[1] + "' WHERE id='" + id + "'";
+				String updateQuery = "UPDATE barang SET gambar='" + id + "."
+						+ sp[1] + "' WHERE id='" + id + "'";
 				if (s.executeUpdate(updateQuery) < 1) {
 					success = false;
 				}
@@ -172,8 +209,19 @@ public class AdminBarang extends HttpServlet {
 			}
 		} else if (request.getParameter("action").equals("update")) {
 			System.out.println(request.getParameter("description"));
-			BarangBean barang = new BarangBean(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("category")), request.getParameter("name"), null, Integer.parseInt(request.getParameter("price")), request.getParameter("description"), Integer.parseInt(request.getParameter("amount")));
-			String updateQuery = "UPDATE barang SET id_kategori='" + barang.getId_category() + "', nama_barang='" + barang.getName() + "', harga_barang='" + barang.getPrice() + "', keterangan='" + barang.getDescription() + "', jumlah_barang='" + barang.getTotal_item() + "' WHERE id='" + barang.getId() + "'";
+			BarangBean barang = new BarangBean(Integer.parseInt(request
+					.getParameter("id")), Integer.parseInt(request
+					.getParameter("category")), request.getParameter("name"),
+					null, Integer.parseInt(request.getParameter("price")),
+					request.getParameter("description"),
+					Integer.parseInt(request.getParameter("amount")));
+			String updateQuery = "UPDATE barang SET id_kategori='"
+					+ barang.getId_category() + "', nama_barang='"
+					+ barang.getName() + "', harga_barang='"
+					+ barang.getPrice() + "', keterangan='"
+					+ barang.getDescription() + "', jumlah_barang='"
+					+ barang.getTotal_item() + "' WHERE id='" + barang.getId()
+					+ "'";
 			try {
 				Statement statement = connection.createStatement();
 				PrintWriter out = response.getWriter();
@@ -186,7 +234,8 @@ public class AdminBarang extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (request.getParameter("action").equals("delete")) {
-			String deleteQuery = "DELETE FROM barang WHERE id='" + request.getParameter("id") + "'";
+			String deleteQuery = "DELETE FROM barang WHERE id='"
+					+ request.getParameter("id") + "'";
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(deleteQuery);
@@ -198,7 +247,8 @@ public class AdminBarang extends HttpServlet {
 			String id = request.getParameter("id");
 			String old = null;
 			try {
-				ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM barang WHERE id='" + id + "'");
+				ResultSet rs = connection.createStatement().executeQuery(
+						"SELECT * FROM barang WHERE id='" + id + "'");
 				if (rs.next()) {
 					old = rs.getString("gambar");
 				}
@@ -213,9 +263,11 @@ public class AdminBarang extends HttpServlet {
 			if (old != "null") {
 				old = request.getRealPath("") + "\\img\\barang\\" + old;
 			} else {
-				old = request.getRealPath("") + "\\img\\barang\\" + id + "." + sp[1];
+				old = request.getRealPath("") + "\\img\\barang\\" + id + "."
+						+ sp[1];
 			}
-			//OutputStream out = new FileOutputStream(new File(UPLOAD_DIRECTORY + File.separator + id + "." + sp[1]));
+			// OutputStream out = new FileOutputStream(new File(UPLOAD_DIRECTORY
+			// + File.separator + id + "." + sp[1]));
 			OutputStream out2 = new FileOutputStream(new File(old));
 			InputStream filecontent = filePart.getInputStream();
 
@@ -223,14 +275,12 @@ public class AdminBarang extends HttpServlet {
 			final byte[] bytes = new byte[1024];
 
 			while ((read = filecontent.read(bytes)) != -1) {
-				//out.write(bytes, 0, read);
+				// out.write(bytes, 0, read);
 				out2.write(bytes, 0, read);
 			}
 			/*
-			if (out != null) {
-				out.close();
-			}
-			*/
+			 * if (out != null) { out.close(); }
+			 */
 			if (out2 != null) {
 				out2.close();
 			}
@@ -241,7 +291,8 @@ public class AdminBarang extends HttpServlet {
 			boolean success = true;
 			try {
 				Statement s = connection.createStatement();
-				String updateQuery = "UPDATE barang SET gambar='" + id + "." + sp[1] + "' WHERE id='" + id + "'";
+				String updateQuery = "UPDATE barang SET gambar='" + id + "."
+						+ sp[1] + "' WHERE id='" + id + "'";
 				if (s.executeUpdate(updateQuery) < 1) {
 					success = false;
 				}
