@@ -48,10 +48,34 @@ public class RuserbaServices {
         }
     }
     
+    public static JSONObject GetKategori(int id) {
+        try {
+            return GetResponse(address+"services/kategori.php?id="+id);
+        } catch (ParseException ex) {
+            return null;
+        }
+    }
+    
+    public static JSONObject GetKategori() {
+        try {
+            return GetResponse(address+"services/kategori.php");
+        } catch (ParseException ex) {
+            return null;
+        }
+    }
+    
     public static JSONObject GetBarangByKategori(int id, int limit, int idx, String sortby, int sortType) {
         try {
             return GetResponse(address+"services/barang.php?kategori="+id+"&limit="+limit+"&idx="+idx+"&sortby="
                     +sortby+"&sorttype="+(sortType == 0 ? "asc" : "desc"));
+        } catch (ParseException ex) {
+            return null;
+        }
+    }
+    
+    public static JSONObject GetBarang(int id) {
+        try {
+            return GetResponse(address+"services/barang.php?id_barang="+id);
         } catch (ParseException ex) {
             return null;
         }
