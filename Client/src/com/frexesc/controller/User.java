@@ -156,10 +156,17 @@ public class User extends HttpServlet {
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(insertQuery);
+				
+				//POST
+				//String[] param = {"name","user", "pass","email","phone","add","city","prov","post"};
+				//String[] val= {name, username, password, email, telephone, address, city, province, postal};
+				//ServiceParser.postUrl(ServiceParser.BASE_URL + "UserService/userservice/insertuser",param, val);
+				
+				
 				request.setAttribute("username", username);
 				request.setAttribute("password", password);
 				request.setAttribute("register", "y");
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			getServletContext().getRequestDispatcher("/login").forward(request, response);
