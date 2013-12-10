@@ -46,7 +46,7 @@ import DefaultNamespace.HelloProxy;
 public class InventoriAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String DB_NAME = "toko_imba";
-	static final String helloService = "http://afternoon-river-3681.herokuapp.com/services/Hello";
+	static final String helloService = Database.WebServiceURL + "services/Hello";
        
     /**
      * @see HttpServlet#HttpServlet()

@@ -284,7 +284,7 @@ public class Actions extends HttpServlet {
 		            String query = "SELECT * FROM inventori, kategori WHERE inventori.id_kategori = kategori.id_kategori";
 		        	
 		            if(!query_name.equals("")){
-						query += " AND inventori.nama_inventori LIKE '%" + query_name + "%'";
+						query += " AND LOWER(inventori.nama_inventori) LIKE '%" + query_name.toLowerCase() + "%'";
 					}
 					
 					if(!query_category.equals("")){
