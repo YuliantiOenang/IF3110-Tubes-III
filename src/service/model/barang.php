@@ -215,7 +215,7 @@ function edit_barang($id, $token, $barang, $imgdata){
 			if($imgdata) save_img_barang($id, $imgdata);
 			
 		}else{
-			$response["desc"] = "update gagal";
+			$response["desc"] = "update gagal: ".$db->error;
 		}
 	}
 	
