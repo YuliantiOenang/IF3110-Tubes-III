@@ -4,6 +4,8 @@
     Author     : ize
 --%>
 
+<%@page import="org.json.JSONObject"%>
+<%@page import="ruserba.services.RuserbaServices"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="ruserba.database.DatabaseHelper"%>
@@ -21,33 +23,32 @@
     </span><br/><br/>
     <div class='barang_container'>
         <%
-            query = "select * from barang where barang.id_kategori=" + result.getInt("id_kategori") + " order by dibeli desc limit 0, 3";
-            ResultSet resultKategori = DatabaseHelper.executeQuery(query);
-            while (resultKategori.next()) {
+            JSONObject json = RuserbaServices.GetBarangByKategori(result.getInt("id_kategori"),3,0,"dibeli",1);
+            for(int i=0; i < json.getInt("length"); i++) {
+                JSONObject barang = json.getJSONObject("" + i);
         %>
         <div class='barang'>
-            <a href='/ruserba/barang/<%= resultKategori.getInt("id_barang") %>'>
-                <img src='/ruserba/assets/barang/<%= resultKategori.getString("gambar") %>' height='100%'/>
+            <a href='/ruserba/barang/<%= barang.getInt("id_barang") %>'>
+                <img src='/ruserba/assets/barang/<%= barang.getString("gambar") %>' height='100%'/>
             </a><br/>
             <span class='barang_nama'>
-                <a href='/ruserba/barang/<%= resultKategori.getInt("id_barang") %>'><%= resultKategori.getString("nama_barang") %></a>
+                <a href='/ruserba/barang/<%= barang.getInt("id_barang") %>'><%= barang.getString("nama_barang") %></a>
             </span><br/>
             <span class='barang_tersedia'>
                 <%
-                    int tersedia = resultKategori.getInt("tersedia");
+                    int tersedia = barang.getInt("tersedia");
                     if (tersedia == 0) {
                         out.println("Barang tidak tersedia");
                     }
                     else {
-                        out.println("Barang tersedia (" + resultKategori.getInt("tersedia") + " unit)");
+                        out.println("Barang tersedia (" + barang.getInt("tersedia") + " unit)");
                     }
                 %>
             </span><br/>
-            <span class='barang_harga'>Rp <%= resultKategori.getInt("harga_barang") %>,00</span><br/>
+            <span class='barang_harga'>Rp <%= barang.getInt("harga_barang") %>,00</span><br/>
         </div>
         <%
             }
-            resultKategori.close();
         %>
         <br/><br/>
     </div>

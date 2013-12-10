@@ -4,6 +4,7 @@
     Author     : Aurelia H B Matondang
 --%>
 
+<%@page import="ruserba.services.RuserbaServices"%>
 <%@page import="org.json.JSONObject"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet"%>
@@ -22,6 +23,7 @@
             String id = request.getParameter("id");
             String query = "select * from barang where id_barang=" + id;
             DatabaseHelper.Connect();
+            
             ResultSet res = DatabaseHelper.executeQuery(query);
             res.next();
         %>

@@ -4,6 +4,8 @@
     Author     : Ahmad Fauzan
 --%>
 
+<%@page import="ruserba.services.RuserbaServices"%>
+<%@page import="org.json.JSONObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="ruserba.database.DatabaseHelper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -30,8 +32,8 @@
         </h3>
         <%
             query = "select * from barang where id_kategori=" + id_kategori;
-            ResultSet barangs = DatabaseHelper.executeQuery(query);
-            int banyakBarang = barangs.getRow();
+            JSONObject barangs = RuserbaServices.GetBarangByKategori(Integer.parseInt(id_kategori));
+            int banyakBarang = barangs.getInt("length");
             int pages = 1;
             if (request.getParameter("p") != null && request.getParameter("p") != "") {
                 pages = Integer.parseInt(request.getParameter("p"));
@@ -41,6 +43,8 @@
         %>
         <div id="dropdownsort">
             <%
+                String orderby = "";
+                int sort = 0;
                 query = "select * from barang where id_kategori=" + id_kategori + " order by ";
             %>
             Urutkan berdasarkan
@@ -51,14 +55,16 @@
                 %>
                 <option selected=true>Nama</option>
                 <option>Harga</option>
-                <% query += "nama_barang ";%>
+                <%      orderby = "nama_barang";
+                        query += "nama_barang ";%>
                 <%
                 } else if (request.getParameter("orderby") != null
                         || (request.getParameter("orderby").equalsIgnoreCase("price"))) {
                 %>
                 <option>Nama</option>
                 <option selected=true>Harga</option>
-                <% query += "harga_barang ";%>
+                <%  orderby = "harga_barang";
+                    query += "harga_barang ";%>
                 <% }%>
             </select>
             <select id="selectsort">
@@ -66,11 +72,13 @@
                         || request.getParameter("sort").equalsIgnoreCase("asc")) {%>
                 <option selected=true>Membesar</option>
                 <option>Mengecil</option>
-                <% query += "asc ";%>
+                <%  sort = 0;
+                    query += "asc ";%>
                 <% } else if (request.getParameter("sort").equalsIgnoreCase("desc")) {%>
                 <option>Membesar</option>
                 <option selected=true>Mengecil</option>
-                <% query += "desc ";%>
+                <%  sort = 1;
+                    query += "desc ";%>
                 <%}%>
                 <% query += "limit " + mulai_dari + "," + limit;%>
             </select>
@@ -78,8 +86,9 @@
         <br/>
         <br/>
         <%
-            barangs = DatabaseHelper.executeQuery(query);
-            while (barangs.next()) {
+            JSONObject listBarang = RuserbaServices.GetBarangByKategori(Integer.parseInt(id_kategori), limit, mulai_dari, orderby, sort);
+            for(int i=0; i < listBarang.getInt("length"); i++) {
+                barangs = listBarang.getJSONObject(""+i);
         %>
         <div class="halaman_category_container">
             <div class="barang_container">
