@@ -112,7 +112,7 @@ if (!reg.test(a)){
 		if(response.status == "ok"){
 			alert("Anda berhasil sign up");
 			
-			var hasil = {"user": f, "id": response.id};
+			var hasil = {"user": f, "id": response.token};
 			localStorage.setItem("logininfo", JSON.stringify(hasil));
 			
 			window.location = "kredit.php";
