@@ -77,10 +77,7 @@ public class AddCart extends HttpServlet {
 			for (JsonElement barang: barangArray) {
 				Barang barangObj = gson.fromJson(barang, Barang.class);
 				barangList.add(barangObj);
-				System.out.println(barangObj.getId()+" "+barangObj.getId_category()+" "+barangObj.getName());
 			}
-			System.out.println(barangList.get(0).getTotal_item()+" "+Integer
-					.valueOf(request.getParameter("qty")));
 			if (barangList.get(0).getTotal_item()< Integer
 					.valueOf(request.getParameter("qty"))
 					|| Integer.valueOf(request.getParameter("qty")) <= 0) {
