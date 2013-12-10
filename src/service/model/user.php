@@ -144,12 +144,16 @@ function edit_card($username, $card, $token){
 	
 		$card_name = @$card["card_name"]; $card_number = @$card["card_number"]; $card_date = @$card["card_date"];
 		
-		$query = "UPDATE user SET card_name='$card_name', card_number='$card_number', card_date='$card_date' WHERE username='$username'";
-		
-		$db->query($query);
-		
-		$response["status"] = "ok";	
-		unset($response["desc"]);
+		if (($card_name != "") && ($card_number != "") && ($card_date != "")){		
+			$query = "UPDATE user SET card_name='$card_name', card_number='$card_number', card_date='$card_date' WHERE username='$username'";
+			
+			$db->query($query);
+			
+			$response["status"] = "ok";	
+			unset($response["desc"]);
+		}else{
+			$response["desc"] = "data kartu tidak boleh kosong";
+		}
 	}
 	
 	$db->close();

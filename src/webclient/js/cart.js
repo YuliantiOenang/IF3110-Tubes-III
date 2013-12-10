@@ -107,32 +107,30 @@ function check_credit(cb){
 	data = {"token" : info.id};
 	
 	callback = function(response){
-		buy(response, cb);
+		if ((response.status != "ok") || (!response.has_card)){
+			window.location = "kredit.php?buy=1";
+		}else{
+			buy(cb);
+		}
 	}
 	
 	sendRestAjax("GET", "user/"+info.user+"/card", data, callback);
 }
 
-function buy(response, cb){
-	
-	if ((response.status != "ok") || (!response.has_card)){
-		window.location = "kredit.php?buy=1";
-		return;
-	}
-
+function buy(callback){
 	var list = JSON.parse(localStorage.shoppingbag);	
 	
-	var callback = function(response){
-		if(response.status == "ok"){
-			alert("Barang sudah terbeli");
-			localStorage.removeItem("shoppingbag");
-			refreshCart();
-		}else{
-			alert(JSON.stringify(response));
-		}
+	if (callback == null){
+		callback = function(response){
+			if(response.status == "ok"){
+				alert("Barang sudah terbeli");
+				localStorage.removeItem("shoppingbag");
+				refreshCart();
+			}else{
+				alert(JSON.stringify(response));
+			}
+		};
 	}
-	
-	if (cb!=null) callback = cb;
 	
 	var loginfo = getLoginInfo();
 	

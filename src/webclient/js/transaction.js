@@ -66,7 +66,11 @@ function addCart(id_barang){
 		return;
 	}
 	
-	var data = {"action" : "add", "id_barang" : id_barang, "jumlah" : jumlah};
+	/*if (localStorage.getItem("shoppingbag") !== null){
+	
+	}*/
+	
+	var data = {"action" : "add", "id_barang" : id_barang, "jumlah" : jumlah, "token": getLoginInfo().id};
 	
 	var callback = function(response){	
 		if(response.status == "ok"){
