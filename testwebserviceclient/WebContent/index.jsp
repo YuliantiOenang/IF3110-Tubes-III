@@ -17,238 +17,60 @@
 		---------------------------------------------------------------------<br>
 	</p>
 <h1>Top Pangan</h1>
-<%
-try {
-	  //Load the JDBC driver
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
-			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-	        Connection con = DriverManager.getConnection (url, uname, pass);
-		
-		  
-	  //Create a Statement object and call its executeUpdate 
-	  //method to insert a record
-	  Statement s = con.createStatement();
-	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 1 ORDER BY n_beli DESC LIMIT 0,3";
-	  ResultSet rs = s.executeQuery(sql);
-	  while (rs.next()) {
-	    out.println("<div class='product_box'>");
-		out.println("<h3> "+rs.getString(2)+"</h3><br>");
-	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
-		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addCart' method='post'>");
-		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
-		out.println("<input type='hidden' name='request_tambahan' value='-'>");
-		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
-		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p></div>");
-	  }
-	  rs.close();
-	  s.close();
-	  con.close();
-	}
-	catch (ClassNotFoundException e1) {
-	  // JDBC driver class not found, print error message to the console
-	  System.out.println(e1.toString());
-	}
-	catch (SQLException e2) {
-	  // Exception when executing java.sql related commands, print error message to the console
-	  System.out.println(e2.toString());
-	}
-	catch (Exception e3) {
-	  // other unexpected exception, print error message to the console
-	  System.out.println(e3.toString());
-	}
-%>
-
-
+<div id = kat1>
+<script>
+	getTopItem(1);
+</script>
+</div>
 
 <h1>Top Pakaian</h1>
-<%
-try {
-	  //Load the JDBC driver
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
-			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-	        Connection con = DriverManager.getConnection (url, uname, pass);
-		
-		  
-	  //Create a Statement object and call its executeUpdate 
-	  //method to insert a record
-	  Statement s = con.createStatement();
-	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 2 ORDER BY n_beli DESC LIMIT 0,3";
-	  ResultSet rs = s.executeQuery(sql);
-	  while (rs.next()) {
-		out.println("<div class='product_box'>");
-		out.println("<h3> "+rs.getString(2)+"</h3><br>");
-	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
-		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addCart' method='post'>");
-		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
-		out.println("<input type='hidden' name='request_tambahan' value='-'>");
-		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
-		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p></div>");
-	  }
-	  rs.close();
-	  s.close();
-	  con.close();
-	}
-	catch (ClassNotFoundException e1) {
-	  // JDBC driver class not found, print error message to the console
-	  System.out.println(e1.toString());
-	}
-	catch (SQLException e2) {
-	  // Exception when executing java.sql related commands, print error message to the console
-	  System.out.println(e2.toString());
-	}
-	catch (Exception e3) {
-	  // other unexpected exception, print error message to the console
-	  System.out.println(e3.toString());
-	}
-%>
-
+<div id = kat2>
+<script>
+	getTopItem(2);
+</script>
+</div>
 <h1>Top Elektronik</h1>
-<%
-try {
-	  //Load the JDBC driver
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
-			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-	        Connection con = DriverManager.getConnection (url, uname, pass);
-		
-		  
-	  //Create a Statement object and call its executeUpdate 
-	  //method to insert a record
-	  Statement s = con.createStatement();
-	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 3 ORDER BY n_beli DESC LIMIT 0,3";
-	  ResultSet rs = s.executeQuery(sql);
-	  while (rs.next()) {
-		out.println("<div class='product_box'>");
-		out.println("<h3> "+rs.getString(2)+"</h3><br>");
-	    out.println("<a href='detail.jsp?id="+rs.getString(1)+"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
-		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addCart' method='post'>");
-		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
-		out.println("<input type='hidden' name='request_tambahan' value='-'>");
-		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
-		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p></div>");
-	  }
-	  rs.close();
-	  s.close();
-	  con.close();
-	}
-	catch (ClassNotFoundException e1) {
-	  // JDBC driver class not found, print error message to the console
-	  System.out.println(e1.toString());
-	}
-	catch (SQLException e2) {
-	  // Exception when executing java.sql related commands, print error message to the console
-	  System.out.println(e2.toString());
-	}
-	catch (Exception e3) {
-	  // other unexpected exception, print error message to the console
-	  System.out.println(e3.toString());
-	}
-%>
+<div id = kat3>
+<script>
+	getTopItem(3);
+</script>
+</div>
 <h1>Top Rumah Tangga</h1>
-<%
-try {
-	  //Load the JDBC driver
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
-			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-	        Connection con = DriverManager.getConnection (url, uname, pass);
-		
-		  
-	  //Create a Statement object and call its executeUpdate 
-	  //method to insert a record
-	  Statement s = con.createStatement();
-	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 4 ORDER BY n_beli DESC LIMIT 0,3";
-	  ResultSet rs = s.executeQuery(sql);
-	  while (rs.next()) {
-		out.println("<div class='product_box'>");
-		out.println("<h3> "+rs.getString(2)+"</h3><br>");
-	    out.println("<a href='detail.jsp?id="+rs.getString(1) +"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
-		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addCart' method='post'>");
-		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
-		out.println("<input type='hidden' name='request_tambahan' value='-'>");
-		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
-		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p></div>");
-	  }
-	  rs.close();
-	  s.close();
-	  con.close();
-	}
-	catch (ClassNotFoundException e1) {
-	  // JDBC driver class not found, print error message to the console
-	  System.out.println(e1.toString());
-	}
-	catch (SQLException e2) {
-	  // Exception when executing java.sql related commands, print error message to the console
-	  System.out.println(e2.toString());
-	}
-	catch (Exception e3) {
-	  // other unexpected exception, print error message to the console
-	  System.out.println(e3.toString());
-	}
-%>
+<div id = kat4>
+<script>
+	getTopItem(4);
+</script>
+</div>
 <h1>Top Olah Raga</h1>
-<%
-try {
-	  //Load the JDBC driver
-			String uname = "root";
-			String pass = "";
-			String url = "jdbc:mysql://localhost/progin_13511059";
-			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-	        Connection con = DriverManager.getConnection (url, uname, pass);
-		
-		  
-	  //Create a Statement object and call its executeUpdate 
-	  //method to insert a record
-	  Statement s = con.createStatement();
-	  String sql = "SELECT * FROM `progin_13511059`.barang WHERE kategori_barang = 5 ORDER BY n_beli DESC LIMIT 0,3";
-	  ResultSet rs = s.executeQuery(sql);
-	  while (rs.next()) {
-		out.println("<div class='product_box'>");
-		out.println("<h3> "+rs.getString(2)+"</h3><br>");
-	    out.println("<a href='detail.jsp?id="+rs.getString(1) +"'><img src='"+ rs.getString(3)+"'/></a>");
-		out.println("<p class='product_price'>Harga : Rp "+rs.getString(4) +",-<br>");
-		out.println("Stok : "+rs.getString(8) +"<br>");
-		out.println("<form name='beli' action='addChart' method='post'>");
-		out.println("<input type='hidden' name='id_barang' value='"+rs.getString(1)+"'>");
-		out.println("<input type='hidden' name='request_tambahan' value='-'>");
-		out.println("Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />");
-		out.println("<input type='submit' value='Add to cart'>");
-		out.println("</form></p></div>");
-	  }
-	  rs.close();
-	  s.close();
-	  con.close();
+<div id = kat5>
+<script>
+	getTopItem(5);
+</script>
+</div>
+<script>
+function getTopItem(idkat){
+	var divname = document.getElementById("kat"+idkat);
+	divname.innerHTML = "Masuk semua anjing";
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
 	}
-	catch (ClassNotFoundException e1) {
-	  // JDBC driver class not found, print error message to the console
-	  System.out.println(e1.toString());
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	catch (SQLException e2) {
-	  // Exception when executing java.sql related commands, print error message to the console
-	  System.out.println(e2.toString());
-	}
-	catch (Exception e3) {
-	  // other unexpected exception, print error message to the console
-	  System.out.println(e3.toString());
-	}
-%>
+	xmlhttp.onreadystatechange=function(){
+		if(xmlhttp.readyState==4&&xmlhttp.status==200){
+			divname.innerHTML = xmlhttp.responseText;
+
+			if(err_login.innerHTML==""){
+				//Handle SESSION & LOCAL STORAGE
+				window.location="index.jsp";
+			}
+		}
+	};
+	xmlhttp.open("GET","getTopIem?idkat="+idkat,true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send();
+}
+</script>
 </div>
 <%@ include file= "./footer.jsp" %>

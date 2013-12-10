@@ -12,48 +12,90 @@
 <link href="css/modal.css" rel="stylesheet" type="text/css" />
 <script src="${pageContext.request.contextPath}/verify.js"></script>
 <script type="text/javascript" src="login.js"></script>
+<script type="text/javascript">
+function getKategori(){
+	var kategorilist = document.getElementById("kategorilist");
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if(xmlhttp.readyState==4&&xmlhttp.status==200){
+			kategorilist.innerHTML = xmlhttp.responseText;
+
+			if(err_login.innerHTML==""){
+				//Handle SESSION & LOCAL STORAGE
+				window.location="index.jsp";
+			}
+		}
+	};
+	xmlhttp.open("GET","kategoriOption",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send();
+}
+function getWelcome(){
+	var AJS_header = document.getElementById("AJS_header");
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if(xmlhttp.readyState==4&&xmlhttp.status==200){
+			AJS_header.innerHTML = xmlhttp.responseText;
+
+			if(err_login.innerHTML==""){
+				//Handle SESSION & LOCAL STORAGE
+				window.location="index.jsp";
+			}
+		}
+	};
+	xmlhttp.open("GET","welcomeHeader",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send();
+}
+function getNavbar(){
+	var customnavbar = document.getElementById("customnavbar");
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}
+	else{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if(xmlhttp.readyState==4&&xmlhttp.status==200){
+			customnavbar.innerHTML = xmlhttp.responseText;
+
+			if(err_login.innerHTML==""){
+				//Handle SESSION & LOCAL STORAGE
+				window.location="index.jsp";
+			}
+		}
+	};
+	xmlhttp.open("GET","getNavbar",true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlhttp.send();
+}
+</script>
 <title>RuserBa</title>
 </head>
 <body>
 <div id="AJS_body_wrapper">
 	<div id="AJS_wrapper">
 		<div id="AJS_header">
-			<% 
-			HttpSession sesi = request.getSession(true);
-			if((sesi== null)|| (sesi.getAttribute("username")==null)) {
-			%>
-				<div id='site_title'><h1><a href='index.jsp'>Ruko Serba Ada</a></h1></div>
-			<%
-			}
-			else{
-			out.print("<div id='site_title'><h1><a href='index.jsp'>Welcome</a>, <a href='profile.jsp'>"+ sesi.getAttribute("username")+"</a></h1></div>");
-			}
-			%>
+			<script>
+				getWelcome();
+			</script>
 		</div>
 		<div id="AJS_menubar">
 			<div id="top_nav" class="ddsmoothmenu">
-				<ul>
-				<% 
-				if((sesi== null)|| (sesi.getAttribute("username")==null)) {
-				%>
-					<li><a href="register.jsp">Sign Up</a></li>
-					<li><a href="#login_form">Log in </a></li>
-				<%
-				}
-				else{
-				%>
-					<li><a href="registercreditcard.jsp"> Register Credit Card </a></li>
-					<li><a href="shoppingbag.jsp"> Shopping Bag </a></li>
-					<li><a href="profile.jsp">Profile</a></li>
-					<%
-						if(sesi.getAttribute("username").equals("admin")){
-							out.print("<li><a href='kategori.jsp?laman=1&id=1'>Admin Barang</a></li>");
-						}
-					%>
-					<li><a href="logout.jsp">Log out</a></li>
-				<%
-				}
-				%>
+				<ul id="customnavbar">
+					<script>
+						getNavbar();
+					</script>
 				</ul>
 				<br style="clear: left" />
 			</div> <!-- end of ddsmoothmenu -->	
@@ -62,7 +104,7 @@
         <div class="popup">
             <h2>Welcome Guest!</h2>
             <p>Please enter your login and password here</p>
-            <form name="login" action="javascript:verLogin();" method="post">
+            <form name="login" action="javascript:verLogin();" method="GET">
 	            
 	                Username : <input type="text" name="username"><br>
 	                Password : <input type="password" name="password"><br>
@@ -94,60 +136,10 @@
 
 	            	<h3>Kategori</h3>   
 	                	<div class="content"> 
-	                	<ul class="sidebar_list">
-	                        <%
-							try {
-								  //Load the JDBC driver
-										String uname = "root";
-										String pass = "";
-										String url = "jdbc:mysql://localhost/progin_13511059";
-										Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-								        Connection con = DriverManager.getConnection (url, uname, pass);
-									
-									  
-								  //Create a Statement object and call its executeUpdate 
-								  //method to insert a record
-								  Statement s = con.createStatement();
-								  String sql = "SELECT DISTINCT kategori_barang FROM `progin_13511059`.barang";
-								  ResultSet rs = s.executeQuery(sql);
-								  while (rs.next()) {
-								    int idkat = Integer.parseInt(rs.getString(1));
-								    String nama="";
-								    int laman =1;
-								    if(idkat==1){
-										nama = "Pangan";
-									}
-									else if(idkat==3){
-										nama = "Elektronik";
-									}
-									else if(idkat==2){
-										nama = "Pakaian";
-									}
-									else if(idkat==4){
-										nama = "Rumah Tangga";
-									}
-									else if(idkat==5){
-										nama = "Olah Raga";
-									}
-									out.println("<li> <a href='kategori.jsp?id="+rs.getString(1)+"&laman=1'>"+nama+"</a></li>");
-								  }
-								  rs.close();
-								  s.close();
-								  con.close();
-								}
-								catch (ClassNotFoundException e1) {
-								  // JDBC driver class not found, print error message to the console
-								  System.out.println(e1.toString());
-								}
-								catch (SQLException e2) {
-								  // Exception when executing java.sql related commands, print error message to the console
-								  System.out.println(e2.toString());
-								}
-								catch (Exception e3) {
-								  // other unexpected exception, print error message to the console
-								  System.out.println(e3.toString());
-								}
-							%>
+	                	<ul id="kategorilist" class="sidebar_list">
+	                	<script>
+	                		getKategori();
+	                	</script>
 							</ul>
 						</div>
 		</div>
