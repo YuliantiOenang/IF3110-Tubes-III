@@ -28,6 +28,7 @@
 	<?php
 		echo "var entry = '".$entry."'; ";
 		echo "var loadable = ".($success ? "true" : "false").";\n";
+		echo "var IMGURL = '$IMAGE_BASE_URL';\n";
 	?>
 	var loading = false;
 	var page = 0;
