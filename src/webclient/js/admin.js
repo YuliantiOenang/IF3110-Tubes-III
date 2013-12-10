@@ -73,13 +73,13 @@ function nextPage(){
 
 function createRow(id, nama, harga, deskripsi){
 	var s = '<div class="row rowbarang">';
-	s+='<div class="cell33 imgcell" ><img class="imgbarang" src="image/' + id + '.jpg" /></div>';
+	s+='<div class="cell33 imgcell" ><img class="imgbarang" src="' + IMGURL + id + '.jpg" /></div>';
 	s+='<div class="cell66"><div class="table">';
 	s+='<div class="row title"><a href="barang.php?id=' + id + '" />' + nama + '</a></div>';
 	s+='<div class="row">Rp. ' + formatCurrency(harga) + '</div>';
 	s+='<div class="row">' + deskripsi + '</div>';
 	s+='<div class="rowtools"><input type="checkbox" name="'+ id +'" id="'+ id +'">'; 
-	s+='<a href="edit_barang.php?id="'+ id +'"><img src=image/Edit.jpg id="edit"></a>';
+	s+='<a href="edit_barang.php?id='+ id +'"><img src=image/Edit.jpg id="edit"></a>';
 	s+='<input type="image" src=image/Delete.png id="delete" onclick="">';
 	s+='</div></div></div>';
 	s+='</div>';

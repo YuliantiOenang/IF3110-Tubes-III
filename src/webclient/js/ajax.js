@@ -70,11 +70,15 @@ function sendAjax(data, target, callback){
 	request.open("POST", target, true);
 	request.onload = function(){
 		if (callback!=null){
+			
+			var response;
 			try{
-				callback(JSON.parse(this.responseText));
+				response = JSON.parse(this.responseText);
 			}catch(err){
-				callback({"status":"error", "details": err, "raw": this.responseText});
+				response = {"status" : "error", "desc" : "Parse Error", "raw" : this.responseText};
 			}
+			
+			callback(response);
 			
 		}
 	}

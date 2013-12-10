@@ -11,20 +11,24 @@
 	
 }
 
+.floater{
+	float:right;
+}
+
 .content #add{
 	width: 15px;
 	height: 15px;
-	position: absolute;
+	/*position: absolute;
 	left: 1150px;
-	bottom: 310px;
+	bottom: 310px;*/
 }
 
 .content #bulkdelete{
 	width: 15px;
 	height: 15px;
-	position: absolute;
+	/*position: absolute;
 	left: 1175px;
-	bottom: 310px;
+	bottom: 310px;*/
 }
 
 .backgrey{
@@ -38,7 +42,7 @@
 }
 
 #cattable .rowbarang{
-	width: 335px;
+	width: 300px;
 	display: inline-block;
 	margin-right: 10px;
 }
