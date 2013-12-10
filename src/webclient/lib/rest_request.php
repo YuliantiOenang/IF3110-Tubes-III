@@ -3,11 +3,18 @@
 require_once dirname(__FILE__)."/../config.php";
 
 function sendRestRequest($method, $resource, $data){
-	global $REST_URL;
+	global $REST_URL, $CURL_USE_PROXY;
 
 	$url = $REST_URL.$resource;
 	
 	$ch = curl_init();
+	
+	if ($CURL_USE_PROXY){
+		curl_setopt($ch, CURLOPT_PROXYPORT, '8080');
+		curl_setopt($ch, CURLOPT_PROXYTYPE, 'HTTP');
+		curl_setopt($ch, CURLOPT_PROXY, "cache.itb.ac.id");
+		curl_setopt($ch, CURLOPT_PROXYUSERPWD, "faizilham:baccano");
+	}
 	
 	$data = ($method == "GET") ? arrayToUriEncoded($data) : json_encode($data);
 	

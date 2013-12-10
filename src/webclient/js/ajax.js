@@ -1,4 +1,5 @@
-var REST_URL = "http://localhost/IF3110-Tubes-III/src/service/rest/";
+//var REST_URL = "http://localhost/IF3110-Tubes-III/src/service/rest/";
+var REST_URL = "http://loghorizon.ap01.aws.af.cm/rest/";
 
 function loadBase64Image(formid, callback){
 	var files = document.getElementById(formid).files;
