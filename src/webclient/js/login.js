@@ -37,7 +37,7 @@ function redirect_login(){
 
 function is_admin(){
 	info = getLoginInfo();
-	if(info && (info.a != 1)){
+	if(!info || (info.a != 1)){
 		return false
 	}
 	
@@ -46,7 +46,7 @@ function is_admin(){
 
 function redirect_admin(){
 	info = getLoginInfo();
-	if(info && (info.a != 1)){
+	if(!info || (info.a != 1)){
 		window.location = "index.php";
 		return true;
 	}
