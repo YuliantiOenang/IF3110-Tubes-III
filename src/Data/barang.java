@@ -42,8 +42,9 @@ public class barang extends HttpServlet{
 			response.setHeader("Access-Control-Allow-Origin","*");
 			response.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,DELETE,OPTIONS");
 			response.setHeader("Access-Control-Allow-Headers","X-Requested-With, Content-Type, Content-Length");
-			out.print("action :" + action + parameters);
+			
 			if(action.equals("cari")){
+				
 				// TODO customize for funtion 
 				// FORMAT INPUT : action = register & parameters = username , nama_lengkap , password, email ,handphone , address , province , state , postcode , n_pembelian
 				// FORMAT OUTPUT : {Status_operasi: Success/Failed}
@@ -51,67 +52,78 @@ public class barang extends HttpServlet{
 				
 				Statement statement = con.createStatement();
 				
+				
+				
 				String name = parameter[0];
 				String harga = parameter[1];
 				String kategori = parameter[2];
 				Integer laman=Integer.parseInt(parameter[3]);
 				Integer i=(laman-1)*10;
 				String order=parameter[4];
-				out.print("action :" + name+harga+kategori+laman+i+order);
+				out.print("test aja : "+name+" "+harga+" "+kategori+" "+laman+" "+i+" "+order);
+				
 				String n_item_query=new String();
 				String search_query=new String();
+				
 				
 				if (!name.equals("")) {
 					if(!harga.equals("")){ //ada harga
 						if(!kategori.equals("")){
-							n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = "+kategori;
-							search_query = "SELECT * FROM barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = "+kategori+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
+							n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+Integer.parseInt(harga)+" AND kategori_barang = \'"+kategori+"\'";
+							search_query = "SELECT * FROM barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+Integer.parseInt(harga)+" AND kategori_barang = \'"+kategori+"\' ORDER BY \'"+order+"\' ASC LIMIT "+i+", 10";
 						}else { //kategori kosong
-							n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+harga;
-							search_query = "SELECT * FROM barang WHERE nama_barang like '%"+name+"%' AND harga_barang BETWEEN 0 AND "+harga+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
+							n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE nama_barang like \'%"+name+"%\' AND harga_barang BETWEEN 0 AND "+Integer.parseInt(harga);
+							search_query = "SELECT * FROM barang WHERE nama_barang like \'%"+name+"%\' AND harga_barang BETWEEN 0 AND "+Integer.parseInt(harga)+" ORDER BY \'"+order+"\' ASC LIMIT "+i+", 10";
 						}
 					}else{ //harga kosong
 						if(!kategori.equals("")) {
-							 n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE nama_barang like '%"+name+"%' AND kategori_barang = "+kategori;
-							 search_query = "SELECT * FROM barang WHERE nama_barang like '%"+name+"%' AND kategori_barang = "+kategori+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
+							 n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE nama_barang like \'%"+name+"%\' AND kategori_barang = \'"+kategori+"\'";
+							 search_query = "SELECT * FROM barang WHERE nama_barang like \'%"+name+"%\' AND kategori_barang = \'"+kategori+"\' ORDER BY \'"+order+"\' ASC LIMIT "+i+", 10";
 						} else {
-							 n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE nama_barang like '%"+name+"%'";
-							 search_query = "SELECT * FROM barang WHERE nama_barang like '%"+name+"%' ORDER BY "+order+" ASC LIMIT "+i+", 10";
+							 n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE nama_barang like \'%"+name+"%\'";
+							 search_query = "SELECT * FROM barang WHERE nama_barang like \'%"+name+"%\' ORDER BY \'"+order+"\' ASC LIMIT "+i+", 10";
 						}
 						
 					}
 				}else{// nama kosong
 					if(!harga.equals("")){ //ada harga
 						if(!kategori.equals("")){ //ada kategori
-							n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = "+kategori;
-							search_query = "SELECT * FROM barang WHERE harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = "+kategori+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
+							n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = \'"+kategori+"\'";
+							search_query = "SELECT * FROM barang WHERE harga_barang BETWEEN 0 AND "+harga+" AND kategori_barang = \'"+kategori+"\' ORDER BY "+order+" ASC LIMIT "+i+", 10";
 						}else { //kategori kosong
 							n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE harga_barang BETWEEN 0 AND "+harga;
-							search_query = "SELECT * FROM barang WHERE harga_barang BETWEEN 0 AND "+harga+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
+							search_query = "SELECT * FROM barang WHERE harga_barang BETWEEN 0 AND "+harga+" ORDER BY \'"+order+"\' ASC LIMIT "+i+", 10";
 						}
 					} else { //gak ada harga
 						if(!kategori.equals("")) {
-							n_item_query = "SELECT COUNT(nama_barang) AS n_item FROM barang WHERE kategori_barang = "+kategori;
-							search_query = "SELECT * FROM barang WHERE kategori_barang = "+kategori+" ORDER BY "+order+" ASC LIMIT "+i+", 10";
+							n_item_query = "SELECT COUNT(nama_barang) AS \'n_item\' FROM barang WHERE kategori_barang = \'"+kategori+"\'";
+							search_query = "SELECT * FROM barang WHERE kategori_barang = \'"+kategori+"\' ORDER BY \'"+order+"\' ASC LIMIT "+i+", 10";
+						}else{
+							n_item_query = "SELECT COUNT(nama_barang) AS \'n_item\' FROM barang WHERE kategori_barang = \'\'";
+							search_query = "SELECT * FROM barang WHERE kategori_barang = \'\' ORDER BY \'"+order+"\' ASC LIMIT "+i+", 10";
 						}
 					}
 				}
-				
+				out.print("query:"+n_item_query);
+				out.print("search:"+search_query);
 
-				
+				out.print("TEST");
 				Statement s1 = con.createStatement();
 				Statement s2 = con.createStatement();
 				ResultSet rs1 = s1.executeQuery(n_item_query);
 				ResultSet rs2 = s2.executeQuery(search_query);
 				
-				Integer n_item=0;
+				Integer n_item=new Integer(0);
+				
 				ArrayList<barang_data> Hasil_search=new ArrayList<>();
 				while(rs1.next()){
-					n_item = Integer.parseInt(rs1.getString(1));  
+					n_item = Integer.parseInt(rs1.getString(1));
+					out.print("ada n _item:"+rs1.getString(1));
 				}
-
+				
+				
 				if(n_item.equals(0)){
-					out.print("{\"status\":\"success\",\"hasil\":\"[]\"}");
+					out.print("{\"status\":\"empty\",\"hasil\":\"[]\"}");
 				}else{
 					while (rs2.next()) {
 					  	barang_data b=new barang_data();
@@ -135,17 +147,7 @@ public class barang extends HttpServlet{
 			  Gson gson = new Gson();
 			  String output_search=gson.toJson(Hasil_search);
 			  out.print("{\"status\":\"success\",\"link\":{\"name\":\""+name+"\",\"harga\":\""+harga+"\",\"next_laman\":\""+nextLaman+"\",\"prev_laman\":\""+prevLaman+"\",\"kategori\":\""+kategori+"\",\"n_item\":\""+n_item+"\"},\"output_search\":\""+output_search+"\"}");
-			  /*if (n_item > 10) {
-					if (laman == 1) {
-						out.print("{\"status\":\"success\",\"link\":{\"name\":\""+name+"\",\"harga\":\""+harga+"\",\"next_laman\":\""+nextLaman+"\",\"prev_laman\":\""+prevLaman+"\",\"kategori\":\""+kategori+"\",\"n_item\":\""+n_item+"\"},\"output_search\":\""+output_search+"\"}");
-					}
-					else if (laman >= n_item/10) {
-						out.print("{\"status\":\"success\",\"link\":{\"name\":\""+name+"\",\"harga\":\""+harga+"\",\"next_laman\":\""+nextLaman+"\",\"prev_laman\":\""+prevLaman+"\",\"kategori\":\""+kategori+"\",\"n_item\":\""+n_item+"\"},\"output_search\":\""+output_search+"\"}");
-					} else {
-						
-					}
-					
-				}*/
+			  
 				
 				
 				
@@ -174,17 +176,14 @@ public class barang extends HttpServlet{
 					out.print("{ \"Status_operasi\" : \"gagal\" }");
 				}
 				
-			}else if(action.equals("login")){
+			}else if(action.equals("cari_by_id")){
 			
 				Statement statement = con.createStatement();
 				
-				String username = parameter[0];
-				String password = parameter[1];
+				String id = parameter[0];
 				boolean status = false;
 				
-				ResultSet rs = null;
-				
-				rs = statement.executeQuery("SELECT * FROM user where username ='"+username+"' AND password = '"+password+"'");
+				ResultSet rs = statement.executeQuery("SELECT * FROM barang where id_barang=\'"+id+"\'");
 				status = rs.next();
 				
 				if (status)
