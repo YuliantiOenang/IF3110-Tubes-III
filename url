@@ -4,3 +4,9 @@ http://localhost:8080/Ruserba/barang?action=insert&parameters=tahu_zimbabwe,./im
 
 http://localhost:8080/Ruserba/barang?action=delete&parameter=531
 
+
+http://localhost:8080/Ruserba/creditcard?action=cari_by_id&parameters=1234,
+
+http://localhost:8080/Ruserba/creditcard?action=cari_by_card_owner&parameters=codename,
+
+http://localhost:8080/Ruserba/creditcard?action=insert&parameters=1234,lalala%20lilili,2013-10-23%2000:00:00.0,codename
