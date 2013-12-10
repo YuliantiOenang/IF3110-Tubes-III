@@ -91,6 +91,7 @@ if (!reg.test(a)){
 	var callback = function(response){	
 		if(response.status == "ok"){
 			alert("Anda berhasil edit profile");
+			window.location="profile.php?u="+loginfo.user+"&t="+loginfo.id;
 		}else{
 			alert(JSON.stringify(response));
 		}
