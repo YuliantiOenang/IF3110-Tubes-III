@@ -169,7 +169,13 @@ public class User extends HttpServlet {
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(updateQuery);
-			} catch (SQLException e) {
+				
+				//POST
+				//String[] params = {"name","pass","email","phone","add","city","prov","post","id"};
+				//String[] value= {name, password, email, telephone, address, city, province, postal, "" + request.getSession(true).getAttribute("user_id")};
+				//ServiceParser.postUrl(ServiceParser.BASE_URL + "UserService/userservice/updateuser",params, value);
+				
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			response.sendRedirect("user?id=" + request.getSession(true).getAttribute("user_id"));
