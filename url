@@ -1,2 +1,6 @@
 http://localhost:8080/Ruserba/barang?action=cari&parameters=,,1,1,nama_barang,
 
+http://localhost:8080/Ruserba/barang?action=insert&parameters=tahu_zimbabwe,./images/Tahu.png,100,1,13,baru aja,200,
+
+http://localhost:8080/Ruserba/barang?action=delete&parameter=531
+

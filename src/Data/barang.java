@@ -60,7 +60,7 @@ public class barang extends HttpServlet{
 				Integer laman=Integer.parseInt(parameter[3]);
 				Integer i=(laman-1)*10;
 				String order=parameter[4];
-				out.print("test aja : "+name+" "+harga+" "+kategori+" "+laman+" "+i+" "+order);
+				//out.print("test aja : "+name+" "+harga+" "+kategori+" "+laman+" "+i+" "+order);
 				
 				String n_item_query=new String();
 				String search_query=new String();
@@ -104,10 +104,10 @@ public class barang extends HttpServlet{
 						}
 					}
 				}
-				out.print("query:"+n_item_query);
-				out.print("search:"+search_query);
+				//out.print("query:"+n_item_query);
+				//out.print("search:"+search_query);
 
-				out.print("TEST");
+				//out.print("TEST");
 				Statement s1 = con.createStatement();
 				Statement s2 = con.createStatement();
 				ResultSet rs1 = s1.executeQuery(n_item_query);
@@ -118,7 +118,7 @@ public class barang extends HttpServlet{
 				ArrayList<barang_data> Hasil_search=new ArrayList<>();
 				while(rs1.next()){
 					n_item = Integer.parseInt(rs1.getString(1));
-					out.print("ada n _item:"+rs1.getString(1));
+					//out.print("ada n _item:"+rs1.getString(1));
 				}
 				
 				
@@ -151,29 +151,27 @@ public class barang extends HttpServlet{
 				
 				
 				
-			}else if(action.equals("update")){
+			}else if(action.equals("insert")){
 			
 				Statement statement = con.createStatement();
+				String nama = parameter[0];
+				String gambar = parameter[1];
+				Integer harga = Integer.parseInt(parameter[2]);
+				Integer kategori = Integer.parseInt(parameter[3]);
+				Integer n_beli = Integer.parseInt(parameter[4]);
+				String keterangan = parameter[5];
+				Integer stok = Integer.parseInt(parameter[6]);
 				
-				String username = parameter[0];
-				String fullname = parameter[1];
-				String password = parameter[2];
-				String email = parameter[3];
-				String hpnum = parameter[4];
-				String address = parameter[5];
-				String province = parameter[6];
-				String kecamatan = parameter[7];
-				String postcode = parameter[8];
 				
-				String query = "UPDATE `user` SET nama_lengkap='"+fullname+"', password='"+password+"', handphone="+hpnum+", address='"+address+"', province='"+province+"', state='"+kecamatan+"', postcode ="+postcode+", email='"+email+"'  WHERE username= '"+ username+"'";
+				String query = "INSERT INTO `barang` (nama_barang,gambar_barang,harga_barang,kategori_barang,n_beli,keterangan,stok) VALUES (\'"+nama+"\',\'"+gambar+"\',"+harga+","+kategori+","+n_beli+",\'"+keterangan+"\',"+stok+")";
 				
 				
 				int status = statement.executeUpdate(query);
 				
 				if(status==1){
-					out.print("{ \"Status_operasi\" : \"berhasil\" }");
+					out.print("{ \"status\" : \"success\" }");
 				}else{
-					out.print("{ \"Status_operasi\" : \"gagal\" }");
+					out.print("{ \"status\" : \"failed\" }");
 				}
 				
 			}else if(action.equals("cari_by_id")){
@@ -183,83 +181,64 @@ public class barang extends HttpServlet{
 				String id = parameter[0];
 				boolean status = false;
 				
-				ResultSet rs = statement.executeQuery("SELECT * FROM barang where id_barang=\'"+id+"\'");
+				ResultSet rs = statement.executeQuery("SELECT * FROM barang where id_barang="+id+"");
 				status = rs.next();
 				
-				if (status)
-					out.print("{ \"Status_operasi\" : \"berhasil\" , \"Username\" : \""+username+"\"}");
-				else
-					out.print("{ \"Status_operasi\" : \"gagal\" }");
-					
-			}else if(action.equals("find")){
-				Statement statement = con.createStatement();
-				
-				String username = parameter[0];
-				
-				boolean status = false;
-				//ResultSet rs = null;
-				
-				ResultSet rs = statement.executeQuery("SELECT * FROM user where username ='"+username+"'");
-				
-				
-				
-				
-				/*
-				ArrayList<String> HasilQuery_username= new ArrayList<>();
-				ArrayList<String> HasilQuery_nama_lengkap= new ArrayList<>();
-				ArrayList<String> HasilQuery_password= new ArrayList<>();
-				ArrayList<String> HasilQuery_email= new ArrayList<>();
-				ArrayList<String> HasilQuery_handphone= new ArrayList<>();
-				ArrayList<String> HasilQuery_address= new ArrayList<>();
-				ArrayList<String> HasilQuery_province= new ArrayList<>();
-				ArrayList<String> HasilQuery_state= new ArrayList<>();
-				ArrayList<String> HasilQuery_postcode= new ArrayList<>();
-				*/
-				ArrayList<user_data> List_User_data = new ArrayList<>();
-
-				while(rs.next()){
-					user_data UD = new user_data();
-					
-					out.print(rs.getObject(1).toString());
-					
-					UD.setUsername(rs.getObject(1).toString());
-					UD.setNama_lengkap(rs.getObject(2).toString());
-					UD.setPassword(rs.getObject(3).toString());
-					UD.setEmail(rs.getObject(4).toString());
-					UD.setHandphone(rs.getObject(5).toString());
-					UD.setAddress(rs.getObject(6).toString());
-					UD.setProvince(rs.getObject(7).toString());
-					UD.setState(rs.getObject(8).toString());
-					UD.setPostcode(rs.getObject(9).toString());
-					UD.setN_pembelian(rs.getObject(10).toString());
-
-					
-
-					List_User_data.add(UD);
-					/*
-					HasilQuery_username.add();
-					HasilQuery_nama_lengkap.add((String) rs.getObject(2));
-					HasilQuery_password.add((String) rs.getObject(3));
-					HasilQuery_email.add((String) rs.getObject(4));
-					HasilQuery_handphone.add((String) rs.getObject(5));
-					HasilQuery_address.add((String) rs.getObject(6));
-					HasilQuery_province.add((String) rs.getObject(7));
-					HasilQuery_state.add((String) rs.getObject(8));
-					HasilQuery_postcode .add((String) rs.getObject(9));
-					*/
+				barang_data b = new barang_data();
+				String output = new String();
+				if(status){
+					b.setId_barang(rs.getObject(1).toString());
+				  	b.setNama_barang(rs.getObject(2).toString());
+				  	b.setGambar_barang(rs.getObject(3).toString());
+				  	b.setHarga_barang(rs.getObject(4).toString());
+				  	b.setKategori_barang(rs.getObject(5).toString());
+				  	b.setN_beli(rs.getObject(6).toString());
+				  	b.setKeterangan(rs.getObject(7).toString());
+				  	b.setStok(rs.getObject(8).toString());
+				  	Gson gson=new Gson();
+				  	output = gson.toJson(b);
 				}
-				
-				
-				//Convert Java Object into JSON object
-				Gson gson = new Gson();
-				
-				String output = gson.toJson(List_User_data);
-				status = List_User_data.isEmpty();
-				if (!status)
-					out.print("{ \"Status_operasi\" : \"berhasil\" , \"hasil\" : "+output+"  }");
+			  	
+				if (status)
+					out.print("{ \"Status_operasi\" : \"success\" , \"output_search\" : \""+output+"\"}");
 				else
-					out.print("{ \"Status_operasi\" : \"gagal\" }");
+					out.print("{ \"Status_operasi\" : \"failed\" }");
+					
+			}else if(action.equals("update")){
+
+				Statement statement = con.createStatement();
+				String nama = parameter[0];
+				String gambar = parameter[1];
+				Integer harga = Integer.parseInt(parameter[2]);
+				Integer kategori = Integer.parseInt(parameter[3]);
+				Integer n_beli = Integer.parseInt(parameter[4]);
+				String keterangan = parameter[5];
+				Integer stok = Integer.parseInt(parameter[6]);
 				
+				
+				String query = "UPDATE `barang` SET nama_barang=\'"+nama+"\',gambar_barang=\'"+gambar+"\',harga_barang=\'"+harga+"\',kategori_barang=\'"+kategori+"\',n_beli=\'"+n_beli+"\',keterangan=\'"+keterangan+"\',stok=\'"+stok+"\'";
+				
+				
+				int status = statement.executeUpdate(query);
+				
+				if(status==1){
+					out.print("{ \"status\" : \"success\" }");
+				}else{
+					out.print("{ \"status\" : \"failed\" }");
+				}
+			}else if(action.equals("delete")){
+				Statement statement = con.createStatement();
+				Integer id=Integer.parseInt(parameter[0]);
+				
+				String query = "DELETE FROM `barang` WHERE id_barang="+id;
+				
+				int status = statement.executeUpdate(query);
+				
+				if(status==1){
+					out.print("{ \"status\" : \"success\" }");
+				}else{
+					out.print("{ \"status\" : \"failed\" }");
+				}
 			}
 		}catch(Exception e){
 			
