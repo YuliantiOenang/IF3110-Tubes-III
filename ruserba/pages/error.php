@@ -1,1 +1,0 @@
-<h2 id='error'>Halaman tidak ditemukan</h2>
