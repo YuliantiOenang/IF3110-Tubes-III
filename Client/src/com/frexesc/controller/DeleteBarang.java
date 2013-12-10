@@ -14,6 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import com.frexesc.model.Barang;
 import com.frexesc.model.BarangUserBean;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * 
@@ -37,9 +41,12 @@ public class DeleteBarang extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		Gson gson = new Gson();
+		String json = null;
+		JsonParser jsonParser = new JsonParser();
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		
+
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");
 		} else {
@@ -49,69 +56,64 @@ public class DeleteBarang extends HttpServlet {
 			int id = 0;
 			id = Integer.parseInt(request.getParameter("id"));
 
-			//String query = "SELECT * FROM barang_user WHERE id=" + id;
+			// String query = "SELECT * FROM barang_user WHERE id=" + id;
 
 			try {
-				//ResultSet rs = connection.createStatement().executeQuery(query);
+				// ResultSet rs =
+				// connection.createStatement().executeQuery(query);
 
-				String json = ServiceParser.readUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/baranguserid?id=" + id);
-				
-				List<BarangUserBean> allResults = ServiceParser.parseJsonToGenericlist(json, BarangUserBean.class);//new ArrayList<BarangUserBean>();
+				json = ServiceParser
+						.readUrl(ServiceParser.BASE_URL
+								+ "BarangUserService/baranguserService/baranguserid?id="
+								+ id);
 
-//				while (rs.next()) {
-//					BarangUserBean barangUser = new BarangUserBean(
-//							Integer.valueOf(rs.getString("id")),
-//							Integer.valueOf(rs.getString("id_barang")),
-//							Integer.valueOf(rs.getString("id_user")),
-//							Integer.valueOf(rs.getString("status")),
-//							Integer.valueOf(rs.getString("jumlah_barang")),
-//							rs.getString("deskripsi_tambahan"));
-//
-//					allResults.add(barangUser);
-//				}
+				List<BarangUserBean> allResults = ServiceParser
+						.parseJsonToGenericlist(json, BarangUserBean.class);// new
+																			// ArrayList<BarangUserBean>();
 
-				String query2 = "SELECT * FROM barang WHERE id="
-						+ allResults.get(0).getId_item();
+				// while (rs.next()) {
+				// BarangUserBean barangUser = new BarangUserBean(
+				// Integer.valueOf(rs.getString("id")),
+				// Integer.valueOf(rs.getString("id_barang")),
+				// Integer.valueOf(rs.getString("id_user")),
+				// Integer.valueOf(rs.getString("status")),
+				// Integer.valueOf(rs.getString("jumlah_barang")),
+				// rs.getString("deskripsi_tambahan"));
+				//
+				// allResults.add(barangUser);
+				// }
+				json = WebServicesKit
+						.readUrl("http://localhost:8080/web-services/BS/barang/select?id="
+								+ allResults.get(0).getId_item());
+				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
+				ArrayList<Barang> barangList = new ArrayList<Barang>();
+				for (JsonElement barang : barangArray) {
+					Barang barangObj = gson.fromJson(barang, Barang.class);
+					barangList.add(barangObj);
+				}
 
-				ResultSet rs2 = connection.createStatement().executeQuery(
-						query2);
+				int jumlah_barang_akhir = barangList.get(0).getTotal_item()
+						+ allResults.get(0).getTotal_item();
 
-				if (rs2 != null) {
-					ArrayList<Barang> allResults2 = new ArrayList<Barang>();
+				try {
+					json = WebServicesKit
+							.readUrl("http://localhost:8080/web-services/BS/barang/update/id="
+									+ allResults.get(0).getId_item()
+									+ "&jumlah=" + jumlah_barang_akhir);
+				} catch (NumberFormatException e) {
 
-					while (rs2.next()) {
-						Barang barang = new Barang(Integer.valueOf(rs2
-								.getString("id")), Integer.valueOf(rs2
-								.getString("id_kategori")),
-								rs2.getString("nama_barang"),
-								rs2.getString("gambar"), Integer.valueOf(rs2
-										.getString("harga_barang")),
-								rs2.getString("keterangan"),
-								Integer.valueOf(rs2.getString("jumlah_barang")));
-						allResults2.add(barang);
-					}
+					//
+					// POST
+					String[] param = { "id" };
+					String[] val = { "" + allResults.get(0).getId() };
+					ServiceParser
+							.postUrl(
+									ServiceParser.BASE_URL
+											+ "BarangUserService/baranguserService/deletebaranguser",
+									param, val);
 
-					int jumlah_barang_akhir = allResults2.get(0)
-							.getTotal_item()
-							+ allResults.get(0).getTotal_item();
-
-					String query3 = "UPDATE barang SET jumlah_barang=" // update stock
-							+ jumlah_barang_akhir + " WHERE id="
-							+ allResults.get(0).getId_item();
-					connection.createStatement().executeUpdate(query3);
-
-//					String query4 = "DELETE FROM barang_user WHERE id=" + id; // delete
-//																				// entry
-//					connection.createStatement().executeUpdate(query4);
-
-					//POST
-					String[] param = {"id"};
-					String[] val= {"" + allResults.get(0).getId()};
-					ServiceParser.postUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/deletebaranguser",param, val);
-					
-					
 					response.sendRedirect("./cart"); // back to previous
-															// page
+														// page
 				}
 
 			} catch (Exception e) {

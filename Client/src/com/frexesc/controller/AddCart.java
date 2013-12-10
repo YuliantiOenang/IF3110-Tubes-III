@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
- extends HttpServlet {
+public class AddCart extends HttpServlet {
 	Gson gson = new Gson();
 	String json = null;
 	JsonParser jsonParser = new JsonParser();
@@ -49,8 +49,6 @@ import com.google.gson.JsonParser;
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DbConnection dbConnection = new DbConnection();
-		Connection connection = dbConnection.mySqlConnection();
 
 		HttpSession session = request.getSession();
 		if (session.getAttribute("username") == null) {

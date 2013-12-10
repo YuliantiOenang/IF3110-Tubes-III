@@ -49,7 +49,7 @@ public class User extends HttpServlet {
 				String id = request.getParameter("id");
 				try {
 					/**PORT*/
-					String json = webkit
+					String json = WebServicesKit
 							.readUrl("http://localhost:8080/web-services/UserService/userservice/user2/"
 									+ id);
 					Gson gson = new Gson();
@@ -92,7 +92,7 @@ public class User extends HttpServlet {
 				String id = request.getParameter("id");
 				try {
 					/**PORT*/
-					String json = webkit
+					String json = WebServicesKit
 							.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"
 									+ id);
 					Gson gson = new Gson();

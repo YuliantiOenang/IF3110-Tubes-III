@@ -19,8 +19,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-
-
 /**
  * 
  * Servlet implementation class Gallery
@@ -43,9 +41,12 @@ public class Gallery extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		Gson gson = new Gson();
+		String json = null;
+		JsonParser jsonParser = new JsonParser();
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		
+
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");
 		} else {
@@ -91,91 +92,88 @@ public class Gallery extends HttpServlet {
 						partial2 = " DESC ";
 					}
 				}
-				
+
 				if (request.getParameter("name") != null) {
-					partial3 = " AND ( barang.nama_barang LIKE '%" + request.getParameter("name") + "%' ) ";
+					partial3 = " AND ( barang.nama_barang LIKE '%"
+							+ request.getParameter("name") + "%' ) ";
 				}
-				
+
 				if (request.getParameter("category") != null) {
 					if (Integer.parseInt(request.getParameter("category")) != 0)
-						partial4 = " AND barang.id_kategori=" + Integer.parseInt(request.getParameter("category")) +" ";
+						partial4 = " AND barang.id_kategori="
+								+ Integer.parseInt(request
+										.getParameter("category")) + " ";
 				}
-				
+
 				if (request.getParameter("price") != null) {
 					if (Integer.parseInt(request.getParameter("price")) != 0)
-						partial5 = " AND barang.harga_barang=" + Integer.parseInt(request.getParameter("price")) + " ";
+						partial5 = " AND barang.harga_barang="
+								+ Integer.parseInt(request
+										.getParameter("price")) + " ";
 				}
 
 				if (page != 0) {
 					page = page * 10;
 				}
-				
 
-				String query = "SELECT kategori.nama, barang.gambar, barang.id, barang.id_kategori, barang.nama_barang, barang.harga_barang, barang.jumlah_barang, barang.keterangan FROM barang JOIN kategori ON barang.id_kategori=kategori.id "
-						 + partial3 + partial4 + partial5 + partial1 + partial2 + "LIMIT " + page + ",10"; // Select
-																			// all
-																			// items
-																			// based
-																			// on
-																			// selection
-				ResultSet rs = connection.createStatement().executeQuery(query);
-
-				ArrayList<Barang> allResults = new ArrayList<Barang>();
-
-				while (rs.next()) {
-					Barang barang = new Barang(Integer.valueOf(rs
-							.getString("id")), Integer.valueOf(rs
-							.getString("id_kategori")),
-							rs.getString("nama_barang"), rs.getString("gambar"),
-							Integer.valueOf(rs.getString("harga_barang")),
-							rs.getString("keterangan"), Integer.valueOf(rs
-									.getString("jumlah_barang")));
-					allResults.add(barang);
+				json = WebServicesKit
+						.readUrl("http://localhost:8080/web-services/BS/barang/select2?p1="+partial1
+								+ "&p2="+partial2 + "&p3="+partial3 + "&p4="+partial4 + "&p5="+partial5);
+				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
+				ArrayList<Barang> allResults= new ArrayList<Barang>();
+				for (JsonElement barang : barangArray) {
+					Barang barangObj = gson.fromJson(barang, Barang.class);
+					allResults.add(barangObj);
 				}
-				
-				String query2 = "SELECT COUNT(id) AS JmlBarang FROM barang WHERE id=id " + partial3 + partial4 + partial5;
-				
-				ResultSet rs2 = connection.createStatement().executeQuery(query2);
-				rs2.next();
-				
+				json = WebServicesKit
+						.readUrl("http://localhost:8080/web-services/BS/barang/select3?p3="+partial3
+								+"&p4="+partial4+"&p5="+partial5);
+				int jmlBrg= jsonParser.parse(json).getAsInt();
 				if (request.getParameter("category") != null) {
 					if (Integer.parseInt(request.getParameter("category")) != 0) {
-						
-						/**port*/
+
+						/** port */
 						WebServicesKit webkit = new WebServicesKit();
-						String json = webkit.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories");
-						Gson gson = new Gson();
-						JsonParser jsonParser = new JsonParser();
-						JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
+						json = WebServicesKit
+								.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories");
+						jsonParser = new JsonParser();
+						JsonArray categoryArray = jsonParser.parse(json)
+								.getAsJsonArray();
 						KategoriBean kategObj;
-						for (JsonElement categ : categoryArray)
-						{
+						for (JsonElement categ : categoryArray) {
 							kategObj = gson.fromJson(categ, KategoriBean.class);
-							System.out.println("debug admin gallery=>"+kategObj.getName());
-							if (Integer.parseInt(request.getParameter("category")) == kategObj.getId()){
-								request.setAttribute("category_name", kategObj.getName());	
+							System.out.println("debug admin gallery=>"
+									+ kategObj.getName());
+							if (Integer.parseInt(request
+									.getParameter("category")) == kategObj
+									.getId()) {
+								request.setAttribute("category_name",
+										kategObj.getName());
 							}
 						}
-						/**port*/
-						
-						/**old*/
-//						String query3 = "SELECT * FROM kategori WHERE id=" + Integer.parseInt(request.getParameter("category"));
-//						ResultSet rs3 = connection.createStatement().executeQuery(query3);
-//						rs3.next();
-//						request.setAttribute("category_name", rs3.getString("nama"));	
-						/**old*/
+						/** port */
+
+						/** old */
+						// String query3 = "SELECT * FROM kategori WHERE id=" +
+						// Integer.parseInt(request.getParameter("category"));
+						// ResultSet rs3 =
+						// connection.createStatement().executeQuery(query3);
+						// rs3.next();
+						// request.setAttribute("category_name",
+						// rs3.getString("nama"));
+						/** old */
 					}
 				}
 
 				request.setAttribute("items", allResults);
-				request.setAttribute("total_pages", rs2.getString("JmlBarang"));
+				request.setAttribute("total_pages", jmlBrg);
 
 				RequestDispatcher dispatcher = getServletContext()
 						.getRequestDispatcher("/barang/index.jsp");
 				dispatcher.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}			
+			}
 		}
 
 	}

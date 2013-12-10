@@ -16,7 +16,10 @@ import javax.servlet.http.HttpSession;
 
 import com.frexesc.model.Barang;
 import com.frexesc.model.BarangUserBean;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * 
@@ -24,6 +27,9 @@ import com.frexesc.model.BarangUserBean;
  * 
  */
 public class Cart extends HttpServlet {
+	Gson gson = new Gson();
+	String json = null;
+	JsonParser jsonParser = new JsonParser();
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -49,55 +55,51 @@ public class Cart extends HttpServlet {
 			DbConnection dbConnection = new DbConnection();
 			Connection connection = dbConnection.mySqlConnection();
 
-			//String query = "SELECT * FROM barang_user WHERE id_user=" + session.getAttribute("user_id") + " AND status=0";
-			String query2 = "SELECT * FROM barang";
+			// String query = "SELECT * FROM barang_user WHERE id_user=" +
+			// session.getAttribute("user_id") + " AND status=0";
 
 			try {
-				//ResultSet rs = connection.createStatement().executeQuery(query);
+				// ResultSet rs =
+				// connection.createStatement().executeQuery(query);
 
-				
-				String json = ServiceParser.readUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/statuszero?id=" + session.getAttribute("user_id"));
-				
-				List<BarangUserBean> allResults = ServiceParser.parseJsonToGenericlist(json, BarangUserBean.class);//new ArrayList<BarangUserBean>();
+				json = ServiceParser.readUrl(ServiceParser.BASE_URL
+						+ "BarangUserService/baranguserService/statuszero?id="
+						+ session.getAttribute("user_id"));
 
-				//ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
+				List<BarangUserBean> allResults = ServiceParser
+						.parseJsonToGenericlist(json, BarangUserBean.class);// new
+																			// ArrayList<BarangUserBean>();
 
-//				while (rs.next()) {
-//					BarangUserBean barangUser = new BarangUserBean(
-//							Integer.valueOf(rs.getString("id")),
-//							Integer.valueOf(rs.getString("id_barang")),
-//							Integer.valueOf(rs.getString("id_user")),
-//							Integer.valueOf(rs.getString("status")),
-//							Integer.valueOf(rs.getString("jumlah_barang")),
-//							rs.getString("deskripsi_tambahan"));
-//					allResults.add(barangUser);
-//				}
+				// ArrayList<BarangUserBean> allResults = new
+				// ArrayList<BarangUserBean>();
 
-
-				ResultSet rs2 = connection.createStatement().executeQuery(
-						query2);
-				ArrayList<Barang> allResults2 = new ArrayList<Barang>();
-
-				while (rs2.next()) {
-					Barang barang = new Barang(Integer.valueOf(rs2
-							.getString("id")), Integer.valueOf(rs2
-							.getString("id_kategori")),
-							rs2.getString("nama_barang"),
-							rs2.getString("gambar"), Integer.valueOf(rs2
-									.getString("harga_barang")),
-							rs2.getString("keterangan"), Integer.valueOf(rs2
-									.getString("jumlah_barang")));
-					allResults2.add(barang);
+				// while (rs.next()) {
+				// BarangUserBean barangUser = new BarangUserBean(
+				// Integer.valueOf(rs.getString("id")),
+				// Integer.valueOf(rs.getString("id_barang")),
+				// Integer.valueOf(rs.getString("id_user")),
+				// Integer.valueOf(rs.getString("status")),
+				// Integer.valueOf(rs.getString("jumlah_barang")),
+				// rs.getString("deskripsi_tambahan"));
+				// allResults.add(barangUser);
+				// }
+				json = WebServicesKit
+						.readUrl("http://localhost:8080/web-services/BS/barang/select");
+				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
+				ArrayList<Barang> barangList = new ArrayList<Barang>();
+				for (JsonElement barang : barangArray) {
+					Barang barangObj = gson.fromJson(barang, Barang.class);
+					barangList.add(barangObj);
 				}
+				request.setAttribute("items", barangList);
 
 				request.setAttribute("user_items", allResults);
-				request.setAttribute("items", allResults2);
 
 				RequestDispatcher dispatcher = getServletContext()
 						.getRequestDispatcher("/barang/cart.jsp");
 				dispatcher.forward(request, response);
 
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

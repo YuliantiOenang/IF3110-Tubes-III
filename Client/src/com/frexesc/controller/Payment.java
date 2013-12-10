@@ -54,7 +54,7 @@ public class Payment extends HttpServlet {
 			WebServicesKit webkit = new WebServicesKit();
 			String json;
 			try {
-				json = webkit.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"+ session.getAttribute("user_id"));
+				json = WebServicesKit.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"+ session.getAttribute("user_id"));
 				Gson gson = new Gson();
 				JsonParser jsonParser = new JsonParser();
 				JsonArray userArray = jsonParser.parse(json).getAsJsonArray();
@@ -100,7 +100,7 @@ public class Payment extends HttpServlet {
 						
 						/**port*/
 
-							json = webkit.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"+ session.getAttribute("user_id"));
+							json = WebServicesKit.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"+ session.getAttribute("user_id"));
 							gson = new Gson();
 							jsonParser = new JsonParser();
 							userArray = jsonParser.parse(json).getAsJsonArray();

@@ -60,7 +60,7 @@ public class Login extends HttpServlet {
 			
 			/**PORT*/
 
-			String json = webkit.readUrl("http://localhost:8080/web-services/UserService/userservice/username/"+username+"/"+password);
+			String json = WebServicesKit.readUrl("http://localhost:8080/web-services/UserService/userservice/username/"+username+"/"+password);
 			Gson gson = new Gson();
 			JsonParser jsonParser = new JsonParser();
 			JsonArray userArray = jsonParser.parse(json).getAsJsonArray();

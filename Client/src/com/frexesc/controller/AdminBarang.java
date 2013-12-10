@@ -184,7 +184,6 @@ public class AdminBarang extends HttpServlet {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			System.out.println("SR1");
 			int id = jsonParser.parse(json).getAsInt();
 			URL filename = null;
 			filename = getServletContext().getResource("/img/barang/1.jpg");
