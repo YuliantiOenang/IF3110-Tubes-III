@@ -14,6 +14,13 @@ class Rest extends RestC{
 	function handle_put($urlpart,$data){
 		$response["status"] = "error";
 		$response["desc"] = "URI is not available in method PUT";
+		if ($urlpart[0]=="editprofile"){
+			$response = editprofile($data["username"],$data["password"],$data["namalengkap"],$data["nohp"],$data["provinsi"],$data["kotakabupaten"],$data["alamat"],$data["kodepos"]);
+		}
+		
+		if ($urlpart[0]=="buy"){
+			$response = buy($data["namabarang"],$data["jumlah"]);
+		}
 		
 		echo json_encode($response);
 	}

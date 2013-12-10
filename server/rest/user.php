@@ -1,5 +1,23 @@
 <?php
+// .PUT
 
+function editprofile($username,$password,$namalengkap,$nohp,$provinsi,$kotakabupaten,$alamat,$kodepos){
+	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
+	$query = "UPDATE user_ SET password='$password', namalengkap='$namalengkap', nohp='$nohp' ,alamat='$alamat' ,kotakabupaten='$kotakabupaten' ,provinsi='$provinsi' ,kodepos='$kodepos' WHERE username='$username'" ;
+	$result=pg_query($query);
+	$response = "ok";	
+	return $response;
+}
+
+function buy($namabarang,$jumlah){
+	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
+	$query = "UPDATE barang_ SET jumlah='$jumlah' WHERE namabarang='$namabarang'";
+	$result=pg_query($query);
+	$response = "ok";
+	return $response;
+}
+
+// .GET
 
 function login($username,$password){
 	
