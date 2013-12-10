@@ -22,7 +22,7 @@ function getKategori(){
 		var jsonArray = JSON.parse(xmlhttp.responseText);
 		var result="";
 		for (var i = 0; i < jsonArray.result.length; i++) {
-			result += "<li> <a href='kategori.jsp?id="+jsonArray.result[i]+"&laman=1'>"+kategori[jsonArray.result[i]-1]+"</a></li>"; 
+			result += "<li> <a href='kategori.jsp?id="+jsonArray.result[i]+"&laman=1'>"+kategori[jsonArray.result[i]-1] + "</a></l1>"; 
 		}
 		kategorilist.innerHTML = result;
 	});
@@ -41,12 +41,31 @@ function getWelcome(){
 	});*/
 }
 function getNavbar(){
-	
+	var customnavbar = document.getElementById("customnavbar");
+    if(window.XMLHttpRequest){
+            xmlhttp = new XMLHttpRequest();
+    }
+    else{
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4&&xmlhttp.status==200){
+                    customnavbar.innerHTML = xmlhttp.responseText;
+
+                    if(err_login.innerHTML==""){
+                            //Handle SESSION & LOCAL STORAGE
+                            window.location="index.jsp";
+                    }
+            }
+    };
+    xmlhttp.open("GET","getNavbar",true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send();
 }
 </script>
 <title>RuserBa</title>
 </head>
-<body onload='getKategori();getWelcome();getNavbar()'>
+<body onload='getKategori();getWelcome()'>
 <div id="AJS_body_wrapper">
 	<div id="AJS_wrapper">
 		<div id="AJS_header">
@@ -65,6 +84,8 @@ function getNavbar(){
 		<div id="AJS_menubar">
 			<div id="top_nav" class="ddsmoothmenu">
 				<ul id="customnavbar">
+<<<<<<< HEAD
+=======
 					<% 
 				if((sesi== null)|| (sesi.getAttribute("username")==null)) {
 				%>
@@ -86,6 +107,7 @@ function getNavbar(){
 				<%
 				}
 				%>
+>>>>>>> 0c2106408f92feefad3fdfde8603c0801d97e88d
 				</ul>
 				<br style="clear: left" />
 			</div> <!-- end of ddsmoothmenu -->	
