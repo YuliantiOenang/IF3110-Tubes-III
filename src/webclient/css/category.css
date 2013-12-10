@@ -26,6 +26,11 @@
 	margin-right: 10px;
 }
 
+#cattable .rowbarang .rowtools #edit, #delete{
+	width: 15px;
+	height: 15px;
+}
+
 h3{
 	margin:0;
 	

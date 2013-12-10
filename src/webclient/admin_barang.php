@@ -92,10 +92,10 @@
 			echo '<div class="row">Rp. '.formatCurrency($barang["harga"]).'</div>';
 			echo '<div class="row">Stok  : '.$barang["stok"].'</div>'; 
 			echo '<div class="row">'.$barang["deskripsi"].'</div>';
-			echo '<input type="checkbox" name="'.$barang["id"].'" id="'.$barang["id"].'">'; 
-			echo '<a href="edit_barang.php?id="'.$barang["id"].'"><img src=image/Edit.jpg id="edit"></a>)';
+			echo '<div class="rowtools"><input type="checkbox" name="'.$barang["id"].'" id="'.$barang["id"].'">'; 
+			echo '<a href="edit_barang.php?id="'.$barang["id"].'"><img src=image/Edit.jpg id="edit"></a>';
 			echo '<input type="image" src=image/Delete.png id="delete" onclick="">';
-			echo '</div></div>';
+			echo '</div></div></div>';
 			echo '</div>';
 		}
 	?>
