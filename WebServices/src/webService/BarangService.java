@@ -16,6 +16,9 @@ import javax.ws.rs.core.UriInfo;
 import model.AccessManager;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import dto.Barang;
 
@@ -30,8 +33,10 @@ public class BarangService {
 	@Path("/insert")
 	@Produces("application/json")
 	public String insertBarang(@Context UriInfo info) {
+		gson = new Gson();
+		String json = null;
+		JsonParser jsonParser = new JsonParser();
 		String insertResult = null;
-		int temp;
 		try {
 			String idKat = info.getQueryParameters().getFirst("idKat");
 			String nama = info.getQueryParameters().getFirst("nama");
@@ -40,7 +45,7 @@ public class BarangService {
 					.getFirst("keterangan");
 			String harga = info.getQueryParameters().getFirst("harga");
 			String jumlah = info.getQueryParameters().getFirst("jumlah");
-			query = "INSERT INTO barang (id_kategori, nama_barang, gambar, harga_barang, keterangan, jumlah_barang) VALUES ('"
+			query = "INSERT INTO barang (id_kategori, nama_barang, gambar, harga_barang, keterangan, jumlah_barang, nKat) VALUES ('"
 					+ idKat
 					+ "','"
 					+ nama
@@ -48,11 +53,22 @@ public class BarangService {
 					+ gambar
 					+ "','"
 					+ harga
-					+ "','" + keterangan + "','" + jumlah + "')";
+					+ "','" + keterangan + "','" + jumlah + "','-1')";
 			PreparedStatement stmt = con.prepareStatement(query);
-			temp = stmt.executeUpdate();
-			gson = new Gson();
-			insertResult = gson.toJson(temp);
+			stmt.executeUpdate();
+			try {
+				json = selectBarang(-1, Integer.parseInt(idKat), nama, 0);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
+			ArrayList<Barang> barangList = new ArrayList<Barang>();
+			for (JsonElement barang : barangArray) {
+				Barang barangObj = gson.fromJson(barang, Barang.class);
+				barangList.add(barangObj);
+			}
+			insertResult = gson.toJson(barangList.get(0).getId());
 		} catch (Exception e) {
 		}
 		return insertResult;
@@ -101,12 +117,13 @@ public class BarangService {
 			@QueryParam("p4") String p4, @QueryParam("p5") String p5,
 			@QueryParam("page") int page) {
 		String selectResult = null;
-		query = "SELECT COUNT(id) AS JmlBarang FROM barang WHERE id=id " + p3 + p4 + p5;
+		query = "SELECT COUNT(id) AS JmlBarang FROM barang WHERE id=id " + p3
+				+ p4 + p5;
 		try {
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs;
 			rs = stmt.executeQuery();
-			int cID=(rs.getInt(1));
+			int cID = (rs.getInt(1));
 			gson = new Gson();
 			selectResult = gson.toJson(cID);
 		} catch (Exception e) {
@@ -115,7 +132,7 @@ public class BarangService {
 		}
 		return selectResult;
 	}
-	
+
 	@GET
 	@Path("/select")
 	@Produces("application/json")
@@ -126,11 +143,14 @@ public class BarangService {
 		String selectResult = null;
 		try {
 			ArrayList<Barang> barangList = new ArrayList<Barang>();
-			if (join==1)
-				query="SELECT * FROM barang JOIN kategori ON barang.id_kategori=kategori.id AND barang.id="+ id;
-			else if (join==2)
-				query="SELECT * FROM barang JOIN barang_user ON barang.id=barang_user.id_barang AND barang.id_kategori="+ idKat + " GROUP BY barang.id ORDER BY COUNT(barang.id) DESC LIMIT 0,4";
-			else	{
+			if (join == 1)
+				query = "SELECT * FROM barang JOIN kategori ON barang.id_kategori=kategori.id AND barang.id="
+						+ id;
+			else if (join == 2)
+				query = "SELECT * FROM barang JOIN barang_user ON barang.id=barang_user.id_barang AND barang.id_kategori="
+						+ idKat
+						+ " GROUP BY barang.id ORDER BY COUNT(barang.id) DESC LIMIT 0,4";
+			else {
 				query = "SELECT * FROM barang WHERE 1";
 				if (id != -1)
 					query += (" && id=" + id);

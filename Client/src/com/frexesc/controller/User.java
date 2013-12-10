@@ -2,7 +2,6 @@ package com.frexesc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.frexesc.model.UserBean;
-import com.frexesc.model.UserBean2;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -51,7 +49,7 @@ public class User extends HttpServlet {
 				String id = request.getParameter("id");
 				try {
 					/**PORT*/
-					String json = webkit
+					String json = WebServicesKit
 							.readUrl("http://localhost:8080/web-services/UserService/userservice/user2/"
 									+ id);
 					Gson gson = new Gson();
@@ -94,7 +92,7 @@ public class User extends HttpServlet {
 				String id = request.getParameter("id");
 				try {
 					/**PORT*/
-					String json = webkit
+					String json = WebServicesKit
 							.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"
 									+ id);
 					Gson gson = new Gson();
@@ -158,10 +156,17 @@ public class User extends HttpServlet {
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(insertQuery);
+				
+				//POST
+				//String[] param = {"name","user", "pass","email","phone","add","city","prov","post"};
+				//String[] val= {name, username, password, email, telephone, address, city, province, postal};
+				//ServiceParser.postUrl(ServiceParser.BASE_URL + "UserService/userservice/insertuser",param, val);
+				
+				
 				request.setAttribute("username", username);
 				request.setAttribute("password", password);
 				request.setAttribute("register", "y");
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			getServletContext().getRequestDispatcher("/login").forward(request, response);
@@ -171,7 +176,13 @@ public class User extends HttpServlet {
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(updateQuery);
-			} catch (SQLException e) {
+				
+				//POST
+				//String[] params = {"name","pass","email","phone","add","city","prov","post","id"};
+				//String[] value= {name, password, email, telephone, address, city, province, postal, "" + request.getSession(true).getAttribute("user_id")};
+				//ServiceParser.postUrl(ServiceParser.BASE_URL + "UserService/userservice/updateuser",params, value);
+				
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			response.sendRedirect("user?id=" + request.getSession(true).getAttribute("user_id"));

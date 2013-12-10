@@ -2,10 +2,6 @@ package com.frexesc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -17,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import com.frexesc.model.UserBean2;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 /**
@@ -65,7 +60,7 @@ public class Login extends HttpServlet {
 			
 			/**PORT*/
 
-			String json = webkit.readUrl("http://localhost:8080/web-services/UserService/userservice/username/"+username+"/"+password);
+			String json = WebServicesKit.readUrl("http://localhost:8080/web-services/UserService/userservice/username/"+username+"/"+password);
 			Gson gson = new Gson();
 			JsonParser jsonParser = new JsonParser();
 			JsonArray userArray = jsonParser.parse(json).getAsJsonArray();

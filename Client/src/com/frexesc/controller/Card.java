@@ -2,7 +2,6 @@ package com.frexesc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
@@ -53,7 +52,13 @@ public class Card extends HttpServlet {
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(updateQuery);
-		} catch (SQLException e) {
+			
+			//POST
+			//String[] param = {"name", "num", "date", "id"};
+			//String[] val= {name, num, date, "" + request.getSession(true).getAttribute("user_id")};
+			//ServiceParser.postUrl(ServiceParser.BASE_URL + "UserService/userservice/updatecard",param, val);
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if (request.getParameter("from") == null || request.getParameter("from") == "") response.sendRedirect("index");

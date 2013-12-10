@@ -103,11 +103,12 @@ function isChanged(nama, tel, add, cit, prov, posta) {
 					onkeyup="validateEmpty(this.value, 'valtelephone'); validateAll();"
 					required> <span id="valtelephone"></span>
 			</div>
-			<p class='keterangan'>Lorem ipsum dolor sit amet lorem ipsum
-				dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
-				lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum
-				dolor sit amet lorem ipsum dolor sit amet</p>
-
+			<div>
+				<input
+					name="email"  type="hidden" id="email" value="${user.getEmail()}"
+				>
+			</div>
+			
 			<input id="action" name="action" type="hidden" value="edit" />
 			<button type="submit" id="btn" onclick="" class="btn">Simpan</button>
 		</div>

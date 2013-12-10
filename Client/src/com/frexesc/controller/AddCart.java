@@ -2,10 +2,7 @@ package com.frexesc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,12 +15,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
-/**
- * 
- * Servlet implementation class AddCart
- * 
- */
 public class AddCart extends HttpServlet {
 	Gson gson = new Gson();
 	String json = null;
@@ -58,8 +49,6 @@ public class AddCart extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DbConnection dbConnection = new DbConnection();
-		Connection connection = dbConnection.mySqlConnection();
 
 		HttpSession session = request.getSession();
 		if (session.getAttribute("username") == null) {
@@ -73,7 +62,7 @@ public class AddCart extends HttpServlet {
 				e1.printStackTrace();
 			}
 			JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
-			List<Barang> barangList = new ArrayList<Barang>();
+			ArrayList<Barang> barangList = new ArrayList<Barang>();
 			for (JsonElement barang: barangArray) {
 				Barang barangObj = gson.fromJson(barang, Barang.class);
 				barangList.add(barangObj);
