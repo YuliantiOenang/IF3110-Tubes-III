@@ -65,7 +65,6 @@ public class AdminBarang extends HttpServlet {
 				String category = request.getParameter("category");
 
 				/** port */
-				WebServicesKit webkit = new WebServicesKit();
 
 				try {
 					String json = WebServicesKit
@@ -169,6 +168,7 @@ public class AdminBarang extends HttpServlet {
 					request.getParameter("description"),
 					Integer.parseInt(request.getParameter("amount")));
 
+			System.out.println("SR0");
 			try {
 				json = WebServicesKit
 						.readUrl("http://localhost:8080/web-services/BS/barang/insert?idKat="
@@ -187,6 +187,7 @@ public class AdminBarang extends HttpServlet {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			System.out.println("SR1");
 			int id = jsonParser.parse(json).getAsInt();
 			URL filename = null;
 			filename = getServletContext().getResource("/img/barang/1.jpg");
@@ -275,13 +276,20 @@ public class AdminBarang extends HttpServlet {
 			String id = request.getParameter("id");
 			String old = null;
 			try {
-				ResultSet rs = connection.createStatement().executeQuery(
-						"SELECT * FROM barang WHERE id='" + id + "'");
-				if (rs.next()) {
-					old = rs.getString("gambar");
+				json = WebServicesKit
+						.readUrl("http://localhost:8080/web-services/BS/barang/select?id="
+								+ id);
+				JsonArray barangArray = jsonParser.parse(json)
+						.getAsJsonArray();
+				ArrayList<Barang> barangs = new ArrayList<Barang>();
+				for (JsonElement barang : barangArray) {
+					Barang barangObj = gson.fromJson(barang, Barang.class);
+					barangs.add(barangObj);
+					old = barangObj.getPicture();
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			System.out.println(old);
 			Part filePart = request.getPart("photo");
@@ -316,18 +324,15 @@ public class AdminBarang extends HttpServlet {
 				filecontent.close();
 			}
 			/* end of upload */
-			boolean success = true;
 			try {
-				Statement s = connection.createStatement();
-				String updateQuery = "UPDATE barang SET gambar='" + id + "."
-						+ sp[1] + "' WHERE id='" + id + "'";
-				if (s.executeUpdate(updateQuery) < 1) {
-					success = false;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				success = false;
+				json = WebServicesKit
+						.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
+								+ id + "&gambar=" + id + "." + sp[1]);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+			int success = jsonParser.parse(json).getAsInt();
 			response.sendRedirect("close.jsp");
 		}
 	}

@@ -53,7 +53,7 @@ public class BarangService {
 					+ gambar
 					+ "','"
 					+ harga
-					+ "','" + keterangan + "','" + jumlah + "','')";
+					+ "','" + keterangan + "','" + jumlah + "','-1')";
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.executeUpdate();
 			try {
