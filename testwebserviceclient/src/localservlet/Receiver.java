@@ -38,6 +38,13 @@ public class Receiver extends HttpServlet {
 		String USER_AGENT = "Mozilla/5.0";
 		String url = request.getParameter("url");
 		
+		String[] tokens = url.split(" ");
+		String newUrl = "";
+		for (int i = 0; i < tokens.length; i++) {
+			newUrl += tokens[i]+"+";
+		}
+		url = newUrl;
+
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
  
@@ -53,17 +60,19 @@ public class Receiver extends HttpServlet {
  
 		BufferedReader in = new BufferedReader(
 		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
+		String inputLine = null;
 		StringBuffer resp = new StringBuffer();
-
-		do {
-			inputLine = in.readLine();
+		String temp = null;
+		
+		while ((temp = in.readLine()) != null) {
+			inputLine = temp;
 			resp.append(inputLine);
-		} while (in.readLine() != null);
+		}
+		System.out.println(inputLine);
 		
 		// Send data to jsp
 		PrintWriter out = response.getWriter();
-		out.print(inputLine);
+		out.write(inputLine);
 		in.close();
 	}
 
