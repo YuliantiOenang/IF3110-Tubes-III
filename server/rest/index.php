@@ -55,6 +55,15 @@ class Rest extends RestC{
 		if ($urlpart[0]=="search"){
 			$response = search($data["search"]);
 		}
+		if ($urlpart[0]=="validasiusername"){
+			$response = validasiusername($data["username"]);
+		}
+		if ($urlpart[0]=="validasiemail"){
+			$response = validasiemail($data["email"]);
+		}
+		if ($urlpart[0]=="validasicredit"){
+			$response = validasicredit($data["creditnumber"]);
+		}
 		
 		echo json_encode($response);
 	}
