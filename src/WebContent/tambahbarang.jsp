@@ -12,7 +12,7 @@
 	<div style="width:1100px; margin-left:auto; margin-right:auto">
 	<%@ include file="header.jsp" %>
 	<article id="featured" class="body">
-	<form method="post" action="webservice?url=http://dichbar.ap01.aws.af.cm/tambahbarang">
+	<form method="post" action="resulttambahbarang.jsp">
 		<h2>Tambah Barang Baru</h2>
 		<pre>Nama Barang	: <input type="text" name="nama"></pre>
 		<pre>Kategori		: <input type="text" name="kategori"></pre>

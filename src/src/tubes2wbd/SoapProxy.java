@@ -50,5 +50,11 @@ public class SoapProxy implements tubes2wbd.Soap {
     return soap.registeruser(username, password, nama, nohp, alamat, provinsi, kota, kodepos, email);
   }
   
+  public java.lang.String additem(java.lang.String nama, java.lang.String img, java.lang.String harga, java.lang.String kategori, java.lang.String jumlah, java.lang.String deskripsi) throws java.rmi.RemoteException{
+    if (soap == null)
+      _initSoapProxy();
+    return soap.additem(nama, img, harga, kategori, jumlah, deskripsi);
+  }
+  
   
 }

@@ -9,4 +9,5 @@ package tubes2wbd;
 
 public interface Soap extends java.rmi.Remote {
     public java.lang.String registeruser(java.lang.String username, java.lang.String password, java.lang.String nama, java.lang.String nohp, java.lang.String alamat, java.lang.String provinsi, java.lang.String kota, java.lang.String kodepos, java.lang.String email) throws java.rmi.RemoteException;
+    public java.lang.String additem(java.lang.String nama, java.lang.String img, java.lang.String harga, java.lang.String kategori, java.lang.String jumlah, java.lang.String deskripsi) throws java.rmi.RemoteException;
 }
