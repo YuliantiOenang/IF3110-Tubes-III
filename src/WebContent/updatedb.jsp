@@ -6,31 +6,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>saving image...</title>
-<%
-	if(request.getParameter("username")!=null){
-		try{
-			// Register JDBC driver
-		    Class.forName("com.mysql.jdbc.Driver");
-        	// Open a connection
-	        Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            // Execute SQL query
-          	Statement stmt = conn.createStatement();
-          	String sql = "update anggota set foto='"+request.getParameter("filename")+"' where username='"+request.getParameter("username")+"'";
-    		stmt.executeUpdate(sql);
-    		out.print("<script>function delay(){document.write(\"<p>Foto berhasil di upload!</p><a href='profile.jsp'>Kembali ke halaman profile</a>\");}</script>");
-          	stmt.close();
-          	conn.close();
-       	}catch(SQLException se){
-          	//Handle errors for JDBC
-          	out.println(se.toString());
-       	}catch(Exception e){
-        	//Handle errors for Class.forName
-          	out.println(e.toString());
-       	}//end try
-	}else{
-		out.print("<script>var username = localStorage.wbduser;document.getElementById(\"username\").value=username;document.getElementById(\"filename\").value=\""+request.getParameter("filename")+"\";</script>");
-	}
-%>
+<span id="saveReport"></span>
+<script>
+function savingImg()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    	document.getElementById("saveReport").innerHTML = xmlhttp.responseText;
+	    	
+	    }
+	 }
+	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/savingImage&type=html",true);
+	xmlhttp.send();
+}
+</script>
 </head>
 <body onLoad="setTimeout('delay()', 500)">
 <form action="updatedb.jsp" method="GET">

@@ -11,7 +11,7 @@
 
 <script>
 
-var slideid;
+var slideid = 0;
 
 function getbarang()
 {
@@ -29,7 +29,8 @@ function getbarang()
 	  {
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    {
-	    	document.getElementById("myslide").innerHTML = xmlhttp.responseText;	
+	    	document.getElementById("myslide").innerHTML = xmlhttp.responseText;
+	    	//alert(xmlhttp.responseText);
 	    }
 	 }
 	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/indexservlet&type=html",true);
@@ -53,15 +54,25 @@ var xmlhttp;
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	    {
 	    	slideid = xmlhttp.responseText;	
+	    	//alert(xmlhttp.responseText);
 	    }
 	 }
 	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/indexslideservlet",true);
 	xmlhttp.send();
 }
 
-getbarang();
-getslideid();
+function initpage()
+{
+	var i;
+	for (i = 0; i < 10; i++)
+	{
+		getbarang();
+		getslideid();
+	}
+}
 
+initpage();
+alert("Selamat datang di RuSerBa :)");
 </script>
 
 <body id="index" class="home">
@@ -69,11 +80,14 @@ getslideid();
 	<%@ include file="header.jsp" %>
 	<article id="featured" class="body">
 		<h2>Most Wanted Products</h2>
-		<div id="slideshow">
+		<div id="slideshow" >
 				<label class="arrows" id="arrow-1" onclick="autoPlaySlide.slidetoleft();">prev</label>
 				<label class="arrows" id="arrow-2" onclick="autoPlaySlide.slidetoright();">next</label>
 				<div id="slideshow-inner">
 					<ul id="myslide">
+					<script>
+						initpage();
+					</script>
 		</ul></div></div>
 		<p>Cara belanja di RuSerBa Imba :<br>
 - Pilih barang yang ingin anda beli (dapat memilih menu kategori maupun menggunakan search bar pada header untuk melakukan pencarian nama, kategori, maupun harga dari barang yang ingin anda beli)<br>

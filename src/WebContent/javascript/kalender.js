@@ -14,7 +14,7 @@ function ds_getel(id) {
 // Get the left and the top of the element.
 function ds_getleft(el) {
 	var tmp = el.offsetLeft;
-	el = el.offsetParent
+	el = el.offsetParent;
 	while(el) {
 		tmp += el.offsetLeft;
 		el = el.offsetParent;
@@ -23,7 +23,7 @@ function ds_getleft(el) {
 }
 function ds_gettop(el) {
 	var tmp = el.offsetTop;
-	el = el.offsetParent
+	el = el.offsetParent;
 	while(el) {
 		tmp += el.offsetTop;
 		el = el.offsetParent;

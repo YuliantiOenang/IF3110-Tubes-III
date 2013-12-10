@@ -12,47 +12,57 @@
 	<div style="width:1100px; margin-left:auto; margin-right:auto">
 	<%@ include file="header.jsp" %>
 	<article id="featured" class="body">
-	<form method="post" action="editbarang">
+	<form method="post" action="webservice?url=http://dichbar.ap01.aws.af.cm/editbarang&type=html">
 		<h2>Edit</h2>
-		<% 
-		Connection conn = null;
-	    Statement stmt = null;
-	    String id;
-	    if(request.getParameter("id")!=null){
-	    	id=request.getParameter("id");
-	    }else{
-	    	id="1";
-	    }
-	    try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(DB_URL,USER,PASS);
-			stmt = conn.createStatement();
-			String sql;
-            sql = "select * from barang where id="+id;
-            ResultSet rs = stmt.executeQuery(sql);
-          	// Extract data from result set
-          	while(rs.next()){
-          		out.println("<input type=\"hidden\" value='"+id+"'name='id'>"
-          				+"<pre>Nama Barang	: <input type=\"text\" name=\"nama\" value="+rs.getString("nama")+"></pre>"
-                		+"<pre>Kategori		: <input type=\"text\" name=\"kategori\" value="+rs.getString("kategori")+"></pre>"
-                		+"<pre>Harga		: <input type=\"text\" name=\"harga\" value="+rs.getString("harga")+"></pre>"
-                		+"<pre>Jumlah		: <input type=\"text\" name=\"jumlah\" value="+rs.getString("jumlah")+"></pre>"
-                		+"<pre id=\"addedrequest\">Deskripsi		: <textarea name=\"deskripsi\" cols=\"25\" rows=\"5\">"+rs.getString("keterangan")+"</textarea></pre>"
-                		+"<pre>Link Gambar	: <input type=\"text\" name=\"img\" value="+rs.getString("gambar")+"></pre>");
-          	}
-          	// Clean-up environment
-          	rs.close();
-          	stmt.close();
-		} catch (ClassNotFoundException e) {	
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		%>
+		<div id="editbarangform">
+		</div>
+		<script>
+			initpage();
+		</script>
 		<input type="submit" value="Edit">
 	</form>
 	</article><!-- /#featured -->
 	<%@ include file="footer.jsp" %>
 	</div>
 </body>
+
+<script>
+
+function geteditbarangform()
+{
+	var xmlhttp;
+	
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    	document.getElementById("editbarangform").innerHTML = xmlhttp.responseText;	
+	    	//alert(xmlhttp.responseText);
+	    }
+	 }
+	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/editbarangservlet?id=<%=request.getParameter("id") %>&type=html",true);
+	xmlhttp.send();
+}
+
+function initpage()
+{
+	var i;
+	for (i = 0; i < 10; i++)
+	{
+		geteditbarangform();
+	}
+}
+
+initpage();
+
+</script>
+
 </html>

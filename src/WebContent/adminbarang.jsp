@@ -28,6 +28,7 @@
 <%@ include file="headeradmin.jsp" %>
 <form name='check' action='webservice?url=http://dichbar.ap01.aws.af.cm/admin' method='POST'>
 <input type="hidden" name="admincode" id="admincode">
+<input type="hidden" name="type" id="type" value="html">
 <article id="featured" class="body">
 	<%
 	String kategori;

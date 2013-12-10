@@ -8,38 +8,34 @@
 </aside>
 <script src="javascript/transaksi.js"></script>
 <script>
+function sideBar()
+{
+	var xmlhttp;
+	
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+		  	var currentpage=1;
+			var shopping_bag = [];
+			var sum_item = parseInt(xmlhttp.responseText);
+			var maxpage= (sum_item/10+1);
+			var isi,buyitem;
+			initialize_bag();
+	    }
+	 }
+	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/sidebar?type=plain&type=plain",true);
+	xmlhttp.send();
+}
 if(localStorage.wbduser){
-	<% 
-		Connection conn = null;
-	    Statement stmt = null;
-	    PrintWriter outs = response.getWriter();
-	    int i=0;
-	    try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/wbd1"
-					,"root","");
-			stmt = conn.createStatement();
-			
-			String sql;
-			sql = "select count(*) from barang";
-			ResultSet rs = stmt.executeQuery(sql);
-			
-			while (rs.next()) {
-				i = rs.getInt("count(*)") - 1;
-			}
-			
-			
-		} catch (ClassNotFoundException e) {	
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	%>
-	var currentpage=1;
-	var shopping_bag = [];
-	var sum_item = <% out.print(i); %>;
-	var maxpage= (sum_item/10+1);
-	var isi,buyitem;
-	initialize_bag();
+sideBar();	
 }
 </script>

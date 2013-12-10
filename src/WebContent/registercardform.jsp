@@ -9,8 +9,9 @@
 	<div style="width:1100px; margin-left:auto; margin-right:auto">
 	<%@ include file="header.jsp" %>
 	<article id="featured" class="body">
-	<form id="registerform" method="post" action="registercard" name="myform">
-	<strong><h2>Pendaftaran Kartu Kredit</h2></strong><br>
+	<form id="registerform" method="post" action="webservice?url=http://dichbar.ap01.aws.af.cm/registercard" name="myform">
+	<h2><strong>Pendaftaran Kartu Kredit</strong></h2><br>
+	<input type="hidden" name="type" id="type" value="html">
 	<p><script>document.write(localStorage.wbduser);</script> bisa mendaftarkan kartu kredit sekarang atau nanti</p>
 	<pre>Card Number	<input type="text" name="cardnumber"></pre>
 	<pre>Name on Card	<input type="text" name="nama"></pre>

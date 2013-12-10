@@ -207,6 +207,8 @@ function readysubmit(no,val)
 <article id="featured" class="body">
 		<h2 id="headername"></h2>
 		<form id="registerform" method="post" action="webservice?url=http://dichbar.ap01.aws.af.cm/editprofilesave">
+		
+		<input type="hidden" name="type" id="type" value="html">
 		<pre>(*) Harus diisi.</pre>
 		<pre>Username*			<input type="hidden" name="username" id="usnm"><span id="usnmt"></span><span id="validasiUser"></span></pre>
 		<pre>Password*			<input type="password" name="password" id="pwd" onblur="validate(pwd.value,3,usnm.value)"/><span id="validasiPass"></span></pre>

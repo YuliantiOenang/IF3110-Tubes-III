@@ -7,37 +7,8 @@
  	<nav><ul id="menubar">
 		<li><a href="index.jsp">Home</a></li>
 		<li><a href="halamanbarang.jsp" onmouseover="slidedown(true)" onmouseup="slidedown(false)">Kategori Barang</a>
-			<ul class="sub-menu">	
-			<%
-			//mengambil dari database barang
-			try{
-				// Register JDBC driver
-			    Class.forName("com.mysql.jdbc.Driver");
-            	// Open a connection
-		        Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
-                // Execute SQL query
-	          	Statement stmt = conn.createStatement();
-	          	String sql = "select * from barang group by kategori";
-	          	ResultSet rs = stmt.executeQuery(sql);
-	          	// Extract data from result set
-	          	while(rs.next()){
-	            	//Retrieve by column name
-	             	String kategori = rs.getString("kategori");
-	             	//Display values
-	             	out.println("<li><a href=\"halamanbarang.jsp?kategori="+kategori+"\">"+kategori+"</a></li>");
-	          	}
-	          	// Clean-up environment
-	          	rs.close();
-	          	stmt.close();
-	          	conn.close();
-	       	}catch(SQLException se){
-	          	//Handle errors for JDBC
-	          	out.println(se.toString());
-	       	}catch(Exception e){
-	        	//Handle errors for Class.forName
-	          	out.println(e.toString());
-	       	}//end try
-			%>
+			<ul class="sub-menu" id="headeradmin">	
+			
 			</ul>
 		</li>
 		<div id="log"></div>
@@ -70,41 +41,60 @@
 	<script src="javascript/header.js"></script>
 <script src="javascript/transaksi.js"></script>
 <script>
-if(localStorage.wbduser){
-	var currentpage=1;
-	var shopping_bag = [];
-	var sum_item = parseInt(<%
-			//mengambil dari database barang
-			try{
-				// Register JDBC driver
-			    Class.forName("com.mysql.jdbc.Driver");
-            	// Open a connection
-		        Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
-                // Execute SQL query
-	          	Statement stmt = conn.createStatement();
-	          	String sql = "select count(*) from barang";
-	          	ResultSet rs = stmt.executeQuery(sql);
-	          	// Extract data from result set
-	          	while(rs.next()){
-	            	//Retrieve by column name
-	             	int count = rs.getInt("count(*)");
-	             	//Display values
-	             	out.println(""+(count-1));
-	          	}
-	          	// Clean-up environment
-	          	rs.close();
-	          	stmt.close();
-	          	conn.close();
-	       	}catch(SQLException se){
-	          	//Handle errors for JDBC
-	          	out.println(se.toString());
-	       	}catch(Exception e){
-	        	//Handle errors for Class.forName
-	          	out.println(e.toString());
-	       	}//end try
-			%>);
-	var maxpage= (sum_item/10+1);
-	var isi,buyitem;
-	initialize_bag();
+function headadmin()
+{
+	var xmlhttp;
+	
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    	document.getElementById("headeradmin").innerHTML = xmlhttp.responseText;
+	    	
+	    }
+	 }
+	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/headeradmin&type=html",true);
+	xmlhttp.send();
 }
+
+function getSumAdmin()
+{
+	var xmlhttp;
+	
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+		  if(localStorage.wbduser){
+				var currentpage=1;
+				var shopping_bag = [];
+				var sum_item = parseInt(xmlhttp.responseText);
+				var maxpage= (sum_item/10+1);
+				var isi,buyitem;
+				initialize_bag();
+			}
+	    }
+	 }
+	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/headeradmin&type=plain",true);
+	xmlhttp.send();
+}
+headadmin();
+getSumAdmin()
+
 </script>

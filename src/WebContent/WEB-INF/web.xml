@@ -270,4 +270,14 @@
     <servlet-name>indexslideservlet</servlet-name>
     <url-pattern>/indexslideservlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>editbarangservlet</display-name>
+    <servlet-name>editbarangservlet</servlet-name>
+    <servlet-class>tubes2wbd.editbarangservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>editbarangservlet</servlet-name>
+    <url-pattern>/editbarangservlet</url-pattern>
+  </servlet-mapping>
 </web-app>

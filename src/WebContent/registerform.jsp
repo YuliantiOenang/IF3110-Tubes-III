@@ -150,7 +150,7 @@
 	<div style="width:1100px; margin-left:auto; margin-right:auto">
 <%@ include file="header.jsp" %>
 <article id="featured" class="body">
-		<form id="registerform" method="post" action="webservice">
+		<form id="registerform" method="post" action="resultregister.jsp">
 		<input type="hidden" name="url" id="url" value="http://dichbar.ap01.aws.af.cm/register">
 		<input type="hidden" name="type" id="type" value="html">
 		

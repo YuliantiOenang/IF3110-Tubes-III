@@ -68,7 +68,7 @@ public class webservice extends HttpServlet {
 			url = new_url;
 		}
 		
-		System.out.println(url);
+		System.out.println("Url = " + url);
 		PrintWriter out = response.getWriter();
 		try {
 	        URL serviceURL = new URL(url);
@@ -129,7 +129,6 @@ public class webservice extends HttpServlet {
 			if (paramName.equals("url") || paramName.equals("type"))
 				continue;
 			
-			out.write(paramName);
 			String[] paramValues = request.getParameterValues(paramName);
 			for (int i = 0; i < paramValues.length; i++) {
 				String paramValue = paramValues[i];

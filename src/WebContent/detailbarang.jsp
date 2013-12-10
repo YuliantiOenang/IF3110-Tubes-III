@@ -8,43 +8,53 @@
 	<div style="width:1100px; margin-left:auto; margin-right:auto">
 <%@ include file="header.jsp" %>
 <article id="featured" class="body">
-	<%
-		String id = null;
-		if (request.getParameter("id") != null) {
-			id = request.getParameter("id");
-		}
-		
-	    try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/wbd1"
-					,"root","");
-			Statement stmt = conn.createStatement();
-			
-			String sql;
-			sql = "select * from barang where id="+id;
-			ResultSet rs = stmt.executeQuery(sql);
-			
-			while (rs.next()) {
-				out.print("<img src='"+rs.getString("gambar")+"' width='318' height='238'/>");
-				out.print("<h2>"+rs.getString("nama")+"</h2>");
-				out.print("<p>Keterangan : "+rs.getString("keterangan")+"</p>");
-				out.print("<form>");
-				out.print("<pre>Masukkan jumlah barang yang akan dibeli		<input type='number' name='quantity' min='1' id='qty'></pre>");
-				out.print("<pre id='addedrequest'>Masukkan tambahan permintaan 			<textarea name='tambahan' rows='4'></textarea></pre>");
-				out.print("<input type='button' value='Beli!' onclick='tempBuy("+rs.getInt("id")+",qty.value)'></form>");
-			}
-			
-			
-		} catch (ClassNotFoundException e) {	
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	%>
+	<script>
+		initpage();
+	</script>
 </article>
 
 <%@ include file="footer.jsp" %>
 
 </div>
 </body>
+
+<script>
+function geteditbarangform()
+{
+var xmlhttp;
+	
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+	    	document.getElementById("featured").innerHTML = xmlhttp.responseText;	
+	    	//alert(xmlhttp.responseText);
+	    }
+	 }
+	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/detailbarangservlet?id="+<%=request.getParameter("id")%>+"&type=html",true);
+	xmlhttp.send();
+}
+
+function initpage()
+{
+	var i;
+	for (i = 0; i < 10; i++)
+	{
+		geteditbarangform();
+	}
+}
+
+initpage();
+
+</script>
+
+
 </html>

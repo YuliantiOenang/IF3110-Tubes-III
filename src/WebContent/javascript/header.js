@@ -91,7 +91,7 @@ function searchsuggest(text)
 			document.getElementById("cariyu").innerHTML=xmlhttp.responseText;
 		}
 	};
-	xmlhttp.open("GET","search?cari="+text+"&suggest=true",true);
+	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/search?cari="+text+"*suggest=true",true);
 	xmlhttp.send();
 }
 var spage=1;
@@ -116,7 +116,7 @@ function search(text)
 			document.getElementById("cariyu").innerHTML="";
 		}
 	};
-	xmlhttp.open("GET","search?cari="+text+"&suggest=false&page="+spage,true);
+	xmlhttp.open("GET","webservice?url=http://dichbar.ap01.aws.af.cm/search?cari="+text+"*suggest=false*page="+spage,true);
 	xmlhttp.send();
 }
 function auth(user,pass){
@@ -138,7 +138,7 @@ function auth(user,pass){
 	{
 		if (xmlhttp.readyState==4 && xmlhttp.status==200)
 		{
-			if(xmlhttp.responseText=="0"){
+			if(xmlhttp.responseText.charAt(0)=='0'){
 				ANIMATEPOPUPBOX.closembox();
 				localStorage.wbduser = user;
 				localStorage.wbdlogintime=new Date().getTime();
@@ -146,7 +146,7 @@ function auth(user,pass){
 				s += "<li><a href=\"index.jsp\" onclick=\"javascript:localStorage.removeItem('wbduser');localStorage.removeItem('wbdlogintime');localStorage.removeItem('shoppingbag');\">Logout</a></li>";
 				document.getElementById("log").innerHTML=s;
 				document.getElementById("loginbutton").innerHTML='<input type="button" value="Login" onclick="auth(username.value,password.value)"> <a href="registerform.jsp">Daftar baru!</a>';
-			}else if(xmlhttp.responseText=="1"){
+			}else if(xmlhttp.responseText.charAt(0)== '1'){
 				document.getElementById("errorInfo").innerHTML='<img src="images/unlike.png" width="15" height="15"/>Invalid username passowrd!';
 				document.getElementById("loginbutton").innerHTML='<input type="button" value="Login" onclick="auth(username.value,password.value)"> <a href="registerform.jsp">Daftar baru!</a>';
 			}else{
@@ -159,7 +159,7 @@ function auth(user,pass){
 			document.getElementById("loginbutton").innerHTML='<img src="images/ope-loader.gif"/>Logging in...';
 		}
 	};
-	xmlhttp.open("POST","authentication",true);
+	xmlhttp.open("POST","webservice?url=http://dichbar.ap01.aws.af.cm/authentication",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("username="+user+"&password="+pass);
 }
@@ -174,6 +174,7 @@ if(typeof(Storage)!=="undefined"){
 			localStorage.removeItem('wbduser');
 			localStorage.removeItem('wbduserlogin');
 			localStorage.removeItem('shoppingbag');
+			localStorage.clear();
 			window.location.href="../RuSerBa/index.jsp";
 		}
 	}else{
