@@ -51,8 +51,8 @@ public class user extends HttpServlet {
 			String parameter[]=parameters.split(",");
 			GlobalConfig GC = new GlobalConfig();
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-			//Connection con = DriverManager.getConnection (GC.geturl(), GC.getuser(), GC.getpass());
-			Connection con = DriverManager.getConnection ("jdbc:mysql://localhost/progin_13511059", "root", "");
+			Connection con = DriverManager.getConnection (GC.geturl(), GC.getuser(), GC.getpass());
+			//Connection con = DriverManager.getConnection ("jdbc:mysql://localhost/progin_13511059", "root", "");
 			PrintWriter out =  response.getWriter();
 			// End OF DONT CHANGE
 			
