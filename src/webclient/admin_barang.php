@@ -121,7 +121,7 @@
 <script src="js/admin.js"></script>
 
 </head>
-<body>
+<body onload="redirect_admin()">
 <div class="outer">
 	<?php include("header.php"); ?>
 	<div class='content'>
