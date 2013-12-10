@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2013 at 10:58 AM
+-- Generation Time: Dec 10, 2013 at 11:07 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -52,10 +52,10 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `kategori`, `
 (56, 'Alice Carroll B', 18750, 60, 'mainan', 'Kartu Alice Carroll B!', 17),
 (57, 'Athena Glory A', 19500, 70, 'mainan', 'Kartu Athena Glory A!', 15),
 (58, 'Alice Carroll C', 20250, 80, 'mainan', 'Kartu Alice Carroll C!', 13),
-(59, 'Alice Carroll D', 21500, 86, 'peralatan serbaguna', 'Kartu Alice Carroll D!', 21),
-(60, 'Athena Glory B', 22250, 13, 'peralatan serbaguna', 'Kartu Athena Glory B!', 3),
-(61, 'Athena Glory C', 24750, 15, 'peralatan serbaguna', 'Kartu Athena Glory C', 5),
-(62, 'Athena Glory D', 26750, 156, 'peralatan serbaguna', 'Kartu Athena Glory D', 56),
+(59, 'Alice Carroll D', 21500, 86, 'mainan', 'Kartu Alice Carroll D!', 21),
+(60, 'Athena Glory B', 22250, 13, 'mainan', 'Kartu Athena Glory B!', 3),
+(61, 'Athena Glory C', 24750, 15, 'mainan', 'Kartu Athena Glory C', 5),
+(62, 'Athena Glory D', 26750, 156, 'mainan', 'Kartu Athena Glory D', 56),
 (63, 'Woody Ayanokouji the 51st', 27500, 115, 'peralatan serbaguna', 'Kartu Woody Ayanokouji the 51st!', 15),
 (64, 'Alice Carroll E', 28000, 74, 'peralatan rumah', 'Kartu Alice Carroll E!', 14),
 (65, 'Athena Glory E', 19500, 24, 'peralatan rumah', 'Kartu Athena Glory E!', 20),
