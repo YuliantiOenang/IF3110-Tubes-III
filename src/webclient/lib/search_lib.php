@@ -51,7 +51,7 @@
 		// page dimulai dari 0, 1 page 10 barang
 		// kembalian: array of Barang
 		$data["page"] = $page;
-		$array = sendRestRequest("GET","search/".$keyword, $data);
+		$array = sendRestRequest("GET","search/".rawurlencode($keyword), $data);
 		if ($array["status"] == "ok") {
 			return $array["hasil"];
 		} else {
@@ -67,7 +67,7 @@
 		$data["sort"] = $srt;
 		$data["order"] = $ord;
 		
-		$array = sendRestRequest("GET","kategori/".$category, $data);
+		$array = sendRestRequest("GET","kategori/".rawurlencode($category), $data);
 		if ($array["status"] == "ok") {
 			return $array["hasil"];
 		} else {
