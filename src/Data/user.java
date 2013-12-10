@@ -57,6 +57,14 @@ public class user extends HttpServlet {
 			// End OF DONT CHANGE
 			
 			
+			response.setContentType("text/html");
+	        response.setHeader("Cache-control", "no-cache, no-store");
+	        response.setHeader("Pragma", "no-cache");
+	        response.setHeader("Expires", "-1");
+			response.setHeader("Access-Control-Allow-Origin","*");
+			response.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,DELETE,OPTIONS");
+			response.setHeader("Access-Control-Allow-Headers","X-Requested-With, Content-Type, Content-Length");
+			
 			if(action.equals("insert")){
 				// TODO customize for funtion 
 				// FORMAT INPUT : action = register & parameters = username , nama_lengkap , password, email ,handphone , address , province , state , postcode , n_pembelian

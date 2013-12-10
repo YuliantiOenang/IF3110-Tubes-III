@@ -22,6 +22,11 @@ public class logger {
 			String url = GC.geturl();
 			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 	        con = DriverManager.getConnection (url, uname, pass);
+			/*String uname = "root";
+			String pass = "";
+			String url = "jdbc:mysql://localhost/progin_13511059";
+			Class.forName ("com.mysql.jdbc.Driver").newInstance ();
+	        con = DriverManager.getConnection (url, uname, pass);*/
 		}
 		catch(Exception e){
 			System.out.println("Cannot connect to database "+ e.getMessage());

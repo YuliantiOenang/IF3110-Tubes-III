@@ -4,6 +4,11 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+        <param-name>incomingURLs</param-name>
+        <param-value>http://www.domainA.com,https://www.domainB.com,http://localhost:8080</param-value>
+  </context-param>	
+  
   <servlet>
     <servlet-name>verifyRegister</servlet-name>
     <servlet-class>tubesII.wbd.kay.verifyregist.verifyRegister</servlet-class>
@@ -11,9 +16,13 @@
   </servlet>
   <servlet>
     <servlet-name>verifyLogin</servlet-name>
-    <servlet-class>tubesII.wbd.kay.verifyregist.verifyLogin</servlet-class>
+    <servlet-class>tubesII.wbd.kay.verifylogin.verifyLogin</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>verifyLogin</servlet-name>
+    <url-pattern>/verifyLogin</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>verifyRegister</servlet-name>
     <url-pattern>/verifyRegister.do</url-pattern>
