@@ -74,29 +74,30 @@ public class Index extends HttpServlet {
 			try {
 				/**port*/
 
-//				String json = webkit.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"+userid);
-//				
-//				Gson gson = new Gson();
-//				JsonParser jsonParser = new JsonParser();
-//				JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
-//				List<UserBean2> categoriesList = new ArrayList<UserBean2>();
-//				for (JsonElement category : categoryArray)
-//				{
-//					UserBean2 courseObj = gson.fromJson(category, UserBean2.class);
-//					categoriesList.add(courseObj);
-//				}
-//				
-//				sessions.setAttribute("role", categoriesList.get(0).getRole());
-//				sessions.setAttribute("user_id", userid);
-//				sessions.setAttribute("username", username);
+				String json = webkit.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"+userid);
+				
+				Gson gson = new Gson();
+				JsonParser jsonParser = new JsonParser();
+				JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
+				List<UserBean2> categoriesList = new ArrayList<UserBean2>();
+				for (JsonElement category : categoryArray)
+				{
+					UserBean2 courseObj = gson.fromJson(category, UserBean2.class);
+					System.out.println("yoi bro");
+					categoriesList.add(courseObj);
+				}
+				
+				sessions.setAttribute("role", String.valueOf(categoriesList.get(0).getRole()));
+				sessions.setAttribute("user_id", userid);
+				sessions.setAttribute("username", username);
 				
 				
 				/**OLD*/
-				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");
-				rs.next();				
-				sessions.setAttribute("role", rs.getString("role"));
-				sessions.setAttribute("user_id", userid);
-				sessions.setAttribute("username", username);
+//				ResultSet rs = new DbConnection().mySqlConnection().createStatement().executeQuery("SELECT role FROM user WHERE id='" + userid + "'");
+//				rs.next();				
+//				sessions.setAttribute("role", rs.getString("role"));
+//				sessions.setAttribute("user_id", userid);
+//				sessions.setAttribute("username", username);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
