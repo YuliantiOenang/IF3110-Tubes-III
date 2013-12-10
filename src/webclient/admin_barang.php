@@ -110,6 +110,7 @@
 	echo "var category = '".$cat."';";
 	echo "var sortby = '".$sort."';";
 	echo "var order = '".$order."';";
+	echo "var IMGURL = '$IMAGE_BASE_URL';\n";
 ?>
 </script>
 
@@ -117,17 +118,20 @@
 <script src="js/ajax.js"></script>
 <script src="js/login.js"></script>
 <script src="js/transaction.js"></script>
-<script src="js/category.js"></script>
+<script src="js/admin.js"></script>
 
 </head>
 <body>
 <div class="outer">
 	<?php include("header.php"); ?>
 	<div class='content'>
-	<?php echo "<h3>Kategori: ".$cat."</h3>"; 
-	echo '<a href="add_barang.php"><img src=image/Plus.png id="add"></a>';
-	echo '<input type="image" src=image/Delete.png id="bulkdelete" onclick="deleteBulkBarang()">';
-	echo '"<input type="hidden" name="admincode" id="adminidcode">"';?>
+	<?php echo "<h3>Kategori: ".$cat."</h3>"; ?>
+	<div class="floater">
+	<a href="add_barang.php"><img src="image/Plus.png" id="add"></a>
+	<input type="image" src="image/Delete.png" id="bulkdelete" onclick="deleteBulkBarang()">
+	</div>
+	
+	<div>
 	Pengurutan:
 	<select onchange="changeSortBy(this.value)">
 		<option value="nama" <?php if(!$harga_selected) echo "selected"; ?> >Nama Barang</option>
@@ -138,7 +142,7 @@
 		<option value="asc" <?php if(!$desc_selected) echo "selected"; ?> >Ascending</option>
 		<option value="desc" <?php if($desc_selected) echo "selected"; ?> >Descending</option>
 	</select>
-	
+	</div>
 	<div id='cattable' class='table'>
 	<?php
 		foreach($list as $barang){
