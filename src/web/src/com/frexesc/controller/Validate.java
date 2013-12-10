@@ -11,8 +11,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.frexesc.Constants;
+import com.frexesc.service.WebService;
 
 /**
  * Servlet implementation class Validate
@@ -45,45 +51,34 @@ public class Validate extends HttpServlet {
 		// TODO Auto-generated method stub
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
-
+		HttpSession session = request.getSession(true);
 		PrintWriter out = response.getWriter();
 		
 		String value = request.getParameter("value");
 		String method = request.getParameter("method");
 		System.out.println(value + " " + method);
+		
+		/** Set WebService (REST) for retrieving list of User */
+		WebService _user = new WebService(hostname + "user");
+		_user.addParam("action", "validate");
+		_user.addParam("method", method);
+		_user.addParam("value", value);
+		_user.addHeader("GData-Version", "2");
+
 		try {
-			if (method.equals("number")) {
-				String query = "SELECT nomor_kartu FROM user WHERE nomor_kartu='" + value + "' LIMIT 1";
-				Statement statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery(query);
-				if (rs.next()) {
-					out.print(method + " has been taken!");
-				} else {
-					out.print(method + " is available.");
-				}
-			} else if (method.equals("name")) {
-				String query = "SELECT nama_kartu FROM user WHERE nama_kartu='" + value + "' LIMIT 1";
-				Statement statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery(query);
-				if (rs.next()) {
-					out.print(method + " has been taken!");
-				} else {
-					out.print(method + " is available.");
-				}
-			} else {
-				String query = "SELECT "+ method + " FROM user WHERE " + method + "='" + value + "' LIMIT 1";
-				System.out.println(query);
-				Statement statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery(query);
-				if (rs.next()) {
-					out.print(method + " has been taken!");
-					System.out.println(method + " has been taken!");
-				} else {
-					out.print(method + " is available.");
-					System.out.println(method + " has been taken!");
-				}
+			_user.execute(WebService.REQUEST_METHOD.POST);
+			String user = _user.getResponse();
+			JSONParser parser = new JSONParser();
+			JSONObject mainJSON = null;
+			
+			try {
+				mainJSON = (JSONObject) parser.parse(user);
+				out.print(mainJSON.get("status").toString());
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

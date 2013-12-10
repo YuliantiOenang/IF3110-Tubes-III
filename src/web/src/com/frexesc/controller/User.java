@@ -245,8 +245,8 @@ public class User extends HttpServlet {
 			// } catch (SQLException e) {
 			// e.printStackTrace();
 			// }
-			// response.sendRedirect("user?id=" +
-			// request.getSession(true).getAttribute("user_id"));
+			 response.sendRedirect("user?id=" +
+			 request.getSession(true).getAttribute("user_id"));
 		}
 
 	}

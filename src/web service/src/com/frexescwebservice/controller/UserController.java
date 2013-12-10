@@ -103,7 +103,7 @@ public class UserController extends HttpServlet {
 		if (requestType.equals("edit_profile")) {
 			String id = request.getParameter("id");
 			String password = request.getParameter("password");
-			String email = request.getParameter("email");
+			// String email = request.getParameter("email");
 			String name = request.getParameter("name");
 			String telephone = request.getParameter("telephone");
 			String address = request.getParameter("address");
@@ -115,10 +115,10 @@ public class UserController extends HttpServlet {
 			Connection connection = dbConnection.mySqlConnection();
 
 			String updateQuery = "UPDATE user SET nama='" + name
-					+ "', password='" + password + "', email='" + email
-					+ "', handphone='" + telephone + "', alamat='" + address
-					+ "', kota='" + city + "', provinsi='" + province
-					+ "', kodepos='" + postal + "' WHERE id='" + id + "'";
+					+ "', password='" + password + "', handphone='" + telephone
+					+ "', alamat='" + address + "', kota='" + city
+					+ "', provinsi='" + province + "', kodepos='" + postal
+					+ "' WHERE id=" + id;
 			try {
 				Statement statement = connection.createStatement();
 				statement.executeUpdate(updateQuery);
@@ -205,6 +205,58 @@ public class UserController extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+		}
+
+		if (requestType.equals("validate")) {
+			String value = request.getParameter("value");
+			String method = request.getParameter("method");
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+			JSONObject json = new JSONObject();
+
+			if (method.equals("number")) {
+				String query = "SELECT nomor_kartu FROM user WHERE nomor_kartu='"
+						+ value + "' LIMIT 1";
+				try {
+					ResultSet rs = connection.createStatement().executeQuery(
+							query);
+					if (rs.next())
+						json.put("status", " has been taken!");
+					else
+						json.put("status", " is available");
+					out.println(json.toString());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} else if (method.equals("name")) {
+				String query = "SELECT nama_kartu FROM user WHERE nama_kartu='"
+						+ value + "' LIMIT 1";
+				try {
+					ResultSet rs = connection.createStatement().executeQuery(
+							query);
+					if (rs.next())
+						json.put("status", " has been taken!");
+					else
+						json.put("status", " is available");
+					out.println(json.toString());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} else {
+				String query = "SELECT " + method + " FROM user WHERE "
+						+ method + "='" + value + "' LIMIT 1";
+				try {
+					ResultSet rs = connection.createStatement().executeQuery(
+							query);
+					if (rs.next())
+						json.put("status", " has been taken!");
+					else
+						json.put("status", " is available");
+					out.println(json.toString());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

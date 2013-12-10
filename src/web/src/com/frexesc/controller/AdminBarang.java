@@ -57,6 +57,7 @@ public class AdminBarang extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 		if (session.getAttribute("role") == null) {
 			response.sendRedirect("register");
+			
 		} else if (session.getAttribute("role").equals("1")) {
 			DbConnection dbConnection = new DbConnection();
 			Connection connection = dbConnection.mySqlConnection();
