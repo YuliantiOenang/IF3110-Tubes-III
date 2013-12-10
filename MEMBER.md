@@ -1,5 +1,6 @@
 Data Kelompok
 =============
 
+Satria Ady Pradana - 13510030 - 13510030 di std.stei.itb.ac.id - xathrya
 Okaswara Perkasa - 13510051 - 13510051 di std.stei.itb.ac.id - okaswara-p
-Sandy Gunawan Tanuwijaya - 13510025 - 13510025 di std.stei.itb.ac.id - 4XPG
+Ezra Hizkia Nathanael - 13510076 - 13510076 di std.stei.itb.ac.id - enathanael
