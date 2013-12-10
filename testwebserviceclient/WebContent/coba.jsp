@@ -13,7 +13,7 @@
 		sendQuery(query, function() {
 			var jsonArray = JSON.parse(xmlhttp.responseText);
 			var b = jsonArray.result[0][1];
-			document.getElementById('test').innerHTML = b;
+			document.write(b);
 		});
 	}
 	
@@ -21,8 +21,9 @@
 
 </head>
 
-<body onload='getquery();alert("test")'>
+<body>
 	<div id='test'>
+		<script>getquery();</script>
 	</div>
 </body>
 </html>

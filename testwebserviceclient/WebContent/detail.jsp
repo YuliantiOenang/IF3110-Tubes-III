@@ -1,34 +1,34 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file= "./header.jsp" %>
-<div id = "detailhere">
-<script>
-	getDetail(<%= request.getParameter("id") %>);
-</script>
-</div>
+<script src='${pageContext.request.contextPath}/ajax.js'></script>
+<script type="text/javascript"></script>
 <script>
 function getDetail(id){
-	var detail = document.getElementById("detailhere");
-	detail.innerHTML = "masuk sayang";
-	if(window.XMLHttpRequest){
-		xmlhttp = new XMLHttpRequest();
-	}
-	else{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange=function(){
-		if(xmlhttp.readyState==4&&xmlhttp.status==200){
-			detail.innerHTML = xmlhttp.responseText;
-
-			if(err_login.innerHTML==""){
-				//Handle SESSION & LOCAL STORAGE
-				window.location="index.jsp";
-			}
-		}
-	};
-	xmlhttp.open("GET","getDetailBarang?idbarang="+id,true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send();
+	var query = "SELECT * FROM barang where id_barang='"+id+"'";
+	sendQuery(query, function() {
+		var jsonArray = JSON.parse(xmlhttp.responseText);
+		document.getElementById("nama").innerHTML = jsonArray.result[0][1];
+		document.getElementById("detail").innerHTML = jsonArray.result[0][6];
+		document.getElementById("id_barang").innerHTML = jsonArray.result[0][1];
+		document.getElementById("img").innerHTML = jsonArray.result[0][3];
+	});
 }
 </script>
+<body>
+	<h1 id="nama"></h1>
+	<img id="img" width='300px' height='300px'/><br>
+	<br><h2>Deskripsi :</h2>
+	<p id="detail"></p><br>
+	Request tambahan 	: <br>
+	<form action='addCart' method='post' id='usrform'>
+	<textarea rows='4' cols='50'  name='request_tambahan' form='usrform'></textarea><br>
+	<input type='hidden' name='id_barang'>
+	Quantity : <input type='text' name='qt' style='width: 20px; text-align: right' /><br>
+	<input type='submit' value='Add to cart'></form>
+	<script>
+		getDetail(<%= request.getParameter("id") %>);
+	</script>
+</body>
+
 <%@ include file= "./footer.jsp" %>
