@@ -75,14 +75,14 @@ public class BarangService {
 			ArrayList<Barang> barangList = new ArrayList<Barang>();
 			while (rs.next()) {
 				Barang barang = new Barang();
-				barang.setId(rs.getInt(3));
-				barang.setId_category(rs.getInt(4));
-				barang.setName(rs.getString(5));
-				barang.setPicture(rs.getString(2));
-				barang.setPrice(rs.getInt(6));
-				barang.setDescription(rs.getString(8));
-				barang.setName(rs.getString(7));
-				barang.setnKat(rs.getString(1));
+				barang.setId(rs.getInt("id"));
+				barang.setId_category(rs.getInt("id_kategori"));
+				barang.setName(rs.getString("nama_barang"));
+				barang.setPicture(rs.getString("gambar"));
+				barang.setPrice(rs.getInt("harga_barang"));
+				barang.setDescription(rs.getString("keterangan"));
+				barang.setTotal_item(rs.getInt("jumlah_barang"));
+				barang.setnKat(rs.getString("nKat"));
 				barangList.add(barang);
 			}
 			gson = new Gson();
@@ -149,7 +149,7 @@ public class BarangService {
 				barang.setPicture(rs.getString("gambar"));
 				barang.setPrice(rs.getInt("harga_barang"));
 				barang.setDescription(rs.getString("keterangan"));
-				barang.setName(rs.getString("jumlah_barang"));
+				barang.setTotal_item(rs.getInt("jumlah_barang"));
 				barangList.add(barang);
 			}
 			gson = new Gson();

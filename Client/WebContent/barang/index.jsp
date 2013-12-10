@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.lang.*"%>
-<%@ page import="com.frexesc.model.BarangBean"%>
+<%@ page import="com.frexesc.model.Barang"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -109,12 +109,12 @@
 	<jsp:include page="../layout.jsp" />
 	<%
 		@SuppressWarnings("unchecked")
-		ArrayList<BarangBean> barangBean = (ArrayList<BarangBean>) request
-				.getAttribute("items");
+			ArrayList<Barang> barangBean = (ArrayList<Barang>) request
+			.getAttribute("items");
 	%>
 	<%
 		if (barangBean == null)
-			barangBean = new ArrayList<BarangBean>();
+		barangBean = new ArrayList<Barang>();
 	%>
 
 	<div class='header_divider'>
@@ -133,29 +133,29 @@
 
 	<%
 		String previous = "";
-		String previous2 = "";
-		if (request.getParameter("sort") != null) {
-			previous = "&sort=" + request.getParameter("sort");
-		}
-		if (request.getParameter("jenisSort") != null) {
-			previous = previous + "&jenisSort="
-					+ request.getParameter("jenisSort");
-		}
-		if (request.getParameter("name") != null) {
-			previous = previous + "&name=" + request.getParameter("name");
-			previous2 = "&name=" + request.getParameter("name");
-		}
-		if (request.getParameter("category") != null) {
-			previous = previous + "&category="
-					+ request.getParameter("category");
-			previous2 = previous2 + "&category="
-					+ request.getParameter("category");
-		}
-		if (request.getParameter("price") != null) {
-			previous = previous + "&price=" + request.getParameter("price");
-			previous2 = previous2 + "&price="
-					+ request.getParameter("price");
-		}
+			String previous2 = "";
+			if (request.getParameter("sort") != null) {
+		previous = "&sort=" + request.getParameter("sort");
+			}
+			if (request.getParameter("jenisSort") != null) {
+		previous = previous + "&jenisSort="
+				+ request.getParameter("jenisSort");
+			}
+			if (request.getParameter("name") != null) {
+		previous = previous + "&name=" + request.getParameter("name");
+		previous2 = "&name=" + request.getParameter("name");
+			}
+			if (request.getParameter("category") != null) {
+		previous = previous + "&category="
+				+ request.getParameter("category");
+		previous2 = previous2 + "&category="
+				+ request.getParameter("category");
+			}
+			if (request.getParameter("price") != null) {
+		previous = previous + "&price=" + request.getParameter("price");
+		previous2 = previous2 + "&price="
+				+ request.getParameter("price");
+			}
 	%>
 
 	<div class='header_divider'>
@@ -178,7 +178,7 @@
 
 		<%
 			for (int i = 0; i < barangBean.size(); i++) {
-			BarangBean b = barangBean.get(i);
+			Barang b = barangBean.get(i);
 		%>
 		<%
 			if (i % 2 == 0) {

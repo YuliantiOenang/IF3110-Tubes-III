@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class KategoriBean {
 	private int id;
 	private String name;
-	private ArrayList<BarangBean> itemList;
+	private ArrayList<Barang> itemList;
 
 	public KategoriBean(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.itemList = new ArrayList<BarangBean>();
+		this.itemList = new ArrayList<Barang>();
 	}
 
 	public int getId() {
@@ -30,19 +30,19 @@ public class KategoriBean {
 		this.name = name;
 	}
 
-	public ArrayList<BarangBean> getItemList() {
+	public ArrayList<Barang> getItemList() {
 		return itemList;
 	}
 
-	public BarangBean getItemList(int x) {
+	public Barang getItemList(int x) {
 		return itemList.get(x);
 	}
 
-	public void setItemList(ArrayList<BarangBean> itemList) {
+	public void setItemList(ArrayList<Barang> itemList) {
 		this.itemList = itemList;
 	}
 
-	public void setItemList(BarangBean itemList) {
+	public void setItemList(Barang itemList) {
 		this.itemList.add(itemList);
 	}
 

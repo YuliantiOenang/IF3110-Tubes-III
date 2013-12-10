@@ -45,6 +45,26 @@ public class UserService
 	}
 	
 	@GET
+	@Path("/user2/{paramID}")
+	@Produces("application/json")
+	public String userById2(@PathParam("paramID") int paramID)
+	{
+		String user = null;
+		ArrayList<UserBean> userList = new ArrayList<UserBean>();
+		try
+		{
+			userList = new AccessManager().getUsersById2(paramID);
+			Gson gson = new Gson();
+			user = gson.toJson(userList);
+		} catch (Exception e)
+		{
+				e.printStackTrace();
+		}
+		return user;
+	}
+	
+	
+	@GET
 	@Path("/userlimit1/{paramID}")
 	@Produces("application/json")
 	public String userByIdlimit1(@PathParam("paramID") int paramID)

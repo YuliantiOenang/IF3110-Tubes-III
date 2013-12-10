@@ -16,10 +16,10 @@
 	<h1 class="header">Edit Barang</h1>
 	<%
 		@SuppressWarnings("unchecked")
-		ArrayList<BarangBean> barangs = (ArrayList<BarangBean>) request.getAttribute("barangs");
-		@SuppressWarnings("unchecked")
-		ArrayList<KategoriBean> kategoris = (ArrayList<KategoriBean>) request.getAttribute("kategoris");
-		for (int i = 0; i < kategoris.size(); i++) {
+			ArrayList<Barang> barangs = (ArrayList<Barang>) request.getAttribute("barangs");
+			@SuppressWarnings("unchecked")
+			ArrayList<KategoriBean> kategoris = (ArrayList<KategoriBean>) request.getAttribute("kategoris");
+			for (int i = 0; i < kategoris.size(); i++) {
 	%>
 	<a href="admin?action=edit&category=<%=kategoris.get(i).getId()%>"><%=kategoris.get(i).getName()%></a>
 	<%
@@ -40,7 +40,7 @@
 		<%
 			String[] categories = { "Ladies Dress", "Ladies Shoes", "Men Shirt", "Men Shoes", "Men Hat" };
 			for (int i = 0; i < barangs.size(); i++) {
-				BarangBean b = barangs.get(i);
+				Barang b = barangs.get(i);
 		%>
 		<div class="row" id="<%="r" + b.getId()%>">
 			<div class="c1" id="<%="id" + b.getId()%>"><%=b.getId()%></div>

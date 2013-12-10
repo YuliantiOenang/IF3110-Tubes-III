@@ -6,7 +6,7 @@ import java.net.URL;
 
 public class WebServicesKit {
 	
-	String readUrl(String urlString) throws Exception
+	static String readUrl(String urlString) throws Exception
 	{
 		BufferedReader reader = null;
 		try

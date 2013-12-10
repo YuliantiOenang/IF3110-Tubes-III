@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.frexesc.model.BarangBean;
+import com.frexesc.model.Barang;
 import com.frexesc.model.BarangUserBean;
 
 /**
@@ -77,10 +77,10 @@ public class UpdateCart extends HttpServlet {
 							query2);
 
 					if (rs2 != null) {
-						ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+						ArrayList<Barang> allResults2 = new ArrayList<Barang>();
 
 						while (rs2.next()) {
-							BarangBean barang = new BarangBean(
+							Barang barang = new Barang(
 									Integer.valueOf(rs2.getString("id")),
 									Integer.valueOf(rs2
 											.getString("id_kategori")),

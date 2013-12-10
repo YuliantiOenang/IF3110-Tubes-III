@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.frexesc.model.BarangBean;
+import com.frexesc.model.Barang;
 import com.frexesc.model.KategoriBean;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * 
@@ -58,10 +62,10 @@ public class Detail extends HttpServlet {
 						+ id; // Select item based on id
 				ResultSet rs = connection.createStatement().executeQuery(query);
 
-				ArrayList<BarangBean> allResults = new ArrayList<BarangBean>();
+				ArrayList<Barang> allResults = new ArrayList<Barang>();
 
 				while (rs.next()) {
-					BarangBean barang = new BarangBean(Integer.valueOf(rs
+					Barang barang = new Barang(Integer.valueOf(rs
 							.getString("id")), Integer.valueOf(rs
 							.getString("id_kategori")),
 							rs.getString("nama_barang"), rs.getString("gambar"),
@@ -71,17 +75,36 @@ public class Detail extends HttpServlet {
 					allResults.add(barang);
 				}
 
-				String query2 = "SELECT * FROM kategori";
-				ResultSet rs2 = connection.createStatement().executeQuery(query2);
+				/**PORT*/
+				WebServicesKit webkit = new WebServicesKit();
 
-				ArrayList<KategoriBean> allResults2 = new ArrayList<KategoriBean>();
-
-				while (rs2.next()) {
-					KategoriBean kategori = new KategoriBean(Integer.valueOf(rs2
-							.getString("id")), rs2.getString("nama"));
-					allResults2.add(kategori);
-				}
-
+					String json = webkit.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories");
+					Gson gson = new Gson();
+					JsonParser jsonParser = new JsonParser();
+					JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
+					ArrayList<KategoriBean> allResults2 = new ArrayList<KategoriBean>();
+					for (JsonElement categ : categoryArray)
+					{
+						KategoriBean kategObj = gson.fromJson(categ, KategoriBean.class);
+						System.out.println("debug admin barang-detail=>"+kategObj.getName());
+						allResults2.add(kategObj);
+					}
+					
+				/**PORT*/
+				
+				/**OLD*/
+//				String query2 = "SELECT * FROM kategori";
+//				ResultSet rs2 = connection.createStatement().executeQuery(query2);
+//
+//				ArrayList<KategoriBean> allResults2 = new ArrayList<KategoriBean>();
+//
+//				while (rs2.next()) {
+//					KategoriBean kategori = new KategoriBean(Integer.valueOf(rs2
+//							.getString("id")), rs2.getString("nama"));
+//					allResults2.add(kategori);
+//				}
+				/**old*/
+				
 				request.setAttribute("items", allResults);
 				request.setAttribute("categories", allResults2);
 				RequestDispatcher dispatcher = getServletContext()

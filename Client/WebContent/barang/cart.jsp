@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.frexesc.model.BarangBean"%>
+<%@ page import="com.frexesc.model.Barang"%>
 <%@ page import="com.frexesc.model.BarangUserBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,22 +15,22 @@
 	<jsp:include page="../layout.jsp" />
 	<%
 		@SuppressWarnings("unchecked")
-		ArrayList<BarangUserBean> barangUserBean = (ArrayList<BarangUserBean>) request
-				.getAttribute("user_items");
+			ArrayList<BarangUserBean> barangUserBean = (ArrayList<BarangUserBean>) request
+			.getAttribute("user_items");
 	%>
 	<%
 		if (barangUserBean == null)
-			barangUserBean = new ArrayList<BarangUserBean>();
+		barangUserBean = new ArrayList<BarangUserBean>();
 	%>
 
 	<%
 		@SuppressWarnings("unchecked")
-		ArrayList<BarangBean> barangBean = (ArrayList<BarangBean>) request
-				.getAttribute("items");
+			ArrayList<Barang> barangBean = (ArrayList<Barang>) request
+			.getAttribute("items");
 	%>
 	<%
 		if (barangBean == null)
-			barangBean = new ArrayList<BarangBean>();
+		barangBean = new ArrayList<Barang>();
 	%>
 
 	<div id='content_frame' name='page'>
@@ -69,9 +69,9 @@
 						<%
 							int totalHarga = 0;
 
-							for (int i = 0; i < barangUserBean.size(); i++) {
+											for (int i = 0; i < barangUserBean.size(); i++) {
 
-								BarangUserBean b = barangUserBean.get(i);
+												BarangUserBean b = barangUserBean.get(i);
 						%>
 						<div class='row'>
 							<div class='list_body' id='no'>
@@ -79,10 +79,10 @@
 							</div>
 							<%
 								for (int j = 0; j < barangBean.size(); j++) {
-										BarangBean b2 = barangBean.get(j);
-										if (b2.getId() == b.getId_item()) {
-											totalHarga = totalHarga + b.getTotal_item()
-													* b2.getPrice();
+															Barang b2 = barangBean.get(j);
+															if (b2.getId() == b.getId_item()) {
+																totalHarga = totalHarga + b.getTotal_item()
+																		* b2.getPrice();
 							%>
 							<div class='list_body' id='item'>
 								<p>
