@@ -75,24 +75,6 @@ public class Index extends HttpServlet {
 			}
 		}
 
-		// if (isLogin && sessions.getAttribute("user_id") == null) {
-		// try {
-		// ResultSet rs = new DbConnection()
-		// .mySqlConnection()
-		// .createStatement()
-		// .executeQuery(
-		// "SELECT role FROM user WHERE id='" + userid
-		// + "'");
-		// rs.next();
-		// sessions.setAttribute("role", rs.getString("role"));
-		// sessions.setAttribute("user_id", userid);
-		// sessions.setAttribute("username", username);
-		// } catch (SQLException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// }
-
 		ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
 
 		/** Set WebService (REST) for retrieving list of Barang */

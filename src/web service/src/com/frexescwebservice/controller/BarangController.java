@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import com.frexescwebservice.controller.DbConnection;
+import com.frexescwebservice.model.KategoriBean;
 import com.frexescwebservice.model.BarangBean;
 
 /**
@@ -113,7 +116,7 @@ public class BarangController extends HttpServlet {
 									.getString("harga_barang")),
 							rs2.getString("keterangan"), Integer.valueOf(rs2
 									.getString("jumlah_barang")));
-					allResults2.add(barang);
+					allResults2.add(barang); 
 				}
 
 				/** ArrayList for storing JSONObject */
@@ -134,6 +137,32 @@ public class BarangController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (requestType.equals("readId")) {
+			String nama_barang = request.getParameter("nama_barang").toString();
+			JSONObject json = new JSONObject();
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "SELECT * FROM barang WHERE nama_barang='"
+					+ nama_barang + "'";
+
+			try {
+				ResultSet rs2 = connection.createStatement()
+						.executeQuery(query);
+
+				if (rs2.next()) {
+					json.put("status", "true");
+					json.put("data", rs2.getString("id").toString());
+				} else {
+					json.put("status", "false");
+				}
+				out.println(json.toString());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		} else if (requestType.equals("search")) {
 			JSONObject json = new JSONObject();
 
@@ -270,6 +299,59 @@ public class BarangController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else if (requestType.equals("edit")) {
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+			JSONObject json = new JSONObject();
+			String category = request.getParameter("category");
+			String selectQuery = "SELECT * FROM barang WHERE id_kategori='"
+					+ category + "'";
+			String selectCQuery = "SELECT * FROM kategori";
+
+			try {
+				ResultSet rsc = connection.createStatement().executeQuery(
+						selectCQuery);
+				ArrayList<KategoriBean> kategoris = new ArrayList<KategoriBean>();
+				while (rsc.next()) {
+					kategoris.add(new KategoriBean(rsc.getInt("id"), rsc
+							.getString("nama")));
+				}
+
+				ArrayList<JSONObject> ResultKategoris = new ArrayList<JSONObject>();
+				if (kategoris.size() > 0) {
+					for (int i = 0; i < kategoris.size(); i++) {
+						ResultKategoris.add(kategoris.get(i).toJSON());
+					}
+					json.put("status", "true");
+					json.put("kategoris", ResultKategoris);
+				}
+
+				ResultSet rs = connection.createStatement().executeQuery(
+						selectQuery);
+				ArrayList<BarangBean> barangs = new ArrayList<BarangBean>();
+				while (rs.next()) {
+					barangs.add(new BarangBean(rs.getLong("id"), rs
+							.getLong("id_kategori"), rs
+							.getString("nama_barang"), rs.getString("gambar"),
+							rs.getInt("harga_barang"), rs
+									.getString("keterangan"), rs
+									.getInt("jumlah_barang")));
+				}
+				ArrayList<JSONObject> ResultBarangs = new ArrayList<JSONObject>();
+				if (barangs.size() > 0) {
+					for (int i = 0; i < barangs.size(); i++) {
+						ResultBarangs.add(barangs.get(i).toJSON());
+					}
+					json.put("status", "true");
+					json.put("barangs", ResultBarangs);
+				} else {
+					json.put("status", "false");
+				}
+				out.println(json.toString());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -296,6 +378,68 @@ public class BarangController extends HttpServlet {
 			String query = "UPDATE barang SET jumlah_barang=" // update
 					// stock
 					+ new_value + " WHERE id=" + id;
+			try {
+				connection.createStatement().executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (requestType.equals("updateGambar")) {
+			Long id = Long.parseLong(request.getParameter("id"));
+			String path = request.getParameter("path");
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String updateQuery = "UPDATE barang SET gambar='" + id + "."
+					+ path + "' WHERE id='" + id + "'";
+			
+			try {
+				connection.createStatement().executeUpdate(updateQuery);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (requestType.equals("updateBarang")) {
+			Long id = Long.parseLong(request.getParameter("id"));
+			Long id_category = Long.parseLong(request
+					.getParameter("id_category"));
+			String name = request.getParameter("name").toString();
+			Integer price = Integer.parseInt(request.getParameter("price"));
+			String description = request.getParameter("description").toString();
+			Integer total_item = Integer.parseInt(request
+					.getParameter("total_item"));
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String updateQuery = "UPDATE barang SET id_kategori='"
+					+ id_category + "', nama_barang='" + name
+					+ "', harga_barang='" + price + "', keterangan='"
+					+ description + "', jumlah_barang='" + total_item
+					+ "' WHERE id='" + id + "'";
+
+			try {
+				Statement statement = connection.createStatement();
+				// PrintWriter out = response.getWriter();
+				if (statement.executeUpdate(updateQuery) < 1) {
+					// out.print("not");
+				} else {
+					// out.print("success");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (requestType.equals("delete")) {
+
+			Long id = Long.parseLong(request.getParameter("id"));
+
+			DbConnection dbConnection = new DbConnection();
+			Connection connection = dbConnection.mySqlConnection();
+
+			String query = "DELETE FROM barang WHERE id=" + id; // delete
+			// entry
 			try {
 				connection.createStatement().executeUpdate(query);
 			} catch (SQLException e) {

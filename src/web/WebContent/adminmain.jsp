@@ -13,16 +13,16 @@
 			if (request.getParameter("result").equals("success")) {
 	%>
 	<script>
-		alert("tambah barang sukses!");
+				alert("tambah barang sukses!");
 	</script>
 	<%
-		} else {
+			} else {
 	%>
 	<script>
-		alert("tambah barang tidak sukses!");
+				alert("tambah barang tidak sukses!");
 	</script>
 	<%
-		}
+			}
 		}
 	%>
 

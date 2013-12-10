@@ -163,7 +163,6 @@ public class UserController extends HttpServlet {
 				}
 				out.println(json.toString());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -184,7 +183,6 @@ public class UserController extends HttpServlet {
 			try {
 				connection.createStatement().executeUpdate(query);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
