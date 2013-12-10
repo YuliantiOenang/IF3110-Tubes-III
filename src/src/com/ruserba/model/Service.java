@@ -1,10 +1,16 @@
+package com.ruserba.model;
+
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 
-public class HTTPRequest
+public class Service
 {
-	public static String httpGet(String urlStr) throws IOException {
-	  URL url = new URL(urlStr);
+	//private static final String REMOTE_URL = "http://ec2-54-235-99-46.compute-1.amazonaws.com/";
+	private static final String REMOTE_URL = "http://localhost/remote/";
+
+	public static ArrayList<String> httpGet(String urlStr) throws IOException {
+	  URL url = new URL(REMOTE_URL + urlStr);
 	  HttpURLConnection conn =
 		  (HttpURLConnection) url.openConnection();
 
@@ -15,19 +21,19 @@ public class HTTPRequest
 	  // Buffer the result into a string
 	  BufferedReader rd = new BufferedReader(
 		  new InputStreamReader(conn.getInputStream()));
-	  StringBuilder sb = new StringBuilder();
+	  ArrayList<String> lst = new ArrayList<String>();
 	  String line;
 	  while ((line = rd.readLine()) != null) {
-		sb.append(line);
+		lst.add(line);
 	  }
 	  rd.close();
 
 	  conn.disconnect();
-	  return sb.toString();
+	  return lst;
 	}
 
-	public static String httpPost(String urlStr, String[] paramName, String[] paramVal) throws Exception {
-	  URL url = new URL(urlStr);
+	public static ArrayList<String> httpPost(String urlStr, String[] paramName, String[] paramVal) throws Exception {
+	  URL url = new URL(REMOTE_URL + urlStr);
 	  HttpURLConnection conn =
 		  (HttpURLConnection) url.openConnection();
 	  conn.setRequestMethod("POST");
@@ -57,21 +63,23 @@ public class HTTPRequest
 	  // Buffer the result into a string
 	  BufferedReader rd = new BufferedReader(
 		  new InputStreamReader(conn.getInputStream()));
-	  StringBuilder sb = new StringBuilder();
+	  ArrayList<String> lst = new ArrayList<String>();
 	  String line;
 	  while ((line = rd.readLine()) != null) {
-		sb.append(line);
+		lst.add(line);
 	  }
 	  rd.close();
 
 	  conn.disconnect();
-	  return sb.toString();
+	  return lst;
 	}
 
 	public static void main(String args[])
 	{
 		try	{
-			System.out.println(httpGet("http://localhost/remote/query.php"));
+			ArrayList<String> lst = httpGet("db.php");
+			for (int i = 0; i < lst.size(); i++)
+				System.out.println(lst.get(i));
 		} catch (Exception ex)	{
 			ex.printStackTrace();
 		}

@@ -72,14 +72,36 @@ public class Database {
 		return prod;
 	}
 
+	private Product getProductDataFromArrayList(ArrayList<String> res)
+	{
+		// Id produk tidak ditemukan.
+		if (res.get(0).equals("error_null")) return null;
+
+		// Dikuli... Semoga nggak ada typo... :p
+		Product prod = new Product();
+		prod.setIdBarang(Integer.parseInt(res.get(0)));
+		prod.setIdKategori(Integer.parseInt(res.get(1)));
+		prod.setHarga(Integer.parseInt(res.get(3)));
+		prod.setJumlahPembelian(Integer.parseInt(res.get(6)));
+		prod.setJumlahStok(Integer.parseInt(res.get(7)));
+		prod.setNamaBarang(res.get(2));
+		prod.setSatuan(res.get(4));
+		prod.setDeskripsi(res.get(5));
+		prod.setNamaGambar(res.get(8));
+		prod.setNamaGambarThumb(res.get(9));
+
+		return prod;
+	}
+
 	// Mengambil seluruh data produk.
 	public Product getProductData(int product_id) throws SQLException
 	{
-		PreparedStatement stat = getConnection().prepareStatement("select * from barang where id_barang=?");
-		stat.setInt(1, product_id);
-		ResultSet res = stat.executeQuery();
+		ArrayList<String> res = null;
+		try {
+			res = Service.httpGet("product_info.php?product_id=" + product_id);
+		} catch(Exception ex) {}
 
-		return getProductDataFromResultSet(res);
+		return getProductDataFromArrayList(res);
 	}
 
 	private User getUserDataFromResultSet(ResultSet res) throws SQLException	{
@@ -105,13 +127,40 @@ public class Database {
 		return user;
 	}
 
+	private User getUserDataFromArrayList(ArrayList<String> res)	{
+
+		// Id user tidak ditemukan.
+		if (res.get(0).equals("error_null")) return null;
+
+		// Dikuli... Lagi...
+		User user = new User();
+		user.setIdUser(Integer.parseInt(res.get(0)));
+		user.setUsername(res.get(1));
+		user.setEmail(res.get(2));
+		user.setPassword(res.get(3));
+		user.setNamaLengkap(res.get(4));
+		user.setProvinsi(res.get(5));
+		user.setKota(res.get(6));
+		user.setAlamat(res.get(7));
+		user.setKodePos(res.get(8));
+		user.setKontak(res.get(9));
+		user.setNomorKartu(res.get(10));
+		user.setNamaKartu(res.get(11));
+		user.setEkspirasiKartu(res.get(12));
+		if (res.get(12).equals("t")) user.setAdmin(true); else user.setAdmin(false);
+
+		return user;
+	}
+
+
 	public User getUserData(int user_id) throws SQLException
 	{
-		PreparedStatement stat = getConnection().prepareStatement("select * from user where id_user=?");
-		stat.setInt(1, user_id);
-		ResultSet res = stat.executeQuery();
+		ArrayList<String> res = null;
+		try {
+			res = Service.httpGet("user_info.php?user_id=" + user_id);
+		} catch(Exception ex) {}
 
-		return getUserDataFromResultSet(res);
+		return getUserDataFromArrayList(res);
 	}
 
 	public User getUserDataFromUsername(String username) throws SQLException
@@ -125,32 +174,31 @@ public class Database {
 
 	public Category getCategoryData(int category_id) throws SQLException
 	{
-		PreparedStatement stat = getConnection().prepareStatement("select * from kategori where id_kategori=?");
-		stat.setInt(1, category_id);
-		ResultSet res = stat.executeQuery();
+		ArrayList<Category> lst = getCategory();
 
-		// Id produk tidak ditemukan.
-		if (!res.next()) return null;
+		int i = 0;
+		while (i < lst.size())
+		{
+			if (lst.get(i).getIdKategori() == category_id) return lst.get(i);
+			i++;
+		}
 
-		// Dikuli... Lagi...
-		Category cat = new Category();
-		cat.setIdKategori(res.getInt("id_kategori"));
-		cat.setNamaKategori(res.getString("nama_kategori"));
-
-		return cat;
+		return null;
 	}
 
 	public ArrayList<Category> getCategory() throws SQLException
 	{
-		PreparedStatement stat = getConnection().prepareStatement("select * from kategori");
-		ResultSet res = stat.executeQuery();
+		ArrayList<String> res = null;
+		try {
+			res = Service.httpGet("category_info.php");
+		} catch(Exception ex) {}
 
 		ArrayList<Category> lst = new ArrayList<Category>();
-		while (res.next())
+		for (int i = 0; i < res.size(); i+=2)
 		{
 			Category cat = new Category();
-			cat.setIdKategori(res.getInt("id_kategori"));
-			cat.setNamaKategori(res.getString("nama_kategori"));
+			cat.setIdKategori(Integer.parseInt(res.get(i)));
+			cat.setNamaKategori(res.get(i+1));
 			lst.add(cat);
 		}
 		return lst;

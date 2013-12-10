@@ -8,13 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.MessageDigest;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.ruserba.model.Database;
 import com.ruserba.model.User;
 import com.ruserba.web.WebUtil;
+import com.ruserba.model.Service;
  
 public class LoginService extends HttpServlet
 {
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	{
+		doPost(request,response);
+	}
  	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
 		response.setContentType("text/plain");
@@ -27,61 +33,26 @@ public class LoginService extends HttpServlet
 
 		String username = request.getParameter("username"); if (username == null) username = "";
 		String password = request.getParameter("password"); if (password == null) password = "";
-		Database db = WebUtil.getDatabase(getServletContext());
 
-		String msg_out;
+		String[] paramName = new String[] { "username", "password" };
+		String[] paramVal = new String[] { username, password };
 
-		User user;
-		try
+		ArrayList<String> res = null;
+		try	{
+			res = Service.httpPost("login_service.php", paramName, paramVal);
+		} catch (Exception ex) {}
+
+		if (res.get(0).equals("1"))
 		{
-			user = db.getUserDataFromUsername(username);
-		}
-		catch(Exception ex)
-		{
-			user = null;
+			Cookie id_cookie = new Cookie("id_user", res.get(1)); // Bad practice, but who cares? :p
+			id_cookie.setPath("/"); id_cookie.setMaxAge(2592000);
+			response.addCookie(id_cookie);
+
+			Cookie username_cookie = new Cookie("username", res.get(2)); // Bad practice, but who cares? :p
+			username_cookie.setPath("/"); username_cookie.setMaxAge(2592000);
+			response.addCookie(username_cookie);
 		}
 
-		if (user != null)
-		{
-			MessageDigest md = null;
-			try
-			{
-				md = MessageDigest.getInstance("MD5");
-			}
-			catch(Exception ex)
-			{
-				md = null;
-			}
-			md.update(password.getBytes());
-			byte pass_byte[] = md.digest();
-	 
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < pass_byte.length; i++) {
-				sb.append(Integer.toString((pass_byte[i] & 0xff) + 0x100, 16).substring(1));
-			}
-
-			String password_hash = sb.toString();
-
-			if (password_hash.equals(user.getPassword()))
-			{
-				Cookie id_cookie = new Cookie("id_user", Integer.toString(user.getIdUser())); // Bad practice, but who cares? :p
-				id_cookie.setPath("/"); id_cookie.setMaxAge(2592000);
-				response.addCookie(id_cookie);
-
-				Cookie username_cookie = new Cookie("username", user.getUsername()); // Bad practice, but who cares? :p
-				username_cookie.setPath("/"); username_cookie.setMaxAge(2592000);
-				response.addCookie(username_cookie);
-				msg_out = "1";
-			}
-			else
-			{
-				msg_out = "0";
-			}
-		}
-		else
-		{
-			msg_out = "0";
-		}
-		out.write(msg_out + "\n"); // No JSON, no XML, just pure "linebreak separated"...
+		out.write(res.get(0) + "\n"); // No JSON, no XML, just pure "linebreak separated"...
 	}
 }
