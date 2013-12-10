@@ -118,6 +118,12 @@ public class Payment extends HttpServlet {
 								+ session.getAttribute("user_id");
 						connection.createStatement().executeUpdate(query4);
 
+						//POST
+						//String[] params = {"num", "id"};
+						//String[] value= {"" + (Integer.parseInt(rs3.getString("transaksi")) + 1), "" + session.getAttribute("user_id")};
+						//ServiceParser.postUrl(ServiceParser.BASE_URL + "UserService/userservice/updatetrans",params, value);
+						
+						
 							
 						/**port*/
 						
