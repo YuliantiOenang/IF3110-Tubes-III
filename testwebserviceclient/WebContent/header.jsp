@@ -84,8 +84,7 @@ function getNavbar(){
 		<div id="AJS_menubar">
 			<div id="top_nav" class="ddsmoothmenu">
 				<ul id="customnavbar">
-<<<<<<< HEAD
-=======
+
 					<% 
 				if((sesi== null)|| (sesi.getAttribute("username")==null)) {
 				%>
@@ -107,7 +106,6 @@ function getNavbar(){
 				<%
 				}
 				%>
->>>>>>> 0c2106408f92feefad3fdfde8603c0801d97e88d
 				</ul>
 				<br style="clear: left" />
 			</div> <!-- end of ddsmoothmenu -->	
