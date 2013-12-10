@@ -33,17 +33,14 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String reqType = request.getParameter("type");
+		String req = request.getParameter("query");
 		String message = "";
 
 		PrintWriter out = response.getWriter();
 
-		out.write("type : " + reqType);
-		if (reqType.equals("query")) {
-			String query = request.getParameter("query");
-			out.write("query : " + query);
+		if (req != null) {
 			message = java.lang.System.getenv("VCAP_SERVICES");
-			message = QueryController.getQuery(query);
+			message = QueryController.getQuery(req);
 		}
 		out.write(message);
 	}

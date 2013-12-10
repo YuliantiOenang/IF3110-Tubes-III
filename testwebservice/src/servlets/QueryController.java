@@ -23,9 +23,6 @@ public class QueryController {
 		// Get Connection from DbAccess
 		DatabaseAccess db = new DatabaseAccess();
 		con = db.mySqlConnection();
-		if (con == null){
-			return "MySQLConnection failed";
-		}
 		System.out.println("DB Connect Success");
 
 		// Run query
@@ -68,26 +65,16 @@ public class QueryController {
 		ResultSetMetaData rsMetaData = rs.getMetaData();
 		int columnCount = rsMetaData.getColumnCount();
 		JSONArray json = new JSONArray();
-		
-		while(rs.next()){
+
+		while (rs.next()) {
 			JSONArray arr = new JSONArray();
-			for (int i = 1; i<=columnCount; i++){
+			for (int i = 1; i <= columnCount; i++) {
 				arr.add(rs.getObject(i).toString());
 			}
 			json.add(arr);
 		}
-//
-//		for (int i = 1; i <= columnCount; i++) {
-//			JSONArray jarr = new JSONArray();
-//			rs.first();
-//			while (!rs.isAfterLast()) {
-//				jarr.add(rs.getObject(i).toString());
-//				if (!rs.next()) break; // impossible ?
-//			}
-//			ResultSetMetaData rsmd = rs.getMetaData();
-//			String name = rsmd.getColumnName(i);
-//			json.put(i, jarr);
-//		}
-		return json.toJSONString();
+		JSONObject obj = new JSONObject();
+		obj.put("result", json);
+		return obj.toJSONString();
 	}
 }

@@ -1,12 +1,15 @@
 package dbAccess;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Iterator;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -17,53 +20,39 @@ public class DatabaseAccess {
 	private String driver = "com.mysql.jdbc.Driver";
 	private Connection connection = null;
 
-	public DatabaseAccess(boolean value) {
-		/** Get VCAP_SERVICES from Web Service */
-		String vcapServices = java.lang.System.getenv("VCAP_SERVICES");
-		/*
-		 * JSON Parser, using json_simple-1.1.jar
-		 */
-		JSONParser parser = new JSONParser();
-		JSONObject mainJSON = null;
-		try {
-			mainJSON = (JSONObject) parser.parse(vcapServices);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		JSONArray infoPeers = (JSONArray) mainJSON.get("mysql-5.1"); // Get info
+	public DatabaseAccess() {
 
-		/** Suppress warning for Compilation level */
-		@SuppressWarnings("unchecked")
-		Iterator<JSONObject> iterator = infoPeers.iterator();
-		while (iterator.hasNext()) {
-			JSONObject peer = iterator.next(); // each peer info
-			JSONObject subInfoPeers = (JSONObject) peer.get("credentials");
-			if (subInfoPeers.size() != 0) {
-				url = "jdbc:mysql://" + subInfoPeers.get("hostname").toString()
-						+ ":" + subInfoPeers.get("port").toString() + "/"
-						+ subInfoPeers.get("name").toString();
-				username = subInfoPeers.get("username").toString();
-				password = subInfoPeers.get("password").toString();
-			}
-		}
-	}
-	
-	public DatabaseAccess(){
-		
-	}
+	}	
 	
 	public Connection mySqlConnection() {
+		String url = "jdbc:mysql://localhost:3306/wbd1";
+		String driver = "com.mysql.jdbc.Driver";
+		String username = "root";
+		String password = "";
+		
 		try {
+			if (java.lang.System.getenv("VCAP_SERVICES") != null)
+			{
+				if (!java.lang.System.getenv("VCAP_SERVICES").equals(""))
+				{
+					JSONObject jsonVCAP = new JSONObject(java.lang.System.getenv("VCAP_SERVICES"));
+					JSONArray mysql = jsonVCAP.getJSONArray("mysql-5.1");
+					String table = mysql.getJSONObject(0).getJSONObject("credentials").getString("name");
+					url = "jdbc:mysql://"+mysql.getJSONObject(0).getJSONObject("credentials").getString("hostname")+":3306/"+table;
+					username = mysql.getJSONObject(0).getJSONObject("credentials").getString("username");
+					password = mysql.getJSONObject(0).getJSONObject("credentials").getString("password");
+				}
+			}
 			Class.forName(driver).newInstance();
 			connection = DriverManager.getConnection(url, username, password);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		return connection;
 	}
 
-	public Connection defaultConnection(){
+	public Connection defaultConnection() {
 		String user = "root";
 		String pass = "";
 		String urls = "jdbc:mysql://localhost/progin_13511059";
@@ -86,6 +75,7 @@ public class DatabaseAccess {
 		}
 		return connection;
 	}
+
 	public String getUsername() {
 		return username;
 	}
