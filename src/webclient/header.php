@@ -28,19 +28,21 @@
 			<a href="category.php?cat=Makanan" class="item">Makanan</a><a href="category.php?cat=Peralatan%20Sekolah" class="item">Peralatan Sekolah</a><a href="category.php?cat=Peralatan%20Rumah" class="item">Peralatan Rumah</a><a href="category.php?cat=Peralatan%20Serbaguna" class="item">Peralatan Serbaguna</a><a href="category.php?cat=Mainan" class="item">Mainan</a>
 		</div>
 		
-		<script>
-			if(is_admin()){
-				document.getElementById("menubar").innerHTML = '<a href="admin_barang.php?cat=Makanan" class="item">Makanan</a><a href="admin_barang.php?cat=Peralatan%20Sekolah" class="item">Peralatan Sekolah</a><a href="admin_barang.php?cat=Peralatan%20Rumah" class="item">Peralatan Rumah</a><a href="admin_barang.php?cat=Peralatan%20Serbaguna" class="item">Peralatan Serbaguna</a><a href="admin_barang.php?cat=Mainan" class="item">Mainan</a>';
-				
-				document.getElementById("indexlink").href = "admin_barang.php?cat=Makanan";
-			}
-		</script>
+		
 		
 		<div class="search-wrapper">
 			<form method="GET" id="searchform" action="search.php">
 				<input type="text" name="q" class="search search-grey" onfocus="searchBoxFocus(this)" onblur="searchBoxBlur(this)" value="Search" />
 			</form>
 		</div>
+		
+		<script>
+			if(is_admin()){
+				document.getElementById("menubar").innerHTML = '<a href="admin_barang.php?cat=Makanan" class="item">Makanan</a><a href="admin_barang.php?cat=Peralatan%20Sekolah" class="item">Peralatan Sekolah</a><a href="admin_barang.php?cat=Peralatan%20Rumah" class="item">Peralatan Rumah</a><a href="admin_barang.php?cat=Peralatan%20Serbaguna" class="item">Peralatan Serbaguna</a><a href="admin_barang.php?cat=Mainan" class="item">Mainan</a>';
+				document.getElementById("searchform").action = 'admin_search.php';
+				document.getElementById("indexlink").href = "admin_barang.php?cat=Makanan";
+			}
+		</script>
 		
 		</div>	
 	</div>

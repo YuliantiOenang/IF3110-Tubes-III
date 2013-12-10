@@ -21,6 +21,23 @@ function checkedToList(id){
 	}
 }
 
+function deleteBarangDetail(category, id){
+	if (!confirm("Anda yakin ingin melakukan penghapusan?"))
+		return;
+	data = { "ids" : [id], "token" : getLoginInfo().id};
+	
+	callback = function (response) {
+		if (response.status=="ok"){
+			alert ("Barang (barang-barang) berhasil dihapus)!");
+			window.location = "admin_barang.php?cat="+category;
+		} else {
+			alert (response.desc);
+		}
+	}
+
+	sendRestAjax("DELETE", "barang", data , callback);	
+}
+
 function deleteBarang(id){
 	if (!confirm("Anda yakin ingin melakukan penghapusan?"))
 		return;
@@ -127,7 +144,7 @@ function createRow(id, nama, harga, deskripsi){
 	var s = '<div class="row rowbarang">';
 	s+='<div class="cell33 imgcell" ><img class="imgbarang" src="' + IMGURL + id + '.jpg" /></div>';
 	s+='<div class="cell66"><div class="table">';
-	s+='<div class="row title"><a href="barang.php?id=' + id + '" />' + nama + '</a></div>';
+	s+='<div class="row title"><a href="admin_detail_barang.php?id=' + id + '" />' + nama + '</a></div>';
 	s+='<div class="row">Rp. ' + formatCurrency(harga) + '</div>';
 	s+='<div class="row">' + deskripsi + '</div>';
 	s+='<div class="rowtools"><input type="checkbox" name="'+ id +'" id="'+ id +'">'; 

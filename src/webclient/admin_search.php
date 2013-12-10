@@ -37,7 +37,7 @@
 <script src="js/ajax.js"></script>
 <script src="js/login.js"></script>
 <script src="js/transaction.js"></script>
-<script src="js/search.js"></script>
+<script src="js/adminsearch.js"></script>
 
 </head>
 <body>
@@ -48,19 +48,21 @@
 		<div id="cattable">
 			<?php
 				foreach($search as $barang){
-					echo '<div class="row rowbarang">';
-			
-					echo '<div class="cell33 imgcell" ><img class="imgbarang" src="'.$IMAGE_BASE_URL.$barang["id"].'.jpg" /></div>';
-					echo '<div class="cell66"><div class="table">';
-					echo '<div class="row title"><a href="barang.php?id='.$barang["id"].'" />'.$barang["nama"].'</a></div>';
-					echo '<div class="row">Kategori: <a href="category.php?cat='.$barang["kategori"].'">'.$barang["kategori"].'</a></div>';
-					echo '<div class="row">Rp. '.formatCurrency($barang["harga"]).'</div>';
-					echo '<div class="row">'.$barang["deskripsi"].'</div>';
-					echo '<div class="row"><input type="button" value="Tambahkan ke Keranjang" class="main-button-small" onclick="addCart('.$barang["id"].')" /></div>';
-					echo '</div></div>';
-					
-					echo '</div>';
-				}
+				echo '<div class="row rowbarang">';
+				echo '<div class="cell33 imgcell" ><img class="imgbarang" src="'.$IMAGE_BASE_URL.$barang["id"].'.jpg" /></div>';
+				echo '<div class="cell66"><div class="table">';
+				echo '<div class="row title"><a href="admin_detail_barang.php?id='.$barang["id"].'">'.$barang["nama"].'</a></div>';
+				echo '<div class="row">Kategori: <a href="admin_barang.php?cat='.$barang["kategori"].'">'.$barang["kategori"].'</a></div>';
+				echo '<div class="row">Rp. '.formatCurrency($barang["harga"]).'</div>';
+				echo '<div class="row">Dibeli '.$barang["jumlah_beli"].' kali</div>';
+				echo '<div class="row">Stok  : '.$barang["stok"].'</div>'; 
+				echo '<div class="row">'.$barang["deskripsi"].'</div>';
+				echo '<div class="rowtools"><input type="checkbox" name="'.$barang["id"].'" id="'.$barang["id"].'" onclick=checkedToList('.$barang["id"].')>'; 
+				echo '<a href="edit_barang.php?id='.$barang["id"].'"><img src=image/Edit.jpg id="edit"></a>';
+				echo '<input type="image" src=image/Delete.png id="delete" onclick="deleteBarang('.$barang["id"].')">';
+				echo '</div></div></div>';
+				echo '</div>';
+		}
 			?>
 		</div>
 		<?php

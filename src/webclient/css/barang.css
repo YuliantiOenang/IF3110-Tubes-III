@@ -13,3 +13,8 @@
 	font-weight: bold;
 	font-size: 13pt;
 }
+
+#edit, #delete{
+	width : 25px;
+	height : 25px;
+}
