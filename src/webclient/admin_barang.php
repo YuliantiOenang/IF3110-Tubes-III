@@ -68,6 +68,8 @@
 	}
 	
 	function deleteBarang(id){
+		if (!confirm("Anda yakin ingin melakukan penghapusan?"))
+			return;
 		data = { "ids" : [id], "token" : getLoginInfo().id};
 		
 		callback = function (response) {
@@ -78,12 +80,14 @@
 				alert (response.desc);
 			}
 		}
-		
+
 		sendRestAjax("DELETE", "barang", data , callback);
 		
 	}
 	
 	function deleteBulkBarang(){
+		if (!confirm("Anda yakin ingin melakukan penghapusan?"))
+				return;
 		data = { "ids" : listcheck, "token" : getLoginInfo().id};
 		
 		callback = function (response) {

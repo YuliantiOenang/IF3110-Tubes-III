@@ -31,6 +31,7 @@ require_once "lib/search_lib.php";
 			
 			if(response.status == "ok"){
 				alert("berhasil");
+				window.location= "admin_barang.php?cat="+cat;
 			}else{
 				alert(JSON.stringify(response));
 			}
