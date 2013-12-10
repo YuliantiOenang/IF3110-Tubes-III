@@ -70,7 +70,7 @@ function refreshCart(){
 			cart.innerHTML += s;
 			
 		}else{
-			cart.innerHTML = "error " + response.details;
+			cart.innerHTML = "error " + response.details + response.raw;
 		}
 	};
 	
@@ -100,34 +100,46 @@ function deleteItem(id){
 	}
 }
 
-function commit_buy(cb){
-	// cek kartu kredit
+function check_credit(cb){
 	
-	var list = [];
-	var bag = JSON.parse(localStorage.shoppingbag);
-	for (barang in bag){
-		list.push({"id" : parseInt(barang), "jumlah" : bag[barang]});
-	}
+	var info = getLoginInfo();
 	
-	var callback = function(response){
-		if(response.status == "ok"){
-			alert("Barang sudah terbeli");
-			localStorage.removeItem("shoppingbag");
-			refreshCart();
+	data = {"token" : info.id};
+	
+	callback = function(response){
+		if ((response.status != "ok") || (!response.has_card)){
+			window.location = "kredit.php?buy=1";
 		}else{
-			if(response.code == 0){
-				alert("Barang tidak mencukupi");
-			}else{
-				window.location = "kredit.php?buy=1";
-			}
+			buy(cb);
 		}
 	}
 	
-	if (cb!=null) callback = cb;
+	sendRestAjax("GET", "user/"+info.user+"/card", data, callback);
+}
+
+function buy(callback){
+	var list = JSON.parse(localStorage.shoppingbag);	
+	
+	if (callback == null){
+		callback = function(response){
+			if(response.status == "ok"){
+				alert("Barang sudah terbeli");
+				localStorage.removeItem("shoppingbag");
+				refreshCart();
+			}else{
+				alert(JSON.stringify(response));
+			}
+		};
+	}
 	
 	var loginfo = getLoginInfo();
 	
-	sendAjax({"action" : "buy", "list": list, "id" : loginfo.id}, "cart.php", callback);
+	sendRestAjax("POST", "buy", {"cart": list, "token" : loginfo.id}, callback);
+}
+
+function commit_buy(cb){
+	// cek kartu kredit
+	check_credit(cb);
 }
 
 function editItem(id){

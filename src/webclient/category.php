@@ -56,6 +56,7 @@
 	echo "var category = '".$cat."';";
 	echo "var sortby = '".$sort."';";
 	echo "var order = '".$order."';";
+	echo "var IMGURL = '$IMAGE_BASE_URL';\n";
 ?>
 </script>
 

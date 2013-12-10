@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2013 at 06:33 AM
+-- Generation Time: Dec 10, 2013 at 11:07 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -36,52 +36,13 @@ CREATE TABLE IF NOT EXISTS `barang` (
   `jumlah_beli` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_barang`),
   UNIQUE KEY `nama_barang` (`nama_barang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=89 ;
 
 --
 -- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `kategori`, `deskripsi`, `jumlah_beli`) VALUES
-(1, 'sate padang', 100, 7, 'makanan', 'lololo', 4),
-(2, 'soto', 6000, 93, 'makanan', '', 100),
-(3, 'ikan teri', 1000, 10, 'makanan', '', 0),
-(4, 'barang_test', 1000000, 100, 'mainan', 'test aja :v', 7),
-(5, 'hongli', 50200, 32, 'Model Kit', 'ini kw woy :v', 80),
-(6, 'Monster Hunter 4', 500000, 40, 'game', 'MH 4 masih jap bahkan -_-', 76),
-(7, 'barang_test1', 1000000, 100, 'mainan', 'test aja :v', 12),
-(8, 'barang_test2', 1000000, 100, 'mainan', 'test aja :v', 35),
-(19, 'Fam Fan Fan A', 50000, 25, 'makanan', 'Kartu Fam Fan Fan A!', 8),
-(20, 'Fam Fan Fan B', 25000, 56, 'makanan', 'Kartu Fam Fan Fan B!', 10),
-(21, 'Fam Fan Fan J', 8500, 23, 'peralatan sekolah', 'Kartu Fam Fan Fan J!', 11),
-(22, 'Fam Fan Fan C', 25000, 22, 'makanan', 'Kartu Fam Fan Fan C!', 1),
-(23, 'Fam Fan Fan D', 32500, 76, 'makanan', 'Kartu Fam Fan Fan D!', 50),
-(24, 'Fam Fan Fan E', 10000, 10, 'makanan', 'Kartu Fam Fan Fan E!', 36),
-(25, 'Fam Fan Fan F', 58500, 18, 'peralatan sekolah', 'Kartu Fam Fan Fan F!', 11),
-(26, 'Fam Fan Fan G', 80000, 91, 'peralatan sekolah', 'Kartu Fam Fan Fan G!', 64),
-(27, 'Fam Fan Fan H', 100000, 64, 'peralatan sekolah', 'Kartu Fam Fan Fan H!', 22),
-(28, 'Fam Fan Fan I', 34500, 76, 'peralatan sekolah', 'Kartu Fam Fan Fan I!', 6),
-(29, 'Fam Fan Fan K', 56500, 54, 'peralatan rumah', 'Kartu Fam Fan Fan K!', 12),
-(30, 'Fam Fan Fan L', 23250, 78, 'peralatan rumah', 'Kartu Fam Fan Fan L!', 12),
-(31, 'Mermaid Idol Flute', 25000, 33, 'peralatan rumah', 'Kartu Mermaid Idol Flute!', 21),
-(32, 'Mermaid Idol Sedna', 87500, 94, 'peralatan rumah', 'Kartu Mermaid Idol Sedna!', 12),
-(33, 'Blazers Pleasures', 57500, 54, 'peralatan rumah', 'Kartu Blazer Pleasures!', 21),
-(34, 'Bewitching Lady Butterfy', 125000, 4, 'peralatan serbaguna', 'Kartu Bewitching Officer, Lady Butterfly!', 1),
-(35, 'Mermaid Idol Felucca', 90000, 8, 'peralatan serbaguna', 'Kartu Mermaid Idol Felucca!', 5),
-(36, 'White Coral Princess Claire', 55500, 5, 'peralatan serbaguna', 'Kartu Snow White Coral Princess Claire!', 4),
-(37, 'Mermaid Idol Salem', 12500, 120, 'peralatan serbaguna', 'Kartu Mermaid Idol Salem!', 100),
-(38, 'Pearl Sisters, Perla', 250000, 34, 'peralatan serbaguna', 'Kartu Pearl Sisters, Perla!', 12),
-(39, 'Pearl Sisters, Perle', 250000, 1, 'mainan', 'Kartu Pearl Sisters, Perle!', 0),
-(40, 'Top Idol, Flores', 14500, 111250, 'mainan', 'Kartu Top Idol, Flores!', 4),
-(41, 'Top Idol Pacifica', 332500, 74, 'mainan', 'Kartu Top Idol, Pacifica!', 5),
-(42, 'Bermuda Cadet, Caravelle', 1000, 99, 'mainan', 'Kartu Bermuda Cadet, Caravelle!', 12),
-(43, 'Drive Quartet, Paburin', 5000, 90, 'mainan', 'Kartu Drive Quartet, Paburin!', 10),
-(44, 'Drive Quartet Flows', 6000, 98, 'makanan', 'Kartu Drive Quartet, Flows!', 21),
-(45, 'Drive Quartet Risakka', 7000, 97, 'makanan', 'Kartu Drive Quartet, Risakka!', 26),
-(46, 'Drive Quartet Shupuryu', 8000, 96, 'makanan', 'Kartu Drive Quartet, Shupuryu!', 11),
-(47, 'Girls Rock, Rio', 9000, 95, 'makanan', 'Kartu Girls Rock, Rio!', 76),
-(48, 'Top Idol Aqua', 10000, 94, 'makanan', 'Kartu Top Idol, Aqua!', 55),
-(49, 'Akira, Alicia, and Athena', 11000, 94, 'peralatan sekolah', 'Kartu Akira, Alicia, dan Athena!', 12),
 (50, 'Hime, Maa, and Aria', 12000, 93, 'peralatan sekolah', 'Kartu Hime, Maa, dan Aria!', 23),
 (51, 'Akari, Aika, and Alice A', 13000, 94, 'peralatan sekolah', 'Kartu Akari, Aika, dan Alice A!', 34),
 (52, 'Akari, Aika, and Alice B', 14000, 93, 'peralatan sekolah', 'Kartu Akari, Aika dan Alice B!', 45),
@@ -91,10 +52,10 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `kategori`, `
 (56, 'Alice Carroll B', 18750, 60, 'mainan', 'Kartu Alice Carroll B!', 17),
 (57, 'Athena Glory A', 19500, 70, 'mainan', 'Kartu Athena Glory A!', 15),
 (58, 'Alice Carroll C', 20250, 80, 'mainan', 'Kartu Alice Carroll C!', 13),
-(59, 'Alice Carroll D', 21500, 86, 'peralatan serbaguna', 'Kartu Alice Carroll D!', 21),
-(60, 'Athena Glory B', 22250, 13, 'peralatan serbaguna', 'Kartu Athena Glory B!', 3),
-(61, 'Athena Glory C', 24750, 15, 'peralatan serbaguna', 'Kartu Athena Glory C', 5),
-(62, 'Athena Glory D', 26750, 156, 'peralatan serbaguna', 'Kartu Athena Glory D', 56),
+(59, 'Alice Carroll D', 21500, 86, 'mainan', 'Kartu Alice Carroll D!', 21),
+(60, 'Athena Glory B', 22250, 13, 'mainan', 'Kartu Athena Glory B!', 3),
+(61, 'Athena Glory C', 24750, 15, 'mainan', 'Kartu Athena Glory C', 5),
+(62, 'Athena Glory D', 26750, 156, 'mainan', 'Kartu Athena Glory D', 56),
 (63, 'Woody Ayanokouji the 51st', 27500, 115, 'peralatan serbaguna', 'Kartu Woody Ayanokouji the 51st!', 15),
 (64, 'Alice Carroll E', 28000, 74, 'peralatan rumah', 'Kartu Alice Carroll E!', 14),
 (65, 'Athena Glory E', 19500, 24, 'peralatan rumah', 'Kartu Athena Glory E!', 20),
@@ -121,6 +82,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `stok`, `kategori`, `
 (86, 'Aika S Granzchesta G', 47650, 43, 'mainan', 'Kartu Aika S Granzchesta G!', 13),
 (87, 'Akira E Ferrari G', 125000, 250, 'mainan', 'Kartu Akira E Ferarri G!', 225),
 (88, 'Aika S Granzchesta H', 33850, 65, 'mainan', 'Kartu Aika S Granzchesta H!', 60);
+
 -- --------------------------------------------------------
 
 --

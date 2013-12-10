@@ -41,10 +41,21 @@ function redirect_admin(){
 }
 
 function logout(){
-	localStorage.removeItem("logininfo");
-	localStorage.removeItem("shoppingbag");
+	loginfo = getLoginInfo();
+	data = {"username" : loginfo.user, "token" : loginfo.id};
 	
-	window.location = "index.php";
+	var callback = function(response){
+		if(response.status=="ok"){
+			localStorage.removeItem("logininfo");
+			localStorage.removeItem("shoppingbag");
+	
+			window.location = "index.php";
+		}else{
+			alert(response.desc);
+		}	
+	}
+
+	sendRestAjax("POST", "logout", data, callback);
 }
 
 function getLoginInfo(){
