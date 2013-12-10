@@ -11,7 +11,12 @@ function login(){
 		if(response.status=="ok"){
 			var hasil = {"user": username, "id": response.token, "a": response.a};
 			localStorage.setItem("logininfo", JSON.stringify(hasil));
-			location.reload(true)
+			
+			if (response.a){
+				window.location = "admin_barang.php?cat=Makanan";
+			}else{
+				location.reload(true)
+			}
 		}else{
 			//alert(response.raw);
 			alert("Username atau password salah!");
@@ -28,6 +33,15 @@ function redirect_login(){
 	}
 	
 	return false;
+}
+
+function is_admin(){
+	info = getLoginInfo();
+	if(info && (info.a != 1)){
+		return false
+	}
+	
+	return true;
 }
 
 function redirect_admin(){
