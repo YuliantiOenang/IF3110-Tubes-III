@@ -62,6 +62,10 @@ class Rest extends RestC{
 	function handle_delete($urlpart,$data){
 		$response["status"] = "error";
 		$response["desc"] = "URI is not available in method DELETE";
+		if ($urlpart[0]=="deletebarang"){
+			$response = deletebarang($data["namabarang"]);
+		}
+		
 		echo json_encode($response);
 	}
 	function handle_default($urlpart,$data,$method){

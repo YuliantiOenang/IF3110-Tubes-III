@@ -42,6 +42,7 @@ function barangbykategori($kategori){
 	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
 	$query = "SELECT * FROM barang_ WHERE kategori='$kategori'";
 	$result=pg_query($query);
+	$Index=0;
 	while($row=pg_fetch_assoc($result)){
 		$response["index_".$Index] = $row;
 		$Index++;
@@ -61,6 +62,7 @@ function sortbyharga($kategori){
 	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
 	$query = "SELECT * FROM barang_ WHERE kategori='$kategori' ORDER BY harga ASC";
 	$result=pg_query($query);
+	$Index = 0;
 	while($row=pg_fetch_assoc($result)){
 		$response["index_".$Index] = $row;
 		$Index++;
@@ -72,6 +74,7 @@ function sortbynama($kategori){
 	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
 	$query = "SELECT * FROM barang_ WHERE kategori='$kategori' ORDER BY namabarang ASC";
 	$result=pg_query($query);
+	$Index = 0;
 	while($row=pg_fetch_assoc($result)){
 		$response["index_".$Index] = $row;
 		$Index++;
@@ -83,10 +86,21 @@ function search($search){
 	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
 	$query = "SELECT * FROM barang_ WHERE (namabarang LIKE '%$search%')";
 	$result=pg_query($query);
+	$Index = 0;
 	while($row=pg_fetch_assoc($result)){
 		$response["index_".$Index] = $row;
 		$Index++;
 	}
+	return $response;
+}
+
+// .DELETE
+
+function deletebarang($namabarang){
+	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
+	$query = "DELETE FROM barang_ WHERE namabarang='$namabarang'";
+	$result=pg_query($query);
+	$response = "ok";
 	return $response;
 }
 
