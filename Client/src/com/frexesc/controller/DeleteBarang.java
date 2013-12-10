@@ -3,15 +3,13 @@ package com.frexesc.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.BarangUserBean;
 
@@ -39,7 +37,7 @@ public class DeleteBarang extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-
+		
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");
 		} else {
@@ -49,24 +47,26 @@ public class DeleteBarang extends HttpServlet {
 			int id = 0;
 			id = Integer.parseInt(request.getParameter("id"));
 
-			String query = "SELECT * FROM barang_user WHERE id=" + id;
+			//String query = "SELECT * FROM barang_user WHERE id=" + id;
 
 			try {
-				ResultSet rs = connection.createStatement().executeQuery(query);
+				//ResultSet rs = connection.createStatement().executeQuery(query);
 
-				ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
+				String json = ServiceParser.readUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/baranguserid?id=" + id);
+				
+				List<BarangUserBean> allResults = ServiceParser.parseJsonToGenericlist(json, BarangUserBean.class);//new ArrayList<BarangUserBean>();
 
-				while (rs.next()) {
-					BarangUserBean barangUser = new BarangUserBean(
-							Integer.valueOf(rs.getString("id")),
-							Integer.valueOf(rs.getString("id_barang")),
-							Integer.valueOf(rs.getString("id_user")),
-							Integer.valueOf(rs.getString("status")),
-							Integer.valueOf(rs.getString("jumlah_barang")),
-							rs.getString("deskripsi_tambahan"));
-
-					allResults.add(barangUser);
-				}
+//				while (rs.next()) {
+//					BarangUserBean barangUser = new BarangUserBean(
+//							Integer.valueOf(rs.getString("id")),
+//							Integer.valueOf(rs.getString("id_barang")),
+//							Integer.valueOf(rs.getString("id_user")),
+//							Integer.valueOf(rs.getString("status")),
+//							Integer.valueOf(rs.getString("jumlah_barang")),
+//							rs.getString("deskripsi_tambahan"));
+//
+//					allResults.add(barangUser);
+//				}
 
 				String query2 = "SELECT * FROM barang WHERE id="
 						+ allResults.get(0).getId_item();
@@ -98,15 +98,21 @@ public class DeleteBarang extends HttpServlet {
 							+ allResults.get(0).getId_item();
 					connection.createStatement().executeUpdate(query3);
 
-					String query4 = "DELETE FROM barang_user WHERE id=" + id; // delete
-																				// entry
-					connection.createStatement().executeUpdate(query4);
+//					String query4 = "DELETE FROM barang_user WHERE id=" + id; // delete
+//																				// entry
+//					connection.createStatement().executeUpdate(query4);
 
+					//POST
+					String[] param = {"id"};
+					String[] val= {"" + allResults.get(0).getId()};
+					ServiceParser.postUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/deletebaranguser",param, val);
+					
+					
 					response.sendRedirect("./cart"); // back to previous
 															// page
 				}
 
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
