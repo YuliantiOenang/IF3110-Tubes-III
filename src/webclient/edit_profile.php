@@ -41,11 +41,11 @@ if (j==null || a=="")
   alert("Zip Code must be filled out");
   return false;
   }
-if (f.length<5)
+/*if (f.length<5)
   {
   alert("Username must be more than 5 characters");
   return false;
-  }
+  }*/
 if (g.length<8)
   {
   alert("Password must be more than 8 characters");
@@ -85,7 +85,9 @@ if (!reg.test(a)){
 	return false;
 }
 
-	var data = {"token" : getLoginInfo().id, "user" : {"nama_lengkap" : a, "provinsi" :b, "alamat" : c, "telepon" : d, "email" : e, "password" : g, "kota" : i,"kodepos" : j}};
+	loginfo = getLoginInfo();
+
+	var data = {"token" : loginfo.id, "user" : {"username" : loginfo.user, "nama_lengkap" : a, "provinsi" :b, "alamat" : c, "telepon" : d, "email" : e, "password" : g, "kota" : i,"kodepos" : j}};
 	var callback = function(response){	
 		if(response.status == "ok"){
 			alert("Anda berhasil edit profile");
