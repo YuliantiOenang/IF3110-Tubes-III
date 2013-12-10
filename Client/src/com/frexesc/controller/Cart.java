@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import com.frexesc.model.Barang;
 import com.frexesc.model.BarangUserBean;
-
-import java.util.List;
 
 
 /**

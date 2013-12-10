@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import com.frexesc.model.Barang;
 import com.frexesc.model.KategoriBean;
 import com.google.gson.Gson;

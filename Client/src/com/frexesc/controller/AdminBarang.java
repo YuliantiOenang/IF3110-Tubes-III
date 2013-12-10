@@ -8,11 +8,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Locale.Category;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
