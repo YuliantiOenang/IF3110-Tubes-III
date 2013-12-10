@@ -28,6 +28,27 @@ class Rest extends RestC{
 		if ($urlpart[0]=="getprofile"){
 			$response = getprofile($data["username"]);
 		}
+		
+		if ($urlpart[0]=="barangbykategori"){
+			$response = barangbykategori($data["kategori"]);
+		}
+		
+		if ($urlpart[0]=="detailbarang"){
+			$response = getdetail($data["namabarang"]);
+		}
+		
+		if ($urlpart[0]=="sortbyharga"){
+			$response = sortbyharga($data["kategori"]);
+		}
+		
+		if ($urlpart[0]=="sortbynama"){
+			$response = sortbynama($data["kategori"]);
+		}
+		
+		if ($urlpart[0]=="search"){
+			$response = search($data["search"]);
+		}
+		
 		echo json_encode($response);
 	}
 	
