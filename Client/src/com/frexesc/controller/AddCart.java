@@ -2,6 +2,7 @@ package com.frexesc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import com.frexesc.SOAP.InsertBarangUserProxy;
 import com.frexesc.model.Barang;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -79,14 +82,30 @@ public class AddCart extends HttpServlet {
 					deskripsiTambahan = "";
 
 				// Add to Cart here
-				String query2 = "INSERT INTO barang_user (id_barang,id_user,status,jumlah_barang,deskripsi_tambahan) VALUES ("
-						+ request.getParameter("id_barang")
-						+ ", "
-						+ session.getAttribute("user_id")
-						+ ", 0, "
-						+ request.getParameter("qty")
-						+ ", \""
-						+ deskripsiTambahan + "\")";
+				/**PORT*/
+				InsertBarangUserProxy insertBarangPro = new InsertBarangUserProxy();
+				insertBarangPro.insertBarangUser(request.getParameter("id_barang"),session.getAttribute("user_id").toString(),request.getParameter("qty"),deskripsiTambahan);
+				System.out.println("IT WORKS SOAP updated=>"+request.getParameter("id_barang")+session.getAttribute("user_id").toString()+request.getParameter("qty")+deskripsiTambahan);
+				/**PORT*/
+				
+				/**old*/
+//				DbConnection dbConnection = new DbConnection();
+//				Connection connection = dbConnection.mySqlConnection();
+//				String query2 = "INSERT INTO barang_user (id_barang,id_user,status,jumlah_barang,deskripsi_tambahan) VALUES ("
+//						+ request.getParameter("id_barang")
+//						+ ", "
+//						+ session.getAttribute("user_id")
+//						+ ", 0, "
+//						+ request.getParameter("qty")
+//						+ ", \""
+//						+ deskripsiTambahan + "\")";
+//				try {
+//					connection.createStatement().executeUpdate(query2);
+//				} catch (SQLException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+				/**old*/
 				//POST
 				//String[] param = {"id", "user", "qty", "desc"};
 				//String[] val= {"" + request.getParameter("id_barang") , "" + session.getAttribute("user_id"), "" +  request.getParameter("qty"), "" + //deskripsiTambahan};

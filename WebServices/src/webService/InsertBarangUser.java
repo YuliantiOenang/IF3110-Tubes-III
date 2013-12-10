@@ -1,4 +1,4 @@
-package com.frexesc.controller;
+package webService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
