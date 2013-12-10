@@ -32,12 +32,12 @@ require_once "lib/search_lib.php";
 			if(response.status == "ok"){
 				alert("berhasil");
 			}else{
-				alert(response.desc);
+				alert(JSON.stringify(response));
 			}
 			
 		};
 		
-		sendAjax(data, "handle_add_barang.php", callback);
+		sendAjax(data, "handle_admin_barang.php", callback);
 		
 	}
 	

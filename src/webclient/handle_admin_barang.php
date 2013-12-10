@@ -2,8 +2,7 @@
 	include("config.php");
 	
 	function addBarang($data){
-		// mengecek apakah masih bisa meng-add barang dengan id tertentu sejumlah tertentu
-		// return -1 jika sukses, dan sisa barang jika gagal
+		// menambah barang ke service
 		
 		global $WSDL_URL, $SOAP_URL;
 		
@@ -16,8 +15,7 @@
 	}
 	
 	function handleAddBarangAjax(){
-		// handle ajax untuk aksi2 transaksi
-		// syarat: $_POST["ajax"] terdefinisi
+		// handle ajax untuk add barang
 		
 		$request = json_decode($_POST["ajax"], true);
 		$response = array("status" => "error");

@@ -44,6 +44,7 @@
 	}*/	
 ?>
 
+
 <!DOCTYPE html />
 <html>
 <head>
@@ -52,6 +53,55 @@
 <link rel="stylesheet" href="css/category.css" />
 
 <script>
+
+	var listcheck = [];
+	
+	function checkedToList(id){
+		if (document.getElementById(id).checked==true) {
+			listcheck.push(id);
+		} else {
+			var index = listcheck.indexOf(id);
+			if (index > -1) {
+				array.splice(index, 1);
+			}
+		}
+	}
+	
+	function deleteBarang(id){
+		data = { "ids" : [id], "token" : getLoginInfo().id};
+		
+		callback = function (response) {
+			if (response.status=="ok"){
+				alert ("Barang (barang-barang) berhasil dihapus)!");
+				window.location.reload();
+			} else {
+				alert (response.desc);
+			}
+		}
+		
+		sendRestAjax("DELETE", "barang", data , callback);
+		
+	}
+	
+	function deleteBulkBarang(){
+		data = { "ids" : listcheck, "token" : getLoginInfo().id};
+		
+		callback = function (response) {
+			if (response.status=="ok"){
+				alert ("Barang (barang-barang) berhasil dihapus)!");
+				window.location.reload();
+			} else {
+				alert (response.desc);
+			}
+		}
+		
+		sendRestAjax("DELETE", "barang", data , callback);
+		
+	}
+	
+	
+
+
 <?php
 	echo "var category = '".$cat."';";
 	echo "var sortby = '".$sort."';";
@@ -70,7 +120,10 @@
 <div class="outer">
 	<?php include("header.php"); ?>
 	<div class='content'>
-	<?php echo "<h3>Kategori: ".$cat."</h3>"; ?>
+	<?php echo "<h3>Kategori: ".$cat."</h3>"; 
+	echo '<a href="add_barang.php"><img src=image/Plus.png id="add"></a>';
+	echo '<input type="image" src=image/Delete.png id="bulkdelete" onclick="deleteBulkBarang()">';
+	echo '"<input type="hidden" name="admincode" id="adminidcode">"';?>
 	Pengurutan:
 	<select onchange="changeSortBy(this.value)">
 		<option value="nama" <?php if(!$harga_selected) echo "selected"; ?> >Nama Barang</option>
@@ -88,13 +141,13 @@
 			echo '<div class="row rowbarang">';
 			echo '<div class="cell33 imgcell" ><img class="imgbarang" src="'.$IMAGE_BASE_URL.$barang["id"].'.jpg" /></div>';
 			echo '<div class="cell66"><div class="table">';
-			echo '<div class="row title"><a href="barang.php?id='.$barang["id"].'" />'.$barang["nama"].'</a></div>';
+			echo '<div class="row title"><a href="barang.php?id='.$barang["id"].'">'.$barang["nama"].'</a></div>';
 			echo '<div class="row">Rp. '.formatCurrency($barang["harga"]).'</div>';
 			echo '<div class="row">Stok  : '.$barang["stok"].'</div>'; 
 			echo '<div class="row">'.$barang["deskripsi"].'</div>';
-			echo '<div class="rowtools"><input type="checkbox" name="'.$barang["id"].'" id="'.$barang["id"].'">'; 
-			echo '<a href="edit_barang.php?id="'.$barang["id"].'"><img src=image/Edit.jpg id="edit"></a>';
-			echo '<input type="image" src=image/Delete.png id="delete" onclick="">';
+			echo '<div class="rowtools"><input type="checkbox" name="'.$barang["id"].'" id="'.$barang["id"].'" onclick=checkedToList('.$barang["id"].')>'; 
+			echo '<a href="edit_barang.php?id='.$barang["id"].'"><img src=image/Edit.jpg id="edit"></a>';
+			echo '<input type="image" src=image/Delete.png id="delete" onclick="deleteBarang('.$barang["id"].')">';
 			echo '</div></div></div>';
 			echo '</div>';
 		}

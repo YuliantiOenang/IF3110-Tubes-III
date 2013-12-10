@@ -70,7 +70,7 @@ if ($barang == null) header("Location: index.php");
 		echo '<div class="row"><img class="imgbarang" id="display" src="'.$IMAGE_BASE_URL.$barang["id"].'.jpg" /></div>';
 		echo '<div class="row"><input type="file" id="imgfile" onchange="onfilechange()" /></div>';
 		echo '<div class="row"><div class="cell33">Nama barang</div><div class="cell66">: <input id="namabarang" type="text" value="'.$barang["nama"].'"/></div></div>';
-		echo '<div class="row harga"><div class="cell33">Harga</div><div class="cell66">: Rp. <input id="hargabarang" type="text" value="'.formatCurrency($barang["harga"]).'" /></div></div>';
+		echo '<div class="row harga"><div class="cell33">Harga</div><div class="cell66">: Rp. <input id="hargabarang" type="text" value="'.$barang["harga"].'" /></div></div>';
 		echo '<div class="row"><div class="cell33">Stok</div><div class="cell66">: <input id="stokbarang" type="text" value="'.$barang["stok"].'" /></div></div>';
 		echo '<div class="row kategori"><div class="cell33">Kategori</div><div class="cell66">: ';
 		echo '<input id="kategoribarang"type="text" value="'.$barang["kategori"].'" /></div></div>';
