@@ -127,29 +127,31 @@ public class Index extends HttpServlet {
 			}
 			
 			/**Port*/
-//			String json2 = webkit.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories/");
-//			Gson gson = new Gson();
-//			JsonParser jsonParser = new JsonParser();
-//			JsonArray categoryArray = jsonParser.parse(json2).getAsJsonArray();
-//			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
-//			for (JsonElement category : categoryArray)
-//			{
-//				KategoriBean kategoriObj = gson.fromJson(category, KategoriBean.class);
-//				allResults3.add(kategoriObj);
-//			}			
+			String json2 = webkit.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories/");
+			Gson gson = new Gson();
+			JsonParser jsonParser = new JsonParser();
+			JsonArray categoryArray = jsonParser.parse(json2).getAsJsonArray();
+			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
+			for (JsonElement category : categoryArray)
+			{
+				KategoriBean kategoriObj = gson.fromJson(category, KategoriBean.class);
+				System.out.println("debug-index=>"+kategoriObj.getName());
+				allResults3.add(kategoriObj);
+			}
+			
 			/**Port*/
 			
 			/**OLD*/
-			String query3 = "SELECT * FROM kategori";
-
-			ResultSet rs3 = connection.createStatement().executeQuery(query3);
-			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
-
-			while (rs3.next()) {
-				KategoriBean kategori = new KategoriBean(Integer.valueOf(rs3
-						.getString("id")), rs3.getString("nama"));
-				allResults3.add(kategori);
-			}
+//			String query3 = "SELECT * FROM kategori";
+//
+//			ResultSet rs3 = connection.createStatement().executeQuery(query3);
+//			ArrayList<KategoriBean> allResults3 = new ArrayList<KategoriBean>();
+//
+//			while (rs3.next()) {
+//				KategoriBean kategori = new KategoriBean(Integer.valueOf(rs3
+//						.getString("id")), rs3.getString("nama"));
+//				allResults3.add(kategori);
+//			}
 			/**OLD*/
 			
 			for (int i = 0; i < allResults3.size(); i++) {

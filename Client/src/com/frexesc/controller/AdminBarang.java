@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Locale.Category;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +25,10 @@ import javax.servlet.http.Part;
 
 import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * Servlet implementation class AdminBarang
@@ -58,14 +63,37 @@ public class AdminBarang extends HttpServlet {
 			if (request.getParameter("action").equals("edit")) {
 				String category = request.getParameter("category");
 				String selectQuery = "SELECT * FROM barang WHERE id_kategori='" + category + "'";
-				String selectCQuery = "SELECT * FROM kategori";
+				
+				/**port*/
+				WebServicesKit webkit = new WebServicesKit();
+
 				try {
-					Statement cstmt = connection.createStatement();
-					ResultSet rsc = cstmt.executeQuery(selectCQuery);
+					String json = webkit.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories");
+					Gson gson = new Gson();
+					JsonParser jsonParser = new JsonParser();
+					JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
 					ArrayList<KategoriBean> kategoris = new ArrayList<KategoriBean>();
-					while (rsc.next()) {
-						kategoris.add(new KategoriBean(rsc.getInt("id"), rsc.getString("nama")));
+					for (JsonElement categ : categoryArray)
+					{
+						KategoriBean kategObj = gson.fromJson(categ, KategoriBean.class);
+						System.out.println("debug admin barang=>"+kategObj.getName());
+						kategoris.add(kategObj);
 					}
+					
+
+					
+				/**port*/
+				
+				/**old*/
+//				String selectCQuery = "SELECT * FROM kategori";
+//				try {
+//					Statement cstmt = connection.createStatement();
+//					ResultSet rsc = cstmt.executeQuery(selectCQuery);
+//					ArrayList<KategoriBean> kategoris = new ArrayList<KategoriBean>();
+//					while (rsc.next()) {
+//						kategoris.add(new KategoriBean(rsc.getInt("id"), rsc.getString("nama")));
+//					}
+				/**old*/
 					Statement statement = connection.createStatement();
 					ResultSet rs = statement.executeQuery(selectQuery);
 					ArrayList<BarangBean> barangs = new ArrayList<BarangBean>();
@@ -75,6 +103,9 @@ public class AdminBarang extends HttpServlet {
 					request.setAttribute("kategoris", kategoris);
 					request.setAttribute("barangs", barangs);
 				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				dispatcher = getServletContext().getRequestDispatcher("/adminedit.jsp");
