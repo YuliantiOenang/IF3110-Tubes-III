@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.frexesc.model.KategoriBean"%>
-<%@ page import="com.frexesc.model.BarangBean"%>
+<%@ page import="com.frexesc.model.Barang"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,29 +22,29 @@
 	<jsp:include page="../layout.jsp" />
 	<%
 		@SuppressWarnings("unchecked")
-		ArrayList<BarangBean> barangBean = (ArrayList<BarangBean>) request
-				.getAttribute("items");
+			ArrayList<Barang> barangBean = (ArrayList<Barang>) request
+			.getAttribute("items");
 	%>
 	<%
 		if (barangBean == null)
-			barangBean = new ArrayList<BarangBean>();
+		barangBean = new ArrayList<Barang>();
 	%>
 
 	<%
 		@SuppressWarnings("unchecked")
-		ArrayList<KategoriBean> kategoriBean = (ArrayList<KategoriBean>) request
-				.getAttribute("categories");
+			ArrayList<KategoriBean> kategoriBean = (ArrayList<KategoriBean>) request
+			.getAttribute("categories");
 	%>
 	<%
 		if (kategoriBean == null)
-			kategoriBean = new ArrayList<KategoriBean>();
+		kategoriBean = new ArrayList<KategoriBean>();
 	%>
 
 	<%
 		for (int i = 0; i < barangBean.size(); i++) {
 	%>
 	<%
-		BarangBean b = barangBean.get(i);
+		Barang b = barangBean.get(i);
 	%>
 	<div id='content_frame' name='page'>
 		<h1 class='small-header'><%=b.getName()%></h1>

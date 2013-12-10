@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.frexesc.model.BarangBean;
+import com.frexesc.model.Barang;
 import com.frexesc.model.KategoriBean;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -96,9 +96,9 @@ public class AdminBarang extends HttpServlet {
 				/**old*/
 					Statement statement = connection.createStatement();
 					ResultSet rs = statement.executeQuery(selectQuery);
-					ArrayList<BarangBean> barangs = new ArrayList<BarangBean>();
+					ArrayList<Barang> barangs = new ArrayList<Barang>();
 					while (rs.next()) {
-						barangs.add(new BarangBean(rs.getLong("id"), rs.getLong("id_kategori"), rs.getString("nama_barang"), rs.getString("gambar"), rs.getInt("harga_barang"), rs.getString("keterangan"), rs.getInt("jumlah_barang")));
+						barangs.add(new Barang(rs.getLong("id"), rs.getLong("id_kategori"), rs.getString("nama_barang"), rs.getString("gambar"), rs.getInt("harga_barang"), rs.getString("keterangan"), rs.getInt("jumlah_barang")));
 					}
 					request.setAttribute("kategoris", kategoris);
 					request.setAttribute("barangs", barangs);
@@ -143,7 +143,7 @@ public class AdminBarang extends HttpServlet {
 		DbConnection dbConnection = new DbConnection();
 		Connection connection = dbConnection.mySqlConnection();
 		if (request.getParameter("action").equals("add")) {
-			BarangBean barang = new BarangBean(0, Integer.parseInt(request.getParameter("category")), request.getParameter("name"), null, Integer.parseInt(request.getParameter("price")), request.getParameter("description"), Integer.parseInt(request.getParameter("amount")));
+			Barang barang = new Barang(0, Integer.parseInt(request.getParameter("category")), request.getParameter("name"), null, Integer.parseInt(request.getParameter("price")), request.getParameter("description"), Integer.parseInt(request.getParameter("amount")));
 			String insertQuery = "INSERT INTO barang (id_kategori, nama_barang, gambar, harga_barang, keterangan, jumlah_barang) VALUES ('" + barang.getId_category() + "','" + barang.getName() + "','" + barang.getPicture() + "','" + barang.getPrice() + "','" + barang.getDescription() + "','" + barang.getTotal_item() + "')";
 			int id = 0;
 			URL filename = null;
@@ -201,7 +201,7 @@ public class AdminBarang extends HttpServlet {
 			}
 		} else if (request.getParameter("action").equals("update")) {
 			System.out.println(request.getParameter("description"));
-			BarangBean barang = new BarangBean(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("category")), request.getParameter("name"), null, Integer.parseInt(request.getParameter("price")), request.getParameter("description"), Integer.parseInt(request.getParameter("amount")));
+			Barang barang = new Barang(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("category")), request.getParameter("name"), null, Integer.parseInt(request.getParameter("price")), request.getParameter("description"), Integer.parseInt(request.getParameter("amount")));
 			String updateQuery = "UPDATE barang SET id_kategori='" + barang.getId_category() + "', nama_barang='" + barang.getName() + "', harga_barang='" + barang.getPrice() + "', keterangan='" + barang.getDescription() + "', jumlah_barang='" + barang.getTotal_item() + "' WHERE id='" + barang.getId() + "'";
 			try {
 				Statement statement = connection.createStatement();

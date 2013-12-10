@@ -1,16 +1,18 @@
 package com.frexesc.model;
 
-public class BarangBean {
+public class Barang {
 	private long id;
 	private long id_category;
 	private String name;
-	private String picture;
+	private String picture, nKat;
 	private int price;
 	private String description;
-	private String nKat;
 	private int total_item;
 
-	public BarangBean(long id, long id_category, String name, String picture,
+	public Barang() {
+	}
+
+	public Barang(long id, long id_category, String name, String picture,
 			int price, String description, int total_item) {
 		super();
 		this.id = id;
@@ -20,10 +22,16 @@ public class BarangBean {
 		this.price = price;
 		this.description = description;
 		this.total_item = total_item;
+
+	}
+
+	public void setnKat(String nKat) {
+		this.nKat = nKat;
 	}
 	public String getnKat() {
 		return nKat;
 	}
+
 	public long getId() {
 		return id;
 	}

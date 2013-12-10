@@ -3,16 +3,14 @@ package com.frexesc.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.frexesc.model.BarangBean;
+import com.frexesc.model.Barang;
 import com.frexesc.model.BarangUserBean;
 
 /**
@@ -40,6 +38,8 @@ public class UpdateCart extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 
+		System.out.println("Update");
+		
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");
 		} else {
@@ -49,26 +49,27 @@ public class UpdateCart extends HttpServlet {
 			if (request.getParameter("submit") != null) {
 				int id = 0;
 				id = Integer.parseInt(request.getParameter("id"));
-
-				String query = "SELECT * FROM barang_user WHERE id=" + id;
-
+				
+				//String query = "SELECT * FROM barang_user WHERE id=" + id;
+				
 				try {
-					ResultSet rs = connection.createStatement().executeQuery(
-							query);
+					//ResultSet rs = connection.createStatement().executeQuery(query);
+					
+					String json = ServiceParser.readUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/baranguserid?id=" + id);
+					
+					List<BarangUserBean> allResults = ServiceParser.parseJsonToGenericlist(json, BarangUserBean.class);//new ArrayList<BarangUserBean>();
 
-					ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
-
-					while (rs.next()) {
-						BarangUserBean barangUser = new BarangUserBean(
-								Integer.valueOf(rs.getString("id")),
-								Integer.valueOf(rs.getString("id_barang")),
-								Integer.valueOf(rs.getString("id_user")),
-								Integer.valueOf(rs.getString("status")),
-								Integer.valueOf(rs.getString("jumlah_barang")),
-								rs.getString("deskripsi_tambahan"));
-
-						allResults.add(barangUser);
-					}
+//					while (rs.next()) {
+//						BarangUserBean barangUser = new BarangUserBean(
+//								Integer.valueOf(rs.getString("id")),
+//								Integer.valueOf(rs.getString("id_barang")),
+//								Integer.valueOf(rs.getString("id_user")),
+//								Integer.valueOf(rs.getString("status")),
+//								Integer.valueOf(rs.getString("jumlah_barang")),
+//								rs.getString("deskripsi_tambahan"));
+//
+//						allResults.add(barangUser);
+//					}
 
 					String query2 = "SELECT * FROM barang WHERE id="
 							+ allResults.get(0).getId_item();
@@ -77,10 +78,10 @@ public class UpdateCart extends HttpServlet {
 							query2);
 
 					if (rs2 != null) {
-						ArrayList<BarangBean> allResults2 = new ArrayList<BarangBean>();
+						ArrayList<Barang> allResults2 = new ArrayList<Barang>();
 
 						while (rs2.next()) {
-							BarangBean barang = new BarangBean(
+							Barang barang = new Barang(
 									Integer.valueOf(rs2.getString("id")),
 									Integer.valueOf(rs2
 											.getString("id_kategori")),
@@ -121,20 +122,27 @@ public class UpdateCart extends HttpServlet {
 							connection.createStatement().executeUpdate(query3);
 
 							/** Update barang */
-							String query4 = "UPDATE barang_user SET jumlah_barang=" // update
-																					// barang_user
-									+ Integer.parseInt(request
-											.getParameter("qty"))
-									+ " WHERE id=" + allResults.get(0).getId();
-							connection.createStatement().executeUpdate(query4);
+//							String query4 = "UPDATE barang_user SET jumlah_barang=" // update
+//																					// barang_user
+//									+ Integer.parseInt(request
+//											.getParameter("qty"))
+//									+ " WHERE id=" + allResults.get(0).getId();
+//							connection.createStatement().executeUpdate(query4);
 
+						
+							//POST
+							String[] param = {"qty","id"};
+							String[] val= {"" + Integer.parseInt(request.getParameter("qty")),  "" + allResults.get(0).getId()};
+							ServiceParser.postUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/jumlahbaranguser",param, val);
+							
+							
 							response.getWriter().write(
 									"Success: " + differences);
 
 						}
 					}
 
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
