@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 import com.frexesc.model.Barang;
 import com.frexesc.model.BarangUserBean;
 
+import java.util.List;
+
+
 /**
  * 
  * Servlet implementation class Cart
@@ -47,25 +50,30 @@ public class Cart extends HttpServlet {
 			DbConnection dbConnection = new DbConnection();
 			Connection connection = dbConnection.mySqlConnection();
 
-			String query = "SELECT * FROM barang_user WHERE id_user="
-					+ session.getAttribute("user_id") + " AND status=0";
+			//String query = "SELECT * FROM barang_user WHERE id_user=" + session.getAttribute("user_id") + " AND status=0";
 			String query2 = "SELECT * FROM barang";
 
 			try {
-				ResultSet rs = connection.createStatement().executeQuery(query);
+				//ResultSet rs = connection.createStatement().executeQuery(query);
 
-				ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
+				
+				String json = ServiceParser.readUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/statuszero?id=" + session.getAttribute("user_id"));
+				
+				List<BarangUserBean> allResults = ServiceParser.parseJsonToGenericlist(json, BarangUserBean.class);//new ArrayList<BarangUserBean>();
 
-				while (rs.next()) {
-					BarangUserBean barangUser = new BarangUserBean(
-							Integer.valueOf(rs.getString("id")),
-							Integer.valueOf(rs.getString("id_barang")),
-							Integer.valueOf(rs.getString("id_user")),
-							Integer.valueOf(rs.getString("status")),
-							Integer.valueOf(rs.getString("jumlah_barang")),
-							rs.getString("deskripsi_tambahan"));
-					allResults.add(barangUser);
-				}
+				//ArrayList<BarangUserBean> allResults = new ArrayList<BarangUserBean>();
+
+//				while (rs.next()) {
+//					BarangUserBean barangUser = new BarangUserBean(
+//							Integer.valueOf(rs.getString("id")),
+//							Integer.valueOf(rs.getString("id_barang")),
+//							Integer.valueOf(rs.getString("id_user")),
+//							Integer.valueOf(rs.getString("status")),
+//							Integer.valueOf(rs.getString("jumlah_barang")),
+//							rs.getString("deskripsi_tambahan"));
+//					allResults.add(barangUser);
+//				}
+
 
 				ResultSet rs2 = connection.createStatement().executeQuery(
 						query2);

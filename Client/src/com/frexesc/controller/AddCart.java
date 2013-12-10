@@ -89,7 +89,11 @@ import com.google.gson.JsonParser;
 						+ request.getParameter("qty")
 						+ ", \""
 						+ deskripsiTambahan + "\")";
-
+				//POST
+				//String[] param = {"id", "user", "qty", "desc"};
+				//String[] val= {"" + request.getParameter("id_barang") , "" + session.getAttribute("user_id"), "" +  request.getParameter("qty"), "" + //deskripsiTambahan};
+				//ServiceParser.postUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/insertbaranguser",param, val);
+						
 
 				// Update to Barang here
 				try {

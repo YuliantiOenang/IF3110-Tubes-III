@@ -88,11 +88,16 @@ public class Payment extends HttpServlet {
 						response.sendRedirect("../card?from=payment");
 					} else {
 
-						// Update status
-						String query2 = "UPDATE barang_user SET status=1 WHERE id_user="
-								+ session.getAttribute("user_id");
-						connection.createStatement().executeUpdate(query2);
+												// Update status
+//						String query2 = "UPDATE barang_user SET status=1 WHERE id_user="
+//								+ session.getAttribute("user_id");
+//						connection.createStatement().executeUpdate(query2);
 
+						//POST
+						String[] param = {"id"};
+						String[] val= {"" + session.getAttribute("user_id")};
+						ServiceParser.postUrl(ServiceParser.BASE_URL + "BarangUserService/baranguserService/statusbaranguser",param, val);
+						
 						/**port*/
 
 							json = webkit.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"+ session.getAttribute("user_id"));
@@ -113,6 +118,12 @@ public class Payment extends HttpServlet {
 								+ session.getAttribute("user_id");
 						connection.createStatement().executeUpdate(query4);
 
+						//POST
+						//String[] params = {"num", "id"};
+						//String[] value= {"" + (Integer.parseInt(rs3.getString("transaksi")) + 1), "" + session.getAttribute("user_id")};
+						//ServiceParser.postUrl(ServiceParser.BASE_URL + "UserService/userservice/updatetrans",params, value);
+						
+						
 							
 						/**port*/
 						
@@ -149,13 +160,6 @@ public class Payment extends HttpServlet {
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 
