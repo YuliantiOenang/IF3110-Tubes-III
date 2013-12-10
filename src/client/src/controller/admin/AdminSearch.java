@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Barang;
 import controller.Render;
+import model.Barang;
 
 /**
- * Servlet implementation class AdminView
+ * Servlet implementation class AdminCreate
  */
-@WebServlet("/admin/view")
-public class AdminView extends HttpServlet {
+@WebServlet("/admin/search")
+public class AdminSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	private Vector<HashMap<String,String>> data;
@@ -39,7 +39,7 @@ public class AdminView extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminView() {
+    public AdminSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -97,7 +97,7 @@ public class AdminView extends HttpServlet {
 		request.setAttribute("halaman", hal);
 		request.setAttribute("searchquery", searchquery);
 		request.setAttribute("sorting", sorting);
-		Render.Show(request, response, "../browse.jsp");
+		Render.Show(request, response, "../adminbrowse.jsp");
 	}
 
 	/**

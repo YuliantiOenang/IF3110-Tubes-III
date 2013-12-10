@@ -244,4 +244,15 @@ public class Model
 		else
 			return false;
 	}
+	
+	public static int rupiahReverseFormatter(String str){
+		int bil = 0;
+		for (int i=0;i<str.length();i++){
+			if (str.charAt(i) >= '0' && str.charAt(i) <= '9'){
+				bil*=10;
+				bil+=Character.getNumericValue(str.charAt(i));
+			}
+		}
+		return bil;
+	}
 }

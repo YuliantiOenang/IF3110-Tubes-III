@@ -15,14 +15,14 @@ import controller.Render;
 /**
  * Servlet implementation class AdminEdit
  */
-@WebServlet("/admin/edit")
-public class AdminEdit extends HttpServlet {
+@WebServlet("/admin/tambah")
+public class AdminAdd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminEdit() {
+    public AdminAdd() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,10 +33,10 @@ public class AdminEdit extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Barang model = new Barang();
-		model.findById((int)Integer.parseInt(request.getParameter("id")));
-		model.formatAllCurrency();
-		request.setAttribute("model", model.getDataVector().firstElement());
-		Render.Show(request, response, "../adminbarang.jsp");
+		//model.findById((int)Integer.parseInt(request.getParameter("id")));
+		//model.formatAllCurrency();
+		//request.setAttribute("model", model.getDataVector().firstElement());
+		Render.Show(request, response, "../adminadd.jsp");
 	}
 
 	/**
@@ -44,11 +44,9 @@ public class AdminEdit extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Barang model = new Barang();
-		model.findById((int)Integer.parseInt(request.getParameter("id")));
-		request.setAttribute("model", model.getDataVector().firstElement());
+		
+		
 		try {
-			int id = Integer.parseInt(request.getParameter("id"));
 			String nama = request.getParameter("nama");
 			System.out.println(1);
 			String harga = request.getParameter("harga");
@@ -57,7 +55,8 @@ public class AdminEdit extends HttpServlet {
 			System.out.println(2);
 			Model model2 = new Model("barang");
 			String command;
-			command = "UPDATE barang SET nama = '" + nama + "', harga = " + harga + ", stok = " + stok + ",keterangan = '" + deskripsi +  "' WHERE id = " + id + ";";
+			command = "UPDATE barang (id_kategori,nama,harga,gambar,stok,counter,keterangan) VALUES ("
+					+ 1 + ",' " + nama + "',"+ harga + "," + "1.jpg" + "'," + stok + "," + 0 + ",'" + deskripsi+ "');";
 			//System.out.println(command);
 			model2.updateSQL(command);
 			request.setAttribute("msg", "Changes have been made successfully, keep up the good work!");
