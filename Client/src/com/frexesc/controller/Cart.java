@@ -98,7 +98,7 @@ public class Cart extends HttpServlet {
 						.getRequestDispatcher("/barang/cart.jsp");
 				dispatcher.forward(request, response);
 
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
