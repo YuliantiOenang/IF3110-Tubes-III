@@ -147,6 +147,7 @@
 			echo '<div class="cell66"><div class="table">';
 			echo '<div class="row title"><a href="barang.php?id='.$barang["id"].'">'.$barang["nama"].'</a></div>';
 			echo '<div class="row">Rp. '.formatCurrency($barang["harga"]).'</div>';
+			echo '<div class="row">Dibeli '.$barang["jumlah_beli"].' kali</div>';
 			echo '<div class="row">Stok  : '.$barang["stok"].'</div>'; 
 			echo '<div class="row">'.$barang["deskripsi"].'</div>';
 			echo '<div class="rowtools"><input type="checkbox" name="'.$barang["id"].'" id="'.$barang["id"].'" onclick=checkedToList('.$barang["id"].')>'; 
