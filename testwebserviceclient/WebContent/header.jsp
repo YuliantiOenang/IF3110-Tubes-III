@@ -69,10 +69,45 @@ function getNavbar(){
 <div id="AJS_body_wrapper">
 	<div id="AJS_wrapper">
 		<div id="AJS_header">
+		<% 
+			HttpSession sesi = request.getSession(true);
+			if((sesi== null)|| (sesi.getAttribute("username")==null)) {
+			%>
+				<div id='site_title'><h1><a href='index.jsp'>Ruko Serba Ada</a></h1></div>
+			<%
+			}
+			else{
+			out.print("<div id='site_title'><h1><a href='index.jsp'>Welcome</a>, <a href='profile.jsp'>"+ sesi.getAttribute("username")+"</a></h1></div>");
+			}
+			%>
 		</div>
 		<div id="AJS_menubar">
 			<div id="top_nav" class="ddsmoothmenu">
 				<ul id="customnavbar">
+<<<<<<< HEAD
+=======
+					<% 
+				if((sesi== null)|| (sesi.getAttribute("username")==null)) {
+				%>
+					<li><a href="register.jsp">Sign Up</a></li>
+					<li><a href="#login_form">Log in </a></li>
+				<%
+				}
+				else{
+				%>
+					<li><a href="registercreditcard.jsp"> Register Credit Card </a></li>
+					<li><a href="shoppingbag.jsp"> Shopping Bag </a></li>
+					<li><a href="profile.jsp">Profile</a></li>
+					<%
+						if(sesi.getAttribute("username").equals("admin")){
+							out.print("<li><a href='kategori.jsp?laman=1&id=1'>Admin Barang</a></li>");
+						}
+					%>
+					<li><a href="logout.jsp">Log out</a></li>
+				<%
+				}
+				%>
+>>>>>>> 0c2106408f92feefad3fdfde8603c0801d97e88d
 				</ul>
 				<br style="clear: left" />
 			</div> <!-- end of ddsmoothmenu -->	
