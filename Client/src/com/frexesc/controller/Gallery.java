@@ -12,7 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.frexesc.model.Barang;
+import com.frexesc.model.KategoriBean;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+
 
 /**
  * 
@@ -133,10 +141,30 @@ public class Gallery extends HttpServlet {
 				
 				if (request.getParameter("category") != null) {
 					if (Integer.parseInt(request.getParameter("category")) != 0) {
-						String query3 = "SELECT * FROM kategori WHERE id=" + Integer.parseInt(request.getParameter("category"));
-						ResultSet rs3 = connection.createStatement().executeQuery(query3);
-						rs3.next();
-						request.setAttribute("category_name", rs3.getString("nama"));	
+						
+						/**port*/
+						WebServicesKit webkit = new WebServicesKit();
+						String json = webkit.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories");
+						Gson gson = new Gson();
+						JsonParser jsonParser = new JsonParser();
+						JsonArray categoryArray = jsonParser.parse(json).getAsJsonArray();
+						KategoriBean kategObj;
+						for (JsonElement categ : categoryArray)
+						{
+							kategObj = gson.fromJson(categ, KategoriBean.class);
+							System.out.println("debug admin gallery=>"+kategObj.getName());
+							if (Integer.parseInt(request.getParameter("category")) == kategObj.getId()){
+								request.setAttribute("category_name", kategObj.getName());	
+							}
+						}
+						/**port*/
+						
+						/**old*/
+//						String query3 = "SELECT * FROM kategori WHERE id=" + Integer.parseInt(request.getParameter("category"));
+//						ResultSet rs3 = connection.createStatement().executeQuery(query3);
+//						rs3.next();
+//						request.setAttribute("category_name", rs3.getString("nama"));	
+						/**old*/
 					}
 				}
 

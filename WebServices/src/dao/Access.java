@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dto.BarangUserBean;
 import dto.Category;
 import dto.Course;
 import dto.User;
 import dto.UserBean;
-import dto.BarangUserBean;
 
 public class Access
 {
@@ -251,6 +251,24 @@ public class Access
 	public void insertUser(Connection con,String  name , String username, String password ,String email ,String  telephone ,String address ,String city ,String province ,String postal) throws SQLException {
 		PreparedStatement stmt = con.prepareStatement("INSERT INTO user (nama, username, password, email, handphone, alamat, kota, provinsi, kodepos) VALUES ('" + name + "','" + username + "','" + password + "','" + email + "','" + telephone + "','" + address + "','" + city + "','" + province + "','" + postal + "')");
 		stmt.execute();
+	}
+
+	public ArrayList<UserBean> getUsersById2(Connection con, int id) throws SQLException {
+		ArrayList<UserBean> userList = new ArrayList<UserBean>();
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user WHERE id="+id);
+		ResultSet rs = stmt.executeQuery();
+		try
+		{
+			while(rs.next())
+			{
+				UserBean user = new UserBean(rs.getString("username"), rs.getString("password"), rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), rs.getInt("transaksi"));
+				userList.add(user);
+			}
+		} catch (SQLException e)
+		{		
+			e.printStackTrace();
+		}
+		return userList;
 	}
 	
 	

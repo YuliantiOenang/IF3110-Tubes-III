@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.frexesc.model.UserBean;
+import com.frexesc.model.UserBean2;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * Servlet implementation class User
@@ -21,7 +27,7 @@ import com.frexesc.model.UserBean;
 @WebServlet("/User")
 public class User extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	WebServicesKit webkit = new WebServicesKit();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -44,13 +50,39 @@ public class User extends HttpServlet {
 				Connection connection = dbConnection.mySqlConnection();
 				String id = request.getParameter("id");
 				try {
-					Statement statement = connection.createStatement();
-					ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id='" + id + "' LIMIT 1");
-					if (rs.next()) {
-						UserBean user = new UserBean(rs.getString("username"), null, rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), Integer.parseInt(rs.getString("transaksi")));
-						request.setAttribute("user", user);
+					/**PORT*/
+					String json = webkit
+							.readUrl("http://localhost:8080/web-services/UserService/userservice/user2/"
+									+ id);
+					Gson gson = new Gson();
+					JsonParser jsonParser = new JsonParser();
+					JsonArray userArray = jsonParser.parse(json)
+							.getAsJsonArray();
+
+					ArrayList<UserBean> arr_user2 = new ArrayList<UserBean>();
+					for (JsonElement user : userArray) {
+						UserBean userObj = gson
+								.fromJson(user, UserBean.class);
+						arr_user2.add(userObj);
+						System.out
+								.println("0.User-userobj" + userObj.getName());
+						request.setAttribute("user", arr_user2.get(0));
 						request.setAttribute("id", id);
+						break;
 					}
+
+					/**PORT*/
+					
+					/**OLD*/
+//					Statement statement = connection.createStatement();
+//					ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id='" + id + "' LIMIT 1");
+//					if (rs.next()) {
+//						UserBean user = new UserBean(rs.getString("username"), null, rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), Integer.parseInt(rs.getString("transaksi")));
+//						request.setAttribute("user", user);
+//						request.setAttribute("id", id);
+//					}
+					/**OLD*/
+					
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/profile.jsp");
 					dispatcher.forward(request, response);
 				} catch (Exception e) {
@@ -61,12 +93,37 @@ public class User extends HttpServlet {
 				Connection connection = dbConnection.mySqlConnection();
 				String id = request.getParameter("id");
 				try {
-					Statement statement = connection.createStatement();
-					ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id='" + id + "' LIMIT 1");
-					if (rs.next()) {
-						UserBean user = new UserBean(rs.getString("username"), rs.getString("password"), rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), Integer.parseInt(rs.getString("transaksi")));
-						request.setAttribute("user", user);
+					/**PORT*/
+					String json = webkit
+							.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"
+									+ id);
+					Gson gson = new Gson();
+					JsonParser jsonParser = new JsonParser();
+					JsonArray userArray = jsonParser.parse(json)
+							.getAsJsonArray();
+
+					ArrayList<UserBean> arr_user2 = new ArrayList<UserBean>();
+					for (JsonElement user : userArray) {
+						UserBean userObj = gson
+								.fromJson(user, UserBean.class);
+						arr_user2.add(userObj);
+						System.out
+								.println("0.User-userobj" + userObj.getName());
 					}
+					if (userArray.get(0) != null){
+						request.setAttribute("user", arr_user2.get(0));
+					}
+
+					/**PORT*/
+					
+					/**OLD*/
+//					Statement statement = connection.createStatement();
+//					ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id='" + id + "' LIMIT 1");
+//					if (rs.next()) {
+//						UserBean user = new UserBean(rs.getString("username"), rs.getString("password"), rs.getString("email"), rs.getString("nama"), rs.getString("handphone"), rs.getString("alamat"), rs.getString("provinsi"), rs.getString("kota"), rs.getString("kodepos"), rs.getInt("role"), rs.getString("nomor_kartu"), rs.getString("nama_kartu"), rs.getString("expire_kartu"), Integer.parseInt(rs.getString("transaksi")));
+//						request.setAttribute("user", user);
+//					}
+					/**OLD*/
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editprofile.jsp");
 					dispatcher.forward(request, response);
 				} catch (Exception e) {

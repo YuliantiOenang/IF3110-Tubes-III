@@ -175,4 +175,10 @@ public class AccessManager
 		Access access = new Access();
 		access.insertUser(con, name, username, password, email, telephone, address, city, province, postal);
 	}
+	public ArrayList<UserBean> getUsersById2(int id) throws Exception{
+		ArrayList<UserBean> userList = new ArrayList<UserBean>();
+		Access access = new Access();
+		userList = access.getUsersById2(con,id);
+		return userList;
+	}
 }

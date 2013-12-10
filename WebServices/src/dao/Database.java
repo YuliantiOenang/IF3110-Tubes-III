@@ -19,7 +19,7 @@ public class Database
 			Connection connection = null;
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			connection = DriverManager.getConnection(connectionURL, "uq4KXgZdPVKL4", "pUxhgVj9EKMdX");
-*/			
+*/
 //LOCALHOST
 			String connectionURL = "jdbc:mysql://localhost:3306/frexesc";
 			Connection connection = null;
