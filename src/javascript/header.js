@@ -91,7 +91,7 @@ function searchsuggest(text)
 			document.getElementById("cariyu").innerHTML=xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("GET","search.php?cari="+text+"&suggest=true",true);
+	xmlhttp.open("GET","search.php?cari="+text+"&suggest=true&page=0",true);
 	xmlhttp.send();
 }
 var spage=1;
@@ -151,6 +151,12 @@ function auth(user,pass){
 				break;
 				case '1':
 					document.getElementById("errorInfo").innerHTML='<img src="images/unlike.png" width="15" height="15"/> Invalid username passowrd!';
+				break;
+				case '2':
+					ANIMATEPOPUPBOX.closembox();
+					localStorage.wbduser = user;
+					localStorage.wbdlogintime=new Date().getTime();
+					window.location="adminbarang.php";
 				break;
 			}
 		}else{

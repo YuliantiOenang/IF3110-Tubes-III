@@ -1,0 +1,237 @@
+<!--
+
+(c) Pusheen
+2013-12-11
+pusheen mania....
+
+Online WSDL SOAP generator 0.1a
+Julien Blitte
+-->
+<definitions xmlns:tns="wbd3pusheen.ap01.aws.af.cm.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="wbd3pusheen.ap01.aws.af.cm.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="pusheen mania...." targetNamespace="wbd3pusheen.ap01.aws.af.cm.wsdl">
+<!--  definition of datatypes  -->
+<types>
+<schema xmlns="http://www.w3.org/2000/10/XMLSchema" targetNamespace="wbd3pusheen.ap01.aws.af.cm.xsd">
+<element name="username">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="password">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="nohp">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="alamat">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="provinsi">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="kota">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="kodepos">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="email">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="cardnumber">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="nama">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="expired">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="kategori">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="harga">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="jumlah">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="deskripsi">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="gambar">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="result">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="resultcard">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+<element name="resultbarang">
+<complexType>
+<all>
+<element name="value" type="string"/>
+</all>
+</complexType>
+</element>
+</schema>
+</types>
+<!--  response messages  -->
+<message name="returns_result">
+<part name="result" type="xsd:result"/>
+</message>
+<message name="returns_resultcard">
+<part name="resultcard" type="xsd:resultcard"/>
+</message>
+<message name="returns_resultbarang">
+<part name="resultbarang" type="xsd:resultbarang"/>
+</message>
+<!--  request messages  -->
+<message name="register">
+<part name="username" type="xsd:username"/>
+<part name="password" type="xsd:password"/>
+<part name="nama" type="xsd:nama"/>
+<part name="nohp" type="xsd:nohp"/>
+<part name="alamat" type="xsd:alamat"/>
+<part name="provinsi" type="xsd:provinsi"/>
+<part name="kota" type="xsd:kota"/>
+<part name="kodepos" type="xsd:kodepos"/>
+<part name="email" type="xsd:email"/>
+</message>
+<message name="registercard">
+<part name="username" type="xsd:username"/>
+<part name="cardnumber" type="xsd:cardnumber"/>
+<part name="nama" type="xsd:nama"/>
+<part name="expired" type="xsd:expired"/>
+</message>
+<message name="tambahBarang">
+<part name="nama" type="xsd:nama"/>
+<part name="kategori" type="xsd:kategori"/>
+<part name="harga" type="xsd:harga"/>
+<part name="jumlah" type="xsd:jumlah"/>
+<part name="deskripsi" type="xsd:deskripsi"/>
+<part name="gambar" type="xsd:gambar"/>
+</message>
+<!--  server's services  -->
+<portType name="PusheenService">
+<operation name="register">
+<input message="tns:register"/>
+<output message="tns:returns_result"/>
+</operation>
+<operation name="registercard">
+<input message="tns:registercard"/>
+<output message="tns:returns_resultcard"/>
+</operation>
+<operation name="tambahBarang">
+<input message="tns:tambahBarang"/>
+<output message="tns:returns_resultbarang"/>
+</operation>
+</portType>
+<!--  server encoding  -->
+<binding name="PusheenService_webservices" type="tns:PusheenService">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="register">
+<soap:operation soapAction="urn:xmethods-delayed-quotes#register"/>
+<input>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="registercard">
+<soap:operation soapAction="urn:xmethods-delayed-quotes#registercard"/>
+<input>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="tambahBarang">
+<soap:operation soapAction="urn:xmethods-delayed-quotes#tambahBarang"/>
+<input>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+</binding>
+<!--  access to service provider  -->
+<service name="App Fog">
+<port name="App Fog_0" binding="PusheenService_webservices">
+<soap:address location="http://wbd3pusheen.ap01.aws.af.cm/soapserver.php"/>
+</port>
+</service>
+</definitions>

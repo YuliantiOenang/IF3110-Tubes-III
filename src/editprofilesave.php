@@ -1,5 +1,4 @@
 <?php
-include "koneksi.inc.php";
 if(isset($_POST['username'])){$username=$_POST['username'];}
 if(isset($_POST['password'])){$password=$_POST['password'];}
 if(isset($_POST['nama'])){$nama=$_POST['nama'];}
@@ -18,16 +17,30 @@ if(file_exists("images/".$_FILES["foto"]["name"])){
 }else{
     move_uploaded_file($_FILES["foto"]["tmp_name"],"images/". $_FILES["foto"]["name"]);
 }
-$perintah="update anggota set password='$password',nama='$nama',nomorhp='$nomorhp',alamat='$alamat',provinsi='$provinsi',kota='$kota',kodepos='$kodepos',email='$email',foto='$file_name'
-		where username='$username'";
-if(!empty($username) and !empty($password)){
-	$hasil=mysql_query($perintah,$koneksi);
-	if($hasil){
-		echo "<html><body>Profile berhasil diedit!<br><a href='profile.php'>Kembali ke halaman profile</a></body></html>";
-	}else{
-		echo "<html><body>Edit profile gagal.<br><a href='editprofile.php'>Edit ulang</a> atau <a href='index.php'>Kembali ke halaman utama</a></body></html>";
-	}
-}else{
-	echo "<html><body>Your username or password is incorrect!<br><a href='editprofile.php'>Edit ulang</a> atau <a href='index.php'>Kembali ke halaman utama</a></body></html>";
+//meminta autentifikasi user dengan REST
+$service_url = 'http://wbd3pusheen.ap01.aws.af.cm/resteditprofile.php';
+$curl = curl_init($service_url);
+$curl_post_data = array(
+        'username' => $username,
+        'password' => $password,
+		'nama' => $nama,
+        'nomorhp' => $nomorhp,
+		'alamat' => $alamat,
+        'provinsi' => $provinsi,
+		'kota' => $kota,
+        'kodepos' => $kodepos,
+		'email' => $email,
+        'foto' => $file_name,
+);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+$curl_response = curl_exec($curl);
+if ($curl_response === false) {
+    $info = curl_getinfo($curl);
+    curl_close($curl);
+    die('error occured during curl exec. Additioanl info: ' . var_export($info));
 }
+curl_close($curl);
+echo $curl_response;
 ?>

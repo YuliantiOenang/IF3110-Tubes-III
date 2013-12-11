@@ -1,42 +1,38 @@
-<link rel="stylesheet" href="css/header.css" type="text/css" />
-<link rel="stylesheet" href="css/mainadmin.css" type="text/css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>RuSerBa</title>
+	<link rel="stylesheet" href="css/header.css" type="text/css" />
+	<link rel="stylesheet" href="css/mainadmin.css" type="text/css" /> 
+</head>
+<body id="index" class="home">
+	<div style="width:1100px; margin-left:auto; margin-right:auto">
 	<header id="banner" class="body">
-	<span style="float:left"><a href="index.jsp"><img src="images/logo.png" alt="RuSerBa Logo" width="110" height="110"/></a></span>
-	<h1><span><a href="index.jsp">RuSerBa<br><br><strong>Ruko Serba Ada</strong></a></span></h1>
+	<span style="float:left"><a href="index.php"><img src="images/logo.png" alt="RuSerBa Logo" width="110" height="110"/></a></span>
+	<h1><span><a href="index.php">RuSerBa<br><strong>Ruko Serba Ada</strong></a></span></h1>
  	<nav><ul id="menubar">
-		<li><a href="index.jsp">Home</a></li>
-		<li><a href="halamanbarang.jsp" onmouseover="slidedown(true)" onmouseup="slidedown(false)">Kategori Barang</a>
+		<li><a href="index.php">Home</a></li>
+		<li><a href="halamanbarang.php" onmouseover="slidedown(true)" onmouseup="slidedown(false)">Kategori Barang</a>
 			<ul class="sub-menu">	
-		
-		<?php
-		
-			$con=mysqli_connect("localhost","root","","ruserba");
-			// Check connection
-			if (mysqli_connect_errno()) {
-				echo "Failed to connect to MySQL: " . mysqli_connect_error();
-			}
-			$sql = "SELECT * FROM barang group by kategori";
-			$result = mysqli_query($con,$sql);
-			
-			while ($row = mysqli_fetch_array($result)){
-				$kategori = $GET['kategori'];
-				<li><a href=\"halamanbarang.php?kategori="+$kategori+"\">"+$kategori+</a></li>;
-			}
-			
-		?>
-</ul>
+			<?php 
+				include "koneksi.inc.php";
+				$query2 = "select * from barang group by kategori";
+				$hasil2 = mysql_query($query2,$koneksi);
+				while($row = mysql_fetch_array($hasil2)){
+				echo '<li><a href="halamanbarang.php?kategori='.$row["kategori"].'">'.$row["kategori"].'</a></li>';
+				}
+			?>
+			</ul>
 		</li>
 		<div id="log"></div>
-		<li><a href="shoppingbag">Shopping Bag</a></li>
 		<div id="searchbar" style="float:right">
 		<li><input type="text" name="search" id="cari" placeholder="Cari Barang" onkeyup="searchsuggest(cari.value)" onblur="resetsuggest()">
 			<ul class="suggestion" id="cariyu">	
 			</ul>
 		</li>
 		<li><button type="button" onclick="resetsearch();search(cari.value,1);">Search</button></li>
-		</div>
-		
-		
+		</div>	
 	</ul></nav>
 	</header><!-- /#banner -->
 	<!-- buat animasi kotak login user -->
@@ -55,26 +51,31 @@
 	<!-- import script dari file javascript -->
 	<script src="javascript/header.js"></script>
 <script src="javascript/transaksi.js"></script>
+
 <script>
 if(localStorage.wbduser){
 	var currentpage=1;
 	var shopping_bag = [];
 	var sum_item = parseInt(
 	<?php
-			$con=mysqli_connect("localhost","root","","ruserba");
-			// Check connection
-			if (mysqli_connect_errno()) {
-				echo "Failed to connect to MySQL: " . mysqli_connect_error();
-			}
+			$sql = "select COUNT (*) FROM barang";
+			$result = mysql_query($query2,$koneksi);
 			
-			$sql = "SELECT COUNT (*) FROM barang";
-			$result = mysqli_query($con,$sql);
-			
-			while($row=mysqli_fetch_array($result)){
+			while($row = mysqli_fetch_array($result)){
 				$count = $row['COUNT (*)'];
-				echo (""+($count-1));
+				echo ($count-1);
 			}
 	?>
+	var maxpage = (sum_item/10+1);
+	var isi,buyitem;
+	initialize_bag();
+}
+</script>
+<script>
+if(localStorage.wbduser){
+	var currentpage=1;
+	var shopping_bag = [];
+	var sum_item = 40;
 	var maxpage= (sum_item/10+1);
 	var isi,buyitem;
 	initialize_bag();

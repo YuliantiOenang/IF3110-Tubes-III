@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<!--
+(c) Pusheen
+2013-12-10
+
+
+Online WSDL SOAP generator 0.1a
+Julien Blitte
+-->
+<definitions name=""
+	targetNamespace=".wsdl"
+	xmlns:tns=".wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1=".xsd"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+<!-- definition of datatypes -->
+	<types>
+	<schema targetNamespace=".xsd" xmlns="http://www.w3.org/2000/10/XMLSchema">
+		<element name="name">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="category">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="price">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="qty">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="desc">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="pict">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="success">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+	</schema>
+	</types>
+<!-- response messages -->
+	<message name='returns_success'>
+	<part name='success' type='xsd:success'/>
+	</message>
+<!-- request messages -->
+	<message name='tambahBarang'>
+	<part name='name' type='xsd:name'/>
+	<part name='category' type='xsd:category'/>
+	<part name='price' type='xsd:price'/>
+	<part name='qty' type='xsd:qty'/>
+	<part name='desc' type='xsd:desc'/>
+	<part name='pict' type='xsd:pict'/>
+	</message>
+<!-- server's services -->
+	<portType name='SOAP untuk tambah barang'>
+		<operation name='tambahBarang'>
+		<input message='tns:tambahBarang'/>
+		<output message='tns:returns_success'/>
+		</operation>
+	</portType>
+<!-- server encoding -->
+	<binding name='SOAP untuk tambah barang_webservices' type='tns:SOAP untuk tambah barang'>
+	<soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+		<operation name='tambahBarang'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#tambahBarang'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+	</binding>
+<!-- access to service provider -->
+	<service name=''>
+	<port name='_0' binding='SOAP untuk tambah barang_webservices'>
+	<soap:address location='http://localhost:8081/tubeswbd3/server.php'/>
+	</port>
+	</service>
+</definitions>

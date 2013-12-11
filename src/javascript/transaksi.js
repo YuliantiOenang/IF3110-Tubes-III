@@ -8,7 +8,6 @@
 		xmlhttp.onreadystatechange=function(){
 			if (xmlhttp.readyState==4 && xmlhttp.status==200){
 				if((parseInt(shopping_bag[id_brg])+parseInt(qtty))<=(parseInt(xmlhttp.responseText))){
-						//alert("Barang berhasil ditambahkan ke keranjang.");
 						doInCart(1,id_brg,qtty);
 				}
 				else
@@ -75,7 +74,7 @@
 		}
 		xmlhttp.onreadystatechange=function(){
 			if (xmlhttp.readyState==4 && xmlhttp.status==200){
-				alert("LOMPAT KE ATAP, TRANSAKSI BERHASIL!");
+				alert("TRANSAKSI BERHASIL!");
 				document.getElementById("s_bar").innerHTML="Silakan pilih barang belanjaan Anda! :)";
 				localStorage.removeItem("shoppingbag");
 				initialize_bag();

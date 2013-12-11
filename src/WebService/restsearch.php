@@ -1,6 +1,4 @@
 <?php 
-$barang = array();
-$info_barang = array();
 if(isset($_GET['cari'])){ $cari = $_GET['cari']; }
 if(isset($_GET['suggest'])){ $suggest = $_GET['suggest']; }
 if(isset($_GET['page'])){ $page=($_GET['page']-1)*10; }else{ $page=0; }
@@ -35,14 +33,15 @@ if (strlen($cari) > 0){
 		$query2 = "select * from barang limit $page,10";
 		$hasil2 = mysql_query($query2,$koneksi);
 		while($row = mysql_fetch_array($hasil2)){
-			array_push($info_barang, $row["gambar"]);
-			array_push($info_barang, $row["id"]);
-			array_push($info_barang, $row["nama"]);
-			array_push($info_barang, $row["harga"]);
-			array_push($barang, $info_barang);
-			$info_barang = array();
+			echo '<div class="view">';
+			echo '<img src="'.$row["gambar"].'" width="318" height="238"/>';
+			echo '<div class="mask">';
+			echo '<h2><a href="detailbarang.php?id='.$row["id"].'">'.$row["nama"].'</a></h2>';
+			echo '<p>Harga: '.$row["harga"].'</p>';
+			echo '<form action="shoppingbag.php" method="GET">Masukkan jumlah yang akan dibeli: ';
+			echo '<input type="number" name="quantity" min="0" id="qty"><input type="button" value="Beli!" id="buy" onclick="tempBuy('.$row["id"].',qty.value)"></form>';
+			echo '</div></div>';
 		}
-		echo json_encode($barang);
 	}
 }	
 ?>
