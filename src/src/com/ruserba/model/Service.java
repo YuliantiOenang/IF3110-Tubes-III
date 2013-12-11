@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Service
 {
-	//private static final String REMOTE_URL = "http://ec2-54-235-99-46.compute-1.amazonaws.com/";
-	private static final String REMOTE_URL = "http://localhost/remote/";
+	private static final String REMOTE_URL = "http://ec2-54-235-99-46.compute-1.amazonaws.com/";
+	//private static final String REMOTE_URL = "http://localhost/remote/";
 
 	public static ArrayList<String> httpGet(String urlStr) throws IOException {
 	  URL url = new URL(REMOTE_URL + urlStr);
