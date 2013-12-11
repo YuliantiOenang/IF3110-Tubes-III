@@ -84,7 +84,7 @@ public class Cart extends HttpServlet {
 				// allResults.add(barangUser);
 				// }
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/select");
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select");
 				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
 				ArrayList<Barang> barangList = new ArrayList<Barang>();
 				for (JsonElement barang : barangArray) {

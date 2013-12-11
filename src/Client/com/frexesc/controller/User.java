@@ -54,7 +54,7 @@ public class User extends HttpServlet {
 				try {
 					/**PORT*/
 					String json = WebServicesKit
-							.readUrl("http://localhost:8080/web-services/UserService/userservice/user2/"
+							.readUrl("http://coba-soap.ap01.aws.af.cm/UserService/userservice/user2/"
 									+ id);
 					Gson gson = new Gson();
 					JsonParser jsonParser = new JsonParser();
@@ -97,7 +97,7 @@ public class User extends HttpServlet {
 				try {
 					/**PORT*/
 					String json = WebServicesKit
-							.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"
+							.readUrl("http://coba-soap.ap01.aws.af.cm/UserService/userservice/user/"
 									+ id);
 					Gson gson = new Gson();
 					JsonParser jsonParser = new JsonParser();

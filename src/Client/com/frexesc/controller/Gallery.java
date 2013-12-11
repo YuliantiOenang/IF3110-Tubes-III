@@ -115,7 +115,7 @@ public class Gallery extends HttpServlet {
 				if (page != 0) {
 					page = page * 10;
 				}
-				String temp="http://localhost:8080/web-services/BS/barang/select2?p1="+partial1
+				String temp="http://coba-soap.ap01.aws.af.cm/BS/barang/select2?p1="+partial1
 						+ "&p2="+partial2 + "&p3="+partial3 + "&p4="+partial4 + "&p5="+partial5+"&page="+page;
 				temp=temp.replace(" ","%20");
 				System.out.println(temp);
@@ -129,9 +129,9 @@ public class Gallery extends HttpServlet {
 					allResults.add(barangObj);
 				}
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/select3?p3="+partial3
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select3?p3="+partial3
 								+"&p4="+partial4+"&p5="+partial5);
-				System.out.println("http://localhost:8080/web-services/BS/barang/select3?p3="+partial3
+				System.out.println("http://coba-soap.ap01.aws.af.cm/BS/barang/select3?p3="+partial3
 								+"&p4="+partial4+"&p5="+partial5);
 				int jmlBrg= jsonParser.parse(json).getAsInt();
 				if (request.getParameter("category") != null) {
@@ -140,7 +140,7 @@ public class Gallery extends HttpServlet {
 						/** port */
 						WebServicesKit webkit = new WebServicesKit();
 						json = WebServicesKit
-								.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories");
+								.readUrl("http://coba-soap.ap01.aws.af.cm/CategoryService/categoryservice/categories");
 						jsonParser = new JsonParser();
 						JsonArray categoryArray = jsonParser.parse(json)
 								.getAsJsonArray();

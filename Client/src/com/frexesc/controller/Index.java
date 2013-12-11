@@ -78,7 +78,7 @@ public class Index extends HttpServlet {
 				/** port */
 
 				String json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/UserService/userservice/user/"
+						.readUrl("http://coba-soap.ap01.aws.af.cm/UserService/userservice/user/"
 								+ userid);
 
 				Gson gson = new Gson();
@@ -120,7 +120,7 @@ public class Index extends HttpServlet {
 
 		try {
 			json = WebServicesKit
-					.readUrl("http://localhost:8080/web-services/BS/barang/select");
+					.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select");
 			JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
 			ArrayList<Barang> allResults2 = new ArrayList<Barang>();
 			for (JsonElement barang : barangArray) {
@@ -130,7 +130,7 @@ public class Index extends HttpServlet {
 
 			/** Port */
 			String json2 = WebServicesKit
-					.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories/");
+					.readUrl("http://coba-soap.ap01.aws.af.cm/CategoryService/categoryservice/categories/");
 			Gson gson = new Gson();
 			JsonParser jsonParser = new JsonParser();
 			JsonArray categoryArray = jsonParser.parse(json2).getAsJsonArray();
@@ -160,7 +160,7 @@ public class Index extends HttpServlet {
 			/** OLD */
 			for (int i = 0; i < allResults3.size(); i++) {
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/select?join=2&idKat="
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select?join=2&idKat="
 								+ allResults3.get(i).getId());
 				JsonArray ggArray2 = jsonParser.parse(json).getAsJsonArray();
 				ArrayList<Barang> ggResults = new ArrayList<Barang>();

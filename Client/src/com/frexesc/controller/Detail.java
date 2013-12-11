@@ -58,7 +58,7 @@ public class Detail extends HttpServlet {
 			}
 			try {
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/select?id="
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select?id="
 								+ id);
 				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
 				ArrayList<Barang> barangList = new ArrayList<Barang>();
@@ -68,7 +68,7 @@ public class Detail extends HttpServlet {
 				}
 
 				String json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories");
+						.readUrl("http://coba-soap.ap01.aws.af.cm/CategoryService/categoryservice/categories");
 				Gson gson = new Gson();
 				JsonParser jsonParser = new JsonParser();
 				JsonArray categoryArray = jsonParser.parse(json)

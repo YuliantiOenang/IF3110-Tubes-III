@@ -69,7 +69,7 @@ public class AdminBarang extends HttpServlet {
 
 				try {
 					String json = WebServicesKit
-							.readUrl("http://localhost:8080/web-services/CategoryService/categoryservice/categories");
+							.readUrl("http://coba-soap.ap01.aws.af.cm/CategoryService/categoryservice/categories");
 					Gson gson = new Gson();
 					JsonParser jsonParser = new JsonParser();
 					JsonArray categoryArray = jsonParser.parse(json)
@@ -99,7 +99,7 @@ public class AdminBarang extends HttpServlet {
 					/** old */
 					try {
 						json = WebServicesKit
-								.readUrl("http://localhost:8080/web-services/BS/barang/select?idkat="
+								.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select?idkat="
 										+ category);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
@@ -176,7 +176,7 @@ public class AdminBarang extends HttpServlet {
 					String.valueOf(barang.getPrice()), barang.getDescription(),
 					String.valueOf(request.getParameter("amount")));
 			try {
-				String temp="http://localhost:8080/web-services/BS/barang/select?nama="
+				String temp="http://coba-soap.ap01.aws.af.cm/BS/barang/select?nama="
 								+ barang.getName()
 								+ "&idKat="
 								+ barang.getId_category()
@@ -227,7 +227,7 @@ public class AdminBarang extends HttpServlet {
 			// System.out.println("SR0");
 			// try {
 			// json = WebServicesKit
-			// .readUrl("http://localhost:8080/web-services/BS/barang/insert?idKat="
+			// .readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/insert?idKat="
 			// + barang.getId_category()
 			// + "&nama="
 			// + barang.getName()
@@ -276,7 +276,7 @@ public class AdminBarang extends HttpServlet {
 			/* end of upload */
 			try {
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/update?id="
 								+ id + "&gambar=" + id + "." + sp[1]);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -298,7 +298,7 @@ public class AdminBarang extends HttpServlet {
 					Integer.parseInt(request.getParameter("amount")));
 			try {
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/update?id="
 								+ barang.getId()
 								+ "&idKat="
 								+ barang.getId_category()
@@ -324,7 +324,7 @@ public class AdminBarang extends HttpServlet {
 		} else if (request.getParameter("action").equals("delete")) {
 			try {
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/delete?id="
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/delete?id="
 								+ request.getParameter("id"));
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -335,7 +335,7 @@ public class AdminBarang extends HttpServlet {
 			String old = null;
 			try {
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/select?id="
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select?id="
 								+ id);
 				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
 				ArrayList<Barang> barangs = new ArrayList<Barang>();
@@ -383,7 +383,7 @@ public class AdminBarang extends HttpServlet {
 			/* end of upload */
 			try {
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/update?id="
 								+ id + "&gambar=" + id + "." + sp[1]);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

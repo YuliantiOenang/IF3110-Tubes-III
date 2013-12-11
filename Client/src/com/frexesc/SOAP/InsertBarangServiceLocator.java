@@ -22,7 +22,7 @@ public class InsertBarangServiceLocator extends org.apache.axis.client.Service i
     }
 
     // Use to get a proxy class for InsertBarang
-    private java.lang.String InsertBarang_address = "http://localhost:8080/web-services/services/InsertBarang";
+    private java.lang.String InsertBarang_address = "http://coba-soap.ap01.aws.af.cm/services/InsertBarang";
 
     public java.lang.String getInsertBarangAddress() {
         return InsertBarang_address;

@@ -83,7 +83,7 @@ public class DeleteBarang extends HttpServlet {
 				// allResults.add(barangUser);
 				// }
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/select?id="
+						.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select?id="
 								+ allResults.get(0).getId_item());
 				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
 				ArrayList<Barang> barangList = new ArrayList<Barang>();
@@ -97,7 +97,7 @@ public class DeleteBarang extends HttpServlet {
 
 				try {
 					json = WebServicesKit
-							.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
+							.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/update?id="
 									+ allResults.get(0).getId_item()
 									+ "&jumlah=" + jumlah_barang_akhir);
 					//

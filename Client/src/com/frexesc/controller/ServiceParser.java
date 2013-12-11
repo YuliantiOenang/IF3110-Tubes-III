@@ -17,7 +17,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public class ServiceParser {
-	public static String BASE_URL = "http://localhost:8080/web-services/";
+	public static String BASE_URL = "http://coba-soap.ap01.aws.af.cm/";
 	
 	public static String readUrl(String urlString) throws Exception
 	{

@@ -60,7 +60,7 @@ public class AddCart extends HttpServlet {
 						
 			response.setContentType("text/html"); // set Content Type for AJAX
 			try {
-				json = WebServicesKit.readUrl("http://localhost:8080/web-services/BS/barang/select?id="+request.getParameter("id_barang"));
+				json = WebServicesKit.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/select?id="+request.getParameter("id_barang"));
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -129,7 +129,7 @@ public class AddCart extends HttpServlet {
 					response.getWriter().write("Success: Transaksi berhasil!");
 					
 					/**SAL*/
-					json = WebServicesKit.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
+					json = WebServicesKit.readUrl("http://coba-soap.ap01.aws.af.cm/BS/barang/update?id="
 							+ request.getParameter("id_barang")
 							+ "&jumlah="
 							+ (barangList.get(0).getTotal_item() - Integer

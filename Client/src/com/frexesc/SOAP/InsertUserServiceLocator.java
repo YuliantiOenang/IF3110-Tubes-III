@@ -22,7 +22,7 @@ public class InsertUserServiceLocator extends org.apache.axis.client.Service imp
     }
 
     // Use to get a proxy class for InsertUser
-    private java.lang.String InsertUser_address = "http://localhost:8080/web-services/services/InsertUser";
+    private java.lang.String InsertUser_address = "http://coba-soap.ap01.aws.af.cm/services/InsertUser";
 
     public java.lang.String getInsertUserAddress() {
         return InsertUser_address;
