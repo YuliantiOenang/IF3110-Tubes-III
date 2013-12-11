@@ -1,0 +1,1 @@
+dengan asumsi appfog telah tersetting dengan baik, jalankan server tomcat, dan jalankan web di eclipse EE
