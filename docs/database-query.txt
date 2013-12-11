@@ -1,0 +1,48 @@
+create table data_barang(nama char(30),harga int,stok int,kategori char(20),terjual int);
+insert into data_barang values('Beras Jepang',10000,1000,'beras',0);
+insert into data_barang values('Beras Pandan Wangi',11000,1000,'beras',0);
+insert into data_barang values('Beras Sentra Ramos',12000,1000,'beras',0);
+insert into data_barang values('Beras Rojolele',12500,1000,'beras',0);
+insert into data_barang values('Beras C4',13000,1000,'beras',0);
+insert into data_barang values('Tenderloin Beef',110000,1000,'daging',0);
+insert into data_barang values ('Sirloin Beef',98000,1000,'daging',0);
+insert into data_barang values ('Eyron Beef',95000,1000,'daging',0);
+insert into data_barang values ('Rump Beef',95000,1000,'daging',0);
+insert into data_barang values ('Lamosir',65000,1000,'daging',0);
+insert into data_barang values ('Bandeng',26000,1000,'ikan',0);
+insert into data_barang values ('Kembung',20000,1000,'ikan',0);
+insert into data_barang values ('Banyar',22000,1000,'ikan',0);
+insert into data_barang values ('Tongkol',20000,1000,'ikan',0);
+insert into data_barang values ('Tengiri',40000,1000,'ikan',0);
+insert into data_barang values ('Tomat',10000,1000,'sayur',0);
+insert into data_barang values ('Wortel Lokal',8000,1000,'sayur',0);
+insert into data_barang values ('Kentang Dieng', 14000,1000,'sayur',0);
+insert into data_barang values ('Brokoli',12000,1000,'sayur',0);
+insert into data_barang values ('Kembang Kol',12000,1000,'sayur',0);
+insert into data_barang values ('Sunkiest',24000,1000,'buah',0);
+insert into data_barang values ('Apel Fuji',18000,1000,'buah',0);
+insert into data_barang values ('Semangka',4000,1000,'buah',0);
+insert into data_barang values ('Melon',8000,1000,'buah',0);
+insert into data_barang values ('Pir',25000,1000,'buah',0);
+
+create table data_user (
+username char(50), 
+nama char(50), 
+nohp char(50), 
+alamat char(50), 
+provinsi char(50),
+kota char(50), 
+kodepos char(50), 
+email char(50), 
+password char(50), 
+cardno char(50), 
+nameoncard char(50), 
+expdate char(50), 
+transaksi int, 
+PRIMARY KEY (username));
+
+create table data_admin (
+username char(30), 
+password char(30));
+
+insert into data_admin values ('admin', 'administrator');
