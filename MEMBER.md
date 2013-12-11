@@ -1,0 +1,1 @@
+NIM NAMA MAIL GITHUB_ID 13510004 R Purwoko Cahyo N aiothealchemist 13510016 Irvan Aditya bisoelpetjah 13510104 Mahdan Ahmad F A H mahdanahmad
