@@ -29,4 +29,14 @@
     <servlet-name>webservice</servlet-name>
     <url-pattern>/service</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>select</display-name>
+    <servlet-name>select</servlet-name>
+    <servlet-class>webservice.select</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>select</servlet-name>
+    <url-pattern>/select</url-pattern>
+  </servlet-mapping>
 </web-app>

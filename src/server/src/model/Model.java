@@ -10,18 +10,18 @@ public class Model
 {
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	private static String DB_URL;
+	private static String DB_URL = "jdbc:mysql://localhost:3306/ruserba";
 
 	//  Database credentials
-	private static String USER;
-	private static String PASS;
+	private static String USER = "root";
+	private static String PASS = "";
 	
 	public String errorMessage;
 	
 	private Vector<HashMap<String,String>> data;
 	
 	private String tabelname;
-	
+
 	public void GlobalConfig()
 	{
 		try
@@ -68,6 +68,7 @@ public class Model
 	}
 	
 	public boolean runSQLSyntax(String sql){
+		System.out.println("runSQLSyntax : " + sql);
 		java.sql.Connection con;
 		java.sql.Statement stmt;
 		ResultSet rs;
@@ -98,6 +99,7 @@ public class Model
 	
 	protected void execute(String sql)
 	{
+		System.out.println("execute : " + sql);
 		java.sql.Connection con;
 		java.sql.Statement stmt;
 		ResultSet rs;

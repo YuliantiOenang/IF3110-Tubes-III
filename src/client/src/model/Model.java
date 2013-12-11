@@ -179,8 +179,9 @@ public class Model
  
 	// HTTP POST request
 	private String sendPost(String param) throws Exception {
+		System.out.println("SENDPOST : "+param);
 		URL obj = new URL(WEBSERVICE_URL);
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
  
 		//add reuqest header
 		con.setRequestMethod("POST");
@@ -224,7 +225,6 @@ public class Model
 			{
 				HashMap<String, String> hashmap = new HashMap<>();
 				JSONObject subdata = datajson.getJSONObject(i);
-				System.out.println(subdata.length());
 				Iterator<?> keys = subdata.keys();
 				while (keys.hasNext())
 				{
@@ -233,12 +233,10 @@ public class Model
 			        if (val == null){
 			        	val = "";
 			        }
-			        System.out.println(key+" : "+val);
 			        hashmap.put(key, val);
 				}
 				data.add(hashmap);
 			}
-			System.out.println(data.size());
 			return true;
 		}
 		else
