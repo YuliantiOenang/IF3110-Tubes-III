@@ -1,0 +1,102 @@
+<html>
+<body>
+	<script src="js/AjaxCreateObject.js" language="javascript"></script>
+	<script>
+		function checkSubmit(){
+			
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			var confirm_password = document.getElementById("confirm_password").value;
+			var nama_lengkap = document.getElementById("nama_lengkap").value;
+			var email = document.getElementById("email").value;
+			
+			if(window.XMLHttpRequest){
+				//CODE FOR IE7+, FIREFOX, ETC
+				http = new XMLHttpRequest();
+			}else{
+				http = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			
+			//document.getElementById("pesan").innerHTML = "sadf";
+			
+			http.onreadystatechange=function(){
+				if(http.readystate=4 && http.status == 200){
+					
+					var decodeJSON = JSON.parse(http.responseText);
+					var boolUser = decodeJSON.boolUser;
+					var boolPass = decodeJSON.boolPass;
+					var bool = decodeJSON.bool;
+					var boolNama = decodeJSON.boolNama;
+					
+					
+					var echo = http.responseText;
+					var response = echo.substr(0,4);
+					//document.getElementById("pesan").innerHTML = echo;
+					//response = "true";
+					
+					//document.getElementById("pesan").innerHTML = response;
+					
+					if(boolUser && boolPass && bool && boolNama){
+						document.getElementById("user_error").innerHTML = "";
+						document.getElementById("pass_label").innerHTML = "";
+						document.getElementById("conf_pass_label").innerHTML = "";
+						document.getElementById("nama_label").innerHTML = "";
+						document.getElementById("email_label").innerHTML = "";
+						document.getElementById("submit").disabled = false;
+						//document.getElementById("pesan").innerHTML = "sadf"
+					}else{
+						document.getElementById("submit").disabled = true;
+						var errorMessage = "";
+						if(!boolNama){
+							document.getElementById("user_error").innerHTML = "ERROR PADA USERNAME";
+						}else{
+							document.getElementById("user_error").innerHTML = "";
+						}
+						if(!boolPass){
+							document.getElementById("conf_pass_label").innerHTML = "PASSWORD TIDAK SAMA";
+						}else{
+							document.getElementById("conf_pass_label").innerHTML = "";
+						}
+						if(!boolUser){
+							document.getElementById("nama_label").innerHTML = "ERROR PADA NAMA";
+						}else{
+							document.getElementById("nama_label").innerHTML = "";
+						}
+						if(!bool){
+							document.getElementById("email_label").innerHTML = "Kesalahan Pada Email";
+						}else{
+							document.getElementById("email_label").innerHTML = "";
+						}
+					}
+				}
+			}
+			http.open("GET","validasi.php?username=" + username + "&password=" + password
+				+"&confirm_password=" + confirm_password + "&nama_lengkap=" + nama_lengkap
+				+ "&email=" + email,true);
+			http.send();
+		}
+		
+	</script>
+		
+	<div id = "login_form"">
+		<div>
+			Registrasi Pelanggan
+		</div>
+		<div>
+			<form>
+				<label>Username</label><br>
+				<input type="text"  id="username" onkeyup="checkSubmit()"><label id="user_error"></label><br>
+				<label>Password</label><br>
+				<input type="password" id ="password" onkeyup = "checkSubmit()"><label id="pass_label"></label><br>
+				<label>Confirm Password</label><br>
+				<input type="password" id= "confirm_password" onkeyup = "checkSubmit()"><label id ="conf_pass_label"></label><br>
+				<label>Nama Lengkap</label><br>
+				<input type="text" id="nama_lengkap" onkeyup = "checkSubmit()"><label id="nama_label"></label><br>
+				<label>Email</label><br>
+				<input type="text" id="email" onkeyup = "checkSubmit()"><label id="email_label"></label><br>
+				<input type="submit" id = "submit" disabled value="Ampas">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
