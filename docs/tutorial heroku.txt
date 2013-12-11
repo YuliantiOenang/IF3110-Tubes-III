@@ -1,0 +1,24 @@
+1) instal heroku toolbelt
+
+2) tambahkan C:\Program Files\Git\bin ke PATH
+
+3) ketik : heroku login
+
+4) ketik : heroku keys:add
+
+5) buka cmd, cd ke folder yang akan dipush ke heroku
+
+6) untuk mendeploy apps di heroku, ketikkan berikut :
+	git init
+	git add .
+	git commit -m "lalala"
+	heroku create
+	git push heroku master
+
+7) untuk menambahkan postgresql pada apps:
+	heroku addons:add heroku-postgresql:dev
+
+8) untuk push ke heroku, ketikkan berikut :
+	git add .
+	git commit -m "lalala"
+	git push heroku master
