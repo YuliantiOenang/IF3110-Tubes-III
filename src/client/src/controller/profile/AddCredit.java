@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import soaptest.SOAPWSProxy;
 import model.Account;
 import controller.Render;
 
@@ -39,12 +40,26 @@ public class AddCredit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Account account = new Account();
 		String id = account.findByCondition("nama='"+request.getParameter("Credit[name_of_card]")+"'").firstElement().get("id");
-		account.updateSQL("INSERT INTO kredit (id_account, card_number, name_of_card, expired_date) "
+		
+		String table_name = "kredit";
+		String query = "INSERT INTO kredit (id_account, card_number, name_of_card, expired_date) "
 				+ "VALUES ('" + id + "', '" +
 				request.getParameter("Credit[card_number]") + "', '" +
 				request.getParameter("Credit[name_of_card]") + "', '" +
 				request.getParameter("Credit[expired_date]") + "'" +		
-				")" );
+				")" ;
+		
+		//SOAP
+		SOAPWSProxy soapwsproxy = new SOAPWSProxy();
+		soapwsproxy.addtoDB(table_name, query);
+		//end of SOAP
+		
+//		account.updateSQL("INSERT INTO kredit (id_account, card_number, name_of_card, expired_date) "
+//				+ "VALUES ('" + id + "', '" +
+//				request.getParameter("Credit[card_number]") + "', '" +
+//				request.getParameter("Credit[name_of_card]") + "', '" +
+//				request.getParameter("Credit[expired_date]") + "'" +		
+//				")" );
 		if (request.getParameter("habisitukesubmit")!=null)
 		{
 			response.sendRedirect(request.getContextPath()+"/cart/submit");

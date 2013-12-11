@@ -5,15 +5,9 @@
 			<%
 				if (request.getAttribute("_pre_userid")!=null)
 				{
-					String str = (String)request.getAttribute("_pre_userid");
-					if (str.equals("evanart")){
-						out.print("<p class='left'> welcome, <a href='../profile'>"+(String)request.getAttribute("_pre_userid")+"</a>! (<a href='" + request.getContextPath() + "/logout'>Logout</a>)</p>");
-						out.print("<p class='right'><a href='" + request.getContextPath() + "/admin/home'>Admin mode</a> | <a href='" + request.getContextPath() + "/cart/shoppingcart'>Shopping Cart</a> <img src='" + request.getContextPath() + "/img/site/cart_white.png' style='margin-right:5px;'/></p>");
-					}
-					else {
-						out.print("<p class='left'> welcome, <a href=''>"+(String)request.getAttribute("_pre_userid")+"</a>! (<a href='" + request.getContextPath() + "/logout'>Logout</a>)</p>");
-						out.print("<p class='right'><a href='" + request.getContextPath() + "/cart/shoppingcart'>Shopping Cart</a> <img src='" + request.getContextPath() + "/img/site/cart_white.png' style='margin-right:5px;'/></p>");
-					}
+					out.print("<p class='left'> welcome, admin <a href='../profile'>"+(String)request.getAttribute("_pre_userid")+"</a>! (<a href='" + request.getContextPath() + "/logout'>Logout</a>)");
+					out.print("<p class='right'><a href='" + request.getContextPath() + "/home'>User mode</a> | <a href='" + request.getContextPath() + "/cart/shoppingcart'>Shopping Cart</a> <img src='" + request.getContextPath() + "/img/site/cart_white.png' style='margin-right:5px;'/></p>");	
+					
 				}
 				else
 				{
@@ -28,7 +22,7 @@
 					int kategoricount = (int)(Integer)request.getAttribute("_cat_count");
 					for (int i = 0; i < kategoricount; i++)
 					{
-						out.print("	<a href='" + request.getContextPath() + "/barang/search?kat=" + (String)request.getAttribute("_cat_" + i + "_id" ) + "'>");
+						out.print("	<a href='" + request.getContextPath() + "/admin/search?kat=" + (String)request.getAttribute("_cat_" + i + "_id" ) + "'>");
 						out.print("		<div class='permenu per" + kategoricount + "'>");
 						out.print("			<div class='menuborder'></div>");
 						out.print("			<div class='menutxt'><h1 id='txtmenu1' class='menu'>" + (String)request.getAttribute("_cat_" + i + "_nama" ) + "</h1></div>");
@@ -118,7 +112,7 @@ if (request.getAttribute("effect")!=null) {
 	<div id = 'search-popup' class='search-popup' onclick='opensearch()'></div>
 	<!-- <div id = 'search-popup-content' class='search-popup-content <?php if ((isset($search_show))&&($search_show)) echo "left-show";?>'> -->
 	<div id = 'search-popup-content' class='search-popup-content'>
-		<form action="${pageContext.request.contextPath}/barang/search" method="get">
+		<form action="${pageContext.request.contextPath}/admin/search" method="get">
 		<!--
 			<?php 
 				$q = (isset($_GET['q'])?$_GET['q']:"");
