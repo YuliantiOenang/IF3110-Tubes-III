@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/tugas_web2">
+    <Resource name="jdbc/d86coev9sq2g1b" auth="Container"
+        type="javax.sql.DataSource" username="vipduorpwbfnzo" password="YYtNSv3tcPGJs7YUyAOiiW0KxO"
+        driverClassName="org.postgresql.Driver"
+        url="jdbc:postgresql://ec2-54-225-124-205.compute-1.amazonaws.com:5432/d86coev9sq2g1b"
+        maxActive="20" maxIdle="10"
+        />
+</Context>
