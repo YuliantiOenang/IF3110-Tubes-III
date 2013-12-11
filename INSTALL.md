@@ -1,0 +1,1 @@
+Untuk memudahkan, aplikasi ini lebih diinstall di "<xampp folder>/htdocs/ruserba/". Karena memanfaatkan web service untuk penyimpanan basis data, koneksi internet harus ada. Setelah itu, untuk menjalankannya (setelah menyalakan Apache) aplikasi dapat diakses dari alamat "http://localhost/ruserba".
