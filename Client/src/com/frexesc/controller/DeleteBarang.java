@@ -97,7 +97,7 @@ public class DeleteBarang extends HttpServlet {
 
 				try {
 					json = WebServicesKit
-							.readUrl("http://localhost:8080/web-services/BS/barang/update/id="
+							.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
 									+ allResults.get(0).getId_item()
 									+ "&jumlah=" + jumlah_barang_akhir);
 				} catch (NumberFormatException e) {

@@ -126,10 +126,10 @@ public class AddCart extends HttpServlet {
 //					
 //					connection.createStatement().executeUpdate(query3);
 //					
-//					response.getWriter().write("Success: Transaksi berhasil!");
+					response.getWriter().write("Success: Transaksi berhasil!");
 					
 					/**SAL*/
-					json = WebServicesKit.readUrl("http://localhost:8080/web-services/BS/barang/update/id="
+					json = WebServicesKit.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
 							+ request.getParameter("id_barang")
 							+ "&jumlah="
 							+ (barangList.get(0).getTotal_item() - Integer

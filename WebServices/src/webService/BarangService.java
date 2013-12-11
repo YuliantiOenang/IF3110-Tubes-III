@@ -115,8 +115,9 @@ public class BarangService {
 		System.out.println(query);
 		try {
 			PreparedStatement stmt = con.prepareStatement(query);
-			ResultSet rs;
+			ResultSet rs;			
 			rs = stmt.executeQuery();
+			rs.next();
 			int cID = (rs.getInt(1));
 			gson = new Gson();
 			selectResult = gson.toJson(cID);
@@ -203,6 +204,7 @@ public class BarangService {
 			if (id != -1)
 				query += (" WHERE id=" + id);
 			PreparedStatement stmt = con.prepareStatement(query);
+			System.out.println(query);
 			temp = stmt.executeUpdate();
 			gson = new Gson();
 			updateResult = gson.toJson(temp);

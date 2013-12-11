@@ -171,7 +171,7 @@ public class Gallery extends HttpServlet {
 				}
 
 				request.setAttribute("items", allResults);
-				request.setAttribute("total_pages", jmlBrg);
+				request.setAttribute("total_pages", ""+jmlBrg);
 
 				RequestDispatcher dispatcher = getServletContext()
 						.getRequestDispatcher("/barang/index.jsp");
