@@ -1,0 +1,319 @@
+html {
+	width:100%;
+	height:100%;
+	overflow-x:hidden;
+	font-family:Segoe UI;
+	margin:0px;
+}
+
+body {
+	width:100%;
+	height:300px;
+	margin:0px;
+	margin:0px;
+}
+
+a {
+	text-decoration:none;
+}
+
+#wrapper {
+	width:75%;
+	height:auto;
+	margin:auto;
+}
+
+#header, #footer{
+	width:100%;
+	height:auto;
+	margin:10px 0;
+}
+
+#logo {
+	display:inline-block;
+}
+
+#logo img {
+	height:120px;
+}
+
+.divider {
+	width:100%;
+	height:5px;
+	margin:10px 0;
+	background:linear-gradient(white, rgb(177, 189, 53));
+}
+
+#searchbar {
+	float:right;
+	margin:10px 50px;
+	position:relative;
+	display:inline-block;
+}
+
+#searchbar input[type=text] {
+	width:300px;
+	border:1px solid rgb(177, 189, 53);
+	padding:4px 7px;
+	color:grey;
+}
+
+#searchbar input[type=submit] {
+	display:none;
+}
+
+#searchbar a {
+	top:5px;
+	left:295px;
+	position:absolute;
+}
+
+#searchbar a img {
+	width:15px;
+}
+
+#welcome {
+	color:rgb(177, 189, 53);
+	display:inline-block;
+	margin:0 10px;
+}
+
+#welcome a {
+	text-decoration:underline;
+	color:rgb(177, 189, 53);
+}
+
+#loggedin, #loggedout {
+	float:right;
+	margin:10px 0;
+	display:inline-block;
+}
+
+#loginform {
+	border:1px solid rgb(177, 189, 53);
+	border-radius:5px;
+	padding:5px;
+	color:rgb(177, 189, 53);
+	display:none;
+}
+
+#loginform input[type=text], #loginform input[type=password] {
+	float:right;
+	border:1px solid rgb(177, 189, 53);
+}
+
+#loginform input[type=submit] {
+	width:0px;
+	visibility:hidden;
+}
+
+#loginerror {
+	color:red;
+	font-size:small;
+	visibility:hidden;
+}
+
+.button {
+	color:white;
+	text-decoration:none;
+	display:inline-block;
+	vertical-align:top;
+}
+
+.button div {
+	padding:3px 7px;
+	border:1px solid rgb(177, 189, 53);
+	border-radius:5px;
+	background:rgb(177, 189, 53);
+}
+
+#cartbutton {
+	float:right;
+	margin:50px 0;
+}
+
+#cartbutton img {
+	width:30px;
+}
+
+.formcontainer {
+	width:800px;
+	margin:auto;
+	padding:20px 20px 80px 20px;
+	border:3px solid rgb(177, 189, 53);
+	border-radius:5px;
+	background:lightgrey;
+}
+
+.formcontainer h2 {
+	text-align:center;
+}
+
+.formlabel {
+	margin:50px;
+}
+
+.formcontainer input[type=text], .formcontainer input[type=password], .formcontainer input[type=date] {
+	width:50%;
+	float:right;
+	margin:0 50px 0 0;
+}
+
+.formcontainer input[type=submit] {
+	float:right;
+	margin:0 75px;
+	background:white;
+}
+
+.formok {	
+	border:2px solid rgb(177, 189, 53);
+}
+
+.formerror {	
+	border:2px solid red;
+}
+
+.formerrortext {
+	left:350px;
+	color:red;
+	font-size:small;
+	position:relative;
+	display:none;
+}
+
+#skipregisterkartu {
+	text-align:center;
+	text-decoration:underline;
+}
+
+#footer {
+	width:100%;
+	margin:auto;
+	color:grey;
+	text-align:center;
+	font-size:xx-small;
+}
+
+#error {
+	text-align:center;
+	margin:50px;
+}
+
+#content{
+	margin:20px 0 50px 0;
+	padding:0 10px;
+	position:relative;
+}
+
+.judul_halaman {
+	margin:0 30px;
+	color:rgb(75, 64, 31);
+}
+
+#hr_mostwanted{
+	width:30%;
+	float:left;
+	margin:0;
+}
+
+.mostwanted{
+	float:left;
+	font-family:Arial;
+	font-size:23px;
+}
+
+.category_container {
+	width:95%;
+	height:250px;
+	margin-left:5%;
+	margin-top:30px;
+	margin-bottom:50px;
+	display:block;
+}
+
+.category {
+	float:left;
+}
+
+.category a {
+	color:rgb(177, 189, 53);
+	font-family:Tahoma;
+	font-size:23px;
+}
+
+.barang_container{
+	margin-top:5px;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+}
+
+.barang {
+	width:20%; 
+	height:120px;
+	float:left;
+	margin-right:12%;
+}
+
+.barang_nama a {
+	color:rgb(177, 189, 53);
+	font-size:18px;
+}
+
+.barang_tersedia{
+	color:#676669;
+	font-size:14px;
+}
+
+.barang_harga{
+	color:rgb(75, 64, 31);
+	font-size:16px;
+	font-weight:bold;
+}
+
+#dropdownsort {
+	float:right;
+}
+
+.halaman_category_container {
+	width:95%;
+	height:200px;
+	margin-left:5%;
+	margin-top:30px;
+	margin-bottom:auto;
+	display:block;
+}
+
+.barang_gambar_detail {
+	width:30%;
+	margin-right:20%;
+	display:inline-block;
+}
+
+.barang_detail {
+	vertical-align:top;
+	display:inline-block;
+}
+
+.inputjumlah {
+	margin-left:10px;
+	width:60px;
+	text-align:right;
+}
+
+.paginasi {
+	float:right;
+}
+
+#detailkeranjang {
+	width:70%;
+	display:inline-block;
+}
+
+#totalkeranjang {
+	width:25%;
+	text-align:center;
+	display:inline-block;
+	vertical-align:top;
+	color:rgb(75, 64, 31);
+}
