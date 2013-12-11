@@ -4,6 +4,7 @@ import java.util.*;
 import javax.servlet.*; 
 import javax.servlet.http.*; 
 import java.sql.*;
+import java.net.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +25,23 @@ import javax.servlet.http.Part;
 public class AddDagang extends HttpServlet{ 
 	private static final long serialVersionUID = 205242440643911308L;
 	private static final String UPLOAD_DIR = "res/img/product";
-
+	public static String httpGet(String urlStr) throws IOException {
+		URL url = new URL(urlStr);
+		HttpURLConnection conn =(HttpURLConnection) url.openConnection();
+		if (conn.getResponseCode() != 200) {
+			throw new IOException(conn.getResponseMessage());
+		}
+		// Buffer the result into a string
+		BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = rd.readLine()) != null) {
+			sb.append(line);
+		}
+		rd.close();
+		conn.disconnect();
+		return sb.toString();
+	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException 
 	{
 		String newnama = request.getParameter("newnama");
@@ -49,8 +66,9 @@ public class AddDagang extends HttpServlet{
         System.out.println("Upload File Directory="+fileSaveDir.getAbsolutePath());
 		
 		request.getPart("fileName").write(uploadFilePath + File.separator + newnama + ".jpg");
-		
-		try{
+		String URL="http://wbd032.ap01.aws.af.cm/AddDagangClient.php?Nama="+newnama+"&Harga="+newharga+"&Kategori="+newkategori+"&Jumlah="+newjumlah;
+		String Resp=httpGet(URL);
+		/*try{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/datauser", "root", "root");
 			Statement s = (Statement) con.createStatement();
@@ -74,10 +92,12 @@ public class AddDagang extends HttpServlet{
 			con.close();
 		}catch(Exception e){
 			throw new SecurityException("Class not found " + e.toString());
-		}
-		if (valid) 
-			out.println("Change success <a href = home.jsp> back to home </a>");
-		else
-			out.println("Change failed, nama sudah ada <a href = home.jsp> back to home </a>");
+		}*/
+		if (Resp=="BERHASIL"){
+			out.println("Change success");}
+		else{
+			out.println("Change failed, nama sudah ada");}
+		response.setHeader("Refresh", "2; URL=home.jsp");
+		return;
 	} 
 }

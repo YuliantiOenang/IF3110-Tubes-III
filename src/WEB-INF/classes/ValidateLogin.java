@@ -167,6 +167,10 @@ public class ValidateLogin extends HttpServlet{
 				String Resp1=httpGet(URL1);
 				Parse_Response_Credit(Resp1,response,request);
 			}
+			String URL1="http://wbd032.ap01.aws.af.cm/JumlahTransaksi.php?username="+DataNama;
+			//response.getWriter().println(URL);
+			Cookie JumlahTransCookie = new Cookie("JumlahTransaksi", httpGet(URL1)); //Add cookie Jumlah Transaksi
+			response.addCookie(JumlahTransCookie);
 		}
 		else{
 			response.getWriter().println("Login Gagal");}

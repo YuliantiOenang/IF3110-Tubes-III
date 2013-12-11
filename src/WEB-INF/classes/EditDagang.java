@@ -95,10 +95,12 @@ public class EditDagang extends HttpServlet{
 		}catch(Exception e){
 			throw new SecurityException("Class not found " + e.toString());
 		}*/
-		if (Resp=="BERHASIL"){
-			out.println("Change success <a href = home.jsp> back to home </a>");}
+		if (Resp.equals("BERHASIL")){
+			out.println("Change success");}
 		else{
-			out.println("Change failed, nama sudah ada <a href = home.jsp> back to home </a>");} 
+			out.println("Change failed, nama sudah ada");}
+		response.setHeader("Refresh", "2; URL=home.jsp");
+		return;
 	} 
 	
 

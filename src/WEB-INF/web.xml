@@ -168,5 +168,15 @@
 		<servlet-name>FileUploadServlet</servlet-name>
 		<url-pattern>/FileUploadServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SimpleSOAP</servlet-name>
+		<servlet-class>SimpleSOAP</servlet-class>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>SimpleSOAP</servlet-name>
+		<url-pattern>/SimpleSOAP</url-pattern>
+	</servlet-mapping>
 
 </web-app>
