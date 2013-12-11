@@ -2,39 +2,55 @@
 
 session_start();  
 
-require_once("databaseconnect.php");   //memanggil file databaseconnect.php  
-
-connect_db();       // memanggil fungsi connect_db yang ada di file databaseconnect.php  
-
     $username =$_POST["username"];  
     $password =$_POST["password"];  
   
-    $query="SELECT * FROM user where username='$username' and password='$password'";   
-    $result=mysql_query($query);  
-  
-    if(mysql_num_rows($result)>0) 
-    {   $_SESSION['username']=$username;
+    //coba login
+	$postdata = http_build_query(
+    array(
+        'username' => $username,
+		'password' => $password
+	)
+	);
+
+$opts = array('http' =>
+    array(
+        'method'  => '.GET',
+        'header'  => "Content-type: application/x-www-form-urlencoded",
+        'content' => json_encode($postdata)
+    )
+);
+
+$context  = stream_context_create($opts);
+
+$result = file_get_contents('http://gentle-ocean-7553.herokuapp.com/rest/index.php/login', false, $context);
+  $Expire = time() +60*60*24*30;
+	if($result!=="false") 
+    { 
+		$result = json_decode($result,true);
+		$_SESSION['username']=$username;
 		$_SESSION['password']=$password;
-        $raw_results=mysql_fetch_array($result);
-		if ($raw_results[9]===NULL){
+    
+		if ($result["nocredit"]===NULL){
 			
 		}else{
-			$_SESSION['cardnumber']=$raw_results[9];
+			$_SESSION['cardnumber']=$result["nocredit"];
+			setcookie('cardnumber', $result["nocredit"], $Expire);
 		}
 
-		$Expire = time() +60*60*24*30;
+		
         setcookie('username', $username, $Expire);
 		setcookie('password', $password, $Expire);
-		setcookie('cardnumber', $raw_results[9], $Expire);
+		
 		
 		echo $username;
 		
     }  
     else  
     {  
-        echo '100';  
+        print_r(" 100");  
 	
-    }    
+    }
 	
  
 ?> 

@@ -70,12 +70,12 @@
 	//Fungsi mengecek Apakah barang sudah ada di cart
 	function IsBarangExist($Barang){
 		foreach ($_SESSION['cart'] as $BarangTemp){
-			if ($BarangTemp[0]->GetIdBarang()==$Barang->GetIdBarang()){
+			if ($BarangTemp[0]->GetNamaBarang==$Barang->GetNamaBarang()){
 				return true;}
 		}
 		return false;
 	}
-	if ($Jumlah < $OldJumlah){
+	if ($Jumlah <= $OldJumlah && $Jumlah>0){
 	if (!isset($_SESSION['cart'])){
 		$_SESSION['cart'][$IdBarang][0]=$Barang;
 		$_SESSION['cart'][$IdBarang][1]=$Jumlah;

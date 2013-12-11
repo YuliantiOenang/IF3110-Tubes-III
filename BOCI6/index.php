@@ -91,10 +91,11 @@
 	<script src="Ajaxlogin.js"></script> 
 	<script>
 	function forLogin(){
-		if (AJAXPost()!=' 100 '){
+		var tes = AJAXPost();
+		if (tes!=" 100 "){
 			var username = AJAXPost();
 			document.getElementById('sbmtlogin').value="Login\nLogin Sukses";
-			var newhtml =		'<h3>Welcome, <span class="user-name"><a href="edit-profile.php" id="member">'+username+'</a></span>!</h3><p id="user-control"><span class="edit-logout">	<a href="logout.php" id="logout2">Logout</a></span></p>';
+			var newhtml =		'<h3>Welcome, <span class="user-name"><a href="getdatamember.php" id="member">'+username+'</a></span>!</h3><p id="user-control"><span class="edit-logout">	<a href="logout.php" id="logout2">Logout</a></span></p>';
 			document.getElementById("logreg").innerHTML=newhtml;
 	
 		}else{

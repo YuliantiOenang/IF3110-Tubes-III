@@ -2,16 +2,31 @@
 
 session_start();  
 
-require_once("databaseconnect.php");   //memanggil file databaseconnect.php  
-
-connect_db();       // memanggil fungsi connect_db yang ada di file databaseconnect.php  
 
     $username =$_POST["username"];
 	
-    $query="SELECT * FROM user where username='$username'";   
-    $result=mysql_query($query);  
+   
+   
+	$postdata = http_build_query(
+    array(
+        'username' => $username
+	)
+	);
+
+	$opts = array('http' =>
+    array(
+        'method'  => '.GET',
+        'header'  => "Content-type: application/x-www-form-urlencoded",
+        'content' => json_encode($postdata)
+    )
+	);
+
+	$context  = stream_context_create($opts);
+
+	$result = file_get_contents('http://gentle-ocean-7553.herokuapp.com/rest/index.php/validasiusername', false, $context);
+
   
-    if(mysql_num_rows($result)>0)  
+    if($result=="false")  
     {  
 		echo false;
     }  

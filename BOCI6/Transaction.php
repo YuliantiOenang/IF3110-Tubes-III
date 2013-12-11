@@ -2,29 +2,57 @@
 	include 'LibUser.php';
 	session_start();
 	if (isset($_GET['TransAct']) AND isset($_SESSION['username']) AND isset($_SESSION['cardnumber']) AND isset($_SESSION['cart'])){
+	
 		/*mysql_connect("localhost", "root", "") or die("Error connecting to database: ".mysql_error());
 		mysql_select_db("datauser") or die(mysql_error());*/
 		function InsertToDB($IdBarang,$Jumlah,$Harga,$Username,$NamaBarang,$Kategori){
-			$conn=mysql_connect("localhost", "root", "") or die("Error connecting to database: ".mysql_error());
-			mysql_select_db("datauser") or die(mysql_error());
-			$sql = "INSERT INTO TransactionLog VALUES('$IdBarang','$NamaBarang','$Harga','$Jumlah','$Username','$Kategori');";
-			$retval=mysql_query($sql,$conn) or die(mysql_error());
-			if(!$retval){
-				die('Could not enter data: ' . mysql_error());
-			}
-			echo "Entered data successfully\n";
-		}
-		function UpdateDB($IdBarang,$Jumlah){
-			mysql_connect("localhost","root","") or die("Error connecting to database: ".mysql_error());
-			mysql_select_db("datauser") or die(mysql_error());
-			$raw_results = mysql_query("SELECT Jumlah FROM Barang WHERE IdBarang='$IdBarang'") or die (mysql_error());
-			$i=0;
-			$results=mysql_fetch_array($raw_results);
-			$OldJumlah=$results[0];
+			ini_set("soap.wsdl_cache_enabled", "0"); // disabling WSDL cache
+			$client = new SoapClient("http://gentle-ocean-7553.herokuapp.com/service.wsdl");
+			$return = $client->createTransaction($NamaBarang,$Harga,$Jumlah,$Username,$Kategori,'-');
 		
+		
+		}
+		function UpdateDB($NamaBarang,$Jumlah){
+			$postdata = http_build_query(
+			array(
+				'namabarang' => $NamaBarang
+			)
+			);
+
+			$opts = array('http' =>
+				array(
+					'method'  => '.GET',
+					'header'  => "Content-type: application/x-www-form-urlencoded",
+					'content' => json_encode($postdata)
+				)
+			);
+
+			$context  = stream_context_create($opts);
+
+			$result = file_get_contents('http://gentle-ocean-7553.herokuapp.com/rest/index.php/getjumlah', false, $context);
+			$result=json_decode($result,true);			
+			$OldJumlah=$result["jumlah"];		
 			$NewJumlah=$OldJumlah-$Jumlah;
+			$postdata = http_build_query(
+			array(
+				'namabarang' => $NamaBarang,
+				'jumlah' => $NewJumlah
+			)
+			);
+
+			$opts = array('http' =>
+				array(
+					'method'  => '.PUT',
+					'header'  => "Content-type: application/x-www-form-urlencoded",
+					'content' => json_encode($postdata)
+				)
+			);
+
+			$context  = stream_context_create($opts);
+
+			$result = file_get_contents('http://gentle-ocean-7553.herokuapp.com/rest/index.php/buy', false, $context);
+			$result=json_decode($result,true);					
 			
-			mysql_query("UPDATE Barang SET Jumlah='$NewJumlah' WHERE IdBarang='$IdBarang';") or die (mysql_error());
 		}	
 		foreach ($_SESSION['cart'] as $Barang){
 			$NamaBarang=$Barang[0]->GetNamaBarang();
@@ -34,13 +62,13 @@
 			$Kategori=$Barang[0]->GetKategori();
 			$Username=$_SESSION['username'];
 			InsertToDB($IdBarang,$Jumlah,$Harga,$Username,$NamaBarang,$Kategori);
-			UpdateDB($IdBarang,$Jumlah);	
+			UpdateDB($NamaBarang,$Jumlah);	
 		}
 		unset($_SESSION['cart']);
-		echo "transaksi berhasil";
-		echo "<a href=\"index.php\">BACK</a><br>";}
+		header('location:ShoppingBag.php');}
 	else if (isset($_SESSION['username']) AND !isset($_SESSION['cardnumber'])){
 		header('location:credit-card.php');}
 	else{
 		header('location:index.php');}
 ?>
+	 

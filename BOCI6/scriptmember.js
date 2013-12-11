@@ -145,7 +145,7 @@ function cekChangeData(){
 		return false;
 		
 	}else{
-		alert("Sukses");
+		alert("Edit di proses");
 		sleep(1);
 		return true;
 		

@@ -17,7 +17,7 @@
 							$_SESSION['cardnumber']=$_COOKIE['cardnumber'];
 							}
 							?>
-							<h3>Welcome, <span class="user-name"><a href="edit-profile.php" id="member"><?php echo "$hoho" ?></a></span>!</h3>
+							<h3>Welcome, <span class="user-name"><a href="getdatamember.php" id="member"><?php echo "$hoho" ?></a></span>!</h3>
 							<p id="user-control">
 								<span class="edit-logout">	<a href='logout.php' id='logout2'>Logout</a></span>
 							</p>

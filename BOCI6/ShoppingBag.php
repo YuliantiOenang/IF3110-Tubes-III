@@ -1,15 +1,17 @@
 <link rel="stylesheet" type="text/css" href="res/css/style.css" media="all"/>
+<link rel="stylesheet" type="text/css" href="TabelCSS.css"/>
 <?php	
-	include 'header.php';
+
 	include 'LibUser.php';
 	session_start();
 	if (isset($_SESSION['username'])){
 		echo "<html>";
 		echo "<head>";
-		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"TabelCSS.css\">";
+		
 		echo "</head>";
 		echo "<body>";
-			
+		echo "<div id=\"container\">";
+		include 'header.php';
 		echo "<div class=\"ShoppingBag\">";
 		$Total=0;
 		if (isset($_SESSION['cart'])){
@@ -28,9 +30,10 @@
 			echo "<button type=\"button\" onClick=\"location.href='Transaction.php?TransAct=1'\" class=\"btn\">Checkout Cart</button></div>";
 		}
 		else{
-			echo "Cart Kosong";}
+			echo "Kosong";}
 		echo "<br>";
 		echo "<a href=\"index.php\">BACK</a><br>";
+		echo "</div>";
 		echo "</body>";
 		echo "</html>";
 	}

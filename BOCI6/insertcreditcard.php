@@ -1,21 +1,31 @@
 <?php
 
-session_start();  
-
-require_once("databaseconnect.php");   //memanggil file databaseconnect.php  
-
-connect_db();  
+session_start(); 
 
 
 $username=$_SESSION["username"];
-$cardnumber=mysql_real_escape_string($_POST['cardnumber']);
+$cardnumber=$_POST['cardnumber'];
 
+$postdata = http_build_query(
+    array(
+        'username' => $username,
+		'nocredit' => $cardnumber
+		
+	)
+	);
 
+$opts = array('http' =>
+    array(
+        'method'  => '.PUT',
+        'header'  => "Content-type: application/x-www-form-urlencoded",
+        'content' => json_encode($postdata)
+    )
+);
 
-// Insert data into mysql
+$context  = stream_context_create($opts);
 
-$sql="UPDATE user SET nocredit = '$cardnumber' WHERE username = '$username' ";
-$result=mysql_query($sql) or die ('error Updating database');
+$result = file_get_contents('http://gentle-ocean-7553.herokuapp.com/rest/index.php/insertcard', false, $context);
+$result=json_decode($result,true);
 
  $_SESSION['cardnumber']=$cardnumber; 
  setcookie('cardnumber', $cardnumber, $Expire);

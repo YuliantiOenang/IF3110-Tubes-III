@@ -13,8 +13,6 @@ if(isset($_COOKIE['username'])){
 		$alamat=$_SESSION['alamat'];
 		$kodepos=$_SESSION['kodepos'];
 		$data2=$_SESSION['jumlahtransaksi'];
-	}else{
-		header('location: getdatamember.php'); 
 	}
 }else{
 	header('location: registrasi.php');  

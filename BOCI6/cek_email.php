@@ -2,16 +2,26 @@
 
 session_start();  
 
-require_once("databaseconnect.php");   //memanggil file databaseconnect.php  
-
-connect_db();       // memanggil fungsi connect_db yang ada di file databaseconnect.php  
-
     $email =$_POST["email"];
 	
-    $query="SELECT * FROM user where email='$email'"; 
-    $result=mysql_query($query);  
-  
-    if(mysql_num_rows($result)>0)  
+ 	$postdata = http_build_query(
+    array(
+        'email' => $email
+	)
+	);
+
+	$opts = array('http' =>
+    array(
+        'method'  => '.GET',
+        'header'  => "Content-type: application/x-www-form-urlencoded",
+        'content' => json_encode($postdata)
+    )
+	);
+
+	$context  = stream_context_create($opts);
+
+	$result = file_get_contents('http://gentle-ocean-7553.herokuapp.com/rest/index.php/validasiemail', false, $context);
+    if($result=="false")  
     {  
         
         

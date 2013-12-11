@@ -61,11 +61,11 @@
 							<img class="gambar" src="res/img/product/<?php echo $Barang->GetNamaBarang()?>.jpg" alt=""/>
 						</div>
 						<div class="kolom-6">
-							<p class="nama-produk-b"><a href="detail-barang.php?id=<?php echo $Barang->GetIdBarang()?>&Kategori=<?php echo $Barang->GetKategori()?>"><?php echo $Barang->GetNamaBarang()?></a></p>
+							<p class="nama-produk-b"><a href="detail-barang.php?id=<?php echo $i?>&Kategori=<?php echo $Barang->GetKategori()?>"><?php echo $Barang->GetNamaBarang()?></a></p>
 							<p class="harga">Harga: <?php echo $Barang->GetHarga()?> /kg</p>
 							<div class="frame buy-bar">
-								<input class="kolom-9 buy-box" type="text" id='<?php echo $Barang->GetIdBarang()?>' name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
-								<button class="kolom-1 buy-button" type="button" onClick=AddToCart(<?php echo $Barang->GetIdBarang()?>)></button>
+								<input class="kolom-9 buy-box" type="text" id='<?php echo $i?>' name="buy" value="Banyaknya barang.." onfocus="checkclear(this)" onblur="checkempty(this, 'Banyaknya barang..')"> 
+								<button class="kolom-1 buy-button" type="button" onClick=AddToCart(<?php echo $i?>)></button>
 							</div>
 						</div>
 					</div>
