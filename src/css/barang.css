@@ -1,0 +1,15 @@
+/* spesifik untuk barang.php */
+
+.barang{
+	width: 500px;
+}
+
+.imgbarang{
+	width:180px;
+	height:180px;
+}
+
+.title{
+	font-weight: bold;
+	font-size: 13pt;
+}
