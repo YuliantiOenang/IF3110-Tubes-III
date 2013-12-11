@@ -91,7 +91,7 @@ public class BarangService {
 				barang.setPrice(rs.getInt("harga_barang"));
 				barang.setDescription(rs.getString("keterangan"));
 				barang.setTotal_item(rs.getInt("jumlah_barang"));
-				barang.setnKat(rs.getString("nKat"));
+				barang.setnKat(rs.getString("kategori.nama"));
 				barangList.add(barang);
 			}
 			gson = new Gson();
@@ -112,11 +112,12 @@ public class BarangService {
 		String selectResult = null;
 		query = "SELECT COUNT(id) AS JmlBarang FROM barang WHERE id=id " + p3
 				+ p4 + p5;
+		System.out.println(query);
 		try {
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs;
 			rs = stmt.executeQuery();
-			int cID = (rs.getInt("JmlBarang"));
+			int cID = (rs.getInt(1));
 			gson = new Gson();
 			selectResult = gson.toJson(cID);
 		} catch (Exception e) {

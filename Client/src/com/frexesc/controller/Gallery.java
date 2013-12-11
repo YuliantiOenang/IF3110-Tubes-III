@@ -118,18 +118,23 @@ public class Gallery extends HttpServlet {
 				if (page != 0) {
 					page = page * 10;
 				}
-
+				String temp="http://localhost:8080/web-services/BS/barang/select2?p1="+partial1
+						+ "&p2="+partial2 + "&p3="+partial3 + "&p4="+partial4 + "&p5="+partial5+"&page="+page;
+				temp=temp.replace(" ","%20");
+				System.out.println(temp);
 				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/select2?p1="+partial1
-								+ "&p2="+partial2 + "&p3="+partial3 + "&p4="+partial4 + "&p5="+partial5+"&page="+page);
+						.readUrl(temp);
 				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
 				ArrayList<Barang> allResults= new ArrayList<Barang>();
+				
 				for (JsonElement barang : barangArray) {
 					Barang barangObj = gson.fromJson(barang, Barang.class);
 					allResults.add(barangObj);
 				}
 				json = WebServicesKit
 						.readUrl("http://localhost:8080/web-services/BS/barang/select3?p3="+partial3
+								+"&p4="+partial4+"&p5="+partial5);
+				System.out.println("http://localhost:8080/web-services/BS/barang/select3?p3="+partial3
 								+"&p4="+partial4+"&p5="+partial5);
 				int jmlBrg= jsonParser.parse(json).getAsInt();
 				if (request.getParameter("category") != null) {

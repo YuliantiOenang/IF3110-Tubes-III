@@ -8,6 +8,7 @@ public class WebServicesKit {
 	
 	static String readUrl(String urlString) throws Exception
 	{
+		urlString=urlString.replace(" ","%20");
 		BufferedReader reader = null;
 		try
 		{
