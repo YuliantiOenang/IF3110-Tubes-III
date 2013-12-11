@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<!--
+(c) example
+2013-12-11
+coba-coba soap buat tubes
+
+Online WSDL SOAP generator 0.1a
+Julien Blitte
+-->
+<definitions name="coba-coba soap buat tubes"
+	targetNamespace="destra.soap.example.wsdl"
+	xmlns:tns="destra.soap.example.wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="destra.soap.example.xsd"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+<!-- definition of datatypes -->
+	<types>
+	<schema targetNamespace="destra.soap.example.xsd" xmlns="http://www.w3.org/2000/10/XMLSchema">
+		<element name="status">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+		<element name="username">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="password">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="nama_lengkap">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="email">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="phone">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="alamat">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="provinsi">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="postcode">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="city">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="jadi">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+		<element name="namaBarang">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="kategori">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="harga">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+		<element name="stock">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+		<element name="deskripsi">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="path">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+	</schema>
+	</types>
+<!-- response messages -->
+	<message name='returns_status'>
+	<part name='status' type='xsd:status'/>
+	</message>
+	<message name='returns_jadi'>
+	<part name='jadi' type='xsd:jadi'/>
+	</message>
+<!-- request messages -->
+	<message name='register'>
+	<part name='username' type='xsd:username'/>
+	<part name='password' type='xsd:password'/>
+	<part name='nama_lengkap' type='xsd:nama_lengkap'/>
+	<part name='email' type='xsd:email'/>
+	<part name='phone' type='xsd:phone'/>
+	<part name='alamat' type='xsd:alamat'/>
+	<part name='provinsi' type='xsd:provinsi'/>
+	<part name='postcode' type='xsd:postcode'/>
+	<part name='city' type='xsd:city'/>
+	</message>
+	<message name='nyetokBarang'>
+	<part name='namaBarang' type='xsd:namaBarang'/>
+	<part name='kategori' type='xsd:kategori'/>
+	<part name='harga' type='xsd:harga'/>
+	<part name='stock' type='xsd:stock'/>
+	<part name='deskripsi' type='xsd:deskripsi'/>
+	<part name='path' type='xsd:path'/>
+	</message>
+<!-- server's services -->
+	<portType name='soap-service-example'>
+		<operation name='register'>
+		<input message='tns:register'/>
+		<output message='tns:returns_status'/>
+		</operation>
+		<operation name='nyetokBarang'>
+		<input message='tns:nyetokBarang'/>
+		<output message='tns:returns_jadi'/>
+		</operation>
+	</portType>
+<!-- server encoding -->
+	<binding name='soap-service-example_webservices' type='tns:soap-service-example'>
+	<soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+		<operation name='register'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#register'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+		<operation name='nyetokBarang'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#nyetokBarang'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+	</binding>
+<!-- access to service provider -->
+	<service name='destra-example'>
+	<port name='destra-example_0' binding='soap-service-example_webservices'>
+	<soap:address location='http://destra.ap01.aws.af.cm/soap-service-example.php'/>
+	</port>
+	</service>
+</definitions>
