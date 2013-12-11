@@ -1,0 +1,26 @@
+GENERATED SOAP
+
+http://localhost/php-example/soap-service-example.php
+
+int status;
+string username;
+string password;
+string nama_lengkap;
+string email;
+string phone;
+string alamat;
+string provinsi;
+string postcode;
+string city;
+int jadi;
+string namaBarang;
+string kategori;
+int harga;
+int stock;
+string deskripsi;
+string path;
+
+
+status register(username, password, nama_lengkap, email, phone, alamat, provinsi, postcode, city);
+
+jadi nyetokBarang(namaBarang, kategori, harga, stock, deskripsi, path);
