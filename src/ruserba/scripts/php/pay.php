@@ -1,39 +1,58 @@
 <?php
-	if (isset($_POST['username'])) {
-		$query = 'select * from kartu_kredit where username=?';
-		$params = array($_POST['username']);
-		include 'query.php';
-		if (count($result) > 0) {
-			if (time() > strtotime($result[0]['kadaluarsa'])) {
-				echo json_encode(array('status'=>'expired'));
-			}
-			else {
-				session_start();
-				$success = true;
-				foreach ($_SESSION['cart'] as $id => $amount) {
-					$query = 'select tersedia from barang where id_barang=?';
-					$params = array($id);
-					include 'query.php';
-					if ($result[0]['tersedia'] >= $amount) {
-						$query = 'update barang set tersedia=tersedia-?, dibeli=dibeli+? where id_barang=?';
-						$params = array($amount, $amount, $id);
-						include 'query.php';
-						unset($_SESSION['cart'][$id]);
-					}
-					else {
-						$success = false;
-					}
-				}
-				if ($success) {
-					echo json_encode(array('status'=>'success'));
-				}
-				else {
-					echo json_encode(array('status'=>'partial'));
-				}
-			}
+	$rest = "http://ditra77.ap01.aws.af.cm";
+	ini_set('max_execution_time', 300);
+	session_start();
+	$result = simplexml_load_file($rest."/kartu_kredit/".$_SESSION['username'].".xml");
+	$jumlah = $result->children();
+	if (count($jumlah) > 0) {
+		if (time() > strtotime($result->kadaluarsa)) {
+			echo json_encode(array('status'=>'expired'));
 		}
 		else {
-			echo json_encode(array('status'=>'failed'));
+			$success = true;
+			foreach ($_SESSION['cart'] as $id => $amount) {
+				$barang = simplexml_load_file($rest."/barang/".$id.".xml");
+				if ($barang->tersedia >= $amount) {
+					$tersedia = $barang->tersedia-$amount;
+					$dibeli = $barang->dibeli+$amount;
+					$ch = curl_init($rest."/barang/".$id);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+					curl_setopt($ch, CURLOPT_POSTFIELDS, 'tersedia='.$tersedia);
+					curl_exec($ch);
+					$ch = curl_init($rest."/barang/".$id);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+					curl_setopt($ch, CURLOPT_POSTFIELDS, 'dibeli='.$dibeli);
+					curl_exec($ch);
+					$ch = curl_init($rest."/barang/".$id);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+					curl_setopt($ch, CURLOPT_POSTFIELDS, 'dibeli='.$dibeli);
+					curl_exec($ch);
+					unset($_SESSION['cart'][$id]);
+				}
+				else {
+					$success = false;
+				}
+			}
+			$result = simplexml_load_file($rest."/user_profile/".$_SESSION['username'].".xml");
+			$jumlah_transaksi = $result->jumlah_transaksi + 1;
+			$ch = curl_init($rest."/user_profile/".$_SESSION['username']);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+			curl_setopt($ch, CURLOPT_POSTFIELDS, 'jumlah_transaksi='.$jumlah_transaksi);
+			curl_exec($ch);
+			curl_close($ch);
+			if ($success) {
+				echo json_encode(array('status'=>'success'));
+			}
+			else {
+				echo json_encode(array('status'=>'partial'));
+			}
 		}
+	}
+	else {
+		echo json_encode(array('status'=>'failed'));
 	}
 ?>

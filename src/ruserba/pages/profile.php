@@ -11,15 +11,17 @@
 	<br />
 	<form id='formprofile' method='post'>
 		<?php
+			$result = simplexml_load_file($rest."/user/".$_SESSION['username'].".xml");
+			echo '<input type="hidden" name="password_old" value ="'.$result->password.'">';
+			$result = simplexml_load_file($rest."/user_profile/".$_SESSION['username'].".xml");
 			echo '<input type="hidden" name="username" value ="'.$_SESSION['username'].'">';
-			echo '<input type="hidden" name="name_old" value ="'.$_SESSION['nama'].'">';
-			echo '<input type="hidden" name="password_old" value ="'.$_SESSION['password'].'">';
-			echo '<input type="hidden" name="email" value ="'.$_SESSION['email'].'">';
-			echo '<input type="hidden" name="alamat_old" value ="'.$_SESSION['alamat'].'">';
-			echo '<input type="hidden" name="provinsi_old" value ="'.$_SESSION['provinsi'].'">';
-			echo '<input type="hidden" name="kotakabupaten_old" value ="'.$_SESSION['kota'].'">';
-			echo '<input type="hidden" name="kodepos_old" value ="'.$_SESSION['kodepos'].'">';
-			echo '<input type="hidden" name="nohp_old" value ="'.$_SESSION['nomor_ponsel'].'">';
+			echo '<input type="hidden" name="name_old" value ="'.$result->nama.'">';
+			echo '<input type="hidden" name="email" value ="'.$result->email.'">';
+			echo '<input type="hidden" name="alamat_old" value ="'.$result->alamat.'">';
+			echo '<input type="hidden" name="provinsi_old" value ="'.$result->provinsi.'">';
+			echo '<input type="hidden" name="kotakabupaten_old" value ="'.$result->kota.'">';
+			echo '<input type="hidden" name="kodepos_old" value ="'.$result->kode_pos.'">';
+			echo '<input type="hidden" name="nohp_old" value ="'.$result->nomor_ponsel.'">';
 		?>
 		<span class='formlabel'>Nama lengkap</span><input type='text' name='name'value = ' '><br />
 		<span id='errorname' class='formerrortext'>Nama lengkap harus terdiri dari paling sedikit 2 kata</span><br />
@@ -49,7 +51,7 @@
 		<span id='errorjumlah' class='formerrortext'>Nomor ponsel tidak boleh melebihi 15 angka</span>
 		<span id='errornoint' class='formerrortext'>Format nomor ponsel salah</span>
 		<br />
-		
+		<span class='formlabel'>Jumlah Transaksi : </span><?php echo $result->jumlah_transaksi; ?>
 		<br />
 		<input type='submit' name='esubmit' value='Simpan'>
 	</form>

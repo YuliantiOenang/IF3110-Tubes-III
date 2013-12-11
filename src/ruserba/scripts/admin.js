@@ -19,11 +19,27 @@ function hapusBarang(){
 
 function tambahKategori(){
    if(document.getElementById('idnama').value.length==0){
-      alert("Nama tidak boleh kosong")
-      return false;
+		alert("Nama tidak boleh kosong");
+		return false;
    } else{      
-      return true;
-   }
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', '/ruserba/scripts/php/check_kategori.php', true);
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('nama_kategori=' + document.getElementById('idnama').value);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var response = JSON.parse(xhr.responseText);
+				if (response['status'] == 'exists') {
+					alert('Nama kategori telah digunakan');
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
 
 function tambahBarang(){
@@ -46,7 +62,23 @@ function tambahBarang(){
                     alert("Ekstensi file tidak diterima");
                     return false;
                 }else{
-                    return true;
+                    var xhr = new XMLHttpRequest();
+					xhr.open('POST', '/ruserba/scripts/php/check_barang.php', true);
+					xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					xhr.send('nama_barang=' + document.getElementById('idnama').value);
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4 && xhr.status == 200) {
+							var response = JSON.parse(xhr.responseText);
+							if (response['status'] == 'exists') {
+								alert('Nama barang telah digunakan');
+								return false;
+							}
+							else {
+								return true;
+							}
+						}
+					}
+					return false;
                 }
             }
         }

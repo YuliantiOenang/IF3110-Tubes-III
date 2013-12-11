@@ -26,13 +26,13 @@
 				echo '<div class="barang_container">';
 				echo '<div class="barang">';
 				echo '<a href="/ruserba/barang/'.$barang->id_barang.'">';
-				echo '<img src="/ruserba/assets/barang/'.$barang->gambar.'" height="100%"/>';
+				echo '<img src="/ruserba/assets/barang/'.$barang->gambar.'" width="100%" height="100%"/>';
 				echo '</a>';
 				echo '</div>';
 				echo '<div class="barang">';
 				echo '<span class="barang_nama">';
 				echo '<a href="/ruserba/barang/'.$barang->id_barang.'">';
-				echo $barang['nama_barang'];
+				echo $barang->nama_barang;
 				echo '</a>';
 				echo '<br/>';
 				echo 'Kategori: ';

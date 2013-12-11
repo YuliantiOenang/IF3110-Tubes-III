@@ -26,7 +26,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
 			<?php 
 			$result = simplexml_load_file($rest."/kategori.xml");
 			?>
-			<form action="ruserba/scripts/php/hapuskategori.php">
+			<form action="../scripts/php/hapuskategori.php" method="POST">
 				<?php
 				foreach($result->children() as $child){ 
 				$kategori = simplexml_load_file($rest."/kategori/".$child.".xml");
@@ -36,7 +36,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
 						<div class="list">
 							<span class="barang_nama">
 								<?php 
-								echo "<input type='checkbox' name='id' value=".$kategori->id_kategori.">";
+								echo "<input type='checkbox' name='id[]' value=".$kategori->id_kategori.">";
 								echo "<a href='editkategori.php?id=".$kategori->id_kategori."'>";
 								echo $kategori->nama_kategori;
 								echo "</a>";
@@ -75,7 +75,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
 			</div>
         </div>
 		<div class='divider'></div>
-		<div id='footer'><?php include 'pages/footer.php'; ?></div>
+		<div id='footer'><?php include 'footer.php'; ?></div>
 		<br /><br /><br /><br /><br /><br />
 	</div>
 </body>

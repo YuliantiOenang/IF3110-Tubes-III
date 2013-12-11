@@ -30,7 +30,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
 			<?php 
 			$result = simplexml_load_file($rest."/barang?id_kategori=".$kategori->id_kategori.".xml");
 			?>
-			<form action="ruserba/scripts/php/hapusbarang.php">
+			<form action="../scripts/php/hapusbarang.php" method="post">
 				<?php
 				foreach($result->children() as $child){ 
 				$barang = simplexml_load_file($rest."/barang/".$child.".xml");
@@ -39,7 +39,8 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
 					<div>
 						<span class="barang_nama">
 							<?php 
-							echo "<input type='checkbox' name='id' value=".$barang->id_barang.">";
+							echo "<input type='checkbox' name='id[]' value=".$barang->id_barang.">";
+							echo "<input type='hidden' name='kategori' value=".$_GET['kategori'].">";
 							echo "<a href='editbarang.php?id=".$barang->id_barang."'>";
 							echo $barang->nama_barang;
 							echo "</a>";
@@ -93,7 +94,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
             </div>
 		</div>
 		<div class='divider'></div>
-		<div id='footer'><?php include 'pages/footer.php'; ?></div>
+		<div id='footer'><?php include 'footer.php'; ?></div>
 		<br /><br /><br /><br /><br /><br />
 	</div>
 </body>

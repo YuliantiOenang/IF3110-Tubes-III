@@ -27,7 +27,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
             </h3>
 			<br/>
 			<br/>
-			<form id='barangform' method='post' action='simpanbarang.jsp'>
+			<form id='barangform' method='post' onsubmit='return tambahBarang()' action='../scripts/php/simpanbarang.php'>
 				<div class="list">
 					<span class='formlabel'>Nama Barang</span>
 				</div>
@@ -63,11 +63,11 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
 				echo "<input name='id_barang' type='hidden' value=".$barang->id_barang.">";
 				echo "<input name='kategori' type='hidden' value=".$barang->id_kategori.">";
 				?>
-				<input type='submit' name='submit' value='Perbarui' onclick='return tambahBarang()'>
+				<input type='submit' name='submit' value='Perbarui'>
 			</form>
         </div>
 		<div class='divider'></div>
-		<div id='footer'><?php include 'pages/footer.php'; ?></div>
+		<div id='footer'><?php include 'footer.php'; ?></div>
 		<br /><br /><br /><br /><br /><br />
 	</div>
 </body>

@@ -1,9 +1,7 @@
 halaman 
 - register terkait penyimpanan di scripts/php/register.php dan scripts/register.js
 - registerkartu terkait penyimpanan di scripts/php/register.php dan scripts/registerkartu.js
-- halaman provile terkait update di scripts/php/save_provile.php dan scripts/profile.js
-- cart terkait pembayaran di scripts/php/pay.php dan scripts/pay.js
-- listkategori terkait tambah dan hapus di di scripts/php/hapuskategori.php dan scripts/php/tambahkategori.php
-- editkategori terkait simpan di di scripts/php/simpankategori.php
-- listbarang terkait tambah dan hapus di di scripts/php/hapusbarang.php dan scripts/php/tambahbarang.php
-- editbarang terkait simpan di di scripts/php/simpanbarang.php
+- listkategori terkait tambah  scripts/php/tambahkategori.php
+- editkategori saat return true, tidak terjadi action
+- listbarang terkait tambah scripts/php/tambahbarang.php
+- editbarang saat return true, tidak terjadi action

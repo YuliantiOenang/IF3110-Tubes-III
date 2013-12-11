@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/ruserba/scripts/php/pay.php', true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		xhr.send(postParams);
+		xhr.send();
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var response = JSON.parse(xhr.responseText);

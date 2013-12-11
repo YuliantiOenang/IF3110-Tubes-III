@@ -27,18 +27,18 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
             </h3>
 			<br/>
 			<br/>
-			<form id='kategoriform' method='post' action='simpankategori.jsp'>
+			<form id='kategoriform' method='post' onsubmit='return tambahKategori()' action='../scripts/php/simpankategori.php'>
 				<span class='formlabel'>Nama Kategori</span>
 				<?php
 				echo "<input type='hidden' id='idid' name='id' value=".$kategori->id_kategori.">";
-				echo "<input type='text' id='idnama' name='nama' value=".(string)$kategori->nama_kategori.">";
+				echo "<input type='text' id='idnama' name='nama' value='".$kategori->nama_kategori."'>";
 				?>                       
 				<br /><br />
-				<input type='submit' name='submit' value='Perbarui' onclick='tambahKategori()'>
+				<input type='submit' name='submit' value='Perbarui'>
 			</form>
         </div>
 		<div class='divider'></div>
-		<div id='footer'><?php include 'pages/footer.php'; ?></div>
+		<div id='footer'><?php include 'footer.php'; ?></div>
 		<br /><br /><br /><br /><br /><br />
 	</div>
 </body>
