@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>web-services</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Course Service</servlet-name>
+    <servlet-class>com.sun.jersey.server.impl.container.servlet.ServletAdaptor</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Course Service</servlet-name>
+    <url-pattern>/Course/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Category Service</servlet-name>
+    <servlet-class>com.sun.jersey.server.impl.container.servlet.ServletAdaptor</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Category Service</servlet-name>
+    <url-pattern>/CategoryService/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>User Service</servlet-name>
+    <servlet-class>com.sun.jersey.server.impl.container.servlet.ServletAdaptor</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>User Service</servlet-name>
+    <url-pattern>/UserService/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Barang User Service</servlet-name>
+    <servlet-class>com.sun.jersey.server.impl.container.servlet.ServletAdaptor</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Barang User Service</servlet-name>
+    <url-pattern>/BarangUserService/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Barang Service</servlet-name>
+    <servlet-class>com.sun.jersey.server.impl.container.servlet.ServletAdaptor</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Barang Service</servlet-name>
+    <url-pattern>/BS/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>Apache-Axis Servlet</display-name>
+    <servlet-name>AxisServlet</servlet-name>
+    <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>/servlet/AxisServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>*.jws</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>Axis Admin Servlet</display-name>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
+    <load-on-startup>100</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/servlet/AdminServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
