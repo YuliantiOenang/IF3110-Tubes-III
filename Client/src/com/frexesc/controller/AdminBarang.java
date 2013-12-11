@@ -275,8 +275,7 @@ public class AdminBarang extends HttpServlet {
 				json = WebServicesKit
 						.readUrl("http://localhost:8080/web-services/BS/barang/select?id="
 								+ id);
-				JsonArray barangArray = jsonParser.parse(json)
-						.getAsJsonArray();
+				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
 				ArrayList<Barang> barangs = new ArrayList<Barang>();
 				for (JsonElement barang : barangArray) {
 					Barang barangObj = gson.fromJson(barang, Barang.class);

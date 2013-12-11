@@ -38,6 +38,24 @@
   <ns1:parameter name="wsdlTargetNamespace" value="http://webService"/>
   <ns1:parameter name="wsdlServiceElement" value="InsertBarangUserService"/>
  </ns1:service>
+ <ns1:service name="InsertBarang" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="insertBarang" qname="ns2:insertBarang" soapAction="" xmlns:ns2="http://webService">
+   <ns1:parameter qname="ns2:id_kategori" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:nama_barang" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:gambar" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:harga_barang" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:keterangan" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:jumlah_barang" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="insertBarang"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="InsertBarang"/>
+  <ns1:parameter name="className" value="webService.InsertBarang"/>
+  <ns1:parameter name="wsdlServicePort" value="InsertBarang"/>
+  <ns1:parameter name="schemaQualified" value="http://webService"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://webService"/>
+  <ns1:parameter name="wsdlServiceElement" value="InsertBarangService"/>
+ </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>
   <ns1:parameter name="enableRemoteAdmin" value="false"/>
@@ -49,23 +67,23 @@
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="InsertUser" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="insertUser" qname="ns2:insertUser" soapAction="" xmlns:ns2="http://webService">
-   <ns1:parameter qname="ns2:nama" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:email" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:handphone" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:alamat" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:kota" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:provinsi" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns2:kodepos" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="insertUser" qname="ns3:insertUser" soapAction="" xmlns:ns3="http://webService">
+   <ns1:parameter qname="ns3:nama" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:email" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:handphone" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:alamat" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:kota" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:provinsi" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:kodepos" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="insertUser"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="InsertUser"/>
-  <ns1:parameter name="className" value="webService.InsertUser"/>
-  <ns1:parameter name="wsdlServicePort" value="InsertUser"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="schemaQualified" value="http://webService"/>
+  <ns1:parameter name="wsdlServicePort" value="InsertUser"/>
+  <ns1:parameter name="className" value="webService.InsertUser"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://webService"/>
   <ns1:parameter name="wsdlServiceElement" value="InsertUserService"/>
  </ns1:service>
