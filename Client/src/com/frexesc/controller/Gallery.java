@@ -118,7 +118,7 @@ public class Gallery extends HttpServlet {
 
 				json = WebServicesKit
 						.readUrl("http://localhost:8080/web-services/BS/barang/select2?p1="+partial1
-								+ "&p2="+partial2 + "&p3="+partial3 + "&p4="+partial4 + "&p5="+partial5);
+								+ "&p2="+partial2 + "&p3="+partial3 + "&p4="+partial4 + "&p5="+partial5+"&page="+page);
 				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
 				ArrayList<Barang> allResults= new ArrayList<Barang>();
 				for (JsonElement barang : barangArray) {
