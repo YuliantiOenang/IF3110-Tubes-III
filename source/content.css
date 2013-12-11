@@ -1,0 +1,92 @@
+.lifted_content_box {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.lifted_content_box h1 {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 2em;
+    margin: 0; /* triangular shape&cut */
+    height: 0;
+    border-bottom: 25px solid #9ACD32; /* height */
+    border-right: 15px solid transparent; /* merubah angle */
+    display: inline-block;
+    color: #fff;
+    text-shadow: 1px 1px 0 #9ACD32;
+    padding: 0 10px;
+    vertical-align: bottom; /* bug */
+}
+
+#itemcontent {
+    padding: 10px;
+    background: #fff;
+    border-top: 5px solid #9ACD32; /* garis border atas */;
+    -webkit-box-shadow: inset 0px 0px 10px rgba(0,0,0,0.20);
+    -moz-box-shadow: inset 0px 0px 10px rgba(0,0,0,0.20);
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.20);
+	margin-bottom : 20px;
+}
+
+#itemcontent2 {
+    padding: 10px;
+    background: #fff;
+    border-top: 5px solid #9ACD32; /* garis border atas */;    
+	margin-bottom : 20px;
+}
+
+.itemcontent2 form {
+	 background: #000;
+}
+
+.lifted_content_box p {
+    margin: 0 0 10px;
+    color: black;
+    line-height: 1.5em;
+}
+
+input.Submit{
+	margin-right: 0.5in;
+	margin-bottom: 10px;
+	padding: 10px;
+	background-image: linear-gradient(to bottom,#7BA428,#8BB82D);
+	background-image: -o-linear-gradient(to bottom,#7BA428,#8BB82D);
+	background-image: -ms-linear-gradient(to bottom,#7BA428,#8BB82D);
+	background-image: -moz-linear-gradient(to bottom,#7BA428,#8BB82D);
+	background-image: -webkit-linear-gradient(to bottom,#7BA428,#8BB82D);
+	background-color: #9ACD32;
+	color: #fff;
+	text-decoration: none;
+	border: 1px solid transparent;
+	vertical-align: middle; /* bug */
+	border-radius: 5px;
+	text-shadow: 1px 1px 0 #9ACD32;
+	text-align : center;
+	cursor:pointer;
+}
+#itemcontent form{
+	text-align:center;
+	vertical-align : middle;
+}
+
+#itemcontent table{
+	margin-left:50px;
+}
+#itemcontent input{
+	margin-left : 10px;
+	margin-bottom : 5px;
+	padding : 5px;
+}
+
+#itemcontent textarea{
+	margin-left : 10px;
+	margin-bottom : 5px;
+	vertical-align : middle;
+	padding : 5px;
+}
+
+#itemcontent label{
+	margin-bottom : 5px;
+}

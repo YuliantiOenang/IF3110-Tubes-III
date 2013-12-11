@@ -1,0 +1,200 @@
+#all
+{
+    width: 80%;
+	max-width: 1260px;
+	min-width: 780px;
+	background: #FFF;
+	margin: 0 auto;
+	height : 100%;
+}
+
+#header
+{
+   background: #E0FFFF;
+   height : 20%;
+}
+
+#logo {
+	text-align : left;
+	display:inline-block;
+	margin-left: 0.1in; 
+	margin-bottom: 0.1in;
+	margin-top: 0.1in;
+}
+#shoppingbag {
+	text-align : center;
+	display:inline-block;
+	margin-left: 0.5in; 
+	margin-bottom: 0.1in;
+	margin-top: 0.1in;
+}
+#headerright {
+	text-align : center;
+	float : right;
+	margin-right: 0.5in; 
+	margin-bottom: 0.1in;
+	margin-top: 0.1in;
+}
+#headerright a{
+	Text-align : center;
+	font-family : courier;
+	display:inline-block;
+    padding:10px;
+}
+#navigasi
+{
+	background : #9ACD32;
+	text-align: center;
+}
+ul.nav , ol.nav { 
+	list-style-type:none;
+	padding: 0;
+	margin: 0;
+}
+ul.nav 
+{
+	list-style: none;
+	margin-bottom: 15px; 
+}
+/*Border pada Navigasi Kategori*/
+ul.nav li { /*Tiap li*/
+	border-width:1px 0;
+	display:inline;
+}
+
+ul.nav a, ul.nav a:visited { 
+	text-decoration: none;
+	background: #9ACD32;
+	color: #000;
+}
+
+/*Saat Kursor diarahkan ke navigasi*/
+
+#navigasi a
+{
+	border-right: 1px solid #666;
+    color :#FFF;
+	text-decoration: none;
+	text-align : center;
+	font-family : courier;
+	display:inline-block;
+    padding:10px;
+}
+
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus {
+	background: #FF4500;
+	color: #FFF;
+}
+
+h3.judul {
+	color: #FF4500;
+}
+
+tr{
+	vertical-align:center;
+}
+a.linkheader{
+	color : #FF4500;
+	cursor:pointer;
+	padding:5px;
+	display:inline-block;
+	text-align : center;
+}
+a.linkprocedure{
+	border: 1px solid #666;
+	padding:5px;
+}
+#linkprosedur{
+	text-align : center;
+	color : #FF4500;
+	cursor:pointer;
+	margin: 0 auto;
+}
+img.linkprocedure{
+	display: block; 
+	margin: auto;
+}
+
+
+/*Form styles*/
+.styled {
+	font-family: Arial, sans-serif;
+}
+.styled fieldset {
+	border: 1px solid #ccc; padding: 10px;
+}
+.styled fieldset legend {
+	font-size: 14px; font-weight: bold; 
+	color: #000; text-transform: capitalize; 
+	padding: 5px 10px; 
+	background: #fff; 
+	display: block; 
+	margin-bottom: 0; 
+	border: 1px solid #ccc;
+	
+}
+.styled fieldset ol, .styled fieldset ol li {list-style: none;}
+.styled fieldset li.form-row {
+	margin-bottom: 3px; 
+	padding: 2px 0; 
+	width: 100%; 
+	overflow: hidden; 
+	position: relative;
+}
+.styled label {
+	font-size: 12px; 
+	display: block; 
+	font-weight: bold; 
+	float: left; 
+	width: 100px; 
+	margin-left: 5px; 
+	line-height: 24px;
+}
+.styled input.text-input, input.userid,input.email,input.nokartu,input.namakartu, .styled .text-area {
+	background: #fefefe; 
+	border-top: 1px solid #909090; 
+	border-right: 1px solid #cecece; 
+	border-bottom: 1px solid #e1e1e1; 
+	border-left: 1px solid #bbb; 
+	padding: 3px; width: 220px; font-size: 12px;}
+.styled input.text-input.default.active, .styled .text-area.default.active {color: #666666; font-style: italic;}
+.styled fieldset li.button-row {margin-bottom: 0; padding: 2px 5px;}
+form input.btn-submit {
+	padding: 3px 7px; 
+	font-family: Arial, sans-serif; 
+	color: #000; 
+	font-weight: bold; 
+	border: 1px solid #000; 
+	background: #FFE220; 
+	font-size: 12px;
+}
+
+/* Form Validation */
+.styled span.error {
+	font-size: 11px; 
+	background: none; 
+	display: block; padding: 2px; 
+	text-align: center;
+}
+.styled fieldset li.error {
+	color: #D8000C; 
+	background: #fff0f0 url(../media/images/checkers.png) repeat; 
+	border: 1px solid #f9c7c7; 
+	padding: 5px 0;}
+.styled fieldset li.error label {text-align: left;}
+
+/* Specific Form Rules */
+#formdaftar, #formdaftarkartukredit {
+	width: 360px; 
+	margin: 0 auto;
+}
+
+.success {
+	order: 1px solid; 
+	margin: 0; 
+	padding: 10px; 
+	text-align: center; 
+	color: #4F8A10; 
+	background-color: #ebf6d9; 
+	border-color: #DFF2BF;
+}
