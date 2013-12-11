@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://tubes2wbd" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://tubes2wbd" xmlns:intf="http://tubes2wbd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://tubes2wbd" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="registeruser">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="nama" type="xsd:string"/>
+      <element name="nohp" type="xsd:string"/>
+      <element name="alamat" type="xsd:string"/>
+      <element name="provinsi" type="xsd:string"/>
+      <element name="kota" type="xsd:string"/>
+      <element name="kodepos" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="registeruserResponse">
+    <complexType>
+     <sequence>
+      <element name="registeruserReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="additem">
+    <complexType>
+     <sequence>
+      <element name="nama" type="xsd:string"/>
+      <element name="img" type="xsd:string"/>
+      <element name="harga" type="xsd:string"/>
+      <element name="kategori" type="xsd:string"/>
+      <element name="jumlah" type="xsd:string"/>
+      <element name="deskripsi" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="additemResponse">
+    <complexType>
+     <sequence>
+      <element name="additemReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="registeruserResponse">
+
+      <wsdl:part element="impl:registeruserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="registeruserRequest">
+
+      <wsdl:part element="impl:registeruser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="additemResponse">
+
+      <wsdl:part element="impl:additemResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="additemRequest">
+
+      <wsdl:part element="impl:additem" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="soap">
+
+      <wsdl:operation name="registeruser">
+
+         <wsdl:input message="impl:registeruserRequest" name="registeruserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:registeruserResponse" name="registeruserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="additem">
+
+         <wsdl:input message="impl:additemRequest" name="additemRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:additemResponse" name="additemResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="soapSoapBinding" type="impl:soap">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="registeruser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="registeruserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="registeruserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="additem">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="additemRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="additemResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="soapService">
+
+      <wsdl:port binding="impl:soapSoapBinding" name="soap">
+
+         <wsdlsoap:address location="http://localhost:8080/dichbar/services/soap"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
