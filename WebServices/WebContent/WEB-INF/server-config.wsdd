@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -30,11 +30,11 @@
    <ns2:parameter qname="ns1:desc" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns2:operation>
   <ns1:parameter name="allowedMethods" value="insertBarangUser"/>
-  <ns1:parameter name="wsdlPortType" value="InsertBarangUser"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="schemaQualified" value="http://webService"/>
-  <ns1:parameter name="wsdlServicePort" value="InsertBarangUser"/>
+  <ns1:parameter name="wsdlPortType" value="InsertBarangUser"/>
   <ns1:parameter name="className" value="webService.InsertBarangUser"/>
+  <ns1:parameter name="wsdlServicePort" value="InsertBarangUser"/>
+  <ns1:parameter name="schemaQualified" value="http://webService"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://webService"/>
   <ns1:parameter name="wsdlServiceElement" value="InsertBarangUserService"/>
  </ns1:service>
@@ -79,11 +79,11 @@
    <ns1:parameter qname="ns3:kodepos" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="insertUser"/>
-  <ns1:parameter name="wsdlPortType" value="InsertUser"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="schemaQualified" value="http://webService"/>
-  <ns1:parameter name="wsdlServicePort" value="InsertUser"/>
+  <ns1:parameter name="wsdlPortType" value="InsertUser"/>
   <ns1:parameter name="className" value="webService.InsertUser"/>
+  <ns1:parameter name="wsdlServicePort" value="InsertUser"/>
+  <ns1:parameter name="schemaQualified" value="http://webService"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://webService"/>
   <ns1:parameter name="wsdlServiceElement" value="InsertUserService"/>
  </ns1:service>

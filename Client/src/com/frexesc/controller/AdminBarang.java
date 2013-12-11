@@ -20,7 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.frexesc.SOAP.InsertBarangProxy;
+import com.frexesc.SOAP.InsertBarangUserProxy;
 import com.frexesc.model.Barang;
+import com.frexesc.model.BarangBean;
 import com.frexesc.model.KategoriBean;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -153,40 +156,96 @@ public class AdminBarang extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		/** port */
 		Gson gson = new Gson();
 		String json = null;
 		JsonParser jsonParser = new JsonParser();
-		DbConnection dbConnection = new DbConnection();
-		Connection connection = dbConnection.mySqlConnection();
+
 		if (request.getParameter("action").equals("add")) {
-			Barang barang = new Barang(0, Integer.parseInt(request
+			BarangBean barang = new BarangBean(0, Integer.parseInt(request
 					.getParameter("category")), request.getParameter("name"),
 					null, Integer.parseInt(request.getParameter("price")),
 					request.getParameter("description"),
 					Integer.parseInt(request.getParameter("amount")));
-
-			System.out.println("SR0");
+			int id = 0;
+			URL filename = null;
+			InsertBarangProxy insbp = new InsertBarangProxy();
+			insbp.insertBarang(String.valueOf(barang.getId_category()),
+					barang.getName(), barang.getPicture(),
+					String.valueOf(barang.getPrice()), barang.getDescription(),
+					String.valueOf(request.getParameter("amount")));
 			try {
-				json = WebServicesKit
-						.readUrl("http://localhost:8080/web-services/BS/barang/insert?idKat="
-								+ barang.getId_category()
-								+ "&nama="
+				String temp="http://localhost:8080/web-services/BS/barang/select?nama="
 								+ barang.getName()
-								+ "&gambar="
-								+ barang.getPicture()
-								+ "&harga="
-								+ barang.getPrice()
+								+ "&idKat="
+								+ barang.getId_category()
 								+ "&keterangan="
 								+ barang.getDescription()
+								+ "&harga="
+								+ barang.getPrice()
 								+ "&jumlah="
-								+ barang.getTotal_item());
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+								+ barang.getTotal_item()
+								+ "&gambar="
+								+ barang.getPicture();
+				temp=temp.replace(" ","%20");
+				System.out.println(temp);
+				json = WebServicesKit
+						.readUrl(temp);
+				JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
+				ArrayList<Barang> barangList = new ArrayList<Barang>();
+				for (JsonElement barangss : barangArray) {
+					Barang barangObj = gson.fromJson(barangss, Barang.class);
+					barangList.add(barangObj);
+				}
+				if (barangList.get(0) != null){
+					id = (int) barangList.get(0).getId();
+					filename = getServletContext().getResource(
+							"/img/barang/1.jpg");
+				}
+
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			int id = jsonParser.parse(json).getAsInt();
-			URL filename = null;
-			filename = getServletContext().getResource("/img/barang/1.jpg");
+
+			/** port */
+
+			/** old */
+			// Gson gson = new Gson();
+			// String json = null;
+			// JsonParser jsonParser = new JsonParser();
+			// DbConnection dbConnection = new DbConnection();
+			// Connection connection = dbConnection.mySqlConnection();
+			// if (request.getParameter("action").equals("add")) {
+			// Barang barang = new Barang(0, Integer.parseInt(request
+			// .getParameter("category")), request.getParameter("name"),
+			// null, Integer.parseInt(request.getParameter("price")),
+			// request.getParameter("description"),
+			// Integer.parseInt(request.getParameter("amount")));
+			//
+			// System.out.println("SR0");
+			// try {
+			// json = WebServicesKit
+			// .readUrl("http://localhost:8080/web-services/BS/barang/insert?idKat="
+			// + barang.getId_category()
+			// + "&nama="
+			// + barang.getName()
+			// + "&gambar="
+			// + barang.getPicture()
+			// + "&harga="
+			// + barang.getPrice()
+			// + "&keterangan="
+			// + barang.getDescription()
+			// + "&jumlah="
+			// + barang.getTotal_item());
+			// filename = getServletContext().getResource("/img/barang/1.jpg");
+			// } catch (Exception e1) {
+			// // TODO Auto-generated catch block
+			// e1.printStackTrace();
+			// }
+			// int id = jsonParser.parse(json).getAsInt();
+			/** old */
+
 			/* upload */
 			System.out.println(filename.toString());
 			Part filePart = request.getPart("photo");

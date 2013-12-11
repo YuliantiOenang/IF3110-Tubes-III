@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/com/frexesc/SOAP/InsertBarang.java=UTF-8
+encoding//src/com/frexesc/SOAP/InsertBarangService.java=UTF-8
+encoding//src/com/frexesc/SOAP/InsertBarangServiceLocator.java=UTF-8
+encoding//src/com/frexesc/SOAP/InsertBarangSoapBindingStub.java=UTF-8
 encoding//src/com/frexesc/SOAP/InsertBarangUser.java=UTF-8
 encoding//src/com/frexesc/SOAP/InsertBarangUserService.java=UTF-8
 encoding//src/com/frexesc/SOAP/InsertBarangUserServiceLocator.java=UTF-8

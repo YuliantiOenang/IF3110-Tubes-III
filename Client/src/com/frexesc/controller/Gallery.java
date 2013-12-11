@@ -93,11 +93,14 @@ public class Gallery extends HttpServlet {
 					}
 				}
 
+				System.out.println("asdf1"+request.getParameter("name"));
 				if (request.getParameter("name") != null) {
 					partial3 = " AND ( barang.nama_barang LIKE '%"
 							+ request.getParameter("name") + "%' ) ";
 				}
-
+				
+				
+				System.out.println("asdf2"+request.getParameter("category"));
 				if (request.getParameter("category") != null) {
 					if (Integer.parseInt(request.getParameter("category")) != 0)
 						partial4 = " AND barang.id_kategori="

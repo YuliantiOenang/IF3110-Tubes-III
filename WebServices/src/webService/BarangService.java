@@ -55,20 +55,7 @@ public class BarangService {
 					+ harga
 					+ "','" + keterangan + "','" + jumlah + "','-1')";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.executeUpdate();
-			try {
-				json = selectBarang(-1, Integer.parseInt(idKat), nama, 0);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			JsonArray barangArray = jsonParser.parse(json).getAsJsonArray();
-			ArrayList<Barang> barangList = new ArrayList<Barang>();
-			for (JsonElement barang : barangArray) {
-				Barang barangObj = gson.fromJson(barang, Barang.class);
-				barangList.add(barangObj);
-			}
-			insertResult = gson.toJson(barangList.get(0).getId());
+			insertResult = gson.toJson(stmt.executeUpdate());
 		} catch (Exception e) {
 		}
 		return insertResult;
@@ -159,6 +146,7 @@ public class BarangService {
 				if (!nama.equals("-1"))
 					query += (" && nama_barang=\"" + nama + "\"");
 			}
+			System.out.println(query);
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
