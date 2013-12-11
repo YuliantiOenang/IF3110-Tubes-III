@@ -10,7 +10,6 @@ function getDetail(id){
 		var jsonArray = JSON.parse(xmlhttp.responseText);
 		document.getElementById("nama").innerHTML = jsonArray.result[0][1];
 		document.getElementById("detail").innerHTML = jsonArray.result[0][6];
-		document.getElementById("id_barang").innerHTML = jsonArray.result[0][1];
 	});
 }
 function getImgSrc(id){
@@ -22,6 +21,9 @@ function getImgSrc(id){
 }
 </script>
 <body>
+	<script>
+		getDetail(<%= request.getParameter("id") %>);
+	</script>
 	<h1 id="nama"></h1>
 	<script>
 		getImgSrc(<%= request.getParameter("id") %>);
@@ -29,14 +31,11 @@ function getImgSrc(id){
 	<br><h2>Deskripsi :</h2>
 	<p id="detail"></p><br>
 	Request tambahan 	: <br>
-	<form action='addCart' method='post' id='usrform'>
-	<textarea rows='4' cols='50'  name='request_tambahan' form='usrform'></textarea><br>
-	<input type='hidden' name='id_barang'>
+	<form name='beli' action='addCart' method='post'>
+	<input type="text"  height="100" width="500" name='request_tambahan'><br>
+	<input type='hidden' name='id_barang' value='<%= request.getParameter("id") %>'>
 	Quantity : <input type='text' name='qt' style='width: 20px; text-align: right' /><br>
 	<input type='submit' value='Add to cart'></form>
-	<script>
-		getDetail(<%= request.getParameter("id") %>);
-	</script>
 </body>
 
 <%@ include file= "./footer.jsp" %>
