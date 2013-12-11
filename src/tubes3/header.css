@@ -1,0 +1,146 @@
+body {
+width: 70%;
+	background-color: pink;
+}
+#popup {
+	padding-top:250px;
+	padding-left: 1050px;
+	position: relative;
+	/*background-color : pink;*/
+
+}
+
+#icon{
+	margin-left: 200px;
+	float:left; 
+	padding-left:5px; 
+	padding-right:5px;
+	padding-top:5px; 
+	padding-bottom:1px; 
+
+}
+
+#name-title{
+	float: left;
+	padding-left:10px;
+	padding-top: 60px;
+	font-size: 50px;
+	color:#262626;
+}
+
+#title{
+	width:1250px;
+	height:180px;
+	float:left;
+	padding-top:10px;
+	padding-left:40px;
+	padding-right:40px;
+	margin-left:2px; 
+	background-color:pink;
+}
+
+#head-mid{
+	position: relative; 
+	left: 180px; 
+	top: 8px; 
+	/*width: 1000px; */
+	height: 150px; 
+	background-color: blue;
+}
+
+#head-right{
+	width:auto; 
+	position: relative;
+	height:0px; 
+	float:top;
+	padding-right:5px; 
+	padding-top:15px;
+	padding-left:1000px;
+	
+}
+
+#head-left{ 
+	float:left;
+	/*padding-right:5px; 
+	padding-top:0px;
+	padding-left:10px;*/
+}
+
+/*navigation bar*/
+
+#navcontainer ul
+{
+	padding-left: 220px;
+	padding-top: 3px;
+	padding-right: 10px;
+	margin-left: 0;
+	color: White;
+	float: left;
+	width: 100%;
+	font-family: arial, helvetica, sans-serif;
+}
+
+#navcontainer ul li { display: inline; }
+
+#navcontainer ul li a
+{
+	padding: 1em 3.6em;
+	background-color: #262626;
+	color: White;
+	text-decoration: none;
+	float: top;
+	border-right: 0px solid #fff;
+}
+
+
+#navcontainer ul li a:hover
+{
+	background-color: #99ff99;
+	color: #fff;
+}
+
+
+
+#product{
+	margin: 0px;
+	padding-left:250px ;
+	height: auto;
+	width: 30%;
+	float: left;
+	/*text-align: center;	*/
+	
+}
+
+#container-left{
+	margin: 0px;
+	padding-left:250px ;
+	height: auto;
+	width: 30%;
+	float: left;
+	
+}
+
+#container
+{
+	margin-left : 0px;
+	width : 700px;
+	height : auto;
+	padding-left:10px;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	background-color:#fffcb7;
+	border-style : solid;
+	border-width : 10px;
+	border-color : #262626;
+	border-radius: 15px;
+}
+
+#containertop3{
+	float: left;
+	margin-left: 20px;
+}
+
+input[type="texttop3"] {
+height: 18px;
+width: 50px;
+}
