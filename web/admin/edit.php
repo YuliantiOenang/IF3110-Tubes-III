@@ -348,12 +348,10 @@ function addImg(imgsrc){
 				</div>
 				
 				<div >
-					<img src = "images/cart.png" class = "cart" onclick="window.location='shoppingbag.php'"></img>
+					
 				</div>
 				
-				<div>
-					<p class = "welcomeadmin" > WELCOME , ADMIN </p>
-				</div>
+				
 				
 			</div>
 			<div class = "signupplace">
@@ -363,7 +361,7 @@ function addImg(imgsrc){
 				if(!isset($_COOKIE['user1']))
 				{
 				?>
-				<img src = "images/signup.png" class = "signup" id="signup" onclick="window.location='registrasi.php'"></img>
+				
 				<?php
 				}
 				?>
@@ -374,21 +372,7 @@ function addImg(imgsrc){
 			</div>
 		</div>
 		<div class = "menu">
-				<div>
-					<a href="kategori.php?key=Jaket"><img src = "images/jacket.png" class = "jacket"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Sweater"><img src = "images/sweaters.png" class = "tshirt"></img>
-				</div>
-				<div >
-					<a href="kategori.php?key=TShirt"><img src = "images/tshirt.png" class = "wristband"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Misc"><img src = "images/misc.png"  class = "emblem"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Pokemon"><img src = "images/pokemon.png"  class = "pokemon"></img></a>
-				</div>
+				
 		</div>
 		<div class = "main">
 		</div>
@@ -397,52 +381,27 @@ function addImg(imgsrc){
 
 <div class = "bodymain">
 	<div class = "sidebar">
-		
-			<p class = "searchtitle"> Search it! </p>
-		<form action="hasilsearch.php" method="get">
+	
 		<div class = "kategori">
-			<select name="kategori">
-				<option value="all">All</option>
-				<option value="Jaket">Jacket</option>
-				<option value="TShirt">T-shirt</option>
-				<option value="Sweater">Sweater</option>
-				<option value="Misc">Misc.</option>
-				<option value="Pokemon">Pokemon</option>
-			</select>
-			<input type="text" id="user" name="key" required placeholder = "e.g. Mylo Xyloto" onkeyup="suggestSearch(this.value)" /></br>
-	</div>
-	
-	<div class = "kategori">
-	<label> Price Range: </label>
-	<select name="range">
-				<option value=1>< Rp50.000 </option>
-				<option value=2>Rp50.000 - Rp100.000</option>
-				<option value=3>Rp100.001 - Rp150.000</option>
-				<option value=4>> Rp150.000</option>
-				
-			</select>
-	</div>
-	<div class = "kategori">
-		<input type="submit" value="Search!"></input>
-	</div>
-	
-	<label>Suggestion : <br><span id="search_suggestion" onclick="copySuggest()"></span></label>
-	
-	</form>
 			
-		<div class = "space"> 
-				
-		</div>
-				
-		<p class = "textadmin"> FITUR KHUSUS ADMIN </p>		
-		
-		<div class = "placetambahbarang" >
-			<form action="upload.php">
-				<input type="submit" class = "buttontambahbarang" value="Tambah Barang">
-			</form>
 		</div>
 	
-	</div>
+		<div class = "kategori">
+			<center>
+				<p> FITUR KHUSUS ADMIN </p>
+			</center>
+		</div>
+		
+		<div class = "kategori">
+			<a href = "upload.php"> 
+				<center>
+					<input type="button" value="Tambah Barang"></input>
+				<center>
+			</a>
+		</div>
+	
+	</div>	
+		
 	<div class = "boddy">
 		<div class = "topfivetitle">
 		<h1 id = "loginHeader"> EDIT BARANG</h1></br></br>
@@ -453,7 +412,7 @@ function addImg(imgsrc){
 			<form method="post" ACTION="update.php" name="uploadForm"> 
 				
 				<label>Nama Barang </label> 
-				<input type="text"  name ="nama_barang" id="nama_barang" onkeyup="checkSubmit()" value="<?php echo $_GET['nama']; ?>" required placeholder = "e.g. Pintu Kemana Saja" />
+				<input type="text"  name ="nama_barang" <?php if(isset($_GET['jumlah'])) echo "disabled"; ?> id="nama_barang" onkeyup="checkSubmit()" value="<?php echo $_GET['nama']; ?>" required placeholder = "e.g. Pintu Kemana Saja" />
 						
 				</br></br>
 				<label>Kategori Barang</label> 
@@ -464,18 +423,18 @@ function addImg(imgsrc){
 					<option value="Misc">Misc.</option>
 					<option value="Pokemon">Pokemon</option>
 				</select>
-				<input type="text" name="idBarang" hidden value="<?php echo $_GET['id'];?>" />		
+				<input type="text" <?php if(isset($_GET['jumlah'])) echo "disabled"; ?> name="idBarang" hidden value="<?php echo $_GET['id'];?>" />		
 				</br></br>
 				<label>Jumlah Barang</label> 
-				<input type="text" id="jumlah_barang" name="jumlah_barang" onkeyup="checkSubmit()" required placeholder = "1000" />
+				<input type="text" id="jumlah_barang" <?php if(isset($_GET['jumlah'])) echo "disabled"; ?> name="jumlah_barang" value="<?php if(isset($_GET['jumlah'])) echo $_GET['jumlah']; ?>" onkeyup="checkSubmit()" required placeholder = "1000" />
 
 				</br></br>
 				<label>Harga Barang</label> 
-				<input type="text" id="harga_barang" name="harga_barang" onkeyup="checkSubmit()" value="<?php echo $_GET['harga'];?>" required placeholder = "100000" />	
+				<input type="text" id="harga_barang" <?php if(isset($_GET['jumlah'])) echo "disabled"; ?> name="harga_barang" onkeyup="checkSubmit()" value="<?php echo $_GET['harga'];?>" required placeholder = "100000" />	
 						
 				</br></br>
 				<label>Deskripsi Barang</label> 
-				<textarea name="deskripsi_barang" rows = 3 cols = 35> Deskripsi Barang </textarea><br><br>
+				<textarea name="deskripsi_barang" <?php if(isset($_GET['jumlah'])) echo "disabled"; ?> rows = 3 cols = 35> Deskripsi Barang </textarea><br><br>
 								
 				<input type="submit" name="Submit" value="Submit"> 
 				<input type="reset" name="Reset" value="Reset"> 
@@ -492,12 +451,10 @@ function addImg(imgsrc){
 					</div>						
 					<br>	
 						
-					<form method="post" ACTION="edit_foto_barang.jsp" name="uploadForm" ENCTYPE='multipart/form-data'> 
-
-						<input type="file" name="uploadFile" id='file' onchange="startRead()"/> 
-						<input type="submit" name="Submit" value="Submit"> 
-						<input type="reset" name="Reset" value="Reset"> 
-
+					<form action="upload_foto.php" method="post" enctype="multipart/form-data">
+						<label for="file">Filename:</label>
+						<input type="file" name="file" id="file" onchange="startRead()"><br>
+						<input type="submit" name="submit" value="Submit">
 					</form>
 
 			</fieldset>

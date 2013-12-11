@@ -92,7 +92,7 @@ function login()
 			loginButton.src="images/logout.png";
 			loginButton.onclick=function()
 			{
-				window.location="logout.jsp";
+				window.location="logout.php";
 			}
 			document.body.removeChild(dimmer); 
 			remove("signup"); 
@@ -112,7 +112,7 @@ function login()
 }
 function logout()
 {
-window.location="logout.jsp";
+window.location="logout.php";
 }
 function cancel()
 {
@@ -132,65 +132,32 @@ function remove(id)
 <body>
     <?php include "headeradmin.php"; ?>
 	<div class = "bodymain">
-		
-		<div class = "boddy">
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE JACKETS</p></br>
-		</div>
-		<div class = "topthreecat">
-			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Jaket";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE SWEATER</p></br>
-		</div>
-		<div class = "topthreecat">
-			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Sweater";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE T-SHIRTS</p></br>
-		</div>
-		<div class = "topthreecat">
-						<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/TShirt";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE MISC.</p></br>
-		</div>
-		<div class = "topthreecat">
-						<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Misc";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE POKEMON</p></br>
-		</div>
-		<div class = "topthreecat">
-			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Pokemon";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-
-			<div class = "mekanisme">
-			<p class = "copyrightext"> Mekanisme Pembayaran </br></br>
-			1. Pembeli melakukan login atau sign up
-			2. Pembeli memesan produk-produk yang ingin dibeli </br>
-			3. Pembeli melakukan checkout dengan memilih cart </br>
-			4. Pembeli memilih mekanisme pembayaran, yaitu dengan kartu kredit yang dipilih </br>
+	
+		<div class = "sidebar">
+	
+			<div class = "kategori">
+				
 			</div>
+		
+			<div class = "kategori">
+				<center>
+					<p> FITUR KHUSUS ADMIN </p>
+				</center>
+			</div>
+			
+			<div class = "kategori">
+				<a href = "upload.php"> 
+					<center>
+						<input type="button" value="Tambah Barang"></input>
+					<center>
+				</a>
+				<a href = "kategori.php"> 
+					<center>
+						<input type="button" value="Ubah/Hapus Barang"></input>
+					<center>
+				</a>
+			</div>
+	
 		</div>
 		</div>
 		<div class = "footer">

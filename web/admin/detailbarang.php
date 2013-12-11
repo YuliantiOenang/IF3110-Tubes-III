@@ -30,7 +30,6 @@ function copySuggest(){
 	x[0].value = document.getElementById("search_suggestion").innerHTML;
 }
 
-
 function popClik()
 {
 	
@@ -77,29 +76,31 @@ function login()
 		{
 			try
 			{
-				var decodeJSON = JSON.parse(http.responseText);
-				
-				document.getElementById("welcome").innerHTML="WELCOME,"+decodeJSON.nama;
-				var lightbox = document.getElementById("lightbox");
-				var dimmer = document.getElementById("dim");
-				var signup = document.getElementById("signup");
-				
-				var loginButton = document.getElementById("loginButton");
-				lightbox.style.visibility = 'hidden';
-				signup.style.visibility = 'hidden';
-				loginButton.src="images/logout.png";
-				loginButton.onclick=function()
-				{
-					window.location="logout.php";
-				}
-				document.body.removeChild(dimmer); 
-				remove("signup"); 
+			var decodeJSON = JSON.parse(http.responseText);
+			
+			document.getElementById("welcome").innerHTML="WELCOME,"+decodeJSON.nama;
+			var lightbox = document.getElementById("lightbox");
+			var dimmer = document.getElementById("dim");
+			var signup = document.getElementById("signup");
+			
+			var loginButton = document.getElementById("loginButton");
+			lightbox.style.visibility = 'hidden';
+			signup.style.visibility = 'hidden';
+			loginButton.src="images/logout.png";
+			loginButton.onclick=function()
+			{
+				window.location="logout.php";
+			}
+			document.body.removeChild(dimmer); 
+			remove("signup"); 
 			
 			}
 			catch(e)
 			{
-				document.getElementById("Error").innerHTML="Welcome,"+http.responseText;
-				var user=document.getElementById("user");
+			document.getElementById("Error").innerHTML="Welcome,"+http.responseText;
+			var user=document.getElementById("user");
+			
+			
 			}
 		}
 	  }
@@ -122,6 +123,49 @@ function cancel()
 function remove(id)
 {
     return (elem=document.getElementById(id)).parentNode.removeChild(elem);
+}
+function buy()
+{
+	
+	//mengambil semua variable dalam form login
+	var jumlah = document.getElementById('jumlahBeli').value;	
+	var permintaan = document.getElementById('permintaan').value;
+	var id=document.getElementById('id').value;
+	
+	if(permintaan=="")
+	{
+		permintaan="standart";
+	}
+	if(jumlah=="")
+	{
+		alert("Maaf anda harus mengisi jumlah barang terlebih dahulu");
+	}
+	
+	else
+	{
+		//request ke file php
+		http.open('get', 'addCart2.php?id='+id+'&jumlah='+jumlah+"&permintaan="+permintaan,true);
+		//cek hasil request 4 jika berhasil
+		http.onreadystatechange = function()
+		  {
+			
+			if (http.readyState==4 && http.status==200)
+			{
+				try
+				{
+				
+				var decodeJSON = JSON.parse(http.responseText);
+				
+				alert("Maaf barang yang ada di stok tidak cukup.\n jumlah stok "+http.responseText);
+				}
+				catch(e)
+				{
+				alert("Berhasil daftar ke keranjang."+http.responseText);
+				}
+			}
+		  }
+		http.send(); 
+		}
 }
 </script>
 <body>
@@ -147,7 +191,7 @@ function remove(id)
 
 		</div>
 <div class = "main">
-	<div class = "header">
+		<div class = "header">
 		
 		<div class = "logohead">
 			<div >
@@ -172,7 +216,14 @@ function remove(id)
 				?>
 				</div>
 				<div >
+				<?php
+				if(isset($_COOKIE['user1']))
+				{
+				?>
 					<img src = "images/cart.png" class = "cart" onclick="window.location='shoppingbag.php'"></img>
+				<?php
+				}
+				?>
 				</div>
 			</div>
 			<div class = "signupplace">
@@ -192,7 +243,7 @@ function remove(id)
 			<a href="see_profile.php"><p class="welctext" id="welcome"><?php if(isset($_COOKIE['user1'])) echo "WELCOME,".$_COOKIE['user1'].""; ?></p></a>
 			</div>
 		</div>
-		<div class = "menu">
+				<div class = "menu">
 				<div>
 					<a href="kategori.php?key=Jaket"><img src = "images/jacket.png" class = "jacket"></img></a>
 				</div>
@@ -215,8 +266,9 @@ function remove(id)
 </div>
 
 <?php
+		
+		
 ?>
-
 <div class = "bodymain">
 		<div class = "sidebar">
 		
@@ -252,63 +304,49 @@ function remove(id)
 	</div>
 	<div class = "boddy">
 		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE JACKETS</p></br>
+		<p class = "title"> PRODUCT DETAIL</p></br></br>
 		</div>
-		<div class = "topthreecat">
+		
+			<div class = "toppreview">
+				<div class = "previmage">
+					
+					
 			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Jaket";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
+				$url= "http://limitless-earth-2748.herokuapp.com/REST/detailBarang/".urlencode($_GET['id'])."";
+				$response=json_decode(file_get_contents($url),true);
+				
+				$arr=$response;
+				
+				echo $arr['source'];
+				$nama=$arr['nama'];
+				$kategori=$arr['kategori'];
+				$deskripsi=$arr['sesuatu'];
+				
 			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE SWEATER</p></br>
-		</div>
-		<div class = "topthreecat">
-			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Sweater";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE T-SHIRTS</p></br>
-		</div>
-		<div class = "topthreecat">
-						<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/TShirt";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE MISC.</p></br>
-		</div>
-		<div class = "topthreecat">
-						<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Misc";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE POKEMON</p></br>
-		</div>
-		<div class = "topthreecat">
-			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Pokemon";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "mekanisme">
-		<p class = "copyrightext"> Mekanisme Pembayaran </br></br>
-		1. Pembeli melakukan login atau sign up
-		2. Pembeli memesan produk-produk yang ingin dibeli </br>
-		3. Pembeli melakukan checkout dengan memilih cart </br>
-		4. Pembeli memilih mekanisme pembayaran, yaitu dengan kartu kredit yang dipilih </br>
-		</div>
-	</div>
-	</div>
+				</div>
+			 
+			</div>
+			 <div class = "detail">
+					<p> Nama Produk : <?php echo $nama;?></p>
+					<p> Harga Produk : <?php echo "Rp.".$kategori;?></p>
+					<p> Deskripsi : <?php echo $deskripsi;?></p>
+					<input hidden id='id' name='id' value="<?php echo $_GET['id']; ?>"></input>
+					<?php if(isset($_COOKIE['user1']))
+					{
+					?>
+					<label> Jumlah Beli : </label> <input type="text" required id="jumlahBeli" name="jumlah"/></br></br>
+					<label> Permintaan Khusus : </label> <input type="text" id="permintaan" name="permintaan"/></br></br>
+					<input type="button" onclick="buy()" value="Add to Cart"></input>
+					<?php
+					}
+					?>
+					</div>
+			</div>
+			</div>
+			
+			
+			
+	
 	<div class = "footer">
 		<div class = "info">
 

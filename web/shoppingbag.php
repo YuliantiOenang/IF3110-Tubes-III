@@ -170,6 +170,15 @@ function remove(id)
 {
     return (elem=document.getElementById(id)).parentNode.removeChild(elem);
 }
+function deletee(idBarang)
+{
+var ask=confirm('Apakah Anda yakin menghapus barang ini ? ');
+												if(ask)
+												{
+window.location="delete.php?idBarang="+idBarang+"";
+}
+}
+
 
 </script>
 <body>
@@ -300,17 +309,24 @@ function remove(id)
 		<div class = "topfivetitle">
 		<p class = "title"> MY SHOPPING BAG</p></br></br>
 		</div>
+		<form action="deleteAll.php" >
 		<?php
 			
 				$count=0;
 
 				$url= "http://limitless-earth-2748.herokuapp.com/REST/getShoppingBag/".$_COOKIE['IdCustomer'];
-		$response=json_decode(file_get_contents($url));
-		$mysql=$response;
+		$response=json_decode(file_get_contents($url),true);
+		$mysql=$response['text'];
+		$count=$response['jumlah'];
 		echo $mysql;
 			
 		?>
+		<input type="text" hidden value="<?php echo $count ?>" name="jumlahBarang"/>
+			
 			<div class = "checkout">
+		<br>
+		<input type="submit" value="deleteChecked" />
+		</form>
 			<input type="button" value="Detail Pembayaran" onclick="window.location='pembayaran.php'"></input>
 			</div>
 	</div>

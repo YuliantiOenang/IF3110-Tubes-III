@@ -23,13 +23,14 @@
 		{
 			
 		}
-		echo "\n1 record added";
-		
-		$message = "Barang Berhasil ditambahkan !";
-		echo "<script type='text/javascript'>alert('$message');</script>";
+		else
+		{
+			$message = "Barang Berhasil ditambahkan,silahkan upload gambar barang !";
+			echo "<script type='text/javascript'>alert('$message');
+					window.location='upload.php';
+			</script>";
+		}
 	}
-
-	echo "<center> <a href=\"upload.php\">Klik disini</a> untuk kembali ke halaman upload barang </center>";	
 
 	//header('Location: upload.php');
 ?>

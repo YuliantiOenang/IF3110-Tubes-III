@@ -40,12 +40,7 @@
 			</div>
 					
 			<div class = "placetambahbarang" >
-				<form action="pileditbarang.php">
-					<input type="submit" class = "buttontambahbarang" value="Edit Barang">
-				</form>
-				<form action="upload.php">
-					<input type="submit" class = "buttontambahbarang" value="Tambah Barang">
-				</form>
+				
 			</div>	
 		</div>
 		

@@ -184,13 +184,11 @@ function addImg(imgsrc){
 						
 					</div>						
 					<br>	
-						
-					<form method="post" ACTION="upload_foto_barang.jsp" name="uploadForm" ENCTYPE='multipart/form-data'> 
-
+					
+					<form action="upload_foto.php" method="post" enctype="multipart/form-data">
 						<input type="file" name="uploadFile" id='file' onchange="startRead()"/> 
-						<input type="submit" name="Submit" value="Submit"> 
-						<input type="reset" name="Reset" value="Reset"> 
-
+						<input type="file" name="file" id="file"><br>
+						<input type="submit" name="submit" value="Submit">
 					</form>
 
 			</fieldset>

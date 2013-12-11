@@ -19,8 +19,11 @@
 		}
 		else
 		{
-		$message = "Barang Berhasil diupdate !";
-		echo "<script type='text/javascript'>alert('$message');window.location='index.php'</script>";
+		
+		$message = "Barang Berhasil diupdate,silahkan update gambar barang !";
+		echo "<script type='text/javascript'>alert('$message');
+				window.location='edit.php?id=".$_POST['idBarang']."&nama=".$_POST['nama_barang']."&harga=".$_POST['harga_barang']."&jumlah=".$_POST['jumlah_barang']."';
+		</script>";
 		
 		}
 	}

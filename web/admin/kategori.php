@@ -186,7 +186,7 @@ function confirmUser()
 				<div>
 				<?php
 				
-				if(!isset($_COOKIE['user1']))
+				if(!isset($_COOKIE['admin']))
 				{
 				?>
 					<img src = "images/login.png" class = "login" onclick="popClik()" id="loginButton"></img>
@@ -201,43 +201,27 @@ function confirmUser()
 				?>
 				</div>
 				<div >
-					<img src = "images/cart.png" class = "cart" onclick="window.location='shoppingbag.php'"></img>
+					
 				</div>
 			</div>
 			<div class = "signupplace">
 				
 				<div>
 				<?php
-				if(!isset($_COOKIE['user1']))
+				if(!isset($_COOKIE['admin']))
 				{
 				?>
-				<img src = "images/signup.png" class = "signup" id="signup" onclick="window.location='registrasi.php'"></img>
+				
 				<?php
 				}
 				?>
 					
 				</div> 
 				
-			<a href="see_profile.php"><p class="welctext" id="welcome"><?php if(isset($_COOKIE['user1'])) echo "WELCOME,".$_COOKIE['user1'].""; ?></p></a>
+			<a href="see_profile.php"><p class="welctext" id="welcome"><?php if(isset($_COOKIE['admin'])) echo "WELCOME,".$_COOKIE['admin'].""; ?></p></a>
 			</div>
 		</div>
-		<div class = "menu">
-				<div>
-					<a href="kategori.php?key=Jaket"><img src = "images/jacket.png" class = "jacket"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Sweater"><img src = "images/sweaters.png" class = "tshirt"></img>
-				</div>
-				<div >
-					<a href="kategori.php?key=TShirt"><img src = "images/tshirt.png" class = "wristband"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Misc"><img src = "images/misc.png"  class = "emblem"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Pokemon"><img src = "images/pokemon.png"  class = "pokemon"></img></a>
-				</div>
-		</div>
+		
 		<div class = "main">
 		</div>
 	
@@ -247,35 +231,26 @@ function confirmUser()
 <div class = "bodymain">
 	<div class = "sidebar">
 		
-			<p class = "searchtitle"> Search it! </p>
-		<form action="hasilsearch.php" method="get">
+
+		
 		<div class = "kategori">
-			<select name="kategori">
-				<option value="all">All</option>
-				<option value="Jaket">Jacket</option>
-				<option value="TShirt">T-shirt</option>
-				<option value="Sweater">Sweater</option>
-				<option value="Misc">Misc.</option>
-				<option value="Pokemon">Pokemon</option>
-			</select>
-			<input type="text" id="user" name="key" required placeholder = "e.g. Mylo Xyloto" onkeyup="suggestSearch(this.value)" /></br>
-	</div>
+			
+		</div>
 	
-	<div class = "kategori">
-	<label> Price Range: </label>
-	<select name="range">
-				<option value=1>< Rp50.000 </option>
-				<option value=2>Rp50.000 - Rp100.000</option>
-				<option value=3>Rp100.001 - Rp150.000</option>
-				<option value=4>> Rp150.000</option>
-				
-			</select>
-	</div>
-	<div class = "kategori">
-	<input type="submit" value="Search!"></input>
-	</div>
-	<label>Suggestion : <br><span id="search_suggestion" onclick="copySuggest()"></span></label>
-	</form>
+		<div class = "kategori">
+			<center>
+				<p> FITUR KHUSUS ADMIN </p>
+			</center>
+		</div>
+		
+		<div class = "kategori">
+			<a href = "upload.php"> 
+				<center>
+					<input type="button" value="Tambah Barang"></input>
+				<center>
+			</a>
+		</div>
+	
 	</div>
 	<div class = "boddy">
 		<div class = "topfivetitle">
@@ -294,7 +269,7 @@ function confirmUser()
 		
 		$counter=0;
 		
-		if(isset($_GET['key']))
+		if(!isset($_GET['key']))
 		{
 			if(isset($_GET['sort']))
 			{	
@@ -355,7 +330,7 @@ function confirmUser()
 					<a href="detailbarang.php?id='.$_SESSION['id'.$i].'"><p class = "copyrightext"> '.$_SESSION["nama".$i].'</a> </br>
 						  Rp'.$_SESSION["harga".$i].' </label> </br> </p>
 					<input type="text" id="idBarang'.$i.'" value="'.$_SESSION['id'.$i].'" hidden/>';
-					if(isset($_COOKIE['user1']))
+					if(isset($_COOKIE['admin']))
 					{
 					?>
 					<center><input type="button" onclick="window.location='edit.php?id=<?php echo $_SESSION['id'.$i]?>&nama=<?php echo $_SESSION['nama'.$i]?>&harga=<?php echo $_SESSION['harga'.$i]?>'" value="Update"></input>
@@ -370,7 +345,6 @@ function confirmUser()
 					else
 					{
 					?>
-					<input type="button" onclick="alert('anda harus login terlebih dahulu'); window.location='index.php'" value="Beli"></input>
 					<?php
 					}
 					echo '</div>';
@@ -391,7 +365,7 @@ function confirmUser()
 					<a href="detailbarang.php?id='.$_SESSION['id'.$counter].'"><p class = "copyrightext"> '.$_SESSION["nama".$counter].'</a> </br>
 						  Rp'.$_SESSION["harga".$counter].' </label> </br> </p>
 					<input type="text" id="idBarang'.$counter.'" value="'.$_SESSION['id'.$counter].'" hidden/>';
-					if(isset($_COOKIE['user1']))
+					if(isset($_COOKIE['admin']))
 					{
 					?>
 					<center><input type="button" onclick="window.location='edit.php?id=<?php echo $_SESSION['id'.$counter]?>&nama=<?php echo $_SESSION['nama'.$counter]?>&harga=<?php echo $_SESSION['harga'.$counter]?>'" value="Update"></input>
@@ -440,7 +414,7 @@ function confirmUser()
 			 echo "Page : ";
 		 for($i=0;$i<$jumlahPage-1;$i++)
 			{
-			echo '<a href="kategori.php?page='.$i.'&sort='.$sort.'&key='.$_GET['key'].'">'.($i+1).'  </a>';
+			echo '<a href="kategori.php?page='.$i.'">'.($i+1).'  </a>';
 			}
 			?>
 			</div>

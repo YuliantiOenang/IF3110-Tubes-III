@@ -67,7 +67,12 @@ function login()
 	var username = encodeURI(document.getElementById('user').value);	
 	var password = encodeURI(document.getElementById('pass').value);
 	
-	//request ke file php
+	var nameadmin = document.getElementById("user").value;
+    var passadmin = document.getElementById("pass").value;
+    
+	if (nameadmin != passadmin) 
+	{
+		//request ke file php
 	http.open('get', 'proses_login.php?user='+username+'&pass='+password,true);
 	//cek hasil request 4 jika berhasil
 	http.onreadystatechange = function()
@@ -104,6 +109,15 @@ function login()
 		}
 	  }
 	http.send(); 
+    }
+    else 
+	{
+		var ask=confirm("Anda akan masuk sebagai ADMIN ProjektMarch !");
+		if(ask)
+		{
+			window.location='proses_login.php';
+		}
+    }	
 	
 }
 function logout()
@@ -172,7 +186,7 @@ function remove(id)
 				?>
 				</div>
 				<div >
-					<img src = "images/cart.png" class = "cart" onclick="window.location='shoppingbag.php'"></img>
+					
 				</div>
 			</div>
 			<div class = "signupplace">
@@ -182,7 +196,7 @@ function remove(id)
 				if(!isset($_COOKIE['user1']))
 				{
 				?>
-				<img src = "images/signup.png" class = "signup" id="signup" onclick="window.location='registrasi.php'"></img>
+				
 				<?php
 				}
 				?>
@@ -192,23 +206,7 @@ function remove(id)
 			<a href="see_profile.php"><p class="welctext" id="welcome"><?php if(isset($_COOKIE['user1'])) echo "WELCOME,".$_COOKIE['user1'].""; ?></p></a>
 			</div>
 		</div>
-		<div class = "menu">
-				<div>
-					<a href="kategori.php?key=Jaket"><img src = "images/jacket.png" class = "jacket"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Sweater"><img src = "images/sweaters.png" class = "tshirt"></img>
-				</div>
-				<div >
-					<a href="kategori.php?key=TShirt"><img src = "images/tshirt.png" class = "wristband"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Misc"><img src = "images/misc.png"  class = "emblem"></img></a>
-				</div>
-				<div>
-					<a href="kategori.php?key=Pokemon"><img src = "images/pokemon.png"  class = "pokemon"></img></a>
-				</div>
-		</div>
+		
 		<div class = "main">
 		</div>
 	
@@ -218,96 +216,7 @@ function remove(id)
 ?>
 
 <div class = "bodymain">
-		<div class = "sidebar">
-		
-			<p class = "searchtitle"> Search it! </p>
-		<form action="hasilsearch.php" method="get">
-		<div class = "kategori">
-			<select name="kategori">
-				<option value="all">All</option>
-				<option value="Jaket">Jacket</option>
-				<option value="TShirt">T-shirt</option>
-				<option value="Sweater">Sweater</option>
-				<option value="Misc">Misc.</option>
-				<option value="Pokemon">Pokemon</option>
-			</select>
-			<input type="text" id="user" name="key" required placeholder = "e.g. Mylo Xyloto" onkeyup="suggestSearch(this.value)" /></br>
-	</div>
-	
-	<div class = "kategori">
-	<label> Price Range: </label>
-	<select name="range">
-				<option value=1>< Rp50.000 </option>
-				<option value=2>Rp50.000 - Rp100.000</option>
-				<option value=3>Rp100.001 - Rp150.000</option>
-				<option value=4>> Rp150.000</option>
-				
-			</select>
-	</div>
-	<div class = "kategori">
-	<input type="submit" value="Search!"></input>
-	</div>
-	<label>Suggestion : <br><span id="search_suggestion" onclick="copySuggest()"></span></label>
-	</form>
-	</div>
-	<div class = "boddy">
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE JACKETS</p></br>
-		</div>
-		<div class = "topthreecat">
-			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Jaket";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE SWEATER</p></br>
-		</div>
-		<div class = "topthreecat">
-			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Sweater";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE T-SHIRTS</p></br>
-		</div>
-		<div class = "topthreecat">
-						<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/TShirt";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE MISC.</p></br>
-		</div>
-		<div class = "topthreecat">
-						<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Misc";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "topfivetitle">
-		<p class = "title"> TOP THREE POKEMON</p></br>
-		</div>
-		<div class = "topthreecat">
-			<?php
-				$url= "http://limitless-earth-2748.herokuapp.com/REST/topThree/Pokemon";
-				$response=json_decode(file_get_contents($url));
-				echo $response;
-			?>
-		</div>
-		<div class = "mekanisme">
-		<p class = "copyrightext"> Mekanisme Pembayaran </br></br>
-		1. Pembeli melakukan login atau sign up
-		2. Pembeli memesan produk-produk yang ingin dibeli </br>
-		3. Pembeli melakukan checkout dengan memilih cart </br>
-		4. Pembeli memilih mekanisme pembayaran, yaitu dengan kartu kredit yang dipilih </br>
-		</div>
-	</div>
+
 	</div>
 	<div class = "footer">
 		<div class = "info">

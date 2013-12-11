@@ -8,7 +8,5 @@
 		
 	$message = "Barang Berhasil didelete !";
 	echo "<script type='text/javascript'>alert('$message');</script>";
-
-	echo "<center> <a href=\"edit.php\">Klik disini</a> untuk kembali ke halaman sebelumnya </center>";	
-	
+header("location: kategori.php");
 ?>
