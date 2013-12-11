@@ -73,7 +73,7 @@ public class creditcard extends HttpServlet{
 				}
 			  	
 				if (status)
-					out.print("{ \"Status_operasi\" : \"success\" , \"output_search\" : \""+output+"\"}");
+					out.print("{ \"Status_operasi\" : \"success\" , \"output_search\" : "+output+"}");
 				else
 					out.print("{ \"Status_operasi\" : \"failed\" }");
 							  
@@ -100,7 +100,7 @@ public class creditcard extends HttpServlet{
 				}
 			  	
 				if (status)
-					out.print("{ \"Status_operasi\" : \"success\" , \"output_search\" : \""+output+"\"}");
+					out.print("{ \"Status_operasi\" : \"success\" , \"output_search\" : "+output+"}");
 				else
 					out.print("{ \"Status_operasi\" : \"failed\" }");
 					

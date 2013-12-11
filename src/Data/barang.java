@@ -123,7 +123,7 @@ public class barang extends HttpServlet{
 				
 				
 				if(n_item.equals(0)){
-					out.print("{\"status\":\"empty\",\"hasil\":\"[]\"}");
+					out.print("{\"status\":\"empty\",\"hasil\":[]}");
 				}else{
 					while (rs2.next()) {
 					  	barang_data b=new barang_data();
@@ -146,7 +146,7 @@ public class barang extends HttpServlet{
 			  
 			  Gson gson = new Gson();
 			  String output_search=gson.toJson(Hasil_search);
-			  out.print("{\"status\":\"success\",\"link\":{\"name\":\""+name+"\",\"harga\":\""+harga+"\",\"next_laman\":\""+nextLaman+"\",\"prev_laman\":\""+prevLaman+"\",\"kategori\":\""+kategori+"\",\"n_item\":\""+n_item+"\"},\"output_search\":\""+output_search+"\"}");
+			  out.print("{\"status\":\"success\",\"link\":{\"name\":\""+name+"\",\"harga\":\""+harga+"\",\"next_laman\":\""+nextLaman+"\",\"prev_laman\":\""+prevLaman+"\",\"kategori\":\""+kategori+"\",\"n_item\":\""+n_item+"\"},\"output_search\":"+output_search+"}");
 			  
 				
 				
@@ -200,7 +200,7 @@ public class barang extends HttpServlet{
 				}
 			  	
 				if (status)
-					out.print("{ \"Status_operasi\" : \"success\" , \"output_search\" : \""+output+"\"}");
+					out.print("{ \"Status_operasi\" : \"success\" , \"output_search\" : "+output+"}");
 				else
 					out.print("{ \"Status_operasi\" : \"failed\" }");
 					
