@@ -28,7 +28,7 @@ window.addEventListener('load', function() {
 	username.onkeyup = function() {
 		if (username.value.length >= 5) {
 			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '/ruserba/scripts/php/check_user.php', true);
+			xhr.open('POST', 'http://ruserba3.herokuapp.com/check_user.php', true);
 			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 			xhr.send('username=' + username.value);
 			xhr.onreadystatechange = function() {
@@ -136,7 +136,7 @@ window.addEventListener('load', function() {
 			var splitdomain = splitusername[1].split('.');
 			if (splitdomain.length > 1 && splitdomain[0] != '' && splitdomain[splitdomain.length - 1] != '') {
 				var xhr = new XMLHttpRequest();
-				xhr.open('POST', '/ruserba/scripts/php/check_user.php', true);
+				xhr.open('POST', 'http://ruserba3.herokuapp.com/check_user.php', true);
 				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 				xhr.send('email=' + email.value);
 				xhr.onreadystatechange = function() {
@@ -178,7 +178,7 @@ window.addEventListener('load', function() {
 	
 	document.getElementById('registerform').onsubmit = function() {
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/ruserba/scripts/php/register.php', true);
+		xhr.open('POST', 'http://ruserba3.herokuapp.com/register.php', true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		var postParams = 'username=' + username.value;
 		postParams += '&password=' + password.value;

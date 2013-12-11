@@ -18,7 +18,7 @@ window.addEventListener('load', function() {
 	var record;
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/ruserba/scripts/php/retrieve_profile.php', true);
+	xhr.open('POST', 'http://ruserba3.herokuapp.com/retrieve_profile.php', true);
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	xhr.send('username=' + localStorage.getItem('username'));
 	xhr.onreadystatechange = function() {
@@ -157,7 +157,7 @@ window.addEventListener('load', function() {
 				if (record['email'] != password.value) {
 					if (password.value == confirm.value) {
 						var xhr = new XMLHttpRequest();
-						xhr.open('POST', '/ruserba/scripts/php/save_profile.php', true);
+						xhr.open('POST', 'http://ruserba3.herokuapp.com/save_profile.php', true);
 						xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 						var postParams = 'username=' + record['username'];
 						postParams += '&password=' + password.value;

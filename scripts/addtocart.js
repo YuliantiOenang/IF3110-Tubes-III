@@ -6,7 +6,7 @@ window.addEventListener('load', function() {
 			if (localStorage.getItem('auth_token') != null) {
 				var idbarang = this.name;
 				var xhr = new XMLHttpRequest();
-				xhr.open('POST', '/ruserba/scripts/php/addtocart.php', true);
+				xhr.open('POST', 'http://ruserba3.herokuapp.com/addtocart.php', true);
 				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 				var postParams = 'id=' + idbarang;
 				xhr.send(postParams);

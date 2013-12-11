@@ -16,7 +16,7 @@ window.addEventListener('load', function() {
 	}
 	
 	logoutbutton.onclick = function() {var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/ruserba/scripts/php/logout.php', true);
+		xhr.open('POST', 'http://ruserba3.herokuapp.com/logout.php', true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		var postParams = 'token=' + localStorage.getItem('auth_token');
 		xhr.send(postParams);
@@ -49,7 +49,7 @@ window.addEventListener('load', function() {
 		var loginuser = document.getElementsByName('loginuser')[0].value;
 		var loginpass = document.getElementsByName('loginpass')[0].value;
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/ruserba/scripts/php/login.php', true);
+		xhr.open('POST', 'http://ruserba3.herokuapp.com/login.php', true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		var postParams = 'username=' + loginuser;
 		postParams += '&password=' + loginpass;
@@ -73,7 +73,7 @@ window.addEventListener('load', function() {
 	var elementToRemove;
 	if (localStorage.getItem('auth_token') != null) {
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/ruserba/scripts/php/login.php', true);
+		xhr.open('POST', 'http://ruserba3.herokuapp.com/login.php', true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		var postParams = 'token=' + localStorage.getItem('auth_token');
 		xhr.send(postParams);

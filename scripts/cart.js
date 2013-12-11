@@ -25,7 +25,7 @@ window.addEventListener('load', function() {
 			document.getElementById('totalbarang').innerHTML = barang;
 			cartcontent[this.name] = this.value * 1;
 			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '/ruserba/scripts/php/updatecart.php', true);
+			xhr.open('POST', 'http://ruserba3.herokuapp.com/updatecart.php', true);
 			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 			var postParams = 'cartcontent=' + JSON.stringify(cartcontent);
 			xhr.send(postParams);

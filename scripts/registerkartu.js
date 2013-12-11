@@ -13,7 +13,7 @@ window.addEventListener('load', function() {
 
 	document.getElementById('formregisterkartu').onsubmit = function() {
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/ruserba/scripts/php/registerkartu.php', true);
+		xhr.open('POST', 'http://ruserba3.herokuapp.com/registerkartu.php', true);
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		var postParams = 'username=' + localStorage.getItem('username');
 		postParams += '&nokartu=' + nokartu.value;
