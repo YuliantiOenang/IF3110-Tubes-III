@@ -1,0 +1,32 @@
+Options +FollowSymLinks
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^search/([^\/\\]+)/?$ index.php?page=search&q=$1 [NC,L]
+RewriteRule ^search/([^\/\\]+)/([0-9]+)/?$ index.php?page=search&q=$1&p=$2 [NC,L]
+RewriteRule ^search/?$ index.php?page=error [NC,L]
+
+RewriteRule ^kategori/([0-9]+)/?$ index.php?page=kategori&id=$1 [NC,L]
+RewriteRule ^kategori/([0-9]+)/name/?$ index.php?page=kategori&id=$1&orderby=name [NC,L]
+RewriteRule ^kategori/([0-9]+)/name/asc/?$ index.php?page=kategori&id=$1&orderby=name&sort=asc [NC,L]
+RewriteRule ^kategori/([0-9]+)/name/desc/?$ index.php?page=kategori&id=$1&orderby=name&sort=desc [NC,L]
+RewriteRule ^kategori/([0-9]+)/price/?$ index.php?page=kategori&id=$1&orderby=price [NC,L]
+RewriteRule ^kategori/([0-9]+)/price/asc/?$ index.php?page=kategori&id=$1&orderby=price&sort=asc [NC,L]
+RewriteRule ^kategori/([0-9]+)/price/desc/?$ index.php?page=kategori&id=$1&orderby=price&sort=desc [NC,L]
+RewriteRule ^kategori/([0-9]+)/([0-9]+)/name/?$ index.php?page=kategori&id=$1&p=$2&orderby=name [NC,L]
+RewriteRule ^kategori/([0-9]+)/([0-9]+)/name/asc/?$ index.php?page=kategori&id=$1&p=$2&orderby=name&sort=asc [NC,L]
+RewriteRule ^kategori/([0-9]+)/([0-9]+)/name/desc/?$ index.php?page=kategori&id=$1&p=$2&orderby=name&sort=desc [NC,L]
+RewriteRule ^kategori/([0-9]+)/([0-9]+)/price/?$ index.php?page=kategori&id=$1&p=$2&orderby=price [NC,L]
+RewriteRule ^kategori/([0-9]+)/([0-9]+)/price/asc/?$ index.php?page=kategori&id=$1&p=$2&orderby=price&sort=asc [NC,L]
+RewriteRule ^kategori/([0-9]+)/([0-9]+)/price/desc/?$ index.php?page=kategori&id=$1&p=$2&orderby=price&sort=desc [NC,L]
+RewriteRule ^kategori/([0-9]+)/([0-9]+)/?$ index.php?page=kategori&id=$1&p=$2 [NC,L]
+RewriteRule ^kategori/?$ index.php?page=error [NC,L]
+
+RewriteRule ^barang/([0-9]+)/?$ index.php?page=barang&id=$1 [NC,L]
+RewriteRule ^barang/?$ index.php?page=error [NC,L]
+
+RewriteRule ^([a-z0-9]+)/?$ index.php?page=$1 [NC,L]
+
+ErrorDocument 404 /ruserba/index.php?page=error
