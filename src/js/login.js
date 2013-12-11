@@ -13,12 +13,11 @@ function login(){
 			localStorage.setItem("logininfo", JSON.stringify(hasil));
 			location.reload(true)
 		}else{
-			alert(response.status);
 			alert("Username atau password salah!");
 		}	
 	}
 
-	sendAjax(data, "ruserba-innani.ap01.aws.af.cm/login_lib.php", callback);
+	sendAjax(data, "lib/login_lib.php", callback);
 }
 
 function redirect_login(){
