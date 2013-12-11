@@ -2,6 +2,7 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<% HttpSession sesi = request.getSession(true); %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,7 +12,6 @@
 <link href="css/layout.css" rel="stylesheet" type="text/css" />
 <link href="css/modal.css" rel="stylesheet" type="text/css" />
 <script src="${pageContext.request.contextPath}/verify.js"></script>
-<script type="text/javascript" src="login.js"></script>
 <script src='${pageContext.request.contextPath}/ajax.js'></script>
 <script type="text/javascript">
 var kategori=new Array("Pangan", "Pakaian", "Elektronik", "Rangga", "Olahraga");
@@ -62,6 +62,41 @@ function getNavbar(){
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send();
 }
+function verLogin(){
+	var username = document.forms['login']['username'].value;
+	var password = document.forms['login']['password'].value;
+	var err_login = document.getElementById("err_login");
+	var query = "SELECT * FROM user where username ='"+username+"' AND password = '"+password+"'";
+	var data = "username="+username+"&password="+password;
+	var isLogin = false;
+	sendQuery(query, function() {
+		var jsonArray = JSON.parse(xmlhttp.responseText);
+		var result="";
+		if(jsonArray.result.length == 0){
+			err_login.innerHTML = "Username or Password is Wrong Bro";
+		}
+		else{
+			if(window.XMLHttpRequest){
+				xmlhttp = new XMLHttpRequest();
+			}
+			else{
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function(){
+				if(xmlhttp.readyState==4&&xmlhttp.status==200){
+					err_login.innerHTML = xmlhttp.responseText;
+					if(err_login.innerHTML==""){
+						//Handle SESSION & LOCAL STORAGE
+						window.location="index.jsp";
+					}
+				}
+			};
+			xmlhttp.open("POST","verifyLogin",true);
+			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			xmlhttp.send(data);
+		}
+	});
+}
 </script>
 <title>RuserBa</title>
 </head>
@@ -70,7 +105,6 @@ function getNavbar(){
 	<div id="AJS_wrapper">
 		<div id="AJS_header">
 		<% 
-			HttpSession sesi = request.getSession(true);
 			if((sesi== null)|| (sesi.getAttribute("username")==null)) {
 			%>
 				<div id='site_title'><h1><a href='index.jsp'>Ruko Serba Ada</a></h1></div>
