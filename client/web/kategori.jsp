@@ -7,7 +7,6 @@
 <%@page import="ruserba.services.RuserbaServices"%>
 <%@page import="org.json.JSONObject"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="ruserba.database.DatabaseHelper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,16 +21,12 @@
         <%
             //mencari banyak data yang ada dalam tabel
             String id_kategori = request.getParameter("id");
-            String query = "select nama_kategori from kategori where id_kategori=" + id_kategori;
-            DatabaseHelper.Connect();
-            ResultSet result = DatabaseHelper.executeQuery(query);
-            result.next();
+            JSONObject result = RuserbaServices.GetKategori(Integer.parseInt(id_kategori));
         %>
         <h3 class="judul_halaman">Kategori: 
             <%= result.getString("nama_kategori")%>
         </h3>
         <%
-            query = "select * from barang where id_kategori=" + id_kategori;
             JSONObject barangs = RuserbaServices.GetBarangByKategori(Integer.parseInt(id_kategori));
             int banyakBarang = barangs.getInt("length");
             int pages = 1;
@@ -45,7 +40,6 @@
             <%
                 String orderby = "";
                 int sort = 0;
-                query = "select * from barang where id_kategori=" + id_kategori + " order by ";
             %>
             Urutkan berdasarkan
             <select id="selectorder">
@@ -55,16 +49,14 @@
                 %>
                 <option selected=true>Nama</option>
                 <option>Harga</option>
-                <%      orderby = "nama_barang";
-                        query += "nama_barang ";%>
+                <%      orderby = "nama_barang";%>
                 <%
                 } else if (request.getParameter("orderby") != null
                         || (request.getParameter("orderby").equalsIgnoreCase("price"))) {
                 %>
                 <option>Nama</option>
                 <option selected=true>Harga</option>
-                <%  orderby = "harga_barang";
-                    query += "harga_barang ";%>
+                <%  orderby = "harga_barang";%>
                 <% }%>
             </select>
             <select id="selectsort">
@@ -72,15 +64,12 @@
                         || request.getParameter("sort").equalsIgnoreCase("asc")) {%>
                 <option selected=true>Membesar</option>
                 <option>Mengecil</option>
-                <%  sort = 0;
-                    query += "asc ";%>
+                <%  sort = 0;%>
                 <% } else if (request.getParameter("sort").equalsIgnoreCase("desc")) {%>
                 <option>Membesar</option>
                 <option selected=true>Mengecil</option>
-                <%  sort = 1;
-                    query += "desc ";%>
+                <%  sort = 1;%>
                 <%}%>
-                <% query += "limit " + mulai_dari + "," + limit;%>
             </select>
         </div>
         <br/>

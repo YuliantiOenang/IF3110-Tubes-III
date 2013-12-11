@@ -8,8 +8,6 @@
 <%@page import="ruserba.services.RuserbaServices"%>
 <%@page import="org.json.JSONObject"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="ruserba.database.DatabaseHelper" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,9 +20,7 @@
     <body>
         <%
             String id = request.getParameter("id");
-            
-            JSONObject barang = RuserbaServices.GetBarang(Integer.parseInt(id));
-            
+            JSONObject barang = RuserbaServices.GetBarang(Integer.parseInt(id));         
         %>
 	
         <h3 class="judul_halaman"> <%= barang.getString("nama_barang") %></h3>
@@ -36,10 +32,7 @@
 	<div class="barang_detail">
             <%
                 String id_kategori = barang.getString("id_kategori");
-                String query = "select nama_kategori from kategori where id_kategori="+id_kategori;
-                DatabaseHelper.Connect();
-                ResultSet kategori = DatabaseHelper.executeQuery(query);
-                kategori.next();
+                JSONObject kategori = RuserbaServices.GetKategori(Integer.parseInt(id_kategori));
             %>
 	Kategori:
 	<a href="/ruserba/kategori/<%= barang.getString("id_kategori") %>">

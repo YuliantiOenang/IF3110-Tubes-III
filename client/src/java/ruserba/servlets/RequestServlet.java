@@ -17,7 +17,9 @@ import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 import ruserba.database.DatabaseHelper;
+import ruserba.services.RuserbaServices;
 
 /**
  *
@@ -86,29 +88,20 @@ public class RequestServlet extends HttpServlet {
             String page = request.getParameter("page");
             if (page != null) {
                 String title = getPageTitle(page);
-                DatabaseHelper.Connect();
                 if (page.equals("kategori")) {
-                    String query = "select nama_kategori from kategori where id_kategori=" + request.getParameter("id");
-                    ResultSet result = DatabaseHelper.executeQuery(query);
-                    try {
-                        result.next();
+                    JSONObject result = RuserbaServices.GetKategori(Integer.parseInt(request.getParameter("id")));
+       
                         title = result.getString("nama_kategori");
-                    } catch (SQLException ex) {
-                        Logger.getLogger(RequestServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                   
                 } else if (page.equals("barang")) {
                     String query = "select nama_barang from barang where id_barang=" + request.getParameter("id");
-                    ResultSet result = DatabaseHelper.executeQuery(query);
-                    try {
-                        result.next();
+                    JSONObject result = RuserbaServices.GetBarang(Integer.parseInt(request.getParameter("id")));
+                    
                         title = result.getString("nama_barang");
-                    } catch (SQLException ex) {
-                        Logger.getLogger(RequestServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    
                 } else if (page.equals("search")) {
                     title = URLDecoder.decode(request.getParameter("q"), "UTF-8") + title;
                 }
-                DatabaseHelper.Disconnect();
                 out.println(title);
             }
             else {

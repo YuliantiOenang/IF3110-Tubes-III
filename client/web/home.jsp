@@ -8,14 +8,12 @@
 <%@page import="ruserba.services.RuserbaServices"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="ruserba.database.DatabaseHelper"%>
 <h3 class='judul_halaman'>Barang terpopuler</h3>
 
 <%
-    String query = "select * from kategori";
-    DatabaseHelper.Connect();
-    ResultSet result = DatabaseHelper.executeQuery(query);
-    while (result.next()) {
+    JSONObject kategori = RuserbaServices.GetKategori();
+    for (int j=0; j < kategori.getInt("length"); j++) {
+        JSONObject result = kategori.getJSONObject(""+j);
 %>
 <div class='category_container'>
     <span class='category'>
@@ -56,6 +54,4 @@
 <hr/>
 <%
     }
-    result.close();
-    DatabaseHelper.Disconnect();
 %>
