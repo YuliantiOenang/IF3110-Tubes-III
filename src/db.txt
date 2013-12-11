@@ -1,0 +1,9 @@
+namadb = heroku_19d5f7fc44e1595
+
+username = b5830ec07ba4dd
+
+password = 5de126cd
+
+host = us-cdbr-east-04.cleardb.com
+
+"us-cdbr-east-04.cleardb.com","b5830ec07ba4dd","5de126cd","heroku_19d5f7fc44e1595"
