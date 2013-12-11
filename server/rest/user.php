@@ -1,6 +1,7 @@
 <?php
 // .PUT
 
+
 function editprofile($username,$password,$namalengkap,$nohp,$provinsi,$kotakabupaten,$alamat,$kodepos){
 	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
 	$query = "UPDATE user_ SET password='$password', namalengkap='$namalengkap', nohp='$nohp' ,alamat='$alamat' ,kotakabupaten='$kotakabupaten' ,provinsi='$provinsi' ,kodepos='$kodepos' WHERE username='$username'" ;
@@ -17,6 +18,13 @@ function buy($namabarang,$jumlah){
 	return $response;
 }
 
+function insertcard($username,$nocredit){
+	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
+	$query = "UPDATE user_ SET nocredit='$nocredit' WHERE username='$username'";
+	$result=pg_query($query);
+	$response = "ok";
+	return $response;
+}
 // .GET
 
 function login($username,$password){
@@ -116,7 +124,7 @@ function validasiemail($email){
 	return $response;
 }
 
-function validasicredit($creditnumber){
+function validasicreditnumber($creditnumber){
 	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
 	$query = "SELECT * FROM creditcard_ WHERE number='$creditnumber'";
 	$result=pg_query($query);
@@ -125,6 +133,36 @@ function validasicredit($creditnumber){
 	}
 	else { $response = true; }
 	return $response;
+}
+
+function validasicreditname($creditnumber, $creditname){
+	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
+	$query = "SELECT * FROM creditcard_ WHERE name='$creditname' AND number='$creditnumber'";
+	$result=pg_query($query);
+	if (pg_fetch_assoc($result) == NULL){
+		$response = false;
+	}
+	else { $response = true; }
+	return $response;
+}
+
+function validasicreditexpire($creditnumber,$creditexpire){
+	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
+	$query = "SELECT * FROM creditcard_ WHERE expiredate='$creditexpire' AND number='$creditnumber'";
+	$result=pg_query($query);
+	if (pg_fetch_assoc($result) == NULL){
+		$response = false;
+	}
+	else { $response = true; }
+	return $response;
+}
+
+function getjumlah($namabarang){
+	$dbconn = pg_connect("host=ec2-174-129-21-42.compute-1.amazonaws.com port=5432 dbname=d38nf6s0hs1vt2 user=cxebbwvchsgibe password=fAHejbAEaq2jW-Kaa8ej74FK3S sslmode=require options='--client_encoding=UTF8'") or die('Could not connect: ' . pg_last_error());
+	$query = "SELECT jumlah FROM barang_ WHERE namabarang='$namabarang'";
+	$result=pg_query($query);
+	$response=pg_fetch_assoc($result);
+	return $response;	
 }
 
 // .DELETE

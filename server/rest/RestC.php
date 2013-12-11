@@ -4,7 +4,11 @@ class RestC{
 
 	function handle(){
 		$method = $_SERVER['REQUEST_METHOD'];	
+	
 		$lol = json_decode(file_get_contents("php://input"), true);
+	
+		$lol = urldecode($lol);
+
 		$urlpart = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
 		header("Content-Type: text/plain");
 		$lol.='&';
@@ -15,7 +19,11 @@ class RestC{
 		
 			if ($bole=="false"){
 				if($lol[$i]!='=' && $lol[$i]!='&'){
-					$coba1.=$lol[$i];
+					if ($lol[$i]!='+'){
+					$coba1.=$lol[$i];}
+					else{
+					$coba1.=' ';
+					}
 				}else{
 					$bole="true";
 					$i++;
@@ -24,7 +32,11 @@ class RestC{
 			
 			if ($bole=="true"){
 				if ($lol[$i]!='&' && $lol[$i]!='='){
-					$coba2.=$lol[$i];
+					if ($lol[$i]!='+'){
+					$coba2.=$lol[$i];}
+					else{					
+					$coba2.=' ';
+					}
 				}else{
 					$bole = "false";
 					$data[$coba1]=$coba2;

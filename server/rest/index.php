@@ -17,7 +17,9 @@ class Rest extends RestC{
 		if ($urlpart[0]=="editprofile"){
 			$response = editprofile($data["username"],$data["password"],$data["namalengkap"],$data["nohp"],$data["provinsi"],$data["kotakabupaten"],$data["alamat"],$data["kodepos"]);
 		}
-		
+		if ($urlpart[0]=="insertcard"){
+			$response = insertcard($data["username"],$data["nocredit"]);
+		}
 		if ($urlpart[0]=="buy"){
 			$response = buy($data["namabarang"],$data["jumlah"]);
 		}
@@ -61,8 +63,18 @@ class Rest extends RestC{
 		if ($urlpart[0]=="validasiemail"){
 			$response = validasiemail($data["email"]);
 		}
-		if ($urlpart[0]=="validasicredit"){
-			$response = validasicredit($data["creditnumber"]);
+		if ($urlpart[0]=="validasicreditnumber"){
+			$response = validasicreditnumber($data["creditnumber"]);
+		}
+		if ($urlpart[0]=="validasicreditname"){
+			$response = validasicreditname($data["creditnumber"],$data["creditname"]);
+		}
+		if ($urlpart[0]=="validasicreditexpire"){
+			$response = validasicreditexpire($data["creditnumber"],$data["creditexpire"]);
+		}
+		
+		if($urlpart[0]=="getjumlah"){
+			$response = getjumlah($data["namabarang"]);
 		}
 		
 		echo json_encode($response);
