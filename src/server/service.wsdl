@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<definitions name="WBD service"
+        targetNamespace="urn:WBDservice"
+        xmlns:tns="urn:WBDservice"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+        
+        <message name='response'>
+        <part name='result' type='xsd:string'/>
+        </message>
+		
+        <message name='createUserRequest'>
+        <part name='username' type='xsd:string'/>
+		<part name='password' type='xsd:string'/>
+        <part name='email' type='xsd:string'/>
+        <part name='namalengkap' type='xsd:string'/>
+        <part name='alamat' type='xsd:string'/>
+        <part name='provinsi' type='xsd:string'/>
+        <part name='kotakabupaten' type='xsd:string'/>
+        <part name='kodepos' type='xsd:string'/>
+        <part name='nohp' type='xsd:string'/>
+		<part name='nocredit' type='xsd:string'/>
+        </message>
+        <message name='createBarangRequest'>
+        <part name='idbarang' type='xsd:integer'/>
+        <part name='namabarang' type='xsd:string'/>
+        <part name='harga' type='xsd:integer'/>		
+        <part name='kategori' type='xsd:string'/>
+        <part name='jumlah' type='xsd:integer'/>
+        <part name='deskripsi' type='xsd:string'/>
+        </message>
+		<message name='bestbuyRequest'>
+		 <part name='tes' type='xsd:integer'/>
+        </message>
+		<message name='createTransactionRequest'>
+        <part name='namabarang' type='xsd:string'/>
+        <part name='harga' type='xsd:integer'/>		
+		<part name='jumlah' type='xsd:integer'/>
+		<part name='username' type='xsd:string'/>
+        <part name='kategori' type='xsd:string'/>
+        <part name='detailpesanan' type='xsd:string'/>
+        </message>
+		
+        <portType name='WBDporttype'>
+                <operation name='createUser'>
+                <input message='tns:createUserRequest'/>
+                <output message='tns:response'/>
+                </operation>
+                <operation name='createBarang'>
+                <input message='tns:createBarangRequest'/>
+                <output message='tns:response'/>
+                </operation>
+				<operation name='createTransaction'>
+                <input message='tns:createTransactionRequest'/>
+                <output message='tns:response'/>
+                </operation>
+        </portType>
+		
+        <binding name='WBDbinding' type='tns:WBDporttype'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+                <operation name='createUser'>
+                <soap:operation soapAction='urn:xmethods-delayed-quotes#createUser'/>
+                <input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+                <output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+                </operation>
+                <operation name='createBarang'>
+                <soap:operation soapAction='urn:xmethods-delayed-quotes#createBarang'/>
+                <input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+                <output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+                </operation>
+				<operation name='createTransaction'>
+                <soap:operation soapAction='urn:xmethods-delayed-quotes#createTransaction'/>
+                <input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+                <output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+                </operation>
+        </binding>
+		
+        <service name='WBDservice'>
+        <port name='WBDport' binding='WBDbinding'>
+        <soap:address location='http://gentle-ocean-7553.herokuapp.com/index.php'/>
+        </port>
+        </service>
+</definitions>
+

@@ -1,0 +1,95 @@
+<?php
+	include 'Database.php';
+	$SearchQuery=$_GET['src'];
+	GetDBSearch($SearchQuery);
+	foreach($_SESSION['Search'] as $Value){
+		$Value->DisplayBarang();}
+?>
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Masukkan Judul Dokumen</title>
+	<link rel="stylesheet" type="text/css" href="res/css/style.css" media="all"/>
+</head>
+<body>
+	
+	<div id="container">
+		
+		<!-- Header Section -->
+		<div id="header" class="frame">
+			<div class="kolom-7">
+				<img src="res/img/logo.png" alt="" id="logo"/>
+			</div>
+			<div class="kolom-4">
+				<div id="user-panel">
+					
+					<div id="user" class="frame">
+						<img id="user-pict" class="kolom-5" src="res/img/userpict_h.png" alt=""/>
+						<div id="user-text" class="kolom-7">
+							<h3>Welcome, <span class="user-name">Riandy</span>!</h3>
+							<p id="user-control">
+								<span class="edit-logout"><a href="">Edit Profile</a></span>
+								&nbsp;or&nbsp;
+								<span class="edit-logout"><a href="">Logout</a></span>
+							</p>
+							
+							<a href="#" class="btn">Check Your Cart</a>
+						</div>
+					</div>
+					
+					<div id="search-bar" class="frame">
+						<form name="search-form" action="search.php">
+							<input id="search-box" class="kolom-9" type="text" name="src" value="Ketikkan barang yang dicari..." onfocus="checkclear(this)" onblur="checkempty(this, 'Ketikkan barang yang dicari...')">
+							<input id="search-button" class="kolom-1" type="submit" value="">
+						</form>					
+					</div>
+				</div>
+			</div>			
+		</div>
+		<!-- End of Header -->
+		
+		<!-- Navbar Section -->
+		<p id="src-title">Search Result(s) for <span class="src-param">"Daging"</span></p>
+		<!-- End of Navbar -->
+		
+		<div id="dagangan">
+			
+			<!-- Dagangan Baris 1 -->
+			<div class="frame">
+			<?php foreach($_SESSION['Search'] as $Barang) { ?>
+				<div class="kolom-6 product">					
+					<div class="frame">
+						<div class="kolom-6">
+							<img class="gambar" src="res/img/product/<?php echo $Barang->GetNamaBarang()?>.jpg" alt=""/>
+						</div>
+						<div class="kolom-6">
+							<p class="nama-produk-b"><a href="<?php echo $Barang->GetNamaBarang()?>"><?php echo $Barang->GetNamaBarang()?></a></p>
+							<p class="harga">Harga: <?php echo $Barang->GetHarga()?> /kg</p>
+						</div>
+					</div>
+				</div>
+			<?php } ?> 	
+			</div>
+			<!--End of Dagangan-->				
+		</div>
+		
+		<div id="pagination">
+			<ul>
+				<li><a href="#">&laquo;First</a></li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#">Last&raquo;</a></li>
+			</ul>
+		</div>
+		
+	</div>
+	
+	<!-- Javascript -->
+	<script src="res/js/common.js" type="text/javascript"></script>
+	
+</body>
+</html>
