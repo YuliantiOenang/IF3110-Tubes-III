@@ -1,0 +1,19 @@
+/***** Register Form *****/
+#registerform {
+	background: #fff;
+	font-style: normal;
+	margin-bottom: 2em;
+	overflow: hidden;
+	padding: 20px;
+	text-align: left;
+	width: 700px;
+ 	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+#registerform h2 {
+	color: #C74451; 
+	font-size: 1.714em; 
+	margin-bottom: 0.333em;
+}

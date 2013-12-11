@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from soapService WSDL service -->
+
+  <service name="soap" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://tubes2wbd"/>
+      <parameter name="wsdlServiceElement" value="soapService"/>
+      <parameter name="schemaQualified" value="http://tubes2wbd"/>
+      <parameter name="wsdlServicePort" value="soap"/>
+      <parameter name="className" value="tubes2wbd.soap"/>
+      <parameter name="wsdlPortType" value="soap"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://tubes2wbd" xmlns:retNS="http://tubes2wbd" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="registeruser" qname="operNS:registeruser" returnQName="retNS:registeruserReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:nama" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:nohp" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:alamat" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:provinsi" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:kota" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:kodepos" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://tubes2wbd" xmlns:retNS="http://tubes2wbd" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="additem" qname="operNS:additem" returnQName="retNS:additemReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:nama" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:img" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:harga" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:kategori" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:jumlah" type="tns:string"/>
+        <parameter xmlns:pns="http://tubes2wbd" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:deskripsi" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="registeruser additem"/>
+
+  </service>
+</deployment>
