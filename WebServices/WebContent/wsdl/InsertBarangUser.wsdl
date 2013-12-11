@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://webService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://webService" xmlns:intf="http://webService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://webService" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="insertBarangUser">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:string"/>
+      <element name="user" type="xsd:string"/>
+      <element name="qty" type="xsd:string"/>
+      <element name="desc" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="insertBarangUserResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="insertBarangUserResponse">
+
+      <wsdl:part element="impl:insertBarangUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="insertBarangUserRequest">
+
+      <wsdl:part element="impl:insertBarangUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="InsertBarangUser">
+
+      <wsdl:operation name="insertBarangUser">
+
+         <wsdl:input message="impl:insertBarangUserRequest" name="insertBarangUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:insertBarangUserResponse" name="insertBarangUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="InsertBarangUserSoapBinding" type="impl:InsertBarangUser">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="insertBarangUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="insertBarangUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="insertBarangUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="InsertBarangUserService">
+
+      <wsdl:port binding="impl:InsertBarangUserSoapBinding" name="InsertBarangUser">
+
+         <wsdlsoap:address location="http://localhost:8080/web-services/services/InsertBarangUser"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

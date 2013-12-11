@@ -67,7 +67,7 @@ public class Payment extends HttpServlet {
 				arr_user2.add(userObj);
 				System.out.println("1.payment-userobj"+userObj.getNacard());
 			}
-			try {
+
 				int i = 0;
 				while (i < arr_user2.size()) {
 					if (arr_user2.get(i).getNocard() == null) {
@@ -162,7 +162,7 @@ public class Payment extends HttpServlet {
 				e1.printStackTrace();
 			}
 		}
-
+			
 	}
 
 	/**

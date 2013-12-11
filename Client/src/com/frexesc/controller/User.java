@@ -1,6 +1,7 @@
 package com.frexesc.controller;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,7 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.frexesc.SOAP.InsertUser;
+import com.frexesc.SOAP.InsertUserProxy;
 import com.frexesc.model.UserBean;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -151,12 +155,21 @@ public class User extends HttpServlet {
 		String postal = request.getParameter("postal");
 		if (action.equals("register")) {
 			String username = request.getParameter("username");
-			// HttpSession session = request.getSession(true);
-			String insertQuery = "INSERT INTO user (nama, username, password, email, handphone, alamat, kota, provinsi, kodepos) VALUES ('" + name + "','" + username + "','" + password + "','" + email + "','" + telephone + "','" + address + "','" + city + "','" + province + "','" + postal + "')";
+			HttpSession session = request.getSession(true);
+			
+			/**port*/
 			try {
-				Statement statement = connection.createStatement();
-				statement.executeUpdate(insertQuery);
-				
+			InsertUserProxy insuserpro = new InsertUserProxy();
+			System.out.println("INSERT USER SOAP ->"+ name + username + password + email + telephone + address + city + province + postal); 
+			insuserpro.insertUser( name , username , password , email , telephone , address , city , province , postal );
+			/**port*/
+			
+			/**old*/
+//			String insertQuery = "INSERT INTO user (nama, username, password, email, handphone, alamat, kota, provinsi, kodepos) VALUES ('" + name + "','" + username + "','" + password + "','" + email + "','" + telephone + "','" + address + "','" + city + "','" + province + "','" + postal + "')";
+//			try {
+//				Statement statement = connection.createStatement();
+//				statement.executeUpdate(insertQuery);
+			/**old*/
 				//POST
 				//String[] param = {"name","user", "pass","email","phone","add","city","prov","post"};
 				//String[] val= {name, username, password, email, telephone, address, city, province, postal};
