@@ -1,0 +1,60 @@
+.gambar{
+	float: left;
+	animation-name:myfirst;
+	animation-duration:5s;
+	animation-timing-function:linear;
+	animation-delay:0s;
+	animation-play-state:running;
+}
+
+@keyframes myfirst
+{
+0%   {opacity:0;}
+100% {opacity:1.0;}
+}
+
+.pull_left{
+	float: left;
+}
+
+
+.list_left{
+}
+
+.list_barang{
+	float: left;
+	height: 150px;
+	width: 430px;
+	border-style:solid;
+	border-width:2px;
+	margin: 8px;
+}
+
+.list_desc{
+	position: relative;
+	left: 10px;
+	top: 10px;
+}
+
+.search_image{
+	position: relative;
+	left: 5px;
+	top: -1px;
+}
+
+
+.sbox{
+	
+}
+
+.sb_value{
+	float: left;
+	position: relative;
+	top: 2px;
+}
+
+.sb_value2{
+	float: left;
+	position: relative;
+	top: 3px;
+}

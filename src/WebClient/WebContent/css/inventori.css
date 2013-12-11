@@ -1,0 +1,33 @@
+#showgambar{
+	width: 100px;
+	height: 100px;
+}
+
+form{
+	margin:0; padding:0;
+}
+
+.table{
+	width: 500px;
+	
+}
+
+.row{
+	width: 100%;
+	vertical-align: top;
+	padding-bottom: 0.5em;
+}
+
+.cell25{
+	width: 25%;
+	display: inline-block;
+}
+
+.cell75{
+	width: 75%;
+	display: inline-block;
+}
+
+.right{
+	text-align: right;
+}
