@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import soaptest.SOAPWSProxy;
 import model.Barang;
 import model.Model;
 import controller.Render;
@@ -58,7 +59,14 @@ public class AdminAdd extends HttpServlet {
 			command = "UPDATE barang (id_kategori,nama,harga,gambar,stok,counter,keterangan) VALUES ("
 					+ 1 + ",' " + nama + "',"+ harga + "," + "1.jpg" + "'," + stok + "," + 0 + ",'" + deskripsi+ "');";
 			//System.out.println(command);
-			model2.updateSQL(command);
+			
+			//SOAP
+			SOAPWSProxy soapwsproxy = new SOAPWSProxy();
+			soapwsproxy.addtoDB("barang", command);
+			//end of SOAP
+			
+			//model2.updateSQL(command);
+			
 			request.setAttribute("msg", "Changes have been made successfully, keep up the good work!");
 			Render.Show(request, response, "../adminpesan.jsp");
 		}
