@@ -100,8 +100,6 @@ public class DeleteBarang extends HttpServlet {
 							.readUrl("http://localhost:8080/web-services/BS/barang/update?id="
 									+ allResults.get(0).getId_item()
 									+ "&jumlah=" + jumlah_barang_akhir);
-				} catch (NumberFormatException e) {
-
 					//
 					// POST
 					String[] param = { "id" };
@@ -114,6 +112,9 @@ public class DeleteBarang extends HttpServlet {
 
 					response.sendRedirect("./cart"); // back to previous
 														// page
+				} catch (NumberFormatException e) {
+
+				
 				}
 
 			} catch (Exception e) {

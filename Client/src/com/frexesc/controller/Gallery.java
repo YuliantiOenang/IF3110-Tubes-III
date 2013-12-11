@@ -108,7 +108,7 @@ public class Gallery extends HttpServlet {
 				if (request.getParameter("price") != null) {
 					if (Integer.parseInt(request.getParameter("price")) != 0)
 						partial5 = " AND barang.harga_barang="
-								+ Integer.parseInt(request
+								+ Integer.parseInt(request	
 										.getParameter("price")) + " ";
 				}
 
