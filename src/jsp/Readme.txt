@@ -1,0 +1,1 @@
+This is folder for private JSP files. (will be installed to WEB-INF/jsp directory)

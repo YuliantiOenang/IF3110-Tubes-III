@@ -1,0 +1,5 @@
+web:    java -cp target/classes:target/dependency/* Category
+web:    java -cp target/classes:target/dependency/* Database
+web:    java -cp target/classes:target/dependency/* Product
+web:    java -cp target/classes:target/dependency/* SearchAttribute
+web:    java -cp target/classes:target/dependency/* User
