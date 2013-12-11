@@ -1,0 +1,61 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from SoapServiceService WSDL service -->
+
+  <service name="SoapService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soap.esc.com"/>
+      <parameter name="wsdlServiceElement" value="SoapServiceService"/>
+      <parameter name="schemaQualified" value="http://soap.esc.com"/>
+      <parameter name="wsdlServicePort" value="SoapService"/>
+      <parameter name="className" value="com.esc.soap.SoapServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="SoapService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="createBarang" qname="operNS:createBarang" xmlns:operNS="http://soap.esc.com" returnQName="retNS:createBarangReturn" xmlns:retNS="http://soap.esc.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:id_kategori" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nama" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:gambar" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:harga_barang" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:keterangan" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:jumlah_barang" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="createUser" qname="operNS:createUser" xmlns:operNS="http://soap.esc.com" returnQName="retNS:createUserReturn" xmlns:retNS="http://soap.esc.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:username" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:handphone" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:alamat" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:provinsi" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:kota" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:kodepos" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:email" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:role" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nama" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nomor_kartu" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nama_kartu" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:expire_kartu" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:transaksi" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="createBarangUser" qname="operNS:createBarangUser" xmlns:operNS="http://soap.esc.com" returnQName="retNS:createBarangUserReturn" xmlns:retNS="http://soap.esc.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:id_barang" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:id_user" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:status" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:jumlah_barang" xmlns:pns="http://soap.esc.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:tanggal_pembelian" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:deskripsi_tambahan" xmlns:pns="http://soap.esc.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="createUser createBarangUser createBarang"/>
+
+  </service>
+</deployment>
