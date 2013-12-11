@@ -6,78 +6,74 @@ if((sesi== null)|| (sesi.getAttribute("username")==null))
 	out.print("<script>window.location='register.jsp';</script>");
 %>
 <script type="text/javascript" src="beli.js"></script>
+<script>
+function getBarang(id, item, req){
+	var query = "SELECT * FROM barang WHERE id_barang='"+id+"'";
+	sendQuery(query, function() {
+		var jsonArray = JSON.parse(xmlhttp.responseText);
+		for (var i = 0; i <jsonArray.result.length;i++){
+			document.write(jsonArray.result[i][2]+" : <input type='text' name = '"+i+"' value='"+item+"'>"+req+"<br>");
+			var totalHarga = document.getElementById("temp").innerHTML;
+		    totalHarga+= item * jsonArray.result[i][4];
+		    document.getElementById("temp").innerHTML = totalHarga;
+		}
+	});
+}
+function getKredit(username){
+	var query = "SELECT * FROM creditcard WHERE card_owner ='"username+"'";
+	sendQuery(query, function() {
+		var jsonArray = JSON.parse(xmlhttp.responseText);
+		var totalHarga = document.getElementById("temp").innerHTML; 
+		document.write("<input type='submit' id='edit' value='Edit!'><br><br></form>");
+		document.write("Total Pembelian Anda :<input type='text' id='totalharga' value='"+totalHarga+"' readonly><br>Choose Your Credit Card :<br>");
+		document.write("<form name='beli_barang' action='javascript:verBeli();' method='post'>");
+		if(jsonArray == null){
+			document.write("<input type='hidden' name ='creditid' value='asd'>");
+			document.write("<input type='submit' value='Beli!'>");
+		} else {
+			for (var i = 0; i<jsonArray.result.length ; i++){
+				if(counter ==0){
+				  document.write("<input type='radio' value='"+jsonArray.result[i][1]+"' name='creditid' checked>"+jsonArray.result[i][1]+"<br>");
+				}
+				else{
+				  document.write("<input type='radio' value='"+jsonArray.result[i][1]+"' name='creditid'>"+jsonArray.result[i][1]+"<br>");  
+				}
+				counter++;
+			}
+			document.write("<input type='submit' value='Beli!'><div id='barang_error'></div>");  
+		}
+		document.write("</form>");
+	});
+}
+</script>
 <h3> Your Shopping Cart </h3>
+<div id="temp" hidden="true"></div>
+
 <form name="shopping_cart" action="editShopCart" method="post">
 <% 
-if(sesi.getAttribute("shopping_cart")==null) {
-%>
-You haven't Add anything to Shopping Cart
-<%
-}
-else{
+if (sesi.getAttribute("shopping_cart")==null) {
+	out.print("You haven't Add anything to Shopping Cart");
+} else {
 	Vector<String> shopping_cart = (Vector<String>) session.getAttribute("shopping_cart");
 	Vector<String> shopping_request = (Vector<String>) session.getAttribute("shopping_request");
 	Vector<Integer> item= (Vector<Integer>) session.getAttribute("amount");
 	
-	try {
-		  //Load the JDBC driver
-				String uname = "root";
-				String pass = "";
-				String url = "jdbc:mysql://localhost/progin_13511059";
-				Class.forName ("com.mysql.jdbc.Driver").newInstance ();
-		        Connection con = DriverManager.getConnection (url, uname, pass);
-				int totalHarga=0;
-			  	int counter = 0;
-		  //Create a Statement object and call its executeUpdate 
-		  //method to insert a record
-		  for(int i = 0; i < shopping_cart.size();i++){
-			  Statement s = con.createStatement();
-			  String sqlBarang = "SELECT * FROM `progin_13511059`.barang WHERE id_barang='"+shopping_cart.get(i)+"'";
-			  ResultSet rs = s.executeQuery(sqlBarang);
-			  while (rs.next()) {
-				    out.println(rs.getString(2)+" : <input type='text' name = '"+i+"' value='"+item.get(i)+"'>"+shopping_request.get(i)+"<br>");
-				    totalHarga+= item.get(i) * Integer.parseInt(rs.getString(4));
-				  }
-			  rs.close();
-			  s.close();
-		  }
-		  out.print("<input type='submit' id='edit' value='Edit!'><br><br></form>");
-		  out.print("Total Pembelian Anda :<input type='text' id='totalharga' value='"+totalHarga+"' readonly><br>Choose Your Credit Card :<br>");
-		  Statement s2 = con.createStatement();
-		  String sqlCredit = "SELECT * FROM `progin_13511059`.creditcard WHERE card_owner ='"+session.getAttribute("username")+"'";
-		  ResultSet rs2 = s2.executeQuery(sqlCredit);
-		  out.print("<form name='beli_barang' action='javascript:verBeli();' method='post'>");
-		  if(!rs2.next()){
-			  out.print("<input type='hidden' name ='creditid' value='asd'>");
-			  out.print("<input type='submit' value='Beli!'>");
-		  }
-		  else{
-			  while(rs2.next()){
-				  if(counter ==0){
-					  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid' checked>"+rs2.getString(1)+"<br>");
-				  }
-				  else{
-					  out.print("<input type='radio' value='"+rs2.getString(1)+"' name='creditid'>"+rs2.getString(1)+"<br>");  
-				  }
-				  counter++;
-			  }
-			  out.print("<input type='submit' value='Beli!'><div id='barang_error'></div>");  
-		  }
-		  con.close();
-		}
-		catch (ClassNotFoundException e1) {
-		  // JDBC driver class not found, print error message to the console
-		  System.out.println(e1.toString());
-		}
-		catch (SQLException e2) {
-		  // Exception when executing java.sql related commands, print error message to the console
-		  System.out.println(e2.toString());
-		}
-		catch (Exception e3) {
-		  // other unexpected exception, print error message to the console
-		  System.out.println(e3.toString());
-		}	
+	int totalHarga=0;
+	int counter = 0;
+	//Create a Statement object and call its executeUpdate 
+	//method to insert a record
+	for(int i = 0; i < shopping_cart.size();i++){
+	%>
+	<script>
+		getBarang(<% out.print(shopping_cart.get(i)); %>,<% out.print(item.get(i)); %>, <% out.print(shopping_request.get(i)); %>);
+	</script>	  	
+	<%
+	}
+	%>
+	<script type="text/javascript">
+		getKredit(<% out.print(session.getAttribute("username")); %>);
+	</script>
+	<%
 }
 %>
-</form>
 <%@ include file= "./footer.jsp" %>
