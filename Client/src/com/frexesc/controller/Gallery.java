@@ -50,9 +50,6 @@ public class Gallery extends HttpServlet {
 		if (session.getAttribute("username") == null) {
 			response.sendRedirect("../register");
 		} else {
-			DbConnection dbConnection = new DbConnection();
-			Connection connection = dbConnection.mySqlConnection();
-
 			int sort = 0;
 			int jenisSort = 0;
 			int page = 0;

@@ -22,6 +22,7 @@ public class ServiceParser {
 	public static String readUrl(String urlString) throws Exception
 	{
 		BufferedReader reader = null;
+		urlString = urlString.replaceAll(" ", "%20");
 		try
 		{
 			URL url = new URL(urlString);
