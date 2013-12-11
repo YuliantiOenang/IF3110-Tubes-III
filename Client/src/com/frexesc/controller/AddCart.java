@@ -57,6 +57,7 @@ public class AddCart extends HttpServlet {
 		if (session.getAttribute("username") == null) {
 			response.getWriter().write("Redirect: ../register");
 		} else {
+						
 			response.setContentType("text/html"); // set Content Type for AJAX
 			try {
 				json = WebServicesKit.readUrl("http://localhost:8080/web-services/BS/barang/select?id="+request.getParameter("id_barang"));
@@ -114,11 +115,26 @@ public class AddCart extends HttpServlet {
 
 				// Update to Barang here
 				try {
+					/**port*/
+					
+					
+					/**port*/
+					
+					/**old*/
+					// Update to Barang here
+//					String query3 = "UPDATE barang SET jumlah_barang=" + (Integer.parseInt(rs.getString("jumlah_barang")) - Integer.parseInt(request.getParameter("qty"))) + " WHERE id=" + request.getParameter("id_barang"); 
+//					
+//					connection.createStatement().executeUpdate(query3);
+//					
+//					response.getWriter().write("Success: Transaksi berhasil!");
+					
+					/**SAL*/
 					json = WebServicesKit.readUrl("http://localhost:8080/web-services/BS/barang/update/id="
 							+ request.getParameter("id_barang")
 							+ "&jumlah="
 							+ (barangList.get(0).getTotal_item() - Integer
 									.parseInt(request.getParameter("qty"))));
+					/**old*/
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -126,7 +142,6 @@ public class AddCart extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				response.getWriter().write("Success: Transaksi berhasil!");
 			}
 
 		}
