@@ -18,7 +18,7 @@
 			    response += "<input type='hidden' name='id_barang' value='"+jsonArray.result[i][0]+"'>";
 			    response += "<input type='hidden' name='request_tambahan' value='-'>";
 			    response += "Quantity <input type='text' name='qt' style='width: 20px; text-align: right' />";
-			    response += "<input type='submit' value='Add to cart'>";
+			    response += "<input type='submit' value='Add to cart'></div>";
 			}
 			document.write(response);
 		});
@@ -62,6 +62,10 @@
 	else {
 		nama = "tidak terdaftar";
 	}
+ %>
+ 
+ <script>showBarang(<%=idkat%>, '<%=order%>', <%=istring%>);</script>
+ <%
  
  int nextlaman = laman+1;
  int prelaman = laman-1;
@@ -87,6 +91,5 @@ out.print("<p> Sort By : </p>");
 out.print("<li> <a href='search.jsp?laman=1&searched=&order=nama_barang&s_harga=&s_kategori="+idkat+"'>Nama Barang</a></li><br>");
 out.print("<li> <a href='search.jsp?laman=1&searched=&order=harga_barang&s_harga=&s_kategori="+idkat+"'>Harga Barang</a></li><br>");
  %>
- <script>showBarang(<%=idkat%>, '<%=order%>', <%=istring%>);</script>
 </div>
 <%@ include file= "./footer.jsp" %>
