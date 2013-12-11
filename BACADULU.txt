@@ -1,0 +1,25 @@
+ // BANGGA Kelompok //
+ Anggota:
+ 	1. Fathan Adi Pranaya (13511027)
+ 	2. Yogi Salomo Mangontang Pratama(13511059)
+ 	3. Geraldi Ranggapardana(13511097)
+
+
+ Kalau mau nge pull:
+(kalau ada yg tau metode lebih baik CMIIW ya gan)
+ 	-setelah nge pull, import dulu file sqlnya ke phpMyAdmin kalian biar databasenya yang terbaru.
+
+ Kalau mau nge push:
+ 	-Export dulu databasenya (kalau diubah) ke folder git kalian biar nanti ikut diperbaharui basis datanya.
+
+
+ Berbagai aturan yang kita buat sendiri:
+ 1. Kategori barang:
+ 		-	1 -> Pangan
+ 		-	2 -> Pakaian
+ 		-	3 -> Elektronik
+ 		-	4 -> Rumah Tangga
+ 		-	5 -> Olah Raga
+
+
+ sok aja kalau ada yg mau ditambahin :D
