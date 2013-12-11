@@ -3,7 +3,7 @@ function AJAXPost(){
 	
     var elem = document.getElementById("login").elements;
     var params = "";
-    url = "LoginServlet";
+    url = document.getElementById("login").action;
 	
 	
     for(var i = 0; i < elem.length; i++){

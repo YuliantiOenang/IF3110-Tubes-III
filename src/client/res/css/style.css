@@ -41,7 +41,7 @@ body {
 	text-decoration:none;
 	text-align:center;
 }.btn:hover {
-	background-color:#000000;
+	background-color:#cccccc;
 }.btn:active {
 	position:relative;
 	top:1px;
@@ -102,36 +102,6 @@ body {
 	color: #cccccc;
 	font-size: 12px;
 	padding-left: 7px;
-}
-
-#search-kategori {
-	width: 200px;
-	height: 30px;
-	color: #cccccc;
-	font-size: 12px;
-	padding-left: 0;
-	margin-left: -37px;
-	margin-top:3px;
-}
-
-
-#search-harga1 {
-	width: 85px;
-	height: 30px;
-	color: #cccccc;
-	font-size: 12px;
-	padding-left: 0;
-	margin-left: -37px;
-	margin-top:3px;
-}
-
-#search-harga2 {
-	width: 85px;
-	height: 30px;
-	color: #cccccc;
-	font-size: 12px;
-	padding-left: 0;
-	margin-top:3px;
 }
 
 #search-button {
@@ -211,7 +181,6 @@ body {
 
 #bbuy-text {
 	margin-top: 50px;
-	margin-left : 17%;
 }
 
 #bbuy-a, #bbuy-b {
@@ -238,24 +207,7 @@ body {
 
 .product .gambar {
 	border-style: solid;
-	border-color: #cccccc;
-	border-width: 2px;
-	padding: 20px 0;
-	height: 176px;
-	width: 186px;
-	
-}
-.gambar:hover{
-	border-style: solid;
-	border-color: #cccccc;
-	border-width: 15px;
-	padding: 20px 0;
-	
-	
-}
-.gambarhome {
-	border-style: solid;
-	border-color: #cccccc;
+	border-color: #000000;
 	border-width: 2px;
 	padding: 20px 0;
 	max-height: 176px;
@@ -273,29 +225,14 @@ body {
 	-o-transition-property: -o-transform;
 	transition-property: transform;
 	overflow:hidden;
-	
 }
-.gambarhome:hover{
+.gambar:hover{
 
 	-webkit-transform:rotate(360deg);
     -moz-transform:rotate(360deg); 
     -o-transform:rotate(360deg);
 	
 }
-@-webkit-keyframes spin {
-	100%
-	{ -webkit-transform: rotate(5deg);
-	} 
-	
-}
-@keyframes spin {
-	100%
-	{ -webkit-transform: rotate(5deg);
-	} 
-	
-}
-
-
 
 .nama-produk {
 	font-size: 18px;
@@ -367,7 +304,7 @@ body {
 }
 
 #pagination a:link, #pagination a:visited {
-	color: #B20000;
+	color: #B2000000;
 }
 
 #pagination > ul {
@@ -408,14 +345,6 @@ body {
 	margin-right: auto;
 	margin-top: 63px;
 	text-align: left;
-	float: left; width: 27%;
-}
-
-.judulbest {
-	background-color: #B20000;
-	color : #ffffff;
-	font-size : 20px
-	
 }
 
 .ShoppingBag {
@@ -548,52 +477,58 @@ body {
 #gambar-detail {
 	margin-top: 15px;
 }
+.gambarhome {
+	border-style: solid;
+	border-color: #cccccc;
+	border-width: 2px;
+	padding: 20px 0;
+	max-height: 176px;
+	min-width: 186px;
+	-webkit-animation: spin 0.5s linear 2s infinite alternate;
+	animation: spin 0.5s linear 2s infinite alternate;
+	
+	-webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+	
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	-o-transition-property: -o-transform;
+	transition-property: transform;
+	overflow:hidden;
+	
+}
+.gambarhome:hover{
 
- #popupbox{
+	-webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg); 
+    -o-transform:rotate(360deg);
+	
+}
+@-webkit-keyframes spin {
+	100%
+	{ -webkit-transform: rotate(5deg);
+	} 
+	
+}
+@keyframes spin {
+	100%
+	{ -webkit-transform: rotate(5deg);
+	} 
+	
+}
+
+
+  #popupbox{
   margin: 0; 
   margin-left: 42%; 
-  margin-top: -10%; 
+  margin-top: -150px; 
   padding-top: 10px; 
   width: 20%; 
   height: 150px; 
   position: absolute; 
-  background: #B20000; 
-  border: solid #000000 2px; 
-  z-index: 9; 
-  font-family: arial; 
-  visibility: hidden; 
-  }
-  
-  #popupboxadd{
-  margin: 0; 
-  text-align: left;
-  margin-left: 25%; 
-  margin-top: 0%; 
-  padding: 10px; 
-  width: 20%; 
-  height: 280px; 
-  position: fixed;
-  top: 15em;
-  right: 35em;
-  background: #B20000; 
-  border: solid #000000 2px; 
-  z-index: 9; 
-  font-family: arial; 
-  visibility: hidden; 
-  }
-  
-  #popupboxedit{
-  margin: 0; 
-  text-align: left;
-  margin-left: 25%; 
-  margin-top: 0%; 
-  padding: 10px; 
-  width: 20%; 
-  height: 250px; 
-  position: fixed;
-  top: 15em;
-  right: 35em;
-  background: #B20000; 
+  background: #b20000; 
   border: solid #000000 2px; 
   z-index: 9; 
   font-family: arial; 

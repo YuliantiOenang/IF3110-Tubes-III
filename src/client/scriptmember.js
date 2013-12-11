@@ -16,7 +16,7 @@
 
 
     function cekCPassword() {
-        var pass1 = document.getElementById("epassword").value;
+        var pass1 = document.getElementById("password").value;
         var pass2 = document.getElementById("cpassword").value;
         if (pass1 != pass2 || pass2.length<8) {
             document.getElementById("validasiCpassword").value="tidak valid";
@@ -32,9 +32,9 @@
 
 
     function cekPassword() {
-        var pass1 = document.getElementById("epassword").value;
+        var pass1 = document.getElementById("password").value;
         var pass2 = document.getElementById("cpassword").value;
-		var user = document.getElementById("eusername").value;
+		var user = document.getElementById("username").value;
 		var em = document.getElementById("email").value;
         if (pass1.length>7 && pass1!=user && pass1!=em) {
             document.getElementById("validasipassword").value="valid";
@@ -108,14 +108,14 @@ function sleep(milliseconds) {
 
 function cekChangeData(){
 		
-	var username = document.getElementById("eusername").value;
-	var password = document.getElementById("epassword").value;
-
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	
 	var email = document.getElementById("email").value;
 	var namalengkap= document.getElementById("namalengkap").value;
 
 	var nohp= document.getElementById("nohp").value;
-
+	
 
 	var provinsi = document.getElementById("provinsi").value;
 
@@ -123,7 +123,7 @@ function cekChangeData(){
 	
 	var alamat = document.getElementById("alamat").value;
 	var kodepos = document.getElementById("kodepos").value;
-
+	
 	
 	var iusername = document.getElementById("iusername").value;	
 	var ipassword = document.getElementById("ipassword").value;
@@ -131,7 +131,7 @@ function cekChangeData(){
 	var inamalengkap= document.getElementById("inamalengkap").value;
 	var inohp= document.getElementById("inohp").value;
 	
-		
+	
 	var iprovinsi = document.getElementById("iprovinsi").value;
 	var ikotakabupaten = document.getElementById("ikotakabupaten").value;
 	
@@ -145,7 +145,7 @@ function cekChangeData(){
 		return false;
 		
 	}else{
-		alert("Sukses\n"+username);
+		alert("Edit di proses");
 		sleep(1);
 		return true;
 		

@@ -24,8 +24,9 @@ function ceknamecard(){
 
 
 function cekexpiredate(){
-	
-	if (AJAXRegister("expiredate")){
+	var tes = AJAXRegister("expiredate");
+
+	if (tes){
 		document.getElementById("validasiexpiredate").value="valid";
 		return true;
 		
@@ -40,7 +41,7 @@ function cekexpiredate(){
 function cekvalid(){
 
 	if (cekfilledAll() && ceknumber() && ceknamecard() && cekexpiredate()){
-		alert("sukses");
+		alert("registrasi di proses");
 		return true;
 	}else{
 		alert("pastikan data valid");

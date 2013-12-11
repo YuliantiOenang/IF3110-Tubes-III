@@ -17,7 +17,7 @@
 
 
     function cekCPassword() {
-        var pass1 = document.getElementById("rpassword").value;
+        var pass1 = document.getElementById("password").value;
         var pass2 = document.getElementById("cpassword").value;
         if (pass1 != pass2 || pass2.length<8) {
             document.getElementById("validasiCpassword").value="tidak valid";
@@ -33,9 +33,9 @@
 
 
     function cekPassword() {
-        var pass1 = document.getElementById("rpassword").value;
+        var pass1 = document.getElementById("password").value;
         var pass2 = document.getElementById("cpassword").value;
-		var user = document.getElementById("rusername").value;
+		var user = document.getElementById("username").value;
 		var em = document.getElementById("email").value;
         if (pass1.length>7 && pass1!=user && pass1!=em) {
             document.getElementById("validasipassword").value="valid";
@@ -97,10 +97,9 @@
 
     function cekusername()
     {
-		var pass = document.getElementById("rpassword").value;
-		var user = document.getElementById("rusername").value;
-	
-		if (user.length>4 && pass!=user && AJAXRegister("rusername") ){
+		var pass = document.getElementById("password").value;
+		var user = document.getElementById("username").value;
+		if (user.length>4 && pass!=user && AJAXRegister("username") ){
 			document.getElementById("validasiusername").value="valid";
 			return true;
 		}
@@ -115,7 +114,7 @@
     {
 		var reg = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/;
 		var elem = document.getElementById("email").value;
-		var pass = document.getElementById("rpassword").value;
+		var pass = document.getElementById("password").value;
 		if (reg.test(elem) && pass!=elem && AJAXRegister("email")){
 			document.getElementById("validasiemail").value="valid";
 			return true;

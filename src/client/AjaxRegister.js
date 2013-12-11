@@ -5,16 +5,16 @@ function AJAXRegister(lol){
   var elem = document.getElementById(lol);
 
     var params = "";
-	if (lol=="rusername"){
-		url = "UsernameValidationServlet";
+	if (lol=="username"){
+		url = "cek_username.php";
 	}else if (lol=="email"){
-		url="EmailValidationServlet";
+		url="cek_email.php";
 	}else if (lol=="cardnumber"){
-		url ="CardNumberValidationServlet";
+		url ="cek_cardnumber.php";
 	}else if (lol=="namecard"){
-		url="NameCardValidationServlet";
+		url="cek_namecard.php";
 	}else if (lol=="expiredate"){
-		url="ExpireDateValidationServlet";
+		url="cek_expiredate.php";
 	}
    
         if (elem.tagName == "SELECT"){
@@ -39,8 +39,9 @@ function AJAXRegister(lol){
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	
 	xmlhttp.send(params);
-	
-	if (xmlhttp.responseText=='true'){
+	var lolipop = xmlhttp.responseText; 
+  
+	if (xmlhttp.responseText==true){
 		
 		return true;
 	}else{
