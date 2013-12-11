@@ -72,7 +72,8 @@ public class Receiver extends HttpServlet {
                 
                 // Send data to jsp
                 PrintWriter out = response.getWriter();
-                out.write(inputLine);
+                if (inputLine == null) out.write(1);
+                else out.write(inputLine);
                 in.close();
         }
 

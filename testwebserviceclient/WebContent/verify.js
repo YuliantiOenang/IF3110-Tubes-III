@@ -52,29 +52,39 @@ function confirmAll(){
 				var kecamatan = document.forms['register']['kecamatan'].value;
 				var postcode = document.forms['register']['postalcode'].value;
 				var email = document.forms['register']['Email'].value;
+		 		alert('Masuk kok :v');
 				var reg_error = document.getElementById('reg_error');
-				var data = "username="+username+"&password="+password+"&repassword="+repassword
-							+"&namalengkap="+namalengkap+"&hpnum="+hpnum+"&address="+address+
-							"&province="+province+"&kecamatan="+kecamatan+"&postcode="+postcode+
-							"&email="+email;
-				if(window.XMLHttpRequest){
-					xmlhttp = new XMLHttpRequest();
-				}
-				else{
-					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-				}
-				xmlhttp.onreadystatechange=function(){
-					if(xmlhttp.readyState==4&&xmlhttp.status==200){
-						reg_error.innerHTML = xmlhttp.responseText;
-						if(reg_error.innerHTML==""){
-							//Handle SESSION & LOCAL STORAGE
+				var uquery = "SELECT * FROM user where username ='"+username+"'";
+				var equery = "SELECT * FROM user where email ='"+email+"'";
+				var regquery = "insert into `user` (`username`, `nama_lengkap`, `password`, `email`, `handphone`, `address`, `province`, `state`, `postcode`) VALUES ('"+username+"','"+namalengkap+"','"+password+"','"+email+"','"+hpnum+"','"+address+"','"+province+"','"+kecamatan+"','"+postcode+"')";
+				reg_error.innerHTML = "";
+				
+				sendQuery(uquery, function() {
+					var jsonArray = JSON.parse(xmlhttp.responseText);
+					if(jsonArray.result.length > 0){
+						reg_error.innerHTML = "The Username is Taken";
+					}
+				});
+				sendQuery(equery, function() {
+					var jsonArray = JSON.parse(xmlhttp.responseText);
+					if(jsonArray.result.length > 0){
+						if(reg_error.innerHTML.valueOf()== "")
+							reg_error.innerHTML = "The Email is Taken";
+						else reg_error.innerHTML = "The Username And Email is Taken";
+					}
+				});
+				if(reg_error.innerHTML.valueOf() == ""){
+					sendQuery(regquery, function() {
+						var jsonArray = JSON.parse(xmlhttp.responseText);
+						alert(jsonArray.result[0]);
+						if(jsonArray.result[0] > -1){
 							window.location = "registercreditcard.jsp";
 						}
-					}
-				};
-				xmlhttp.open("POST","verifyRegister",true);
-				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				xmlhttp.send(data);
+						else{
+							reg_error.innerHTML = "Unable To add to Database";
+						}
+					});
+				}
 			}
 		 	function checkUsername(fld){
 				var err_username = document.getElementById("err_username");
