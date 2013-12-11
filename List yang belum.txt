@@ -1,0 +1,7 @@
+halaman 
+- register terkait penyimpanan di scripts/php/register.php dan scripts/register.js
+- registerkartu terkait penyimpanan di scripts/php/register.php dan scripts/registerkartu.js
+- listkategori terkait tambah  scripts/php/tambahkategori.php
+- editkategori saat return true, tidak terjadi action
+- listbarang terkait tambah scripts/php/tambahbarang.php
+- editbarang saat return true, tidak terjadi action
