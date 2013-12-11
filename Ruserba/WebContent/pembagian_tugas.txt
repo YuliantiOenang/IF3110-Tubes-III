@@ -1,0 +1,32 @@
+
+
+1 Admin :
+	List barang
+	Hapus
+	Ubah
+	Tambah
+
+2 registrasi
+3 registrasi kartu kredit
+4 kategori
+5 result
+6 detail
+7 shoppingbag
+8 login
+9 validasi registrasi
+10 validasi kartu kredit
+11 header
+12 footer
+
+Rangga: 1, 4, 5, 6
+Yodi : 11, 12, 7, 8
+Erwin : 2, 3, 9, 10
+
+operasi database
+================
+loading list kategori , select distinct
+loading search result dengan paginasi hanya 10
+load detail barang 
+insert profil baru dan
+update return field field yang berubah
+Shopping bag insert id user x harga total belanjaan

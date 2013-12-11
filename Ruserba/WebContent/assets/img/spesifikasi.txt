@@ -1,0 +1,22 @@
+registrasi
+registrasikredit
+kategori
+result
+detail
+shoppingbag
+
+ajax login
+ajax validasi registrasi
+ajax validasi kartu kredit
+ajax jumlah barang cukup
+ajax suggestion
+
+
+operasi database
+================
+loading list kategori , select distinct
+loading search result dengan paginasi hanya 10
+load detail barang 
+insert profil baru dan
+update return field field yang berubah
+Shopping bag insert id user x harga total belanjaan
