@@ -57,6 +57,7 @@ public class AdminBarang extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		RequestDispatcher dispatcher = null;
+		
 		if (session.getAttribute("role") == null) {
 			response.sendRedirect("register");
 		} else if (session.getAttribute("role").equals("1")) {
@@ -134,7 +135,7 @@ public class AdminBarang extends HttpServlet {
 			}
 			dispatcher.forward(request, response);
 		} else if (session.getAttribute("role").equals("0")) {
-			response.sendRedirect("index");
+			response.sendRedirect("Index");
 		}
 
 	}
@@ -247,9 +248,11 @@ public class AdminBarang extends HttpServlet {
 			/** old */
 
 			/* upload */
-			System.out.println(filename.toString());
+			System.out.println(filename.toString()+"1");
 			Part filePart = request.getPart("photo");
+			System.out.println(filename.toString()+"2");
 			String fileName = getFileName(filePart);
+			System.out.println(filename.toString()+"3");
 
 			String[] sp = fileName.toString().split("\\.");
 			sp[1] = sp[1].toLowerCase();

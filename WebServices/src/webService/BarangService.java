@@ -33,6 +33,7 @@ public class BarangService {
 	@Path("/insert")
 	@Produces("application/json")
 	public String insertBarang(@Context UriInfo info) {
+		System.out.println("SR1");
 		gson = new Gson();
 		String json = null;
 		JsonParser jsonParser = new JsonParser();
@@ -58,19 +59,24 @@ public class BarangService {
 			insertResult = gson.toJson(stmt.executeUpdate());
 		} catch (Exception e) {
 		}
+		System.out.println("SR2");
 		return insertResult;
 	}
 
 	@GET
 	@Path("/select2")
 	@Produces("application/json")
-	public String selectSelection(@QueryParam("p1") String p1,
-			@QueryParam("p2") String p2, @QueryParam("p3") String p3,
-			@QueryParam("p4") String p4, @QueryParam("p5") String p5,
+	public String selectSelection(
+			@DefaultValue("") @QueryParam("p1") String p1,
+			@DefaultValue("") @QueryParam("p2") String p2,
+			@DefaultValue("") @QueryParam("p3") String p3,
+			@DefaultValue("") @QueryParam("p4") String p4,
+			@DefaultValue("") @QueryParam("p5") String p5,
 			@QueryParam("page") int page) {
 		String selectResult = null;
 		query = "SELECT kategori.nama, barang.gambar, barang.id, barang.id_kategori, barang.nama_barang, barang.harga_barang, barang.jumlah_barang, barang.keterangan FROM barang JOIN kategori ON barang.id_kategori=kategori.id "
 				+ p3 + p4 + p5 + p1 + p2 + "LIMIT " + page + ",10";
+		System.out.println(query);
 		try {
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs;
@@ -110,7 +116,7 @@ public class BarangService {
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs;
 			rs = stmt.executeQuery();
-			int cID = (rs.getInt(1));
+			int cID = (rs.getInt("JmlBarang"));
 			gson = new Gson();
 			selectResult = gson.toJson(cID);
 		} catch (Exception e) {
