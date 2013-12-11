@@ -1,5 +1,4 @@
 <?php
-	
 	function checkPassword($user, $password){
 	
 	    $services_json = json_decode(getenv("VCAP_SERVICES"),true);
@@ -56,11 +55,12 @@
 		return $fetch ? $result : 'undefined';		
 	}
 	
-	if(isset($_POST["ajax"])){
+	//if(isset($_POST["ajax"])){
 		// handle ajax untuk aksi2 transaksi
 		// syarat: $_POST["ajax"] terdefinisi
 		
-		$request = json_decode($_POST["ajax"], true);
+		//$request = json_decode($_POST["ajax"], true);
+		$request = array("action" => "login", "user" => "faiz", "pass" => "root");
 		$response = array("status" => "error");
 		
 		switch($request["action"]){
@@ -79,5 +79,5 @@
 		}
 		
 		exit(json_encode($response));
-	}
+	//}
 ?>

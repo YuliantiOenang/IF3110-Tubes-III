@@ -1,6 +1,4 @@
 <?php
-	//fungsi-fungsi pengambilan data (SELECT) barang
-	
 	class Barang{
 		public $id, $nama, $stok, $harga, $jumlah_beli, $kategori, $deskripsi;
 		
@@ -282,5 +280,4 @@
 		
 		return json_encode($response);
 	}
-
 ?>
