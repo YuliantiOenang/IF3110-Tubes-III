@@ -1,0 +1,181 @@
+[WARNING] DL is deprecated, please use Fiddle
+====> /logs/access.log <====
+
+10.0.64.37 - azon04@gmail.com [16/Dec/2013:05:53:40 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 200 373 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.141 - azon04@gmail.com [16/Dec/2013:05:53:50 +0000] "GET /services/barang.php?id_barang=1&nama=Giordanos HTTP/1.1" 200 276 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.37 - azon04@gmail.com [16/Dec/2013:05:53:55 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 200 373 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.72 - azon04@gmail.com [16/Dec/2013:05:54:11 +0000] "GET /services/barang.php?id_barang=1&harga=0 HTTP/1.1" 200 276 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.72 - azon04@gmail.com [16/Dec/2013:05:54:14 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 200 370 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.37 - - [16/Dec/2013:09:14:39 +0000] "GET /services/kategori.php HTTP/1.1" 200 392 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:14:39 +0000] "GET /services/barang.php?kategori=1&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 461 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:14:40 +0000] "GET /services/barang.php?kategori=2&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:14:40 +0000] "GET /services/barang.php?kategori=3&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:14:41 +0000] "GET /services/barang.php?kategori=4&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 479 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:14:41 +0000] "GET /services/barang.php?kategori=5&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 476 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:15:09 +0000] "GET /services/barang.php?kategori=1&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 461 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:15:09 +0000] "GET /services/barang.php?kategori=2&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:15:10 +0000] "GET /services/barang.php?kategori=3&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:15:11 +0000] "GET /services/barang.php?kategori=5&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 476 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:15:19 +0000] "GET /services/kategori.php HTTP/1.1" 200 392 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:15:21 +0000] "GET /services/barang.php?kategori=1 HTTP/1.1" 200 457 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:15:22 +0000] "GET /services/barang.php?kategori=2 HTTP/1.1" 200 508 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:15:23 +0000] "GET /services/barang.php?kategori=3 HTTP/1.1" 200 464 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:15:23 +0000] "GET /services/barang.php?kategori=4 HTTP/1.1" 200 549 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:15:28 +0000] "GET /services/barang.php?kategori=5 HTTP/1.1" 200 544 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:15:33 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 200 370 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:17:01 +0000] "GET /services/kategori.php HTTP/1.1" 200 392 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:17:02 +0000] "GET /services/barang.php?kategori=1&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 461 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:17:03 +0000] "GET /services/barang.php?kategori=2&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:17:03 +0000] "GET /services/barang.php?kategori=3&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:17:05 +0000] "GET /services/barang.php?kategori=4&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 479 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:17:15 +0000] "GET /services/barang.php?kategori=5&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 476 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:17:27 +0000] "GET /services/kategori.php HTTP/1.1" 200 392 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:17:27 +0000] "GET /services/barang.php?kategori=1 HTTP/1.1" 200 457 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:17:28 +0000] "GET /services/barang.php?kategori=2 HTTP/1.1" 200 508 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:17:28 +0000] "GET /services/barang.php?kategori=3 HTTP/1.1" 200 464 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:17:29 +0000] "GET /services/barang.php?kategori=4 HTTP/1.1" 200 549 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:17:30 +0000] "GET /services/barang.php?kategori=5 HTTP/1.1" 200 544 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:17:34 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 200 370 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:18:39 +0000] "GET /services/kategori.php HTTP/1.1" 200 392 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:18:39 +0000] "GET /services/barang.php?kategori=1&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 461 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:18:40 +0000] "GET /services/barang.php?kategori=2&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:18:41 +0000] "GET /services/barang.php?kategori=4&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 479 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:18:42 +0000] "GET /services/barang.php?kategori=5&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 476 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:18:55 +0000] "GET /services/barang.php?kategori=3 HTTP/1.1" 200 464 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:18:56 +0000] "GET /services/barang.php?kategori=5 HTTP/1.1" 200 544 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:19:00 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 200 370 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:19:04 +0000] "GET /services/barang.php?id_barang=1&nama=Giordanosa&harga=0&tersedia=10 HTTP/1.1" 200 275 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:19:13 +0000] "GET /services/barang.php?kategori=1 HTTP/1.1" 200 457 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:19:14 +0000] "GET /services/barang.php?kategori=2 HTTP/1.1" 200 508 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:19:16 +0000] "GET /services/barang.php?kategori=3 HTTP/1.1" 200 464 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:19:19 +0000] "GET /services/barang.php?kategori=4 HTTP/1.1" 200 549 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:19:23 +0000] "GET /services/barang.php?kategori=5 HTTP/1.1" 200 544 "-" "Java/1.7.0"
+10.0.64.141 - azon04@gmail.com [16/Dec/2013:09:20:20 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 200 370 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.72 - - [16/Dec/2013:09:21:14 +0000] "GET /services/kategori.php HTTP/1.1" 200 392 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:21:14 +0000] "GET /services/barang.php?kategori=1&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 461 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:21:14 +0000] "GET /services/barang.php?kategori=2&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:21:15 +0000] "GET /services/barang.php?kategori=3&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 466 "-" "Java/1.7.0"
+10.0.64.37 - - [16/Dec/2013:09:21:15 +0000] "GET /services/barang.php?kategori=4&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 479 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:21:15 +0000] "GET /services/barang.php?kategori=5&limit=3&idx=0&sortby=dibeli&sorttype=desc HTTP/1.1" 200 476 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:21:19 +0000] "GET /services/kategori.php HTTP/1.1" 200 392 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:21:19 +0000] "GET /services/barang.php?kategori=1 HTTP/1.1" 200 457 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:21:19 +0000] "GET /services/barang.php?kategori=2 HTTP/1.1" 200 508 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:21:19 +0000] "GET /services/barang.php?kategori=3 HTTP/1.1" 200 464 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:21:19 +0000] "GET /services/barang.php?kategori=4 HTTP/1.1" 200 549 "-" "Java/1.7.0"
+10.0.64.72 - - [16/Dec/2013:09:21:19 +0000] "GET /services/barang.php?kategori=5 HTTP/1.1" 200 544 "-" "Java/1.7.0"
+10.0.64.74 - - [16/Dec/2013:09:21:21 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 200 370 "-" "Java/1.7.0"
+10.0.64.141 - - [16/Dec/2013:09:21:25 +0000] "GET /services/barang.php?id_barang=1&nama=Giordanosa&harga=0&tersedia=10 HTTP/1.1" 200 275 "-" "Java/1.7.0"
+
+====> /logs/error.log <====
+
+apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1 for ServerName
+[Mon Dec 16 05:53:22 2013] [warn] NameVirtualHost *:53408 has no VirtualHosts
+[Mon Dec 16 05:53:22 2013] [warn] pid file /var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/run.pid overwritten -- Unclean shutdown of previous Apache run?
+[Mon Dec 16 05:53:22 2013] [notice] Apache/2.2.22 (Ubuntu) PHP/5.3.10-1ubuntu3.4 with Suhosin-Patch configured -- resuming normal operations
+[Mon Dec 16 05:53:50 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: harga in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 05:53:50 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: gambar in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 05:53:50 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: tersedia in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 05:53:50 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: dibeli in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 05:54:11 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: nama in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 05:54:11 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: gambar in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 05:54:11 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: tersedia in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 05:54:11 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: dibeli in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 09:15:21 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:21 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:21 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:21 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:22 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:22 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:22 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:22 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:23 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:23 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:23 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:23 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:23 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:23 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:23 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:23 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:28 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:28 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:28 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:15:28 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:27 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:27 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:27 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:27 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:28 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:28 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:28 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:28 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:28 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:28 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:28 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:28 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:29 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:29 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:29 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:29 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:30 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:30 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:30 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:17:30 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:18:55 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:18:55 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:18:55 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:18:55 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:18:56 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:18:56 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:18:56 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:18:56 2013] [error] [client 10.0.64.37] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:04 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: gambar in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 09:19:04 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: dibeli in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 09:19:13 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:13 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:13 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:13 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:14 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:14 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:14 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:14 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:16 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:16 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:16 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:16 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:23 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:23 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:23 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:19:23 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.74] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: limit in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: idx in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sortby in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:19 2013] [error] [client 10.0.64.72] PHP Notice:  Undefined index: sorttype in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 118
+[Mon Dec 16 09:21:25 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: gambar in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+[Mon Dec 16 09:21:25 2013] [error] [client 10.0.64.141] PHP Notice:  Undefined index: dibeli in /mnt/var/vcap.local/dea/apps/azon04-0-7e9bedffd0447b9c377ffa6de37f045f/app/services/barang.php on line 113
+
+====> /logs/stderr.log <====
+
+apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1 for ServerName
+[Mon Dec 16 05:53:22 2013] [warn] NameVirtualHost *:53408 has no VirtualHosts
+
+

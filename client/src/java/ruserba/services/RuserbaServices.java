@@ -82,10 +82,20 @@ public class RuserbaServices {
         }
     }
     
-    public static boolean EditBarang(int id,String nama, int harga, String gambar, int tersedia, int dibeli) {
+    public static boolean EditBarang(int id,String nama, int harga, String gambar, int tersedia) {
         try {
             JSONObject returnObj = GetResponse(address+"services/barang.php?id_barang="+id+"&nama="+nama
-                    +"&harga="+harga+"&gambar="+gambar+"&tersedia="+tersedia+"&dibeli="+dibeli);
+                    +"&harga="+harga+"&gambar="+gambar+"&tersedia="+tersedia);
+            return returnObj.getString("status").equalsIgnoreCase("success");
+        } catch (ParseException ex) {
+            return false;
+        }
+    }
+    
+    public static boolean EditBarang(int id,String nama, int harga, int tersedia) {
+        try {
+            JSONObject returnObj = GetResponse(address+"services/barang.php?id_barang="+id+"&nama="+nama
+                    +"&harga="+harga+"&tersedia="+tersedia);
             return returnObj.getString("status").equalsIgnoreCase("success");
         } catch (ParseException ex) {
             return false;

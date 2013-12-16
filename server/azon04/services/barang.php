@@ -73,32 +73,39 @@
 		$query = "SELECT * FROM barang WHERE nama_barang='".$nama_barang."'";
 		$result = mysql_query($query,$link);
 		if(mysql_num_rows($result) > 0) {
-			return json_encode(array('status'=>'failed'));
+			return json_encode(array('status'=>'name already exist'));
 		}
 		
 		$query = "UPDATE barang SET ";
 		if(isset($nama_barang)) {
 			$query .= " nama_barang='".$nama_barang."'";
+			$query .= ",";
 		}
 		
 		if(isset($harga_barang)) {
-			$query .= " harga_barang='".$harga_barang."'";
+			$query .= " harga_barang=".$harga_barang;
+			$query .= ",";
 		}
 		
 		if(isset($gambar)) {
 			$query .= " gambar='".$gambar."'";
+			$query .= ",";
 		}
 		
 		if(isset($tersedia)) {
 			$query .= " tersedia=".$tersedia;
+			$query .= ",";
 		}
 		
 		if(isset($dibeli)) {
 			$query .= " dibeli=".$dibeli;
+			$query .= ",";
 		}
 		
-		$query .= "WHERE id_barang=".$id;
+		$query = substr($query,0,strlen($query) - 1);
+		$query .= " WHERE id_barang=".$id;
 		
+		echo $query;
 		$result = mysql_query($query,$link);
 		if($result) {
 			return json_encode(array('status'=>'success'));

@@ -21,6 +21,7 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import ruserba.beans.Item;
 import ruserba.database.DatabaseHelper;
+import ruserba.services.RuserbaServices;
 
 /**
  *
@@ -74,7 +75,7 @@ public class SaveItemServlet extends HttpServlet {
         
         
         String imageName = null;
-        if(fileGambar != null) {
+        if(fileGambar != null && !getFilename(fileGambar).equalsIgnoreCase("")) {
             System.out.println(getFilename(fileGambar));
             String fileName = getFilename(fileGambar);
             InputStream fileGambarStream = fileGambar.getInputStream();
@@ -96,16 +97,18 @@ public class SaveItemServlet extends HttpServlet {
         // Gambar
 
         System.out.println("Nama Barang : " + nama_barang);
+        
         DatabaseHelper.Connect();
-        String query = "Update barang set nama_barang='" + nama_barang
-                + "', id_kategori=" + category
-                + ", harga_barang=" + harga + ", tersedia=" + tersedia + " where id_barang=" + id_barang;
         if(imageName != null) {
-           query = "Update barang set nama_barang='" + nama_barang
-                + "', id_kategori=" + category
-                + ", harga_barang=" + harga + ", tersedia=" + tersedia + ", gambar='"+imageName+"' where id_barang=" + id_barang; 
+            System.out.println(RuserbaServices.EditBarang(Integer.parseInt(id_barang), nama_barang, 
+                    Integer.parseInt(harga), imageName, Integer.parseInt(tersedia)));
+        } else {
+             System.out.println(RuserbaServices.EditBarang(Integer.parseInt(id_barang), nama_barang, 
+                    Integer.parseInt(harga),  Integer.parseInt(tersedia)));
+            
         }
         
+        String query = "";
         if(id_barang == null || id_barang.equalsIgnoreCase("null")) {
             query = "insert into barang (nama_barang,id_kategori,harga_barang,dibeli,tersedia) values"
                     + "('"+nama_barang+"',"+category+","+harga+",0,"+tersedia+")";
