@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ruserba.database.DatabaseHelper;
+import ruserba.services.RuserbaServices;
 
 /**
  *
@@ -34,17 +35,13 @@ public class DeleteItemServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String id = request.getParameter("id_popup");
-        
-        DatabaseHelper.Connect();
-        String query = "DELETE FROM barang WHERE id_barang="+id;
-        if(DatabaseHelper.execute(query)) {
+
+        if(RuserbaServices.DeleteBarang(Integer.parseInt(id))){
             
         }
-        
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin");
         dispatcher.forward(request, response);
         
-        DatabaseHelper.Disconnect();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

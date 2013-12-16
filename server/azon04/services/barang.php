@@ -59,10 +59,22 @@
 		}
 	}
 	
+	function DeleteBarang($link,$id) {
+		$query = "DELETE FROM barang WHERE id_barang=".$id;
+		$result = mysql_query($query,$link);
+		if($result) {
+			return json_encode(array('status'=>'success'));
+		} else {
+			return json_encode(array('status'=>'empty'));
+		}
+	}
+	
 	if(isset($_GET['id_barang'])) {
 		echo GetBarang($link,$_GET['id_barang']);
 	} else if(isset($_GET['kategori'])) {
 			echo GetBarangByKategori($link,$_GET['kategori'],$_GET['limit'],$_GET['idx'],$_GET['sortby'],$_GET['sorttype']);
+	} else if(isset($_GET['delete_id'])) {
+		echo DeleteBarang($link,$_GET['delete_id']);
 	} else {
 		echo GetAllBarang($link);
 	}

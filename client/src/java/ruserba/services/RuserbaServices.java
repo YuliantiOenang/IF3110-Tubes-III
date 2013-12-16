@@ -73,6 +73,15 @@ public class RuserbaServices {
         }
     }
     
+    public static boolean DeleteBarang(int id) {
+        try {
+            JSONObject returnObj = GetResponse(address+"services/barang.php?delete_id="+id);
+            return returnObj.getString("status").equalsIgnoreCase("success");
+        } catch (ParseException ex) {
+            return false;
+        }
+    }
+    
     public static JSONObject GetBarang(int id) {
         try {
             return GetResponse(address+"services/barang.php?id_barang="+id);
