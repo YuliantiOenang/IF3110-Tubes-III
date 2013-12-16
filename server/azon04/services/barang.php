@@ -69,8 +69,51 @@
 		}
 	}
 	
+	function EditBarang($link,$id,$nama_barang,$harga_barang,$gambar,$tersedia, $dibeli) {
+		$query = "SELECT * FROM barang WHERE nama_barang='".$nama_barang."'";
+		$result = mysql_query($query,$link);
+		if(mysql_num_rows($result) > 0) {
+			return json_encode(array('status'=>'failed'));
+		}
+		
+		$query = "UPDATE barang SET ";
+		if(isset($nama_barang)) {
+			$query .= " nama_barang='".$nama_barang."'";
+		}
+		
+		if(isset($harga_barang)) {
+			$query .= " harga_barang='".$harga_barang."'";
+		}
+		
+		if(isset($gambar)) {
+			$query .= " gambar='".$gambar."'";
+		}
+		
+		if(isset($tersedia)) {
+			$query .= " tersedia=".$tersedia;
+		}
+		
+		if(isset($dibeli)) {
+			$query .= " dibeli=".$dibeli;
+		}
+		
+		$query .= "WHERE id_barang=".$id;
+		
+		$result = mysql_query($query,$link);
+		if($result) {
+			return json_encode(array('status'=>'success'));
+		} else {
+			return json_encode(array('status'=>'failed'));
+		}
+		
+	}
+	
 	if(isset($_GET['id_barang'])) {
-		echo GetBarang($link,$_GET['id_barang']);
+		if(isset($_GET['nama']) || isset($_GET['harga']) || isset($_GET['gambar']) || isset($_GET['tersedia']) || isset($_GET['dibeli'])) {
+			echo EditBarang($link,$_GET['id_barang'],$_GET['nama'],$_GET['harga'],$_GET['gambar'],$_GET['tersedia'],$_GET['dibeli']);
+		} else {
+			echo GetBarang($link,$_GET['id_barang']);
+		}
 	} else if(isset($_GET['kategori'])) {
 			echo GetBarangByKategori($link,$_GET['kategori'],$_GET['limit'],$_GET['idx'],$_GET['sortby'],$_GET['sorttype']);
 	} else if(isset($_GET['delete_id'])) {

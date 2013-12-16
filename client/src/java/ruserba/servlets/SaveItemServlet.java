@@ -8,10 +8,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -104,7 +100,7 @@ public class SaveItemServlet extends HttpServlet {
         String query = "Update barang set nama_barang='" + nama_barang
                 + "', id_kategori=" + category
                 + ", harga_barang=" + harga + ", tersedia=" + tersedia + " where id_barang=" + id_barang;
-        if(imageName != null ) {
+        if(imageName != null) {
            query = "Update barang set nama_barang='" + nama_barang
                 + "', id_kategori=" + category
                 + ", harga_barang=" + harga + ", tersedia=" + tersedia + ", gambar='"+imageName+"' where id_barang=" + id_barang; 

@@ -15,8 +15,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 import ruserba.beans.Item;
 import ruserba.database.DatabaseHelper;
+import ruserba.services.RuserbaServices;
 
 /**
  *
@@ -39,7 +41,6 @@ public class EditItemServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        DatabaseHelper.Connect();
         if(request.getParameter("id_barang") == null) {
              Item barang = new Item();
              barang.setCategory(Integer.parseInt(request.getParameter("id_kategori")));
@@ -47,10 +48,9 @@ public class EditItemServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("adminadd");
             dispatcher.forward(request, response);
         } else {        
-            String query = "SELECT * FROM barang WHERE id_barang=" + request.getParameter("id_barang");
-            ResultSet res = DatabaseHelper.executeQuery(query);
-            try {
-                if(res.next()) {
+            JSONObject res = RuserbaServices.GetBarang(Integer.parseInt(request.getParameter("id_barang")));
+            
+              
                     Item barang = new Item();
                     barang.setId(res.getInt("id_barang"));
                     barang.setName(res.getString("nama_barang"));
@@ -60,17 +60,8 @@ public class EditItemServlet extends HttpServlet {
                     request.setAttribute("barang", barang);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("adminedit");
                     dispatcher.forward(request, response);
-                } else {
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("admin");
-                    dispatcher.forward(request, response);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(EditItemServlet.class.getName()).log(Level.SEVERE, null, ex);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("admin");
-                dispatcher.forward(request, response);
-            }
+             
         }
-        DatabaseHelper.Disconnect();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

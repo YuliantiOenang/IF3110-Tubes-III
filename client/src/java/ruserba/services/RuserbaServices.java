@@ -82,6 +82,16 @@ public class RuserbaServices {
         }
     }
     
+    public static boolean EditBarang(int id,String nama, int harga, String gambar, int tersedia, int dibeli) {
+        try {
+            JSONObject returnObj = GetResponse(address+"services/barang.php?id_barang="+id+"&nama="+nama
+                    +"&harga="+harga+"&gambar="+gambar+"&tersedia="+tersedia+"&dibeli="+dibeli);
+            return returnObj.getString("status").equalsIgnoreCase("success");
+        } catch (ParseException ex) {
+            return false;
+        }
+    }
+    
     public static JSONObject GetBarang(int id) {
         try {
             return GetResponse(address+"services/barang.php?id_barang="+id);
