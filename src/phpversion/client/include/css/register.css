@@ -1,0 +1,50 @@
+.form-group {
+	margin-bottom: 10px;
+}
+
+label {
+	display: inline-block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.form-control {
+	display: block;
+	width: 80%;
+	height: 28px;
+	padding: 6px 12px;
+	font-size: 14px;
+	color: #444;
+	vertical-align: middle;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+}
+
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 6px;
+}
+
+.btn {
+	color: #ddd;
+	background-color: #444;
+	border-color: #222;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn:disabled {
+	color: #fff;
+	background-color: #111;
+	border-color: #000;
+}
