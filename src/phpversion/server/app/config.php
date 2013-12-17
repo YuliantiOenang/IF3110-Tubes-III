@@ -15,7 +15,7 @@ define('ENVIRONMENT', 'development');
 /**
  * Alamat web home, tanpa tanda / di belakang
  */
-define('SITEURL', '//localhost/IF3110-Tubes-I/src');
+define('SITEURL', '//localhost/IF3110-Tubes-III/src/phpversion/server');
 
 /**
  * Database configuration
