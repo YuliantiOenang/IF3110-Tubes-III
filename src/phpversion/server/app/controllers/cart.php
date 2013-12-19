@@ -15,8 +15,8 @@ Class CartController Extends BaseController {
 		echo $json;
 	}
 
-	public function add($customer_id, $product_id) {
-		$json = json_encode(ShoppingBag::addItem($this->registry, $customer_id, $product_id));
+	public function add($customer_id, $product_id, $quantity) {
+		$json = json_encode(ShoppingBag::addItem($this->registry, $customer_id, $product_id, $quantity));
 		echo $json;
 	}
 }

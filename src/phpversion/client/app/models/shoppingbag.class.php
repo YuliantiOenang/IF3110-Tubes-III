@@ -77,7 +77,7 @@ class ShoppingBag {
 		return json_decode($response, true);
 	}
 
-	public static function addItem($registry, $customer_id, $product_id) {
+	public static function addItem($registry, $customer_id, $product_id, $quantity) {
 		/*
 		try {
     		$dbh = $registry->database;
@@ -87,7 +87,7 @@ class ShoppingBag {
 			echo $e->getMessage();
 		}
 		*/
-		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/user_exist/" . $customer_id . "/" . $product_id;
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/cart/add/" . $customer_id . "/" . $product_id . "/" . $quantity;
 		$response = file_get_contents($url);
 		return json_decode($response, true);
 	}

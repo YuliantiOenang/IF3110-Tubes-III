@@ -65,11 +65,11 @@ class ShoppingBag {
 		}
 	}
 
-	public static function addItem($registry, $customer_id, $product_id) {
+	public static function addItem($registry, $customer_id, $product_id, $quantity) {
 		try {
     		$dbh = $registry->database;
-			$sth = $dbh->prepare("INSERT INTO shopping_bag (customer_id, product_id, request_count, is_purchased) values (:customer_id, :product_id, 1, 0)"); 
-			return $sth->execute(array('customer_id' => $customer_id, 'product_id' => $product_id));
+			$sth = $dbh->prepare("INSERT INTO shopping_bag (customer_id, product_id, request_count, is_purchased) values (:customer_id, :product_id, :quantity, 0)"); 
+			return $sth->execute(array('customer_id' => $customer_id, 'product_id' => $product_id, 'quantity' => $quantity));
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}

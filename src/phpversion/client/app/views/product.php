@@ -83,7 +83,7 @@
 						<form action="<?php echo SITEURL . '/cart/add/' . $product_id ?>" method="post">
 							<li>
 								<center>
-									<p>Quantity <input type="number" name="quantity"><br></p>
+									<p>Quantity <input type="number" min="1" name="quantity"><br></p>
 									<button type="submit" class="buttonBeli"> BELI </button>
 	
 								</center>

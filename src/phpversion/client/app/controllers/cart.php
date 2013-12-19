@@ -26,8 +26,9 @@ Class CartController Extends BaseController {
 		    header("Location: " . SITEURL . "/register/customer"); die();
 		} else {
 			$customer_id = $_SESSION['logged_userid'];
+			$quantity = $_POST['quantity'];
 
-			ShoppingBag::addItem($this->registry, $customer_id, $product_id);
+			ShoppingBag::addItem($this->registry, $customer_id, $product_id, $quantity);
 			header("Location: " . SITEURL . "/cart"); die();
 		}
 	}
