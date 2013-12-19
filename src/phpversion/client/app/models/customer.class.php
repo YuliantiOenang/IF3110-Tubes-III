@@ -149,7 +149,7 @@ class Customer {
 		}
 		*/
 
-		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/user_exist/" . $user;
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/user_exist/" . $email;
 		$response = file_get_contents($url);
 		return json_decode($response, true);
 	}
@@ -159,18 +159,46 @@ class Customer {
 	 * Mereturn id dari customer
 	 */
 	public static function addCustomer($registry, $customer) {
-		try {
-			$dbh = $registry->database;
-			$sth = $dbh->prepare("INSERT INTO customer (username, email, password, fullname, phone, address, city, province, postcode, transaction) values (:username, :email, :password, :fullname, :phone, :address, :city, :province, :postcode, :transaction)"); 
 
-			if ($sth->execute($customer) !== false) {
-				return $dbh->lastInsertId(); 
-			} else {
-				return 0;
-			}
-		} catch (PDOException $e) {
-			echo $e->getMessage();
+		try{
+
+		  $sClient = new SoapClient('http://localhost/IF3110-Tubes-III/src/phpversion/server/wsdl/customer.wsdl');
+
+		  $response = $sClient->add_customer($customer['username'] .
+											$customer['email'] ,
+											$customer['password'] ,
+											$customer['fullname'] ,
+											$customer['phone'] ,
+											$customer['address'] ,
+											$customer['city'] ,
+											$customer['province'] ,
+											$customer['postcode'] ,
+											$customer['transaction']);
+
+		} catch(SoapFault $e){
+		  //var_dump($e);
 		}
+
+
+
+		if ($response > 0) {
+		 	return $response;
+		} else {
+		 
+			try {
+				$dbh = $registry->database;
+				$sth = $dbh->prepare("INSERT INTO customer (username, email, password, fullname, phone, address, city, province, postcode, transaction) values (:username, :email, :password, :fullname, :phone, :address, :city, :province, :postcode, :transaction)"); 
+
+				if ($sth->execute($customer) !== false) {
+					return $dbh->lastInsertId(); 
+				} else {
+					return 0;
+				}
+			} catch (PDOException $e) {
+				echo $e->getMessage();
+			}
+			
+	    }
 	}
 
 	/**

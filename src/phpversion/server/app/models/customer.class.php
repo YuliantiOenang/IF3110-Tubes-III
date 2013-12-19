@@ -118,13 +118,22 @@ class Customer {
 	 * Menambah customer baru
 	 * Mereturn id dari customer
 	 */
-	public static function addCustomer($registry, $customer) {
+	public static function addCustomer($customer) {
 		try {
-			$dbh = $registry->database;
+			//kasus khusus
+			//$dbh = $registry->database;
+
+			$host = 'localhost';
+			$dbname = 'tubes1_wbd';
+			$user = 'root';
+			$pass = '';
+	    	$dbh = new PDO("mysql:host=" . $host . ";dbname=" . $dbname, $user, $pass);
+
 			$sth = $dbh->prepare("INSERT INTO customer (username, email, password, fullname, phone, address, city, province, postcode, transaction) values (:username, :email, :password, :fullname, :phone, :address, :city, :province, :postcode, :transaction)"); 
 
 			if ($sth->execute($customer) !== false) {
-				return $dbh->lastInsertId(); 
+				return $dbh->lastInsertId();
+
 			} else {
 				return 0;
 			}

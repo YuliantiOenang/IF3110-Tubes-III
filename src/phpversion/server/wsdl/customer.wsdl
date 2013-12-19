@@ -90,7 +90,7 @@ Julien Blitte
 <!-- access to service provider -->
 	<service name='tubes'>
 	<port name='tubes_0' binding='Tubes PBD_webservices'>
-	<soap:address location='http://localhost/IF3110-Tubes-III/src/phpversion/server/soap/'/>
+	<soap:address location='http://localhost/IF3110-Tubes-III/src/phpversion/server/app/controllers/soap.php'/>
 	</port>
 	</service>
 </definitions>
