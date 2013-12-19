@@ -1,0 +1,32 @@
+[WARNING] DL is deprecated, please use Fiddle
+====> /logs/access.log <====
+
+10.0.64.74 - azon04@gmail.com [08/Dec/2013:02:48:25 +0000] "GET /services/barang.php HTTP/1.1" 500 275 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.72 - azon04@gmail.com [08/Dec/2013:02:48:31 +0000] "GET /services/barang.php?id=1 HTTP/1.1" 500 275 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.72 - azon04@gmail.com [08/Dec/2013:02:48:36 +0000] "GET /services/barang.php?id_barnag=1 HTTP/1.1" 500 275 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.74 - azon04@gmail.com [08/Dec/2013:02:48:42 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 500 275 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+10.0.64.74 - azon04@gmail.com [08/Dec/2013:02:48:45 +0000] "GET /services/barang.php?id_barang=1 HTTP/1.1" 500 275 "-" "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"
+
+====> /logs/error.log <====
+
+apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1 for ServerName
+[Sun Dec 08 02:48:05 2013] [warn] NameVirtualHost *:34126 has no VirtualHosts
+[Sun Dec 08 02:48:06 2013] [warn] pid file /var/vcap.local/dea/apps/azon04-0-da827fc9d5e6240f11ab22c7efc6c90a/run.pid overwritten -- Unclean shutdown of previous Apache run?
+[Sun Dec 08 02:48:06 2013] [notice] Apache/2.2.22 (Ubuntu) PHP/5.3.10-1ubuntu3.8 with Suhosin-Patch configured -- resuming normal operations
+[Sun Dec 08 02:48:25 2013] [error] [client 10.0.64.74] PHP Parse error:  syntax error, unexpected '=', expecting ',' or ';' in /mnt/var/vcap.local/dea/apps/azon04-0-da827fc9d5e6240f11ab22c7efc6c90a/app/services/connection.php on line 6
+[Sun Dec 08 02:48:31 2013] [error] [client 10.0.64.72] PHP Parse error:  syntax error, unexpected '=', expecting ',' or ';' in /mnt/var/vcap.local/dea/apps/azon04-0-da827fc9d5e6240f11ab22c7efc6c90a/app/services/connection.php on line 6
+[Sun Dec 08 02:48:36 2013] [error] [client 10.0.64.72] PHP Parse error:  syntax error, unexpected '=', expecting ',' or ';' in /mnt/var/vcap.local/dea/apps/azon04-0-da827fc9d5e6240f11ab22c7efc6c90a/app/services/connection.php on line 6
+[Sun Dec 08 02:48:42 2013] [error] [client 10.0.64.74] PHP Parse error:  syntax error, unexpected '=', expecting ',' or ';' in /mnt/var/vcap.local/dea/apps/azon04-0-da827fc9d5e6240f11ab22c7efc6c90a/app/services/connection.php on line 6
+[Sun Dec 08 02:48:45 2013] [error] [client 10.0.64.74] PHP Parse error:  syntax error, unexpected '=', expecting ',' or ';' in /mnt/var/vcap.local/dea/apps/azon04-0-da827fc9d5e6240f11ab22c7efc6c90a/app/services/connection.php on line 6
+
+====> /logs/stderr.log <====
+
+apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1 for ServerName
+[Sun Dec 08 02:48:05 2013] [warn] NameVirtualHost *:34126 has no VirtualHosts
+
+
+[WARNING] DL is deprecated, please use Fiddle
+
+Interrupted
+
+Terminate batch job (Y/N)? 
