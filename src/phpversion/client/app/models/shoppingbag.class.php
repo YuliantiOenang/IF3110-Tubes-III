@@ -43,6 +43,7 @@ class ShoppingBag {
 	 * Mendapatkan shopping dengan customer id tertentu yang belum terbeli
 	 */
 	public static function getNotPurchasedByCustomerId($registry, $id) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT * FROM shopping_bag WHERE customer_id = :id AND is_purchased = 0');
@@ -53,9 +54,15 @@ class ShoppingBag {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/cart/get/" . $id;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 	public static function updatePurchasedByCustomerId($registry, $id) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('UPDATE shopping_bag SET is_purchased = 1 WHERE customer_id = :id');
@@ -63,9 +70,15 @@ class ShoppingBag {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/cart/update/" . $id;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 	public static function addItem($registry, $customer_id, $product_id) {
+		/*
 		try {
     		$dbh = $registry->database;
 			$sth = $dbh->prepare("INSERT INTO shopping_bag (customer_id, product_id, request_count, is_purchased) values (:customer_id, :product_id, 1, 0)"); 
@@ -73,6 +86,10 @@ class ShoppingBag {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/user_exist/" . $user;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 } /*** end of class ***/
