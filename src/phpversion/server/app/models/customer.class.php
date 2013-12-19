@@ -65,6 +65,8 @@ class Customer {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+
+
 	}
 
 	/**

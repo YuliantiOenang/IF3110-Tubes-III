@@ -14,7 +14,9 @@ class Router {
 	public $file;
 	public $controller;
 	public $action; 
-	public $param;
+	public $param1;
+	public $param2;
+	public $param3;
 
 	function __construct($registry) {
 		$this->registry = $registry;
@@ -67,7 +69,7 @@ class Router {
 		}
 		
 		//jalankan action
-		$controller->$action($this->param);
+		$controller->$action($this->param1, $this->param2, $this->param3);
 	 }
 
 	/**
@@ -92,7 +94,15 @@ class Router {
 			}
 
 			if(isset( $parts[2])) {
-				$this->param = $parts[2];
+				$this->param1 = $parts[2];
+			}
+
+			if(isset( $parts[3])) {
+				$this->param2 = $parts[3];
+			}
+
+			if(isset( $parts[4])) {
+				$this->param3 = $parts[4];
 			}
 		}
 	

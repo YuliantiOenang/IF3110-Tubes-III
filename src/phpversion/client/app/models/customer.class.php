@@ -55,6 +55,7 @@ class Customer {
 	 * Mendapatkan customer dengan id tertentu
 	 */
 	public static function getById($registry, $id) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT * FROM customer WHERE customer_id = :id');
@@ -65,12 +66,37 @@ class Customer {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+
+		/*
+		try{
+
+		  $sClient = new SoapClient('http://localhost/IF3110-Tubes-III/src/phpversion/server/wsdl/hello.wsdl');
+
+		  $params = "Aqila";
+		  $response = $sClient->doHello($params);
+
+		  //var_dump($response);
+		  //echo $response;
+		  echo "ASAS";
+		  die();
+
+		} catch(SoapFault $e){
+		  var_dump($e);
+		}
+		*/
+
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/id/" . $id;
+		$response = file_get_contents($url);
+		//echo var_dump(json_decode($response));
+		return json_decode($response, true);
 	}
 
 	/**
 	 * Memeriksa apakah user tersebut ada dan password sesuai
 	 */
 	public static function isValid($registry, $user, $pass) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT customer_id FROM customer WHERE username = :username AND password = :password');
@@ -80,12 +106,17 @@ class Customer {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/valid/" . $user . "/" . $pass;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 	/**
 	 * Memeriksa apakah user tersebut ada
 	 */
 	public static function isExistUsername($registry, $user) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT customer_id FROM customer WHERE username = :username');
@@ -95,12 +126,18 @@ class Customer {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/user_exist/" . $user;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 	/**
 	 * Memeriksa apakah email tersebut ada
 	 */
 	public static function isExistEmail($registry, $email) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT customer_id FROM customer WHERE email = :email');
@@ -110,6 +147,11 @@ class Customer {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/user_exist/" . $user;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 	/**

@@ -17,7 +17,5 @@ Class ServerController extends BaseController {
 		 
 		$server->AddFunction("doHello");
 		$server->handle();
-
-
 	}
 }

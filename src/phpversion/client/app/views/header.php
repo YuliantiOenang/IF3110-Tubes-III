@@ -42,7 +42,7 @@
 							<input type="type" placeholder="Pencarian">
 						</form></center> -->
 					</li>
-					<li><a href="#" id="keranjang">Keranjang</a></li>	
+					<li><a href="<?php echo SITEURL ?>/cart" id="keranjang">Keranjang</a></li>	
 				</ul>
 			</center>
 		</nav>
