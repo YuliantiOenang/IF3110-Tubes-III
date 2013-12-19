@@ -12,8 +12,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.SOAPBody;
+import javax.xml.soap.SOAPConnection;
+import javax.xml.soap.SOAPConnectionFactory;
+import javax.xml.soap.SOAPElement;
+import javax.xml.soap.SOAPEnvelope;
+import javax.xml.soap.SOAPException;
+import javax.xml.soap.SOAPMessage;
+import javax.xml.soap.SOAPPart;
 import org.json.JSONObject;
 import sun.net.www.http.HttpClient;
 
@@ -92,6 +103,18 @@ public class RuserbaServices {
         }
     }
     
+    public static boolean AddBarang(String nama_barang, int category, int harga, String imageName, int tersedia) {
+        
+            ArrayList<String> params = new ArrayList<String>();
+            params.add(nama_barang);
+            params.add(""+category);
+            params.add(""+harga);
+            params.add(imageName);
+            params.add(""+tersedia);
+            JSONObject returnObj = SOAPConnect(address+"/services/soap_server.php", "create_barang", params);
+            return returnObj.getString("status").equalsIgnoreCase("success");
+        
+    }
     public static boolean EditBarang(int id,String nama, int harga, int tersedia) {
         try {
             JSONObject returnObj = GetResponse(address+"services/barang.php?id_barang="+id+"&nama="+nama
@@ -127,5 +150,61 @@ public class RuserbaServices {
         }
         
         return new JSONObject(res);
+    }
+    
+    private static JSONObject SOAPConnect(String uri, String funcName, ArrayList<String> parameter) {
+         try {
+            // First create the connection
+              SOAPConnectionFactory soapConnFactory = SOAPConnectionFactory.newInstance();
+              SOAPConnection connection = soapConnFactory.createConnection();
+
+              // Next, create the actual message
+              MessageFactory messageFactory = MessageFactory.newInstance();
+              SOAPMessage message = messageFactory.createMessage();
+
+              SOAPPart soapPart = message.getSOAPPart();
+              SOAPEnvelope envelope = soapPart.getEnvelope();
+              
+               // Create and populate the body
+                SOAPBody body = envelope.getBody();
+
+                // Create the main element and namespace
+                SOAPElement bodyElement = body.addChildElement(envelope.createName(funcName,"ns1", "urn:framework"));
+
+                for(int i=0; i < parameter.size(); i++) {
+                    bodyElement.addChildElement("in"+i).addTextNode(parameter.get(i));
+                }
+                
+
+          // Save the message
+          message.saveChanges();
+
+
+          // Send the message and get the reply
+          SOAPMessage reply = connection.call(message, uri);
+          
+          // Retrieve the result - no error checking is done: BAD!
+          soapPart = reply.getSOAPPart();
+          envelope = soapPart.getEnvelope();
+          body = envelope.getBody();
+          
+          System.out.println("Body : " + body.getTextContent());
+         
+          // Close the connection           
+          connection.close();
+          
+          return new JSONObject(body.getTextContent());
+          
+        } catch (SOAPException ex) {
+            Logger.getLogger(RuserbaServices.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedOperationException ex) {
+            Logger.getLogger(RuserbaServices.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RuserbaServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+         JSONObject result = new JSONObject();
+         result.put("status", "failed");
+         return result;
     }
 }

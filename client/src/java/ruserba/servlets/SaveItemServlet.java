@@ -97,38 +97,32 @@ public class SaveItemServlet extends HttpServlet {
         // Gambar
 
         System.out.println("Nama Barang : " + nama_barang);
+        boolean result = false;
         
-        DatabaseHelper.Connect();
-        if(imageName != null) {
-            System.out.println(RuserbaServices.EditBarang(Integer.parseInt(id_barang), nama_barang, 
-                    Integer.parseInt(harga), imageName, Integer.parseInt(tersedia)));
-        } else {
-             System.out.println(RuserbaServices.EditBarang(Integer.parseInt(id_barang), nama_barang, 
-                    Integer.parseInt(harga),  Integer.parseInt(tersedia)));
-            
-        }
-        
-        String query = "";
         if(id_barang == null || id_barang.equalsIgnoreCase("null")) {
-            query = "insert into barang (nama_barang,id_kategori,harga_barang,dibeli,tersedia) values"
-                    + "('"+nama_barang+"',"+category+","+harga+",0,"+tersedia+")";
+
             if(imageName != null) {
-                query = "insert into barang (nama_barang,id_kategori,harga_barang,gambar,dibeli,tersedia) values"
-                    + "('"+nama_barang+"',"+category+","+harga+",'"+imageName+"',0,"+tersedia+")";
+              result =  RuserbaServices.AddBarang(nama_barang, Integer.parseInt(category), 
+                       Integer.parseInt(harga), imageName, Integer.parseInt(tersedia));
+
+            } else {
+               result = RuserbaServices.AddBarang(nama_barang, Integer.parseInt(category), 
+                        Integer.parseInt(harga), " ", Integer.parseInt(tersedia));
+            }
+        } else {
+            if(imageName != null) {
+            result = RuserbaServices.EditBarang(Integer.parseInt(id_barang), nama_barang, 
+                    Integer.parseInt(harga), imageName, Integer.parseInt(tersedia));
+            } else {
+                 result = RuserbaServices.EditBarang(Integer.parseInt(id_barang), nama_barang, 
+                        Integer.parseInt(harga),  Integer.parseInt(tersedia));
             }
         }
         
-        System.out.println(query);
-        if (DatabaseHelper.execute(query)) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("admin");
-            dispatcher.forward(request, response);
-        } else {
-            request.setAttribute("barang", new Item());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("adminedit");
-            dispatcher.forward(request, response);
-        }
-        DatabaseHelper.Disconnect();
-
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin");
+        dispatcher.forward(request, response);
+        
+       
         // Upload File
         
     }

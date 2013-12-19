@@ -55,3 +55,12 @@
 <%
     }
 %>
+<h3>Mekanisme Belanja</h3>
+<p>Mekanisme pembelian di RuSerBa :
+<ol>
+        <li> Login sebagai pengguna. Jika belum punya akun silahkan <a href="register">register</a>. </li>
+        <li> Pilih barang-barang yang akan dibeli. Barang akan masuk ke shopping bag.</li>
+        <li> Masuk ke shopping bag, klik tombol beli.</li>
+        <li> Masukan data kartu kredit anda.</li>
+        <li> Barang anda akan dikirim ke alamat anda.</li>
+</ol><p>

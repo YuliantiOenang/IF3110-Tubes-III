@@ -17,6 +17,14 @@ a {
 	text-decoration:none;
 }
 
+#navCategory
+{
+	float:left;
+	height:45px;
+	margin : 0px;
+	padding : 0px;
+}
+
 #wrapper {
 	width:75%;
 	height:auto;

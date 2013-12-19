@@ -52,3 +52,10 @@
         <a id='searchbutton' href='javascript:void(0)'><img src="/ruserba/assets/search.png" /></a>
     </form>
 </div>
+        <div id="navCategory">
+	<a href="/ruserba/kategori/1" class="header_item">Baju</a>
+	<a href="/ruserba/kategori/2" class="header_item">Gadget</a>
+	<a href="/ruserba/kategori/3" class="header_item">Celana</a>
+	<a href="/ruserba/kategori/4" class="header_item">Indomie</a>
+	<a href="/ruserba/kategori/5" class="header_item">Minuman</a>
+</div>
