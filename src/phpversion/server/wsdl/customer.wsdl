@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<!--
+(c) Ichlasul Amal
+2013-12-19
+A one-line service description
+
+Online WSDL SOAP generator 0.1a
+Julien Blitte
+-->
+<definitions name="A one-line service description"
+	targetNamespace="id.ac.itb.informatika.wbd.tubes3.customer.wsdl"
+	xmlns:tns="id.ac.itb.informatika.wbd.tubes3.customer.wsdl"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd1="id.ac.itb.informatika.wbd.tubes3.customer.xsd"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+<!-- definition of datatypes -->
+	<types>
+	<schema targetNamespace="id.ac.itb.informatika.wbd.tubes3.customer.xsd" xmlns="http://www.w3.org/2000/10/XMLSchema">
+		<element name="username">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="email">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="password">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="fullname">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="phone">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="address">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="city">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="province">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="postcode">
+		<complexType><all><element name="value" type="string" /></all></complexType>
+		</element>
+		<element name="transaction">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+		<element name="resultcode">
+		<complexType><all><element name="value" type="int" /></all></complexType>
+		</element>
+	</schema>
+	</types>
+<!-- response messages -->
+	<message name='returns_resultcode'>
+	<part name='resultcode' type='xsd:resultcode'/>
+	</message>
+<!-- request messages -->
+	<message name='add_customer'>
+	<part name='username' type='xsd:username'/>
+	<part name='email' type='xsd:email'/>
+	<part name='password' type='xsd:password'/>
+	<part name='fullname' type='xsd:fullname'/>
+	<part name='phone' type='xsd:phone'/>
+	<part name='address' type='xsd:address'/>
+	<part name='city' type='xsd:city'/>
+	<part name='province' type='xsd:province'/>
+	<part name='postcode' type='xsd:postcode'/>
+	<part name='transaction' type='xsd:transaction'/>
+	</message>
+<!-- server's services -->
+	<portType name='Tubes PBD'>
+		<operation name='add_customer'>
+		<input message='tns:add_customer'/>
+		<output message='tns:returns_resultcode'/>
+		</operation>
+	</portType>
+<!-- server encoding -->
+	<binding name='Tubes PBD_webservices' type='tns:Tubes PBD'>
+	<soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+		<operation name='add_customer'>
+		<soap:operation soapAction='urn:xmethods-delayed-quotes#add_customer'/>
+		<input><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></input>
+		<output><soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/></output>
+		</operation>
+	</binding>
+<!-- access to service provider -->
+	<service name='tubes'>
+	<port name='tubes_0' binding='Tubes PBD_webservices'>
+	<soap:address location='http://localhost/IF3110-Tubes-III/src/phpversion/server/app/controllers/soap.php'/>
+	</port>
+	</service>
+</definitions>
