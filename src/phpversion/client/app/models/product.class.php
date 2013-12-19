@@ -97,6 +97,7 @@ class Product {
 	 * Mendapatkan seluruh baris produk dengan nama tertentu
 	 */
 	public static function getBySearch($registry, $keyword) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT * FROM product WHERE MATCH(product_name, description) AGAINST (:keyword IN BOOLEAN MODE)');
@@ -107,12 +108,17 @@ class Product {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/product/search/" . $keyword;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 	/**
 	 * Mendapatkan seluruh baris produk dengan id tertentu
 	 */
 	public static function getById($registry, $id) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT * FROM product WHERE product_id = :id');
@@ -123,6 +129,10 @@ class Product {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/product/id/" . $id;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 } /*** end of class ***/

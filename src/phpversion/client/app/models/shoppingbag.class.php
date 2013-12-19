@@ -87,7 +87,7 @@ class ShoppingBag {
 			echo $e->getMessage();
 		}
 		*/
-		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/user_exist/" . $user;
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/customer/user_exist/" . $customer_id . "/" . $product_id;
 		$response = file_get_contents($url);
 		return json_decode($response, true);
 	}
