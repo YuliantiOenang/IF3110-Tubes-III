@@ -76,6 +76,7 @@ class Product {
 	 * Mendapatkan seluruh baris produk dengan kategori tertentu
 	 */
 	public static function getByCategory($category) {
+		/*
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT * FROM product WHERE category = :category');
@@ -86,6 +87,10 @@ class Product {
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
+		*/
+		$url = "http://localhost/IF3110-Tubes-III/src/phpversion/server/product/category/" . $category;
+		$response = file_get_contents($url);
+		return json_decode($response, true);
 	}
 
 	/**

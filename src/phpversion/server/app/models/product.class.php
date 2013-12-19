@@ -75,7 +75,7 @@ class Product {
 	/**
 	 * Mendapatkan seluruh baris produk dengan kategori tertentu
 	 */
-	public static function getByCategory($category) {
+	public static function getByCategory($registry, $category) {
 		try {
 			$dbh = $registry->database;
 			$smh = $dbh->prepare('SELECT * FROM product WHERE category = :category');
